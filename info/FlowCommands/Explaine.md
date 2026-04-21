@@ -7,7 +7,7 @@
 
 ## Purpose
 
-This function explains the concept of calculating the area of a circle.
+python give examples using the qualifier function 'explain'
 
 ## Key Features
 

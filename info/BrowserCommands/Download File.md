@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Steps: ## Example Code: Set up options for Chrome
+using selenium download file
 
 ## Key Features
 

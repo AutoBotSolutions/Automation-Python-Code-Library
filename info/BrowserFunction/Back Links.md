@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Steps to Get Backlinks ## Using `requests` and BeautifulSoup for Scraping: Simulate a search for backlinks using the link: operator
+python provide backlinks of a target page
 
 ## Key Features
 

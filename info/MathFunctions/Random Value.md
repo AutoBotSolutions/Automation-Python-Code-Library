@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant Generate a random integer between 1 and 100 ## Explanation: ## Other Common Random Values:
+python set random value to variable
 

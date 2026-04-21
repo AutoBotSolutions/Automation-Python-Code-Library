@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Set up the WebDriver (example using Chrome) Navigate to a webpage Get the meta keywords content using XPath/CSS Selector Store the meta keywords in the variable Quit the driver
+python using selenium get the current page meta keywords and store it in var
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Common Special Folders in Python: Using os Using Pathlib
+python special folder
 
 ## Key Features
 

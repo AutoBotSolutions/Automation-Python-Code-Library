@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Code for Connecting to an FTP Server Replace with your FTP server details Connect to the FTP server Login to the FTP server List files in the current directory Upload a file
+ftp connect to sever
 
 ## Key Features
 

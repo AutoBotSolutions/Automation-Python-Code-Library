@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant Define condition 1 and condition 2 Set the variable 'both' Print the result to check ## Explanation:
+python set a variable called 'both' set 2 conditions, if condition one is true and condition 2 is also true then set the variable called 'both' to true els set the value to false
 

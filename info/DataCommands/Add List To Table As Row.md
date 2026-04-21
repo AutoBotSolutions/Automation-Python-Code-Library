@@ -7,12 +7,7 @@
 
 ## Purpose
 
-CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY,
-    name TEXT,
-    age INTEGER,
-    email TEXT
-)
+python add list to table as row
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Specify source and destination paths Move the file ## Explanation ## Key Notes:
+move file using python
 
 ## Key Features
 

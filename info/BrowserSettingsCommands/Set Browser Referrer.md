@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Start the browser Navigate to a webpage with referer header Start the Chrome browser with options Enable CDP on the browser session
+Start the browser Navigate to a webpage with referer header Start the Chrome browser with options Enable CDP on the browser session
 
 ## Key Features
 

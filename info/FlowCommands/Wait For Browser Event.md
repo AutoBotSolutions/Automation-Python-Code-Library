@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# AI Assistant ## Example: Waiting for a Specific Browser Event (e.g., an Element to Appear) Initialize the WebDriver Open a webpage Wait for an element to be visible on the page (timeout: 10 seconds)
+Initialize the WebDriver Open a webpage Wait for an element to be visible on the page (timeout: 10 seconds)
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-## Example for Adding a Button in GUI Open a file dialog and get the filename Use the 'open_file' function to read file content Create a GUI window Add a button to open a file Run the main event loop
+Open a file dialog and get the filename Use the 'open_file' function to read file content Create a GUI window Add a button to open a file Run the main event loop
 
 ## Usage Pattern
 

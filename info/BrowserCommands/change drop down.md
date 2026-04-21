@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Steps to Change a Dropdown Value ## Example Code Initialize the WebDriver Navigate to the webpage with the dropdown Locate the dropdown element by its ID (or another locator)
+using selenium change drop down
 
 ## Key Features
 

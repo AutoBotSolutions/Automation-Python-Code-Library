@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Code in Python Set up the WebDriver (e.g., for Chrome) Open a URL Locate an element using CSS selectors Example 1: By specific id Example 2: By class name Example 3: By attribute Perform some operations with the elements
+Set up the WebDriver (e.g., for Chrome) Open a URL Locate an element using CSS selectors Example 1: By specific id Example 2: By class name Example 3: By attribute Perform some operations with the elements
 
 ## Key Features
 

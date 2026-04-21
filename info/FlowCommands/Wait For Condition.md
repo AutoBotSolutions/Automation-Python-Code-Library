@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Using `time.sleep` Inside a `while` Loop Condition-checking function Replace with some logic Wait for the condition ## Using `threading.Condition`
+Condition-checking function Replace with some logic Wait for the condition
 
 ## Key Features
 

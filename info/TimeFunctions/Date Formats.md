@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Common Date Format Codes ### Year ### Month ### Day ### Time
+python date formats
 

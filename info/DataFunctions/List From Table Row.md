@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## **1. If the table is hardcoded or manually defined (as a 2D array)** Example table (2D structure) Convert rows of the table to a Python list ## **2. If the table is stored in a database**
+python list from table row
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Launch the browser Open a webpage Open a new tab Switch to the newly opened tab Navigate to a new URL in the new tab Close the new tab Switch back to the first tab Close the original browser window
+using selenium new browser tab
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Using `imaplib` Email credentials (replace with actual credentials) Connect to the server Login to your email account Select the mailbox you want to use (default is "INBOX") Search for all messages and count them
+python email total messages
 
 ## Key Features
 

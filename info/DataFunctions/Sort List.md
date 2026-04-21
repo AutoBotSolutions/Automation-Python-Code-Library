@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Using `sorted()` ## Using `sort()`
+python sort list
 

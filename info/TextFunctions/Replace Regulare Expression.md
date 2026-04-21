@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Syntax ## Example: Basic Replacement Input string Replace 'Python' with 'coding'
+python replace regular expression
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Using the `**` Operator Basic usage ## Using the `pow()` Function Using pow() function
+python code examples of using exponents
 
 ## Usage Pattern
 

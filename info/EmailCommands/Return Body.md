@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Code Implementation Connect to the email server Search for all emails in the mailbox Get the email IDs as a list
+python return the email body of an email at specified by the position
 
 ## Key Features
 

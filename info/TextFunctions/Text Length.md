@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Generate a random string of a specific length, e.g., 10 characters Print the random string Print the length of the random string ## Explanation:
+Generate a random string of a specific length, e.g., 10 characters Print the random string Print the length of the random string
 
 ## Usage Pattern
 

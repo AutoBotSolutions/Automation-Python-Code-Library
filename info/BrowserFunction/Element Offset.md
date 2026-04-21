@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Initialize WebDriver (example with Chrome) Navigate to the target website Locate the element (replace with your locator strategy) Get the offset (x and y coordinates) Store the offsets in variables Quit the WebDriver session
+python using selenium get the offset from a given element and store it in var
 
 ## Key Features
 

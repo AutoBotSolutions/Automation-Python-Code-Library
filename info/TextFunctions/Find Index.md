@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Searching in a List Example with a list ## Searching in a String Example with a string
+python find index
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example: Using Keyboard Events in Selenium Set up the WebDriver Find an input element on the page Type text into the input field Simulate pressing "Enter" Optionally, simulate other keys (e.g., TAB, CONTROL, SHIFT)
+Using selenium keyboard event
 
 ## Key Features
 

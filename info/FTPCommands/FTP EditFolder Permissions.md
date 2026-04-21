@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## **1. Using an FTP Client (e.g., FileZilla)** ## **2. Using Python to Edit Permissions via FTP** Connect to the FTP server
+ftp edit a folders permissions on the server
 

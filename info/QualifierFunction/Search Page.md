@@ -7,9 +7,7 @@
 
 ## Purpose
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-you found me somewhere in this text!
-Donec vehicula ex ut sem interdum, sit amet venenatis nulla pellentesque.
+python set a variable call search_page then using a qualifier query search a page for the query 'you found me' then set the result to the variable called search_page.
 
 ## Usage Pattern
 

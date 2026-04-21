@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## 1. **Using `list.remove(x)`** ## 2. **Using `del`** ## 3. **Using `list.pop(index)`**
+python remove from list
 

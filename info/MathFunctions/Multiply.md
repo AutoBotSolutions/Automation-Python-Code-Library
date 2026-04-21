@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Code Function to multiply two 2x2 matrices Performing matrix multiplication Example usage Multiply the matrices Print the resulting matrix
+python multiply 2x2
 
 ## Usage Pattern
 

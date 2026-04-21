@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example 1: **Using Ratios in the `fractions` Module** Representing ratios Arithmetic with ratios ## Example 2: **Scaling Values Using Ratios**
+python code examples of using ratios
 

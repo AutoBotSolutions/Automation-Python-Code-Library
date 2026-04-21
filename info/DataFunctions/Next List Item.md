@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example with Indexes ## Looping Through List
+python next list item
 

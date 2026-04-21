@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Code Breakdown: Initialize the WebDriver Extract the page source Define your regular expression
+Initialize the WebDriver Extract the page source Define your regular expression
 
 ## Key Features
 

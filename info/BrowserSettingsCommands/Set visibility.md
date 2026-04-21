@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Use Explicit Waits Example: Wait for an element to be visible ## Explanation: ## Common Alternatives:
+Example: Wait for an element to be visible
 
 ## Key Features
 

@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant Get the first n elements ## Explanation:
+python first n of list
 

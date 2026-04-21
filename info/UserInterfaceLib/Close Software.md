@@ -7,9 +7,7 @@
 
 ## Purpose
 
-Closes the software and any zombie processes tied to it.
-
-    :param process_name: Name of the process to terminate (use executable name).
+code to close software and any zombie process from the software
 
 ## Usage Pattern
 

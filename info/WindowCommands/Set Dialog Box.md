@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Handling Alert, Confirmation, and Prompt Dialogs ### 1. **Simple Alert** Create the webdriver instance Trigger the alert (if needed, for example, by clicking a button that opens the dialog) Switch to the alert dialog
+Using selenium set dialog box
 
 ## Key Features
 

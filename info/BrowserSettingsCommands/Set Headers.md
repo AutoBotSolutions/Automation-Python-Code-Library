@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## 1. **Setting Headers in Chrome Using CDP (Chrome DevTools Protocol)** Enable DevTools Protocol Setting headers using DevTools
+Enable DevTools Protocol Setting headers using DevTools
 
 ## Key Features
 

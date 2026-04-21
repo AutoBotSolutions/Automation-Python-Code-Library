@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant Variables for demonstration If statement with all conditions
+Variables for demonstration If statement with all conditions
 

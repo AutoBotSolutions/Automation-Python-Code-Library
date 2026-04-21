@@ -7,7 +7,7 @@
 
 ## Purpose
 
-This function calculates the square of a number.
+using python code an example using define
 
 ## Usage Pattern
 

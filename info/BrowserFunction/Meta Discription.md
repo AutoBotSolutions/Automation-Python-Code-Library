@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Code: Set up the webdriver (e.g., Chrome, Firefox, etc.) Open the web page Find the meta description element Get the content of the meta description Store it in a variable Print the meta description
+python using selenium get the current page meta description and store it in var
 
 ## Key Features
 

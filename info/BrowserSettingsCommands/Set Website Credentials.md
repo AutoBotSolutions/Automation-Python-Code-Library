@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Initialize the WebDriver (choose your browser driver, e.g., Chrome, Firefox) Navigate to the website Locate the username and password input fields Enter credentials Press the login button
+Initialize the WebDriver (choose your browser driver, e.g., Chrome, Firefox) Navigate to the website Locate the username and password input fields Enter credentials Press the login button
 
 ## Key Features
 

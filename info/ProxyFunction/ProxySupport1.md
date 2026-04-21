@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Code Example Helper functions (from sys_proxy.py)
+using selenium launch a browser then use the code in sys_proxy.py to set the proxy
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Code Set up WebDriver Open a URL Find the element you want to modify Change an attribute (e.g., modify the 'value' attribute) Example: Replace 'attributeName' with the exact attribute (e.g., 'value') and 'newValue' with the desired value ## Explanation:
+using selenium change attribute
 
 ## Key Features
 

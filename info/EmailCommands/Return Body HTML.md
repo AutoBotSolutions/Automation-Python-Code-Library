@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Code Example: Connect to the email server and log in Select the mail folder (e.g., 'inbox') and search for emails Get the list of email IDs and retrieve the email at the desired position
+python email return the body of an email by position as html
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Code Example: FTP Upload Connect to the FTP server Open the file to be uploaded Upload the file to the specified remote path Close the FTP connection Usage
+ftp upload file to server
 
 ## Key Features
 

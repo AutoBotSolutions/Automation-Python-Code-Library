@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example List to be saved Path to save the file Writing the list to the file ## Explanation
+save list to file
 
 ## Key Features
 

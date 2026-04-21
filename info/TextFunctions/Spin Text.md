@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example of a Simple Text Spinner Define synonyms or alternate phrases Loop through the synonyms and replace them randomly in the text Example usage
+python spin text
 
 ## Usage Pattern
 

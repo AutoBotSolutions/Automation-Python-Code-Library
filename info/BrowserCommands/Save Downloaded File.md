@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Specify the download directory Chrome Options to handle downloads Initialize the WebDriver Open a website
+using selenium save downloaded file
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example: Return Value from a Function This function takes two numbers and returns their sum Call the function and store the returned value Print the result ## Explanation:
+using python code an example using return
 
 ## Usage Pattern
 

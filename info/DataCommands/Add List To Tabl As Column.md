@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Using `pandas` Example table (dataframe) List to add as a new column Adding the list as a new column ## Output
+python add list to table as column
 

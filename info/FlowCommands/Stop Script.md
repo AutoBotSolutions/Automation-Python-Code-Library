@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## 1. **Using `exit()` or `quit()`** ## 2. **Using `os._exit()`:** ## 3. **Using Exceptions:**
+terminating code execution
 
 ## Key Features
 

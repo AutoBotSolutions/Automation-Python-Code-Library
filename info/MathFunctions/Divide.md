@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Explanation: ## Example: ## Example of Integer Division:
+python divide 2/2
 

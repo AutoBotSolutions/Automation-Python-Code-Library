@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Code Setup the webdriver (e.g., for Chrome) Open a website or navigate to the desired URL Locate the parent element Locate the child element within the parent element Store the child element in a variable Example: Print the text of the child element
+python using selenium get element from child and store it in var
 
 ## Key Features
 

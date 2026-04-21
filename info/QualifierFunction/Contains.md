@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant Define the variable with some random text Define your query Check if the query is contained in the `contains` variable ## Explanation
+python set a variable call contains and add some random text to the value then using a qualifier contains query search that text for a query
 

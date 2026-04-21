@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example: Changing Proxy in Selenium (Python) Define your proxy settings Setup Proxy Add the proxy to Chrome options Start Chrome WebDriver with Proxy
+Define your proxy settings Setup Proxy Add the proxy to Chrome options Start Chrome WebDriver with Proxy
 
 ## Key Features
 

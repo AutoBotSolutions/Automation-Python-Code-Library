@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Using `os.path`: ## Using `pathlib.Path` (Preferred for modern Python versions):
+python check if file exits
 
 ## Key Features
 

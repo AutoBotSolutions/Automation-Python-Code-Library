@@ -7,5 +7,5 @@
 
 ## Purpose
 
-Define two variables with values between 1 and 20 Check if the sum of the two values equals 15 ## Explanation:
+Define two variables with values between 1 and 20 Check if the sum of the two values equals 15
 

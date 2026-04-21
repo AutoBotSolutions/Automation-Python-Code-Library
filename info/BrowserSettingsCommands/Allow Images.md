@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Enabling Images in Selenium ### 1. **Using Chrome** Set up Chrome options Initialize the driver
+Set up Chrome options Initialize the driver
 
 ## Key Features
 

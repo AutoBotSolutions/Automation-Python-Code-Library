@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Examples ### 1. **Set Operations on Lists** Remove duplicates from a list ### 2. **List Intersection** Intersection ### 3. **List Union**
+python set list without using pandas
 

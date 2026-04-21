@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Code Example Set up Selenium Locate the image element by its XPath, CSS selector, or ID Download and save the image Close the driver
+using selenium save browser image
 
 ## Key Features
 

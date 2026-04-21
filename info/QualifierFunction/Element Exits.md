@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Initialize the web driver (use the appropriate driver for your browser) URL of the page to search Default value for the 'exists' variable The ID, class, or selector of the element you are looking for (target element) Try to find the element on the page using its selector (e.g., ID in this case) If the element doesn't exist, 'exists' remains 'false'
+python set a variable call exits then search a page for a givin webpage element, if the element exist on the page then set the variable called exits to 'true'
 
 ## Key Features
 

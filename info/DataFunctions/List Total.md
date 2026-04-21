@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant Creating a list called 'accounts' with 100 name entries Setting a variable `account_total` to the total number of items in the list 'accounts' Output the total to verify ## Explanation:
+create a list called 'accounts' with a total of 100 names, set a variable called 'account_total' provide the total of list items from the list 'accounts' and set the variable 'account_total' to the list total of 'accounts'
 

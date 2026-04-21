@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Source folder path Destination folder path Move the folder ## Explanation: ## Notes:
+using python move folder
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Explicit Wait with `WebDriverWait` ### Example: Assume 'driver' is a valid WebDriver instance Example: Wait until an element is visible Now safely interact with the element
+using selenium wait for condition
 
 ## Key Features
 

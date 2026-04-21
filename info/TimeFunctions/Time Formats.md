@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## **Common Time Format Codes**
+python time formats
 

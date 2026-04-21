@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## **1. Using List Comprehension** ## **2. Using `set` Data Structure**
+python subtract lists
 

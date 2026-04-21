@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Appending text to a file ## Explanation: ## Output:
+using python append text to file
 
 ## Key Features
 

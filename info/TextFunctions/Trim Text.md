@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Examples ### Trim Whitespace Removes leading and trailing whitespace ### Trim Specific Characters Removes specific characters from the start and end of the string ## Methods that may also be helpful
+python trim text
 

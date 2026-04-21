@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Common Mouse Events with ActionChains
+Using selenium mouse event
 
 ## Key Features
 

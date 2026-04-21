@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant Example string Changing text casing
+python change text casing
 

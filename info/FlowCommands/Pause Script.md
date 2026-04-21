@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## 1. **Using `time.sleep()`** ## 2. **Waiting for User Input (`input`)**
+pause python code
 
 ## Usage Pattern
 

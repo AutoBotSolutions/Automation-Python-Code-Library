@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Code Example: Waiting for an Element Set up the WebDriver Wait for the element to be present and visible Always close the driver
+using selenium wait for element
 
 ## Key Features
 

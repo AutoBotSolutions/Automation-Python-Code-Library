@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Using an FTP Client ## Using Python for FTP
+ftp edit a files permissions on the server
 

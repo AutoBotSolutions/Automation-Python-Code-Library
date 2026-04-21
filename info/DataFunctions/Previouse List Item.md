@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Iterate through the list starting from the second item ## Output: ## Explanation:
+python previouse list item
 

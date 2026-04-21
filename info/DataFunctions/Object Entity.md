@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Object Entities in Python ### Key Components of Object Entities:
+python object entity
 
 ## Key Features
 

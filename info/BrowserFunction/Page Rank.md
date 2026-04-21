@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Steps: ## Example Code: Create a directed graph Add edges (links between pages) Example: Page A links to Page B and Page C
+python provide page rank of a target page
 

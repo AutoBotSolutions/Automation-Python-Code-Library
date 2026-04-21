@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example: Changing Directory in FTP Using Python Connect to the FTP server Change directory on the FTP server Close the FTP connection ## Explanation:
+ftp change directory
 

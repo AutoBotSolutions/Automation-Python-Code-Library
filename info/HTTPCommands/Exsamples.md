@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## **What is an HTTP request?** ## **1. GET Request** ### Example: ### Python Code Example:
+examples of all http request, post, get and parameters
 
 ## Key Features
 

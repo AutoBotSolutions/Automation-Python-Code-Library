@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Example using Chrome Open a website Get the title of the current page Store it in a variable and print it Close the browser ## Breakdown:
+python using selenium get the current page title and store it in var
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Steps to Connect to MySQL: Establish the connection
+connect to mysql
 
 ## Key Features
 

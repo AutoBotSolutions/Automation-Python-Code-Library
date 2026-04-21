@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant Prompt the user to enter something Print the text they typed ## Explanation:
+python prompt the user to respond and return the text they type
 

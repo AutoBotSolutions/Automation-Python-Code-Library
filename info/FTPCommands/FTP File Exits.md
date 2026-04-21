@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Code Example Usage
+python ftp file exits
 
 ## Usage Pattern
 

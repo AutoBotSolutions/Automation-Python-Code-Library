@@ -7,14 +7,7 @@
 
 ## Purpose
 
-Retrieves the body text of the email specified by its position.
-
-    Args:
-        emails (list): A list of email raw strings or email.message.Message objects.
-        position (int): The position of the email in the list (1-based index).
-
-    Returns:
-        str: The body text of the email or an error if the position is invalid.
+python return the body text of the email specified by the position
 
 ## Key Features
 

@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant Initialize the variable Loop while the variable is less than or equal to 50 ## How it works:
+set variable to 0, then loop while that variable = 50, increment the variable in the loop by 2 each loop
 

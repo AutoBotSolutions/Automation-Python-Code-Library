@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Closing a Page Using Selenium Initialize the WebDriver (replace with your choice of WebDriver, e.g., Chrome, Firefox) Open a webpage Perform any actions... Close the current tab/window ## Additional Points to Remember
+using selenium close page
 
 ## Key Features
 

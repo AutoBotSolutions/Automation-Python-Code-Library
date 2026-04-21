@@ -7,7 +7,7 @@
 
 ## Purpose
 
-Add an email to the list.
+python verify email with a given regex and add the option to delete emails with the parameters set with the options of processed verification emails, all emails and none
 
 ## Key Features
 

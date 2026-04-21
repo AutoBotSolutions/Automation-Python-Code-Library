@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant Set the current date and time to a variable Print the date and time Set a specific date to a variable ## Explanation:
+python set date to variable
 

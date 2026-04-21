@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Code Example: Define the table as a 2D list Set a variable to the value at a specific row and column Get the value from the table ## Explanation:
+python set variable to table cell item by position with out using external lib
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Code Load the image Create a Frame Display the background image using a Label Add a widget over the background
+`tkinter.Frame` set background image
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant # Me # AI Assistant ## Using `os.path`: Path to the file Check if the file exists
+python get files
 
 ## Key Features
 

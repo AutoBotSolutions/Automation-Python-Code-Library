@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Explanation ## Example of Extended Options ## Current Code Impact
+window.configure
 

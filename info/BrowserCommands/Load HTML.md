@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example 1: Loading a Local HTML File Path to the local HTML file Initialize the WebDriver (e.g., Chrome) Load the local HTML file Perform actions on the page ... ## Example 2: Loading an HTML page from a URL
+using selenium load html
 
 ## Key Features
 

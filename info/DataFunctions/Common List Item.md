@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Using Set Intersection Find common items ## Using List Comprehension Find common items ## Explanation
+python common list item
 

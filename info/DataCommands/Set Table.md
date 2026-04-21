@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant A table as a list of lists Accessing table cells Create a table using pandas
+python set table
 

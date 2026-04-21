@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Clear a List in Python Example list Method 1: Using clear() Method 2: Reassign to an empty list Method 3: Using slice assignment ## Clear a Table Using SQL (Database Operation)
+python clear list and clear table
 
 ## Key Features
 

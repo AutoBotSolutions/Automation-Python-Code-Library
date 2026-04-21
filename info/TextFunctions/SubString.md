@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Extracting Substrings
+python text function substring exsamples
 
 ## Usage Pattern
 

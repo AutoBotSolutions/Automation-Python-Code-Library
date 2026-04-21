@@ -7,7 +7,7 @@
 
 ## Purpose
 
-## Example: Sorting a Table in Memory Example table as a list of tuples Sort the table by the first column (id) Sort the table by the second column (name) Sort the table by the third column (age)
+Example table as a list of tuples Sort the table by the first column (id) Sort the table by the second column (name) Sort the table by the third column (age)
 
 ## Key Features
 

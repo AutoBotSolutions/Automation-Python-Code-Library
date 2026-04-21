@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## 1. **Basic Alert with `print` (CLI)** ## 2. **Python Logging System** Configure logging Issue an alert
+python alert examples
 
 ## Key Features
 

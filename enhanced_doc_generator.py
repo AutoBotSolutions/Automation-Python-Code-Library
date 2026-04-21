@@ -27,20 +27,24 @@ def analyze_code_functionality(content, filename):
     lines = content.split('\n')
     
     # Extract purpose from comments and docstrings
-    purpose_lines = []
-    for i, line in enumerate(lines[:30]):
-        stripped = line.strip()
-        if stripped.startswith('#'):
-            purpose_lines.append(stripped[1:].strip())
-        elif '"""' in stripped or "'''" in stripped:
-            # Extract docstring
-            doc_match = re.search(r'["\']{3}([^"\']+)["\']{3}', content, re.DOTALL)
-            if doc_match:
-                analysis['purpose'] = doc_match.group(1).strip()[:500]
-                break
-    
-    if purpose_lines and not analysis['purpose']:
-        analysis['purpose'] = ' '.join(purpose_lines[:10])
+    # Handle AI conversation format: "## Me" on line 1, purpose on line 2
+    if len(lines) >= 2 and lines[0].strip() == '## Me':
+        analysis['purpose'] = lines[1].strip()
+    else:
+        purpose_lines = []
+        for i, line in enumerate(lines[:30]):
+            stripped = line.strip()
+            if stripped.startswith('#') and not stripped.startswith('##'):
+                purpose_lines.append(stripped[1:].strip())
+            elif '"""' in stripped or "'''" in stripped:
+                # Extract docstring
+                doc_match = re.search(r'["\']{3}([^"\']+)["\']{3}', content, re.DOTALL)
+                if doc_match:
+                    analysis['purpose'] = doc_match.group(1).strip()[:500]
+                    break
+        
+        if purpose_lines and not analysis['purpose']:
+            analysis['purpose'] = ' '.join(purpose_lines[:10])
     
     # Detect automation type based on imports and patterns
     selenium_keywords = ['selenium', 'webdriver', 'chrome', 'firefox', 'browser']

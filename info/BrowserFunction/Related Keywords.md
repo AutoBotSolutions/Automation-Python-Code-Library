@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Approach ## Example Code
+python provide related keywords from the suggested keywords of a target page
 
 ## Key Features
 

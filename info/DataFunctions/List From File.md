@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example: Converting File Contents to List of Lines Open the file and read its contents Remove any extra whitespace, like newline characters, if needed ## Example: Converting a Comma-Separated Values (CSV) File to a List Split the content by commas to create a list
+python list from file
 
 ## Key Features
 

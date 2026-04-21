@@ -7,5 +7,5 @@
 
 ## Purpose
 
-Looping 100 times ## Explanation:
+Looping 100 times
 

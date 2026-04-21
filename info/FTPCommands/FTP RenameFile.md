@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant Connect to the FTP server Rename the file Close the connection ## Explanation:
+ftp rename file
 

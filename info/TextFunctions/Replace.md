@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant # Me # AI Assistant ## **1. Using `str.replace()` method** ### **Syntax**
+python replace
 

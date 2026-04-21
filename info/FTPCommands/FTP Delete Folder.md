@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Python Code to Delete a Folder from an FTP Server List the contents of the folder Attempt to delete the item (file) If it's a directory, recursively call the function to delete its contents Finally remove the now-empty directory Example usage
+ftp delete folder on server
 
 ## Usage Pattern
 

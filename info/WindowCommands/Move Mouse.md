@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Code: Moving the Mouse Set up the webdriver (e.g., ChromeDriver) Navigate to a webpage Find the element to hover over/move to Create an ActionChains object Move the mouse to the element Optionally, you can chain other actions (like clicking or context-click) actions.context_click(element_to_hover).perform()
+Using selenium move mouse
 
 ## Key Features
 

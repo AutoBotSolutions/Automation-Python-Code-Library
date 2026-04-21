@@ -7,14 +7,7 @@
 
 ## Purpose
 
-Retrieve the email body from a list of email strings.
-
-    Args:
-        emails (list of str): List containing email contents as strings.
-        position (int): Position index of the email to retrieve (0-based).
-
-    Returns:
-        str: The body of the email if the position is valid, otherwise None.
+python return the email body of an email at specified by the position
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Hide the root window Display the confirmation dialog True if "Yes" is pressed, False if "No" is pressed Example usage: ## Explanation of the Code:
+python display a conformation box that returns yes/no and return true if yes is presses and false of no is pressed
 
 ## Usage Pattern
 

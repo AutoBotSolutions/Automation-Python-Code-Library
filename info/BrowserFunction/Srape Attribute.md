@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Code Example Initialize the WebDriver (use the appropriate driver for your browser) Open a webpage Find an element on the page (e.g., a button or an image) Get the desired attribute (e.g., 'href', 'src', etc.) of the element Store the value in a variable
+python using selenium get the current page scrape attribute and store it in var
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Steps: ## Code Example ### Install Required Libraries
+python using an external ai system to generate unique account information and store it in a table.
 
 ## Key Features
 

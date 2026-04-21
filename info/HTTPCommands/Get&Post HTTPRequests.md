@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# AI Assistant ## HTTP GET Request Example: Define the URL of the API endpoint Make a GET request to the API Check the response status code Parse the JSON response ## HTTP POST Request Example:
+Define the URL of the API endpoint Make a GET request to the API Check the response status code Parse the JSON response
 
 ## Key Features
 

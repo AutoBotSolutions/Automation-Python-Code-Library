@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Code Create a new instance of the Chrome WebDriver Open a URL in the new browser window Perform further actions (e.g., interact with page elements) Close the browser window after use ## Explanation
+using selenium open code in new browser
 
 ## Key Features
 

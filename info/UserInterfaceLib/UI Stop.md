@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example of how to stop a running process in Python Create a threading event to handle stopping the running process Start function (represents running code) Simulate some long-running task
+code to stop any running software code
 
 ## Key Features
 

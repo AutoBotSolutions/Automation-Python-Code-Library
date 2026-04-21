@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example: Accessing a Specific Cell from a Table in CSV Format Open the CSV file Access a specific cell, for example, row 2, column 3 (0-based index) ## Explanation:
+Open the CSV file Access a specific cell, for example, row 2, column 3 (0-based index)
 
 ## Key Features
 

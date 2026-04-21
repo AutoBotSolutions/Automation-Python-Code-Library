@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Sample Code: Retrieve Files via FTP Connect to the FTP server Navigate to the directory containing the file (if needed) Open a local file to save the downloaded content Close the connection
+python ftp get files
 
 ## Key Features
 

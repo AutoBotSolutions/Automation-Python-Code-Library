@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## **Basic Logging Example** Set the logging level and format ## **Configuring Logging with Different Levels** Configure the logging
+exsamples of python log commands
 

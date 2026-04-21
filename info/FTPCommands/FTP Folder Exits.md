@@ -7,7 +7,7 @@
 
 ## Purpose
 
-Check if a folder exists on the FTP server.
+python FTP Folder Exits
 
 ## Usage Pattern
 

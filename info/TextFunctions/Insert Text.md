@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## **Inserting Text in Strings** Example: Insert "world" into "Hello!" Output: Hello world! ## **Inserting Text into a File** Example: Insert text into a file
+python insert text
 
 ## Key Features
 

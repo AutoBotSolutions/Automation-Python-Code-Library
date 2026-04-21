@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant To get the last n elements: ## Breakdown: ## Notes:
+python last n of list
 

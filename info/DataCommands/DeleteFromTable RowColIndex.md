@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## 1. Deleting a Row Sample table Deleting a specific row by index (e.g., the second row, index 1) Output ## 2. Deleting a Column
+Delete From Table Row, Col, Index
 

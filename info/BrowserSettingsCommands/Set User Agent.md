@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example for Chrome: Set up Chrome options Initialize the WebDriver with the options Example usage ## Example for Firefox:
+Set up Chrome options Initialize the WebDriver with the options Example usage
 
 ## Key Features
 

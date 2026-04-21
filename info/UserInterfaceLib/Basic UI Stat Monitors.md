@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Frame for stat monitors Monitor 1: CPU Usage Monitor 2: Memory Usage
+code 5 basic ui stat monitors with widgets and placements for tracking
 
 ## Usage Pattern
 

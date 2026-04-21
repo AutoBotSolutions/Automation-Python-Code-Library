@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Example setup, replace 'your_driver_path' with the path to your driver Open a page Get the page source and store it in a variable Print the content Close the browser ## Explanation:
+python using selenium get the current page scrape and store it in var
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Explanation ## Example Code ### File: `my_module.py` This is the file you would "include" in another script ### File: `main.py` Main file that includes `my_module.py`
+using python code an example using include
 
 ## Usage Pattern
 

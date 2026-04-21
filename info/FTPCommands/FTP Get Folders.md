@@ -7,10 +7,7 @@
 
 ## Purpose
 
-List folders in the given path on the FTP server.
-    :param ftp: FTP connection object
-    :param path: Path to list folders from
-    :return: List of folder names
+python ftp get folders
 
 ## Usage Pattern
 

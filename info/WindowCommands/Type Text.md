@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example: Typing in an Input Field Set up your WebDriver (e.g., for Chrome) Navigate to a URL Locate the input field Type keys into the input field Press Enter Quit the WebDriver session
+Using selenium type keys
 
 ## Key Features
 

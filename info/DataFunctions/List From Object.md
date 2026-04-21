@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## 1. **If the object is iterable (e.g., a dictionary, set, etc.):** Example ## 2. **If the object is custom (has attributes):**
+python list from object
 
 ## Usage Pattern
 

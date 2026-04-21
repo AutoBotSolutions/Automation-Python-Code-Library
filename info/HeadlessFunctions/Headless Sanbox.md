@@ -7,7 +7,7 @@
 
 ## Purpose
 
-## A More Complete Example Set up Chrome options Create the WebDriver
+Set up Chrome options Create the WebDriver
 
 ## Key Features
 

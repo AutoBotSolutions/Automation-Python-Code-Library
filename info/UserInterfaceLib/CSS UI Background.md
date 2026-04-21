@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Updated Python Code: Set the background image using CSS
+python set css image background of desktop application gui
 
 ## Usage Pattern
 

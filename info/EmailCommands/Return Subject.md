@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Code Example Function to get email subject from a file at a given position Open the file and read its content Parse the email Get the subject of the email Ensure proper handling of position-based requirement
+python return email subject at given position
 
 ## Key Features
 

@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## **Using Pandas** Example table data Create DataFrame Sum of each column
+python table total columns
 

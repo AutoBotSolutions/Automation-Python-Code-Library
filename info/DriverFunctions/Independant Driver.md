@@ -7,7 +7,7 @@
 
 ## Purpose
 
-Starts the browser with the given browser type.
+can you code an independent drive like selenium
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-## 1. **Plan of Action** ## 2. **Example Code** Set up the WebDriver Define the regular expression Get the page source Search for matches using regex
+Set up the WebDriver Define the regular expression Get the page source Search for matches using regex
 
 ## Key Features
 

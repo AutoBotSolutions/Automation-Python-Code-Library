@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant # Me # AI Assistant ## 1. **Using Selenium with "Clean" Browser Sessions** ### For Chrome: Set up Chrome with a fresh profile
+using selenium rest browser
 
 ## Key Features
 

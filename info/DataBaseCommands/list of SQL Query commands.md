@@ -5,10 +5,6 @@
 **Automation Type:** Database Operations
 **Lines:** 175
 
-## Purpose
-
-# Me # AI Assistant ## **SQL Query Commands:**
-
 ## Key Features
 
 - Database interaction

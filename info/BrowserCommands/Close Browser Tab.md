@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Closing the Current Active Tab: Initialize the driver Open a website Close the currently active tab ## Switching Between Tabs and Closing One: Initialize the driver
+using selenium close browser tab
 
 ## Key Features
 

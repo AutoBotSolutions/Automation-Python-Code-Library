@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## 1. **Using a Proxy** Start the BrowserMob Proxy server Configure Proxy
+Start the BrowserMob Proxy server Configure Proxy
 
 ## Key Features
 

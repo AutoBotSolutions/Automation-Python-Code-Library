@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Steps: ## Code Example Initialize the WebDriver (using Chrome in this example) Open the target website Locate an element by its ID and get its value/text
+using selenium by id set save variable, table, list to file
 
 ## Key Features
 

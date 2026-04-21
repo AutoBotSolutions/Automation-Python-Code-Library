@@ -7,11 +7,7 @@
 
 ## Purpose
 
-Find all occurrences in the text that match the given regex pattern.
-
-    :param text: The input text to search for matches.
-    :param pattern: The regex pattern to search for.
-    :return: A list of all matched strings.
+python text function find regex
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Code: Create a thread with my_var set to 5 Start the thread Wait for the thread to complete ## Explanation:
+launch single thread containing a variable set to 5
 
 ## Key Features
 

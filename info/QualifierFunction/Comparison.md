@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant Define the two values Compare the two values and set the result Output the result ## Explanation:
+python set a variable called 'comparison' set a comparison with the first value of 99 and the second value of 100 using conditions tell me witch one is grater.
 

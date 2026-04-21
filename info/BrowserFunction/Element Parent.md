@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Code Example Initialize the WebDriver Open a webpage Locate a child element Get the parent element using XPath You can now work with the parent_element Close the driver
+python using selenium get element parent and store it in var
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## 1. **Dictionaries** ## 2. **Custom Objects / Attributes**
+python object has key
 
 ## Key Features
 

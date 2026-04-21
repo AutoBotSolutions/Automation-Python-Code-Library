@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Prerequisites ## Code Example Define your connection configuration Connection string to connect to SQL Server
+connect to a SQL Server
 
 ## Key Features
 

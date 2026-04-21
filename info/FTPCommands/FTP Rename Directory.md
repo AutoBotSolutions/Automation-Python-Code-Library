@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Code Example for Renaming a Directory FTP configuration Connect to the FTP server Define the current directory name and the new name Rename the directory
+ftp rename directory
 
 ## Usage Pattern
 

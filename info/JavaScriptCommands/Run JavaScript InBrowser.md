@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Code Example: Initialize the Selenium WebDriver (e.g., using Chrome) Load a website Wait for the page to load completely JavaScript code to execute
+Initialize the Selenium WebDriver (e.g., using Chrome) Load a website Wait for the page to load completely JavaScript code to execute
 
 ## Key Features
 

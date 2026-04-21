@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Setting Up Logging in Python Configure the logging Example usage
+python log establish
 

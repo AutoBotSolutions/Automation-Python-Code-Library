@@ -7,5 +7,5 @@
 
 ## Purpose
 
-## Example Code Example shell command Execute the command ## Explanation:
+Example shell command Execute the command
 

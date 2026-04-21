@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Steps to Switch Browser Tabs in Selenium: ## Example Code (Python): Create a WebDriver instance Open the first tab Open a new tab or simulate opening a new tab Get the list of all current tabs
+using selenium switch browser tabs
 
 ## Key Features
 

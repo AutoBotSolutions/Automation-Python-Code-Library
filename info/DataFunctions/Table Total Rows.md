@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Example table represented as a 2D list Calculate total rows Print the total rows ## Explanation:
+python table total rows without using external lib
 
 ## Key Features
 

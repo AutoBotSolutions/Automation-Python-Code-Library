@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Approach for ChromeDriver Configure Chrome options
+Configure Chrome options
 
 ## Key Features
 

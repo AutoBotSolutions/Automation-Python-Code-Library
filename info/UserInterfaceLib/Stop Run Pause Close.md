@@ -7,7 +7,7 @@
 
 ## Purpose
 
-Starts the main task in a new thread.
+code to pause software from running at any point
 
 ## Key Features
 

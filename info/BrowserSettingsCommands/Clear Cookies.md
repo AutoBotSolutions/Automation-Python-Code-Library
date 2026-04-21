@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Clearing All Cookies Initialize the WebDriver (choose the browser you're automating) Open a website Clear all cookies Optionally, verify cookies are cleared Close the browser
+Initialize the WebDriver (choose the browser you're automating) Open a website Clear all cookies Optionally, verify cookies are cleared Close the browser
 
 ## Key Features
 

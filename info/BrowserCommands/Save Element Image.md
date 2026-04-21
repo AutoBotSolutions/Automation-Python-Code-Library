@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Steps: ## Example Code: Set up Selenium driver Locate the element you want to save as an image Get element position and size
+using selenium save element image
 
 ## Key Features
 

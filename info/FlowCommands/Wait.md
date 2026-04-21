@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant Wait for 5 seconds ## Explanation:
+using python code wait command
 

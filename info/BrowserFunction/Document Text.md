@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Initialize the Selenium WebDriver (e.g., Chrome) Navigate to a webpage Get the current page's document text Print or use the text Close the browser ## Explanation:
+python using selenium get the current page document text and store it in var
 
 ## Key Features
 

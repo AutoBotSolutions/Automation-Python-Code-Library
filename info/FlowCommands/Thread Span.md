@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant A task function to be executed in the thread Creating threads Starting threads Waiting for threads to finish (Thread Join - ensure completion of the span) Completion message
+thread span example
 
 ## Key Features
 

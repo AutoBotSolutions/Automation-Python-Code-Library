@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Simple Mouse Click Initialize the WebDriver Open a webpage Find the element to click Click the element Close the browser
+Using selenium click mouse
 
 ## Key Features
 

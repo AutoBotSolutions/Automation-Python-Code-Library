@@ -5,7 +5,3 @@
 **Automation Type:** General Automation
 **Lines:** 18
 
-## Purpose
-
-## Explanation:
-

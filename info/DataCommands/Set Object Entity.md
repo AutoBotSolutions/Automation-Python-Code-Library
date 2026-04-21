@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Key Characteristics: ## Set Creation: Using set() function Using curly braces ## Common Methods and Operations:
+python set object entity
 

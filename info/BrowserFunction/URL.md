@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Initialize the WebDriver (e.g., using Chrome) Open a webpage Get the current page URL Print or use the URL Close the browser ## Explanation:
+python using selenium get the current page URL and store it in var
 
 ## Key Features
 

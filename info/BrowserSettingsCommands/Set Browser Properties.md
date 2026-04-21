@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## For Chrome Create Options for Chrome browser Set browser properties Set headless mode if needed chrome_options.add_argument("--headless") Initialize the WebDriver with options Perform your actions
+Create Options for Chrome browser Set browser properties Set headless mode if needed chrome_options.add_argument("--headless") Initialize the WebDriver with options Perform your actions
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Options for Achieving Your Goal: Start Selenium WebDriver Open a URL (Modify as per your requirement) Run a shell command using subprocess Close the browser
+using selenium execute shall command in the browser
 
 ## Key Features
 

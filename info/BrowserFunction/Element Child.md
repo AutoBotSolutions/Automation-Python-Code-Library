@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Code Example Initialize the WebDriver Navigate to a page Locate the parent element Locate the child element relative to the parent You can now use the child_element variable Don't forget to close the browser
+python using selenium get element child and store it in var
 
 ## Key Features
 

@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Padding with `.ljust()`, `.rjust()`, and `.center()` Left padding (right justify) Right padding (left justify) Centered padding ## Padding with a specific character Right justify with `-`
+python text function text padding
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Code: File path to the text file Line you want to append Open the file in append mode and write the new line ## Explanation:
+python append line to text
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Example Code Start the browser and navigate to the URL Locate the dialog box's button and click it Assuming the button resides within a specific dialog with ID or class If there's a JavaScript alert, you may need to handle it
+Using selenium click dialog button
 
 ## Key Features
 

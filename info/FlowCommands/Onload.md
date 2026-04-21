@@ -7,7 +7,7 @@
 
 ## Purpose
 
-## Example with **Tkinter** Create the main window Set the window size Call the onload function after the window is initialized Run the application ## Explanation
+Create the main window Set the window size Call the onload function after the window is initialized Run the application
 
 ## Usage Pattern
 

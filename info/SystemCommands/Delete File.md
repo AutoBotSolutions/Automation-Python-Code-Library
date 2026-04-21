@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant Specify the file you want to delete Check if the file exists before deleting ## Key Points:
+using python delete file
 
 ## Key Features
 

@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Clear All Variables and Data in Memory Clear all user-defined variables ## Clear Cached Data (Filesystem, etc.) Clear temporary files and folders
+python clear all stored data
 
 ## Key Features
 

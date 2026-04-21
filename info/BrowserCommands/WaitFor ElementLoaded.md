@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Code Example Initialize the WebDriver (replace "your_webdriver_path" with the actual WebDriver path) Open a webpage Wait for the element to be present in the DOM Wait for the element to be visible
+Initialize the WebDriver (replace "your_webdriver_path" with the actual WebDriver path) Open a webpage Wait for the element to be present in the DOM Wait for the element to be visible
 
 ## Key Features
 

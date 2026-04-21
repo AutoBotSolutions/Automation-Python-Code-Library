@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Steps to Suggest Keywords: ## Python Code Example: Uncomment the first line to download NLTK stopwords if not already done
+python provide suggested keywords of a target page
 
 ## Usage Pattern
 

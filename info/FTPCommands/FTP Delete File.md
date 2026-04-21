@@ -7,5 +7,5 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Steps: ## Example Code: FTP server details Connect to FTP server
+FTP delete file
 

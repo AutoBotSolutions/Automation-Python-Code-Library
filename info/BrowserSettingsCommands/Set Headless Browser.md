@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## For Chrome: Set up Chrome options Initialize the WebDriver Access a webpage Quit the browser
+Set up Chrome options Initialize the WebDriver Access a webpage Quit the browser
 
 ## Key Features
 

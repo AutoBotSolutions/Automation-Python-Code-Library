@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## How to Ensure JavaScript Is Enabled in Selenium (Python): ### Chrome: Configure Chrome options Start WebDriver ### Firefox:
+Configure Chrome options Start WebDriver
 
 ## Key Features
 

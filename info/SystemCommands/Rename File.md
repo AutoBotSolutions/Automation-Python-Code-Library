@@ -7,5 +7,5 @@
 
 ## Purpose
 
-## Example Code: Current file name New file name Renaming the file ## Explanation:
+Current file name New file name Renaming the file
 

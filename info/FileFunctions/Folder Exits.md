@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Using `os` Module Specify the directory path Check if 'python' folder exists ## Using `pathlib` Module Specify the directory path Check if 'python' folder exists
+python folder exits in directory
 
 ## Key Features
 

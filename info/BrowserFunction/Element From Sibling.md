@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# Me # AI Assistant ## Explanation ## Code Example Set up the webdriver (this example uses Chrome, make sure to specify the correct path to your driver) Open the desired webpage Find the target element
+python using selenium get element from sibling and store it in var
 
 ## Key Features
 
