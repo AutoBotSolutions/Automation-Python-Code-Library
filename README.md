@@ -83,12 +83,52 @@ self.library_path = "/path/to/your/code/library"
 
 ```
 CodeLibrary/
-├── code_library_gui.py    # Main application
-├── tracking_log.txt        # Event logs (auto-generated)
-├── usage_stats.json        # Usage statistics (auto-generated)
-├── README.md              # This file
-├── LICENSE                # License file
-└── .gitignore            # Git ignore rules
+├── code_library_gui.py              # Main GUI application
+├── README.md                        # Project documentation
+├── LICENSE                          # MIT License
+├── CONTRIBUTING.md                  # Contribution guidelines
+├── GITHUB_SETUP.md                  # GitHub upload instructions
+├── GITHUB_2FA_SETUP.md              # 2FA authentication guide
+├── .gitignore                       # Git ignore rules
+├── tracking_log.txt                 # Event logs (auto-generated)
+├── usage_stats.json                 # Usage statistics (auto-generated)
+└── code-library/                    # Automation code library
+    ├── AccountFuntions/             # Account-related functions
+    ├── BrowserCommands/             # Browser automation commands
+    ├── BrowserFunction/             # Browser functions
+    ├── BrowserSettingsCommands/     # Browser settings
+    ├── CodeLibrary/                 # Code library utilities
+    ├── CustomFunctions/             # Custom function scripts
+    ├── CustomScripting/             # Custom scripting tools
+    ├── DataBaseCommands/            # Database operations
+    ├── DataCommands/                # Data manipulation commands
+    ├── DataFunctions/               # Data processing functions
+    ├── DriverFunctions/             # Driver-related functions
+    ├── EmailCommands/               # Email automation
+    ├── FileCommands/                # File operations
+    ├── FileFunctions/               # File processing
+    ├── FlowCommands/                # Flow control
+    ├── FTPCommands/                 # FTP operations
+    ├── HeadlessFunctions/           # Headless browser functions
+    ├── HTTPCommands/                # HTTP requests
+    ├── Info Lib/                    # Information library
+    ├── JavaScriptCommands/          # JavaScript execution
+    ├── ListCommands/                # List operations
+    ├── LogCommands/                 # Logging functions
+    ├── MathFunctions/               # Mathematical functions
+    ├── OporationCommands/           # Operation commands
+    ├── ProxyFunction/               # Proxy functions
+    ├── ProxyFunctions/              # Additional proxy functions
+    ├── QualifierFunction/           # Qualifier functions
+    ├── Refracted Projects/          # Refracted automation projects
+    ├── SystemCommands/              # System operations
+    ├── SystemFunctions/             # System functions
+    ├── TableCommands/               # Table operations
+    ├── TextFunctions/              # Text processing
+    ├── ThreadingFunctions/          # Threading utilities
+    ├── TimeFunctions/               # Time/date functions
+    ├── UserInterfaceLib/            # UI library components
+    └── WindowCommands/              # Window management
 ```
 
 ## Tracking Data
