@@ -97,9 +97,111 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e1e2e 0%, #313244 100%);
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1a 100%);
             color: #cdd6f4;
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 191, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(138, 43, 226, 0.05) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: 0;
+            animation: quantumPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes quantumPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.15;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 255, 136, 0.03) 2px,
+                    rgba(0, 255, 136, 0.03) 4px
+                );
+            animation: matrixScroll 20s linear infinite;
+        }
+
+        @keyframes matrixScroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100px); }
+        }
+
+        .quantum-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.3;
+        }
+
+        .quantum-particles::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle, rgba(0, 255, 136, 0.5) 1px, transparent 1px),
+                radial-gradient(circle, rgba(0, 191, 255, 0.5) 1px, transparent 1px);
+            background-size: 50px 50px, 30px 30px;
+            animation: quantumFloat 15s linear infinite;
+        }
+
+        @keyframes quantumFloat {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, 10px) rotate(90deg); }
+            50% { transform: translate(0, 20px) rotate(180deg); }
+            75% { transform: translate(-10px, 10px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        .entanglement-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0.1;
+            background: 
+                linear-gradient(45deg, transparent 48%, rgba(0, 255, 136, 0.2) 49%, rgba(0, 255, 136, 0.2) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(0, 191, 255, 0.2) 49%, rgba(0, 191, 255, 0.2) 51%, transparent 52%);
+            background-size: 100px 100px;
+            animation: entanglementPulse 10s ease-in-out infinite;
+        }
+
+        @keyframes entanglementPulse {
+            0%, 100% { opacity: 0.1; transform: scale(1); }
+            50% { opacity: 0.2; transform: scale(1.1); }
         }
 
         .container {
@@ -289,6 +391,9 @@
     </style>
 </head>
 <body>
+    <div class="matrix-rain"></div>
+    <div class="quantum-particles"></div>
+    <div class="entanglement-lines"></div>
     <div class="container">
         <header>
             <h1>Automation Python Code Library</h1>
