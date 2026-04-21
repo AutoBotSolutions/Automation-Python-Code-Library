@@ -641,6 +641,7 @@ class CodeLibraryGUI:
         self.root = root
         self.root.title("Automation Code Library")
         self.root.geometry("1200x800")
+        self.root.minsize(1000, 600)
         
         # Apply modern theme to main window
         self.root.configure(bg=COLORS['bg_primary'])
@@ -687,7 +688,12 @@ class CodeLibraryGUI:
         style.configure('TEntry', fieldbackground=COLORS['bg_secondary'], foreground=COLORS['fg_primary'],
                        borderwidth=1, insertcolor=COLORS['accent'], font=(font_family, 9))
         style.configure('TCombobox', fieldbackground=COLORS['bg_secondary'], foreground=COLORS['fg_primary'],
-                       background=COLORS['bg_tertiary'], borderwidth=1, font=(font_family, 9))
+                       background=COLORS['bg_tertiary'], borderwidth=1, font=(font_family, 9),
+                       arrowcolor=COLORS['fg_primary'])
+        style.map('TCombobox', fieldbackground=[('readonly', COLORS['bg_secondary']),
+                                                ('focus', COLORS['bg_secondary'])],
+                  foreground=[('readonly', COLORS['fg_primary']),
+                             ('focus', COLORS['fg_primary'])])
         style.configure('Treeview', background=COLORS['bg_secondary'], foreground=COLORS['fg_primary'],
                        fieldbackground=COLORS['bg_secondary'], borderwidth=0, font=(font_family, 9))
         style.configure('Treeview.Heading', background=COLORS['bg_tertiary'], foreground=COLORS['fg_primary'],
@@ -761,37 +767,43 @@ class CodeLibraryGUI:
         files_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         
         # === RIGHT PANEL ===
-        # Code viewer header
-        header_frame = tk.Frame(right_frame, bg=COLORS['bg_primary'])
-        header_frame.pack(fill=tk.X, padx=8, pady=(8, 5))
+        # Code viewer header - top row with file label
+        header_top = tk.Frame(right_frame, bg=COLORS['bg_primary'])
+        header_top.pack(fill=tk.X, padx=8, pady=(8, 5))
         
-        self.file_label = tk.Label(header_frame, text="Select a file to view code", 
+        self.file_label = tk.Label(header_top, text="Select a file to view code", 
                                   font=(font_family, 11, 'bold'), bg=COLORS['bg_primary'], fg=COLORS['accent'])
         self.file_label.pack(side=tk.LEFT)
         
-        # Action buttons
-        button_frame = tk.Frame(header_frame, bg=COLORS['bg_primary'])
-        button_frame.pack(side=tk.RIGHT)
+        # Header bottom row with controls and buttons
+        header_bottom = tk.Frame(right_frame, bg=COLORS['bg_primary'])
+        header_bottom.pack(fill=tk.X, padx=8, pady=(0, 5))
+        
+        # Theme and wrap controls on the left
+        controls_frame = tk.Frame(header_bottom, bg=COLORS['bg_primary'])
+        controls_frame.pack(side=tk.LEFT)
         
         # Color scheme selector
-        tk.Label(button_frame, text="Theme:", bg=COLORS['bg_primary'], fg=COLORS['fg_secondary'],
+        tk.Label(controls_frame, text="Theme:", bg=COLORS['bg_primary'], fg=COLORS['fg_secondary'],
                 font=(font_family, 9)).pack(side=tk.LEFT, padx=(0, 5))
         self.scheme_var = tk.StringVar(value=current_scheme)
-        self.scheme_combo = ttk.Combobox(button_frame, textvariable=self.scheme_var, 
+        self.scheme_combo = ttk.Combobox(controls_frame, textvariable=self.scheme_var, 
                                         values=list(COLOR_SCHEMES.keys()), state='readonly', width=10)
         self.scheme_combo.pack(side=tk.LEFT, padx=2)
         self.scheme_combo.bind('<<ComboboxSelected>>', self.change_color_scheme)
         
         # Wrap mode selector
-        tk.Label(button_frame, text="Wrap:", bg=COLORS['bg_primary'], fg=COLORS['fg_secondary'],
+        tk.Label(controls_frame, text="Wrap:", bg=COLORS['bg_primary'], fg=COLORS['fg_secondary'],
                 font=(font_family, 9)).pack(side=tk.LEFT, padx=(10, 5))
         self.wrap_var = tk.StringVar(value='None')
-        self.wrap_combo = ttk.Combobox(button_frame, textvariable=self.wrap_var,
+        self.wrap_combo = ttk.Combobox(controls_frame, textvariable=self.wrap_var,
                                       values=['None', 'Word', 'Char'], state='readonly', width=8)
         self.wrap_combo.pack(side=tk.LEFT, padx=2)
         self.wrap_combo.bind('<<ComboboxSelected>>', self.change_wrap_mode)
         
-        ttk.Separator(button_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, padx=10, fill=tk.Y)
+        # Action buttons on the right
+        button_frame = tk.Frame(header_bottom, bg=COLORS['bg_primary'])
+        button_frame.pack(side=tk.RIGHT)
         
         self.stats_btn = ttk.Button(button_frame, text="Statistics", command=self.show_statistics)
         self.stats_btn.pack(side=tk.LEFT, padx=2)
@@ -1179,7 +1191,12 @@ class CodeLibraryGUI:
         style.configure('TEntry', fieldbackground=COLORS['bg_secondary'], foreground=COLORS['fg_primary'],
                        borderwidth=1, insertcolor=COLORS['accent'], font=(font_family, 9))
         style.configure('TCombobox', fieldbackground=COLORS['bg_secondary'], foreground=COLORS['fg_primary'],
-                       background=COLORS['bg_tertiary'], borderwidth=1, font=(font_family, 9))
+                       background=COLORS['bg_tertiary'], borderwidth=1, font=(font_family, 9),
+                       arrowcolor=COLORS['fg_primary'])
+        style.map('TCombobox', fieldbackground=[('readonly', COLORS['bg_secondary']),
+                                                ('focus', COLORS['bg_secondary'])],
+                  foreground=[('readonly', COLORS['fg_primary']),
+                             ('focus', COLORS['fg_primary'])])
         style.configure('Treeview', background=COLORS['bg_secondary'], foreground=COLORS['fg_primary'],
                        fieldbackground=COLORS['bg_secondary'], borderwidth=0, font=(font_family, 9))
         style.configure('Treeview.Heading', background=COLORS['bg_tertiary'], foreground=COLORS['fg_primary'],
@@ -1211,6 +1228,19 @@ class CodeLibraryGUI:
                         child.configure(bg=COLORS['bg_primary'], fg=COLORS['fg_secondary'])
                     elif text in ['Categories', 'Files', 'Code Content']:
                         child.configure(bg=COLORS['bg_primary'], fg=COLORS['accent'])
+                # Update nested frames (header_top, header_bottom, controls_frame)
+                elif child.winfo_class() == 'Frame':
+                    for grandchild in child.winfo_children():
+                        if grandchild.winfo_class() == 'Label':
+                            text = grandchild.cget('text')
+                            if text in ['Theme:', 'Wrap:']:
+                                grandchild.configure(bg=COLORS['bg_primary'], fg=COLORS['fg_secondary'])
+                        elif grandchild.winfo_class() == 'Frame':
+                            for ggchild in grandchild.winfo_children():
+                                if ggchild.winfo_class() == 'Label':
+                                    text = ggchild.cget('text')
+                                    if text in ['Theme:', 'Wrap:']:
+                                        ggchild.configure(bg=COLORS['bg_primary'], fg=COLORS['fg_secondary'])
         
         # Re-apply syntax highlighting if code is loaded
         if self.current_file_path:
