@@ -5,9 +5,18 @@
 **Automation Type:** General Automation
 **Lines:** 8
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Object-oriented - Provides classes and methods
+
+## Function Descriptions
+
+- __init__ - Parameters: self, dim. Performs a specific operation.
+- update - Parameters: self, entropy_gradient, lr. Modifies or updates data or settings.
 
 ## Functions
 

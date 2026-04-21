@@ -9,3 +9,7 @@
 
 python set date to variable
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+

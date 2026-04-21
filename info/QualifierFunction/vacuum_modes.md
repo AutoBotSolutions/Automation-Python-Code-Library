@@ -9,6 +9,10 @@
 
 vacuum_modes.py
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Function-based - Provides reusable functions with standalone execution capability
@@ -16,6 +20,10 @@ Function-based - Provides reusable functions with standalone execution capabilit
 ## Dependencies
 
 - `numpy`
+
+## Function Descriptions
+
+- casimir_energy - Parameters: a, n_max. Performs a specific operation.
 
 ## Functions
 

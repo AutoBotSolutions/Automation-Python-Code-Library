@@ -10,6 +10,10 @@
 Function to process a large list in batches to avoid memory issues.
     `input_list` can be a generator to handle truly massive datasets.
 
+## Library Context
+
+This script is part of the database operations library, providing functions for connecting to databases, executing SQL queries, and managing database transactions.
+
 ## Key Features
 
 - Database interaction
@@ -21,6 +25,11 @@ Function-based - Provides reusable functions with standalone execution capabilit
 ## Dependencies
 
 - `mysql.connector`
+
+## Function Descriptions
+
+- process_large_list - Parameters: input_list, batch_size. Performs a specific operation.
+- example_processing_function - Parameters: data_batch. Performs a specific operation.
 
 ## Functions
 

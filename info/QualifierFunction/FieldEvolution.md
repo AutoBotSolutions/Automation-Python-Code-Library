@@ -9,9 +9,17 @@
 
 Field update step for N x N complex tensor Laplacian via roll (discrete diffusion) Multi-field evolution Cross-field coupling Euler integration
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Function-based - Provides reusable functions
+
+## Function Descriptions
+
+- laplacian - Parameters: f. Performs a specific operation.
 
 ## Functions
 

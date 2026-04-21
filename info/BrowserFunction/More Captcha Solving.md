@@ -9,6 +9,10 @@
 
 Replace with your 2captcha API key Start WebDriver Wait for page to load Click the reCAPTCHA checkbox Wait for reCAPTCHA to load Get banner text Save image for CAPTCHA
 
+## Library Context
+
+This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks.
+
 ## Key Features
 
 - Web browser control

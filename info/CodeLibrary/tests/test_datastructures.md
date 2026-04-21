@@ -9,6 +9,10 @@
 
 Tests for datastructures module.
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Function-based - Provides reusable functions
@@ -19,6 +23,12 @@ Function-based - Provides reusable functions
 - `codelibrary.datastructures.Stack`
 - `codelibrary.datastructures.Queue`
 - `codelibrary.datastructures.LinkedList`
+
+## Function Descriptions
+
+- test_stack - Performs a specific operation.
+- test_queue - Performs a specific operation.
+- test_linked_list - Performs a specific operation.
 
 ## Functions
 

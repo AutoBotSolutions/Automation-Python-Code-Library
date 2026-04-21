@@ -9,6 +9,10 @@
 
 Function to simulate adding logs
 
+## Library Context
+
+This script is part of the HTTP/Network library, providing functions for making HTTP requests, interacting with web APIs, and handling network communications.
+
 ## Key Features
 
 - Web API interaction
@@ -21,6 +25,14 @@ Function-based - Provides reusable functions
 
 - `tkinter`
 - `tkinter.messagebox`
+
+## Function Descriptions
+
+- add_log - Parameters: message. Performs a specific operation.
+- show_selection - Performs a specific operation.
+- start - Initializes a connection or process.
+- stop - Terminates or closes a connection or process.
+- pause - Performs a specific operation.
 
 ## Functions
 
@@ -68,5 +80,30 @@ def start():
     if follow_entry.get() == username and unfollow_entry.get() == password:
         messagebox.showinfo(title="Start Success", message="You successfully logged in.")
         add_log("
+```
+
+### stop
+
+```python
+def stop():
+    username = "johnsmith"
+    password = "12345"
+    add_log("Stop button clicked.")  # Log the event
+    if follow_entry.get() == username and unfollow_entry.get() == password:
+        messagebox.showinfo(title="Stop Success", message="You Stopped")
+        add_log("Software Stopped")
+
+```
+
+### pause
+
+```python
+def pause():
+    username = "johnsmith"
+    password = "12345"
+    add_log("Pause button clicked.")  # Log the event
+    if follow_entry.get() == username and unfollow_entry.get() == password:
+        messagebox.showinfo(title="Pause Success", message="You Paused")
+        add_log("Software Paused")
 ```
 

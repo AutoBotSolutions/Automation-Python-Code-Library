@@ -9,6 +9,10 @@
 
 Initialize complex field
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Function-based - Provides reusable functions
@@ -17,6 +21,11 @@ Function-based - Provides reusable functions
 
 - `torch`
 - `torch.fft`
+
+## Function Descriptions
+
+- laplacian - Parameters: field. Performs a specific operation.
+- pump_field - Parameters: x0, y0, amplitude, sigma. Performs a specific operation.
 
 ## Functions
 

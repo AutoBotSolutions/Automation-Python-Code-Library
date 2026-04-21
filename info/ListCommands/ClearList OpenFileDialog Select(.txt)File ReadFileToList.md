@@ -9,6 +9,10 @@
 
 Step 1: Open File Dialog to Select .txt file Step 2: Read the file and store contents in a list Step 3: Print the list to the console
 
+## Library Context
+
+This script is part of the file operations library, providing functions for file system manipulation including creating, reading, writing, and deleting files and directories.
+
 ## Key Features
 
 - File system manipulation

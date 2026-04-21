@@ -9,6 +9,10 @@
 
 python set a variable called 'not_contains' set the value to '10' now using a qualifier function set the condition to search a page for the number 10, if the page dose not contain the number 10 then set the variable 'not_contains' to true and if it dose contain the number 10 set it to false
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Function-based - Provides reusable functions

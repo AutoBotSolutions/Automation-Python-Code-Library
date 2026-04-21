@@ -9,6 +9,10 @@
 
 String manipulation and validation utilities.
 
+## Library Context
+
+This script is part of the HTTP/Network library, providing functions for making HTTP requests, interacting with web APIs, and handling network communications.
+
 ## Key Features
 
 - Web API interaction
@@ -22,6 +26,14 @@ Function-based - Provides reusable functions
 - `re`
 - `typing.List`
 - `typing.Optional`
+
+## Function Descriptions
+
+- camel_to_snake - Parameters: name. Performs a specific operation.
+- snake_to_camel - Parameters: name. Performs a specific operation.
+- truncate - Parameters: text, max_length, suffix. Performs a specific operation.
+- is_email - Parameters: email. Performs a specific operation.
+- is_url - Parameters: url. Performs a specific operation.
 
 ## Functions
 
@@ -115,5 +127,23 @@ def truncate(text: str, max_length: int, suffix: str = "...") -> str:
     if len(text) <= max_length:
         return text
     return text[:max_length - len(suffix)] + suffix
+```
+
+### is_email
+
+```python
+def is_email(email: str) -> bool:
+    """Validate if a string is a valid email format."""
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return bool(re.match(pattern, email))
+```
+
+### is_url
+
+```python
+def is_url(url: str) -> bool:
+    """Validate if a string is a valid URL format."""
+    pattern = r'^https?://[^\s/$.?#].[^\s]*$'
+    return bool(re.match(pattern, url))
 ```
 

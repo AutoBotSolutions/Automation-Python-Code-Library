@@ -9,6 +9,10 @@
 
 Tests for string_helpers module.
 
+## Library Context
+
+This script is part of the email automation library, providing functions for sending, receiving, and managing email communications.
+
 ## Key Features
 
 - Email sending/receiving
@@ -27,6 +31,14 @@ Function-based - Provides reusable functions
 - `codelibrary.string_helpers.remove_extra_spaces`
 - `codelibrary.string_helpers.reverse_string`
 - `codelibrary.string_helpers.count_words`
+
+## Function Descriptions
+
+- test_camel_to_snake - Performs a specific operation.
+- test_snake_to_camel - Performs a specific operation.
+- test_truncate - Performs a specific operation.
+- test_is_email - Performs a specific operation.
+- test_remove_extra_spaces - Performs a specific operation.
 
 ## Functions
 
@@ -68,5 +80,21 @@ def test_snake_to_camel():
 def test_truncate():
     assert truncate("Hello World", 5) == "He..."
     assert truncate("Hi", 10) == "Hi"
+```
+
+### test_is_email
+
+```python
+def test_is_email():
+    assert is_email("test@example.com") is True
+    assert is_email("invalid-email") is False
+```
+
+### test_remove_extra_spaces
+
+```python
+def test_remove_extra_spaces():
+    assert remove_extra_spaces("Hello    World") == "Hello World"
+    assert remove_extra_spaces("  Test  ") == "Test"
 ```
 

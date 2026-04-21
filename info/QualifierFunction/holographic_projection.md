@@ -5,6 +5,10 @@
 **Automation Type:** General Automation
 **Lines:** 9
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Object-oriented - Provides classes and methods
@@ -12,6 +16,11 @@ Object-oriented - Provides classes and methods
 ## Dependencies
 
 - `torch`
+
+## Function Descriptions
+
+- __init__ - Parameters: self, bulk_dim, boundary_dim. Performs a specific operation.
+- project - Parameters: self, bulk_state. Performs a specific operation.
 
 ## Functions
 

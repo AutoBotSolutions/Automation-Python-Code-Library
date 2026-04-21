@@ -9,6 +9,10 @@
 
 2captcha reCAPTCHA Initialize variables Initialize browser Wait for page to load Click reCAPTCHA checkbox Wait for challenge to load Get banner text
 
+## Library Context
+
+This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks.
+
 ## Key Features
 
 - Web browser control

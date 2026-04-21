@@ -9,6 +9,10 @@
 
 Code library indexer - extracts and indexes functions, classes, and documentation.
 
+## Library Context
+
+This script is part of the HTTP/Network library, providing functions for making HTTP requests, interacting with web APIs, and handling network communications.
+
 ## Key Features
 
 - Web API interaction
@@ -30,6 +34,14 @@ Object-oriented - Provides classes and methods
 - `codelibrary.file_operations`
 - `codelibrary.math_helpers`
 - `codelibrary.time_utils`
+
+## Function Descriptions
+
+- __init__ - Parameters: self, name, module, doc, signature, is_class. Performs a specific operation.
+- to_dict - Parameters: self. Performs a specific operation.
+- __init__ - Parameters: self. Performs a specific operation.
+- get_all_functions - Parameters: self. Performs a specific operation.
+- get_module_functions - Parameters: self, module_name. Performs a specific operation.
 
 ## Functions
 
@@ -138,5 +150,24 @@ def __init__(self):
             "math_helpers": math_helpers,
             "time_utils": time_utils
         
+```
+
+### get_all_functions
+
+```python
+def get_all_functions(self) -> List[FunctionInfo]:
+        """Get all indexed functions."""
+        all_funcs = []
+        for functions in self.index.values():
+            all_funcs.extend(functions)
+        return all_funcs
+```
+
+### get_module_functions
+
+```python
+def get_module_functions(self, module_name: str) -> List[FunctionInfo]:
+        """Get all functions from a specific module."""
+        return self.index.get(module_name, [])
 ```
 

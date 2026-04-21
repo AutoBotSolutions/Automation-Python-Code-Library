@@ -9,6 +9,10 @@
 
 ///////////////////////////////////////////////////////////# Initialize the Chrome driver (or another driver of your choice) Navigate to the desired URL Function to check if an element exists Example usage
 
+## Library Context
+
+This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks.
+
 ## Key Features
 
 - Web browser control

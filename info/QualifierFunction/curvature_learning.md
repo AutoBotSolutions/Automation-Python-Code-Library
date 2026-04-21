@@ -5,6 +5,10 @@
 **Automation Type:** General Automation
 **Lines:** 23
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Object-oriented - Provides classes and methods
@@ -12,6 +16,13 @@ Object-oriented - Provides classes and methods
 ## Dependencies
 
 - `torch`
+
+## Function Descriptions
+
+- __init__ - Parameters: self, dim. Performs a specific operation.
+- loss - Parameters: self. Performs a specific operation.
+- fisher_metric - Parameters: self. Performs a specific operation.
+- natural_step - Parameters: self, lr. Performs a specific operation.
 
 ## Functions
 
@@ -65,5 +76,17 @@ def fisher_metric(self):
         grad = torch.autograd.grad(self.loss(), self.theta, create_graph=True)[0]
         G = torch.outer(grad, grad) + 1e-3 * torch.eye(len(self.theta), device="cuda")
         return G
+```
+
+### natural_step
+
+```python
+def natural_step(self, lr=0.01):
+        L = self.loss()
+        grad = torch.autograd.grad(L, self.theta)[0]
+        G = self.fisher_metric()
+        G_inv = torch.linalg.inv(G)
+        update = G_inv @ grad
+        self.theta.data -= lr * update
 ```
 

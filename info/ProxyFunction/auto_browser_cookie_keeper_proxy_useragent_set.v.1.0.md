@@ -9,6 +9,10 @@
 
 Save browser cookies to a file.
 
+## Library Context
+
+This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks.
+
 ## Key Features
 
 - Web browser control
@@ -28,6 +32,10 @@ Function-based - Provides reusable functions with standalone execution capabilit
 - `selenium.webdriver.chrome.service.Service`
 - `selenium.common.exceptions.TimeoutException`
 - `selenium.common.exceptions.WebDriverException`
+
+## Function Descriptions
+
+- save_cookies - Parameters: driver, file_path. Performs a specific operation.
 
 ## Functions
 

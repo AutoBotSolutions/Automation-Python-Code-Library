@@ -9,3 +9,7 @@
 
 python create a list called 'list_items' select a random list item from 'list_items' and set the value of 'list_items' to a new variable called 'random_list_item'
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+

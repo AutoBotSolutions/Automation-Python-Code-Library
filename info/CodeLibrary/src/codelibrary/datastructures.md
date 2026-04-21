@@ -9,6 +9,10 @@
 
 Common data structure implementations.
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Object-oriented - Provides classes and methods
@@ -18,6 +22,14 @@ Object-oriented - Provides classes and methods
 - `typing.Any`
 - `typing.Optional`
 - `typing.Iterator`
+
+## Function Descriptions
+
+- __init__ - Parameters: self. Performs a specific operation.
+- push - Parameters: self, item. Performs a specific operation.
+- pop - Parameters: self. Performs a specific operation.
+- peek - Parameters: self. Performs a specific operation.
+- is_empty - Parameters: self. Performs a specific operation.
 
 ## Functions
 
@@ -149,5 +161,23 @@ def pop(self) -> Any:
         if self.is_empty():
             raise IndexError("pop from empty stack")
         return self._items.pop()
+```
+
+### peek
+
+```python
+def peek(self) -> Any:
+        """Return the top item without removing it."""
+        if self.is_empty():
+            raise IndexError("peek from empty stack")
+        return self._items[-1]
+```
+
+### is_empty
+
+```python
+def is_empty(self) -> bool:
+        """Check if the stack is empty."""
+        return len(self._items) == 0
 ```
 

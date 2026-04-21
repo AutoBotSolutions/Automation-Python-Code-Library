@@ -9,6 +9,10 @@
 
 Configure logging to write events to 'app.log' with timestamps, log levels, and thread names Initialize empty lists to store proxy data and account data Define file paths for proxies and accounts data Initialize global variables for row counters and thread management
 
+## Library Context
+
+This script is part of the file operations library, providing functions for file system manipulation including creating, reading, writing, and deleting files and directories.
+
 ## Key Features
 
 - File system manipulation

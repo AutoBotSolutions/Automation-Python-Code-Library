@@ -9,6 +9,10 @@
 
 zpf_engine.py
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Object-oriented - Provides classes and methods
@@ -16,6 +20,14 @@ Object-oriented - Provides classes and methods
 ## Dependencies
 
 - `numpy`
+
+## Function Descriptions
+
+- __init__ - Parameters: self, dim. Performs a specific operation.
+- apply_constraint - Parameters: self, constraint_matrix. Performs a specific operation.
+- energy - Parameters: self. Performs a specific operation.
+- gradient - Parameters: self. Performs a specific operation.
+- renormalize - Parameters: self. Performs a specific operation.
 
 ## Functions
 
@@ -71,5 +83,19 @@ def apply_constraint(self, constraint_matrix):
 ```python
 def energy(self):
         return np.dot(self.state, self.state)
+```
+
+### gradient
+
+```python
+def gradient(self):
+        return 2 * self.state
+```
+
+### renormalize
+
+```python
+def renormalize(self):
+        self.state -= np.mean(self.state)
 ```
 

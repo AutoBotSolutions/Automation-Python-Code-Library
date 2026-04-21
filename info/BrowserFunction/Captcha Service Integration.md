@@ -9,6 +9,10 @@
 
 Step 1: Request to solve reCAPTCHA Step 2: Poll for solution Example of usage
 
+## Library Context
+
+This script is part of the HTTP/Network library, providing functions for making HTTP requests, interacting with web APIs, and handling network communications.
+
 ## Key Features
 
 - Web API interaction
@@ -25,6 +29,11 @@ Function-based - Provides reusable functions
 - `google.oauth2.credentials.Credentials`
 - `base64`
 - `email.mime.text.MIMEText`
+
+## Function Descriptions
+
+- send_sms - Parameters: message. Performs a specific operation.
+- send_email - Parameters: sender, to, subject, message_text. Performs a specific operation.
 
 ## Functions
 

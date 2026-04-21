@@ -9,6 +9,10 @@
 
 Initialize the WebDriver Open a webpage Wait for an element to be visible on the page (timeout: 10 seconds)
 
+## Library Context
+
+This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks.
+
 ## Key Features
 
 - Web browser control

@@ -9,6 +9,10 @@
 
 curved_vacuum.py
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Object-oriented - Provides classes and methods
@@ -16,6 +20,13 @@ Object-oriented - Provides classes and methods
 ## Dependencies
 
 - `numpy`
+
+## Function Descriptions
+
+- __init__ - Parameters: self, size. Performs a specific operation.
+- inject_mass - Parameters: self, x, y, strength. Performs a specific operation.
+- update - Parameters: self. Modifies or updates data or settings.
+- energy_density - Parameters: self. Performs a specific operation.
 
 ## Functions
 
@@ -73,5 +84,12 @@ def update(self):
         noise = np.random.normal(0, 1, (self.size, self.size))
         self.field += noise * (1 + self.curvature)
         self.field -= np.mean(self.field)
+```
+
+### energy_density
+
+```python
+def energy_density(self):
+        return np.mean(self.field**2)
 ```
 

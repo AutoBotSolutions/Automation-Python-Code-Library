@@ -9,6 +9,10 @@
 
 Time and date manipulation utilities.
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Function-based - Provides reusable functions
@@ -20,6 +24,14 @@ Function-based - Provides reusable functions
 - `typing.Optional`
 - `typing.List`
 - `time`
+
+## Function Descriptions
+
+- now - Performs a specific operation.
+- now_timestamp - Performs a specific operation.
+- datetime_to_timestamp - Parameters: dt. Performs a specific operation.
+- timestamp_to_datetime - Parameters: timestamp. Performs a specific operation.
+- format_datetime - Parameters: dt, format_str. Performs a specific operation.
 
 ## Functions
 
@@ -105,5 +117,21 @@ def now_timestamp() -> float:
 def datetime_to_timestamp(dt: datetime) -> float:
     """Convert a datetime to Unix timestamp."""
     return dt.timestamp()
+```
+
+### timestamp_to_datetime
+
+```python
+def timestamp_to_datetime(timestamp: float) -> datetime:
+    """Convert a Unix timestamp to datetime."""
+    return datetime.fromtimestamp(timestamp)
+```
+
+### format_datetime
+
+```python
+def format_datetime(dt: datetime, format_str: str = "%Y-%m-%d %H:%M:%S") -> str:
+    """Format a datetime as a string."""
+    return dt.strftime(format_str)
 ```
 

@@ -9,6 +9,10 @@
 
 Mathematical computation helpers.
 
+## Library Context
+
+This script is part of the HTTP/Network library, providing functions for making HTTP requests, interacting with web APIs, and handling network communications.
+
 ## Key Features
 
 - Web API interaction
@@ -23,6 +27,14 @@ Function-based - Provides reusable functions
 - `typing.List`
 - `typing.Tuple`
 - `typing.Optional`
+
+## Function Descriptions
+
+- mean - Parameters: numbers. Performs a specific operation.
+- median - Parameters: numbers. Performs a specific operation.
+- mode - Parameters: numbers. Performs a specific operation.
+- standard_deviation - Parameters: numbers. Performs a specific operation.
+- gcd - Parameters: a, b. Performs a specific operation.
 
 ## Functions
 
@@ -125,5 +137,24 @@ def mode(numbers: List[float]) -> List[float]:
     for num in numbers:
         frequency[num] = frequency.get(num, 0) + 1
     max_freq = max(fr
+```
+
+### standard_deviation
+
+```python
+def standard_deviation(numbers: List[float]) -> float:
+    """Calculate the standard deviation of a list of numbers."""
+    if len(numbers) < 2:
+        raise ValueError("Cannot calculate standard deviation with less than 2 numbers")
+    avg = mean(numbers)
+    variance = sum((x - avg) ** 2 for x in
+```
+
+### gcd
+
+```python
+def gcd(a: int, b: int) -> int:
+    """Calculate the greatest common divisor of two integers."""
+    return math.gcd(a, b)
 ```
 

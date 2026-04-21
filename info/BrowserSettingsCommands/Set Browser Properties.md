@@ -9,6 +9,10 @@
 
 Create Options for Chrome browser Set browser properties Set headless mode if needed chrome_options.add_argument("--headless") Initialize the WebDriver with options Perform your actions
 
+## Library Context
+
+This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks.
+
 ## Key Features
 
 - Web browser control

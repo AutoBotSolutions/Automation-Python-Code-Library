@@ -9,6 +9,10 @@
 
 relativistic_vacuum.py simple metric tensor (flat Minkowski baseline)
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Object-oriented - Provides classes and methods
@@ -16,6 +20,14 @@ Object-oriented - Provides classes and methods
 ## Dependencies
 
 - `numpy`
+
+## Function Descriptions
+
+- __init__ - Parameters: self, size, dt. Performs a specific operation.
+- inject_mass - Parameters: self, x, y, z, strength. Performs a specific operation.
+- laplacian - Parameters: self. Performs a specific operation.
+- step - Parameters: self. Performs a specific operation.
+- energy_density - Parameters: self. Performs a specific operation.
 
 ## Functions
 
@@ -87,5 +99,22 @@ def laplacian(self):
             np.roll(self.field,1,2) + np.roll(self.field,-1,2)
             - 6*self.field
         )
+```
+
+### step
+
+```python
+def step(self):
+        curvature_weighted = self.metric * self.laplacian()
+        self.velocity += self.dt * curvature_weighted
+        self.field += self.dt * self.velocity
+        self.field -= np.mean(self.field)
+```
+
+### energy_density
+
+```python
+def energy_density(self):
+        return np.mean(self.field**2 + self.velocity**2)
 ```
 

@@ -9,6 +9,10 @@
 
 Reduce to 2D coordinate Gaussian pump
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Function-based - Provides reusable functions

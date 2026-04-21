@@ -9,6 +9,10 @@
 
 dynamic_metric.py simplified scalar curvature proxy
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Object-oriented - Provides classes and methods
@@ -16,6 +20,14 @@ Object-oriented - Provides classes and methods
 ## Dependencies
 
 - `numpy`
+
+## Function Descriptions
+
+- __init__ - Parameters: self, size, dt. Performs a specific operation.
+- laplacian - Parameters: self, field. Performs a specific operation.
+- stress_energy - Parameters: self. Performs a specific operation.
+- update_metric - Parameters: self. Performs a specific operation.
+- step - Parameters: self. Performs a specific operation.
 
 ## Functions
 
@@ -89,5 +101,24 @@ def laplacian(self, field):
 def stress_energy(self):
         grad = self.laplacian(self.phi)
         return grad**2
+```
+
+### update_metric
+
+```python
+def update_metric(self):
+        T = self.stress_energy()
+        self.metric += self.dt * T
+        self.metric -= np.mean(self.metric)
+```
+
+### step
+
+```python
+def step(self):
+        self.phi_dot += self.dt * self.metric * self.laplacian(self.phi)
+        self.phi += self.dt * self.phi_dot
+        self.phi -= np.mean(self.phi)
+        self.update_metric()
 ```
 

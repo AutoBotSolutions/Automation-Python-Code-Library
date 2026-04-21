@@ -9,6 +9,10 @@
 
 File system utilities.
 
+## Library Context
+
+This script is part of the file operations library, providing functions for file system manipulation including creating, reading, writing, and deleting files and directories.
+
 ## Key Features
 
 - File system manipulation
@@ -24,6 +28,14 @@ Function-based - Provides reusable functions
 - `pathlib.Path`
 - `typing.List`
 - `typing.Optional`
+
+## Function Descriptions
+
+- ensure_directory - Parameters: path. Performs a specific operation.
+- get_file_size - Parameters: path. Performs a specific operation.
+- get_file_extension - Parameters: path. Performs a specific operation.
+- list_files - Parameters: directory, extension. Performs a specific operation.
+- list_directories - Parameters: directory. Performs a specific operation.
 
 ## Functions
 
@@ -113,5 +125,25 @@ def get_file_size(path: str) -> int:
 def get_file_extension(path: str) -> str:
     """Get the file extension from a path."""
     return Path(path).suffix.lower()
+```
+
+### list_files
+
+```python
+def list_files(directory: str, extension: Optional[str] = None) -> List[str]:
+    """List all files in a directory, optionally filtered by extension."""
+    path = Path(directory)
+    if extension:
+        return [str(f) for f in path.glob(f"*{extension}") if f.is_file()]
+    return [str(f) for f in
+```
+
+### list_directories
+
+```python
+def list_directories(directory: str) -> List[str]:
+    """List all subdirectories in a directory."""
+    path = Path(directory)
+    return [str(d) for d in path.iterdir() if d.is_dir()]
 ```
 

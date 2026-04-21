@@ -9,6 +9,10 @@
 
 2captcha reCAPTCHA Click on the reCAPTCHA checkbox Scrape banner text Save CAPTCHA image Add code here for resizing the image and sending it to the CAPTCHA solving API (imagetyperz.com) Simulating the response with placeholders
 
+## Library Context
+
+This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks.
+
 ## Key Features
 
 - Web browser control

@@ -9,6 +9,10 @@
 
 zpf_substrate.py
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Object-oriented - Provides classes and methods
@@ -16,6 +20,13 @@ Object-oriented - Provides classes and methods
 ## Dependencies
 
 - `numpy`
+
+## Function Descriptions
+
+- __init__ - Parameters: self, grid_size. Performs a specific operation.
+- apply_boundary - Parameters: self, mask. Performs a specific operation.
+- energy_density - Parameters: self. Performs a specific operation.
+- renormalize - Parameters: self. Performs a specific operation.
 
 ## Functions
 
@@ -66,5 +77,12 @@ def apply_boundary(self, mask):
 ```python
 def energy_density(self):
         return np.mean(self.grid**2)
+```
+
+### renormalize
+
+```python
+def renormalize(self):
+        self.grid -= np.mean(self.grid)
 ```
 

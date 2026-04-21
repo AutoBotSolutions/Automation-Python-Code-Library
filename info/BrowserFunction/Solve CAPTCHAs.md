@@ -9,6 +9,10 @@
 
 Solves very basic CAPTCHAs. Allows manual solving for image-based CAPTCHAs and supports simple math and text-based CAPTCHAs.
 
+## Library Context
+
+This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks.
+
 ## Key Features
 
 - Web browser control
@@ -32,6 +36,12 @@ Object-oriented - Provides classes and methods with standalone execution capabil
 - `PIL.Image`
 - `io`
 - `re`
+
+## Function Descriptions
+
+- _get_captcha_question - Parameters: self. Performs a specific operation.
+- _enter_answer - Parameters: self, answer. Performs a specific operation.
+- _submit_form - Parameters: self. Performs a specific operation.
 
 ## Functions
 

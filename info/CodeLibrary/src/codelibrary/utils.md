@@ -9,6 +9,10 @@
 
 General utility functions.
 
+## Library Context
+
+This script is part of the HTTP/Network library, providing functions for making HTTP requests, interacting with web APIs, and handling network communications.
+
 ## Key Features
 
 - Web API interaction
@@ -25,6 +29,14 @@ Function-based - Provides reusable functions
 - `typing.Optional`
 - `hashlib`
 - `json`
+
+## Function Descriptions
+
+- flatten - Parameters: nested_list. Performs a specific operation.
+- chunk_list - Parameters: items, chunk_size. Performs a specific operation.
+- safe_get - Parameters: dictionary, key, default. Performs a specific operation.
+- memoize - Parameters: func. Performs a specific operation.
+- generate_hash - Parameters: data, algorithm. Performs a specific operation.
 
 ## Functions
 
@@ -102,5 +114,28 @@ def chunk_list(items: List[Any], chunk_size: int) -> List[List[Any]]:
 def safe_get(dictionary: dict, key: str, default: Any = None) -> Any:
     """Safely get a value from a dictionary with a default fallback."""
     return dictionary.get(key, default)
+```
+
+### memoize
+
+```python
+def memoize(func: Callable) -> Callable:
+    """Simple memoization decorator for functions."""
+    cache = {}
+    
+    def wrapper(*args, **kwargs):
+        key = str(args) + str(sorted(kwargs.items()))
+        if key not in cache:
+            cache[key] = func(*args, **kwargs)
+        return cache[
+```
+
+### generate_hash
+
+```python
+def generate_hash(data: str, algorithm: str = "sha256") -> str:
+    """Generate a hash of the given data using specified algorithm."""
+    hash_func = getattr(hashlib, algorithm, hashlib.sha256)
+    return hash_func(data.encode()).hexdigest()
 ```
 

@@ -19,6 +19,10 @@ Manages a thread-safe counter for tracking threads.
     :ivar lock: A threading.Lock instance used for thread-safe operations.
     :type loc
 
+## Library Context
+
+This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks.
+
 ## Key Features
 
 - Web browser control
@@ -35,6 +39,14 @@ Object-oriented - Provides classes and methods
 - `threading`
 - `concurrent.futures.ThreadPoolExecutor`
 - `logging`
+
+## Function Descriptions
+
+- reset - Parameters: cls. Performs a specific operation.
+- increment - Parameters: cls. Performs a specific operation.
+- decrement - Parameters: cls. Performs a specific operation.
+- read - Parameters: cls. Retrieves data or information.
+- http_get - Parameters: url, user_agent, referrer, ip, timeout. Performs a specific operation.
 
 ## Functions
 
@@ -189,5 +201,23 @@ def decrement(cls):  # Decrements the thread counter by one
         with cls.lock:  # Ensures thread-safe access to counter
             cls.counter -= 1
             logging.debug(f"ThreadsCounter decremented. Current value: {cls.counter}.")
+```
+
+### read
+
+```python
+def read(cls):  # Reads the current value of the thread counter
+        with cls.lock:  # Ensures thread-safe access to counter
+            logging.debug(f"ThreadsCounter read. Current value: {cls.counter}.")
+            return cls.counter
+```
+
+### http_get
+
+```python
+def http_get(url, user_agent, referrer, ip, timeout):  # Simulates an HTTP GET request
+        logging.info(
+            f"Simulated HTTP GET request initiated: URL={url}, User-Agent={user_agent}, Referrer={referrer}, Timeout={timeout}")
+        return "response_data"
 ```
 

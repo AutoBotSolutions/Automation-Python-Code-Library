@@ -21,7 +21,9 @@ def analyze_code_functionality(content, filename):
         'external_apis': [],
         'automation_type': '',
         'usage_pattern': '',
-        'code_examples': []
+        'code_examples': [],
+        'function_descriptions': [],
+        'library_context': ''
     }
     
     lines = content.split('\n')
@@ -94,7 +96,7 @@ def analyze_code_functionality(content, filename):
     if 'if __name__' in content:
         analysis['usage_pattern'] += ' with standalone execution capability'
     
-    # Extract key code snippets
+    # Extract code snippets and function descriptions
     code_snippets = []
     try:
         tree = ast.parse(content)
@@ -106,12 +108,51 @@ def analyze_code_functionality(content, filename):
                         'name': node.name,
                         'code': func_code[:300]
                     })
-                    if len(code_snippets) >= 3:
-                        break
+                    # Add function description
+                    desc = f"{node.name} - "
+                    if node.args.args:
+                        desc += f"Parameters: {', '.join([arg.arg for arg in node.args.args])}. "
+                    if node.name.lower() in ['connect', 'open', 'start', 'begin']:
+                        desc += "Initializes a connection or process."
+                    elif node.name.lower() in ['close', 'end', 'stop', 'shutdown']:
+                        desc += "Terminates or closes a connection or process."
+                    elif node.name.lower() in ['get', 'fetch', 'retrieve', 'read']:
+                        desc += "Retrieves data or information."
+                    elif node.name.lower() in ['set', 'update', 'modify', 'change']:
+                        desc += "Modifies or updates data or settings."
+                    elif node.name.lower() in ['send', 'post', 'submit']:
+                        desc += "Sends data or requests to a target."
+                    elif node.name.lower() in ['delete', 'remove']:
+                        desc += "Deletes or removes data or resources."
+                    elif node.name.lower() in ['create', 'add', 'insert']:
+                        desc += "Creates or adds new data or resources."
+                    elif node.name.lower() in ['execute', 'run', 'perform']:
+                        desc += "Executes an action or command."
+                    else:
+                        desc += "Performs a specific operation."
+                    analysis['function_descriptions'].append(desc)
+                if len(code_snippets) >= 5:
+                    break
     except:
         pass
     
     analysis['code_examples'] = code_snippets
+    
+    # Add library context based on automation type
+    if analysis['automation_type'] == 'Browser Automation':
+        analysis['library_context'] = "This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks."
+    elif analysis['automation_type'] == 'Database Operations':
+        analysis['library_context'] = "This script is part of the database operations library, providing functions for connecting to databases, executing SQL queries, and managing database transactions."
+    elif analysis['automation_type'] == 'File Operations':
+        analysis['library_context'] = "This script is part of the file operations library, providing functions for file system manipulation including creating, reading, writing, and deleting files and directories."
+    elif analysis['automation_type'] == 'HTTP Requests':
+        analysis['library_context'] = "This script is part of the HTTP/Network library, providing functions for making HTTP requests, interacting with web APIs, and handling network communications."
+    elif analysis['automation_type'] == 'Email Automation':
+        analysis['library_context'] = "This script is part of the email automation library, providing functions for sending, receiving, and managing email communications."
+    elif analysis['automation_type'] == 'Threading/Multi-processing':
+        analysis['library_context'] = "This script is part of the threading library, providing functions for parallel execution, multi-threading, and concurrent task processing."
+    else:
+        analysis['library_context'] = "This script is part of the general automation library, providing utility functions for common automation tasks."
     
     return analysis
 
@@ -127,6 +168,11 @@ def generate_enhanced_markdown(file_path, analysis, basic_info):
     if analysis['purpose']:
         md += "## Purpose\n\n"
         md += f"{analysis['purpose']}\n\n"
+    
+    # Library context
+    if analysis['library_context']:
+        md += "## Library Context\n\n"
+        md += f"{analysis['library_context']}\n\n"
     
     # Key features
     if analysis['key_features']:
@@ -150,6 +196,12 @@ def generate_enhanced_markdown(file_path, analysis, basic_info):
         md += "\n"
     
     # Functions
+    if analysis['function_descriptions']:
+        md += "## Function Descriptions\n\n"
+        for desc in analysis['function_descriptions']:
+            md += f"- {desc}\n"
+        md += "\n"
+    
     if basic_info['functions']:
         md += "## Functions\n\n"
         for func in basic_info['functions'][:10]:

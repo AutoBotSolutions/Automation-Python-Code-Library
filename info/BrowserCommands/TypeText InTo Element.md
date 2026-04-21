@@ -9,6 +9,10 @@
 
 Setup the WebDriver (make sure to specify the path to your WebDriver executable) Navigate to the desired webpage Give the page some time to load Locate the web element where you want to type text Clear the element and type the desired text Optionally, you can submit the form if needed element.send_keys(Keys.RETURN) Wait for some time to see the result Close the browser
 
+## Library Context
+
+This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks.
+
 ## Key Features
 
 - Web browser control

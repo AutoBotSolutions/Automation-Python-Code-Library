@@ -9,6 +9,10 @@
 
 Configure advanced logging Load proxies from file
 
+## Library Context
+
+This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks.
+
 ## Key Features
 
 - Web browser control
@@ -22,6 +26,10 @@ Function-based - Provides reusable functions
 - `threading`
 - `logging`
 - `requests`
+
+## Function Descriptions
+
+- threaded_function - Parameters: proxy_file. Performs a specific operation.
 
 ## Functions
 

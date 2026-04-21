@@ -9,6 +9,10 @@
 
 Initialize the browser 2captcha API key Navigate to the URL Click on the reCAPTCHA checkbox Wait a few seconds Get the banner text
 
+## Library Context
+
+This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks.
+
 ## Key Features
 
 - Web browser control
@@ -27,6 +31,10 @@ Function-based - Provides reusable functions
 - `selenium.webdriver.support.expected_conditions`
 - `PIL.Image`
 - `requests`
+
+## Function Descriptions
+
+- wait_for_element - Parameters: locator_type, locator_value, timeout. Performs a specific operation.
 
 ## Functions
 

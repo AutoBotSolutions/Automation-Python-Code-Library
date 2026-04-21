@@ -9,6 +9,10 @@
 
 CodeLibrary GUI Application - A visual interface to library utilities.
 
+## Library Context
+
+This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks.
+
 ## Key Features
 
 - Web browser control
@@ -28,6 +32,14 @@ Object-oriented - Provides classes and methods with standalone execution capabil
 - `codelibrary.datastructures`
 - `codelibrary.time_utils`
 - `codelibrary.indexer.LibraryIndexer`
+
+## Function Descriptions
+
+- main - Performs a specific operation.
+- convert_camel_to_snake - Parameters: self. Performs a specific operation.
+- convert_snake_to_camel - Parameters: self. Performs a specific operation.
+- validate_email - Parameters: self. Performs a specific operation.
+- count_words - Parameters: self. Performs a specific operation.
 
 ## Functions
 
@@ -124,5 +136,24 @@ def convert_snake_to_camel(self):
         result = string_helpers.snake_to_camel(input_text)
         self.snake_output.delete(0, tk.END)
         self.snake_output.insert(0, result)
+```
+
+### validate_email
+
+```python
+def validate_email(self):
+        email = self.email_input.get()
+        is_valid = string_helpers.is_email(email)
+        self.email_result.config(text="Valid ✓" if is_valid else "Invalid ✗", 
+                                  foreground="green" if is_valid else "red")
+```
+
+### count_words
+
+```python
+def count_words(self):
+        text = self.word_input.get()
+        count = string_helpers.count_words(text)
+        self.word_result.config(text=f"{count} words")
 ```
 

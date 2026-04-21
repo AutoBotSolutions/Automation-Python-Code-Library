@@ -9,6 +9,10 @@
 
 Tests for math_helpers module.
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Function-based - Provides reusable functions
@@ -23,6 +27,14 @@ Function-based - Provides reusable functions
 - `codelibrary.math_helpers.fibonacci`
 - `codelibrary.math_helpers.clamp`
 - `codelibrary.math_helpers.lerp`
+
+## Function Descriptions
+
+- test_mean - Performs a specific operation.
+- test_median - Performs a specific operation.
+- test_standard_deviation - Performs a specific operation.
+- test_is_prime - Performs a specific operation.
+- test_fibonacci - Performs a specific operation.
 
 ## Functions
 
@@ -64,5 +76,24 @@ def test_median():
 def test_standard_deviation():
     result = standard_deviation([1, 2, 3, 4, 5])
     assert abs(result - 1.5811) < 0.01
+```
+
+### test_is_prime
+
+```python
+def test_is_prime():
+    assert is_prime(2) is True
+    assert is_prime(7) is True
+    assert is_prime(4) is False
+    assert is_prime(1) is False
+```
+
+### test_fibonacci
+
+```python
+def test_fibonacci():
+    assert fibonacci(5) == [0, 1, 1, 2, 3]
+    assert fibonacci(1) == [0]
+    assert fibonacci(0) == []
 ```
 

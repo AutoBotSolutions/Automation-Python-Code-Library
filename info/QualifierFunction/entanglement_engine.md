@@ -5,6 +5,10 @@
 **Automation Type:** General Automation
 **Lines:** 16
 
+## Library Context
+
+This script is part of the general automation library, providing utility functions for common automation tasks.
+
 ## Usage Pattern
 
 Object-oriented - Provides classes and methods
@@ -12,6 +16,12 @@ Object-oriented - Provides classes and methods
 ## Dependencies
 
 - `numpy`
+
+## Function Descriptions
+
+- __init__ - Parameters: self, field. Performs a specific operation.
+- covariance - Parameters: self. Performs a specific operation.
+- entropy - Parameters: self. Performs a specific operation.
 
 ## Functions
 
