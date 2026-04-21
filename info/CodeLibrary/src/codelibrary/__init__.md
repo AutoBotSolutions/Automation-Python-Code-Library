@@ -2,14 +2,14 @@
 
 **Path:** `CodeLibrary/src/codelibrary/__init__.py`
 
+**Automation Type:** General Automation
 **Lines:** 22
-**Size:** 489 bytes
 
-## Description
+## Purpose
 
 CodeLibrary - A versatile Python code library with common utilities and tools.
 
-## Imports
+## Dependencies
 
 - `codelibrary.utils`
 - `codelibrary.datastructures`

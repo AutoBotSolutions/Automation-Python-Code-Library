@@ -2,14 +2,14 @@
 
 **Path:** `FileCommands/FileExists ChecksFile At GivenPath Exists.py`
 
+**Automation Type:** File Operations
 **Lines:** 53
-**Size:** 2550 bytes
 
-## Description
+## Purpose
 
-## Explanation:
+## Explanation: /////////////////////////////////////////////////////////////# Initialize the variable File to check Check if the file exists Print the result /////////////////////////////////////////////////////////////#
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 1)
+- File system manipulation
 

@@ -2,14 +2,22 @@
 
 **Path:** `ProxyFunction/auto_browser_cookie_keeper_proxy_useragent_set.v.1.0.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 161
-**Size:** 6985 bytes
 
-## Description
+## Purpose
 
-Configure logging
+Save browser cookies to a file.
 
-## Imports
+## Key Features
+
+- Web browser control
+
+## Usage Pattern
+
+Function-based - Provides reusable functions with standalone execution capability
+
+## Dependencies
 
 - `logging`
 - `os`
@@ -44,4 +52,25 @@ Initialize and return the Selenium WebDriver for Chromium.
 **Parameters:** proxy, driver_path
 
 Test a proxy using Selenium WebDriver.
+
+## External APIs
+
+This script interacts with external services:
+- `http://{proxy.strip()}")`
+- `http://whatismyipaddress.com/")`
+
+## Code Examples
+
+### save_cookies
+
+```python
+def save_cookies(driver, file_path):
+    """Save browser cookies to a file."""
+    try:
+        logging.debug("Saving cookies to file.")
+        with open(file_path, "w") as file:
+            json.dump(driver.get_cookies(), file)
+        logging.info(f"Cookies saved to {file_path}.")
+    except Exce
+```
 

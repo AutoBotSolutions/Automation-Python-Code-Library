@@ -2,14 +2,10 @@
 
 **Path:** `TextFunctions/Change Text Casing.py`
 
+**Automation Type:** General Automation
 **Lines:** 45
-**Size:** 1489 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 36) (<unknown>, line 36)
+# Me # AI Assistant Example string Changing text casing
 

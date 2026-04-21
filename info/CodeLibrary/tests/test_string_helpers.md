@@ -2,14 +2,22 @@
 
 **Path:** `CodeLibrary/tests/test_string_helpers.py`
 
+**Automation Type:** Email Automation
 **Lines:** 49
-**Size:** 1139 bytes
 
-## Description
+## Purpose
 
 Tests for string_helpers module.
 
-## Imports
+## Key Features
+
+- Email sending/receiving
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
+
+## Dependencies
 
 - `pytest`
 - `codelibrary.string_helpers.camel_to_snake`
@@ -35,4 +43,30 @@ Tests for string_helpers module.
 ### test_reverse_string
 
 ### test_count_words
+
+## Code Examples
+
+### test_camel_to_snake
+
+```python
+def test_camel_to_snake():
+    assert camel_to_snake("CamelCase") == "camel_case"
+    assert camel_to_snake("myVariableName") == "my_variable_name"
+```
+
+### test_snake_to_camel
+
+```python
+def test_snake_to_camel():
+    assert snake_to_camel("snake_case") == "SnakeCase"
+    assert snake_to_camel("my_variable_name") == "MyVariableName"
+```
+
+### test_truncate
+
+```python
+def test_truncate():
+    assert truncate("Hello World", 5) == "He..."
+    assert truncate("Hi", 10) == "Hi"
+```
 

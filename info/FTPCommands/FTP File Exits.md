@@ -2,14 +2,14 @@
 
 **Path:** `FTPCommands/FTP File Exits.py`
 
+**Automation Type:** General Automation
 **Lines:** 63
-**Size:** 1951 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example Code Example Usage
 
-## Parse Error
+## Usage Pattern
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+Function-based - Provides reusable functions
 

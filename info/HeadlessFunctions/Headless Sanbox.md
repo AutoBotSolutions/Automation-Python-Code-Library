@@ -2,14 +2,14 @@
 
 **Path:** `HeadlessFunctions/Headless Sanbox.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 17
-**Size:** 682 bytes
 
-## Description
+## Purpose
 
-## A More Complete Example
+## A More Complete Example Set up Chrome options Create the WebDriver
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 2)
+- Web browser control
 

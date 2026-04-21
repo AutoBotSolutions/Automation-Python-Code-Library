@@ -2,14 +2,10 @@
 
 **Path:** `DataCommands/Set Table.py`
 
+**Automation Type:** General Automation
 **Lines:** 51
-**Size:** 1531 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 21) (<unknown>, line 21)
+# Me # AI Assistant A table as a list of lists Accessing table cells Create a table using pandas
 

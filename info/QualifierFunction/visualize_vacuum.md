@@ -2,14 +2,14 @@
 
 **Path:** `QualifierFunction/visualize_vacuum.py`
 
+**Automation Type:** General Automation
 **Lines:** 11
-**Size:** 226 bytes
 
-## Description
+## Purpose
 
 visualize_vacuum.py
 
-## Imports
+## Dependencies
 
 - `matplotlib.pyplot`
 - `vacuum_lattice.VacuumLattice`

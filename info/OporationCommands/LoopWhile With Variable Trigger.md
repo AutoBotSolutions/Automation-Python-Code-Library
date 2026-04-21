@@ -2,14 +2,10 @@
 
 **Path:** `OporationCommands/LoopWhile With Variable Trigger.py`
 
+**Automation Type:** General Automation
 **Lines:** 37
-**Size:** 1316 bytes
 
-## Description
+## Purpose
 
-////////////////////////////////////////////////#
-
-## Parse Error
-
-unterminated string literal (detected at line 11) (<unknown>, line 11)
+////////////////////////////////////////////////# ////////////////////////////////////////////////#
 

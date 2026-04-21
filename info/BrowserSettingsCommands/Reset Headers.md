@@ -2,14 +2,23 @@
 
 **Path:** `BrowserSettingsCommands/Reset Headers.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 107
-**Size:** 3591 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## 1. **Using a Proxy** Start the BrowserMob Proxy server Configure Proxy
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 14) (<unknown>, line 14)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
+- `https://www.modifyheaders.com/)`
+- `https://example.com")`
+- `https://example.com")`
+- `https://example.com")`
 

@@ -2,14 +2,19 @@
 
 **Path:** `BrowserCommands/Load HTML.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 80
-**Size:** 1931 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example 1: Loading a Local HTML File Path to the local HTML file Initialize the WebDriver (e.g., Chrome) Load the local HTML file Perform actions on the page ... ## Example 2: Loading an HTML page from a URL
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com"`
 

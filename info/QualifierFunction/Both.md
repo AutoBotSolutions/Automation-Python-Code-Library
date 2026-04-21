@@ -2,14 +2,10 @@
 
 **Path:** `QualifierFunction/Both.py`
 
+**Automation Type:** General Automation
 **Lines:** 24
-**Size:** 922 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid syntax (<unknown>, line 2)
+# Me # AI Assistant Define condition 1 and condition 2 Set the variable 'both' Print the result to check ## Explanation:
 

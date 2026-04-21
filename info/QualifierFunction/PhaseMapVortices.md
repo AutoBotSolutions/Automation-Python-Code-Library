@@ -2,10 +2,10 @@
 
 **Path:** `QualifierFunction/PhaseMapVortices.py`
 
+**Automation Type:** General Automation
 **Lines:** 23
-**Size:** 815 bytes
 
-## Imports
+## Dependencies
 
 - `plotly.express`
 - `scipy.ndimage`

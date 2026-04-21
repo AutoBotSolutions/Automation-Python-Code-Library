@@ -2,10 +2,14 @@
 
 **Path:** `EmailCommands/ConnectTo SendEmail.py`
 
+**Automation Type:** Email Automation
 **Lines:** 181
-**Size:** 7661 bytes
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 35) (<unknown>, line 35)
+- Email sending/receiving
+
+## Usage Pattern
+
+Function-based - Provides reusable functions with standalone execution capability
 

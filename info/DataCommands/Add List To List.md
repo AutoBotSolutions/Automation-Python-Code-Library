@@ -2,14 +2,10 @@
 
 **Path:** `DataCommands/Add List To List.py`
 
+**Automation Type:** General Automation
 **Lines:** 83
-**Size:** 1787 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 82) (<unknown>, line 82)
+# Me # AI Assistant ## 1. **Using the `+` Operator** Output: [1, 2, 3, 4, 5, 6] ## 2. **Using the `extend()` Method** Output: [1, 2, 3, 4, 5, 6]
 

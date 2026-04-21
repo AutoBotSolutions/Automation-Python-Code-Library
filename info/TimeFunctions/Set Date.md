@@ -2,14 +2,10 @@
 
 **Path:** `TimeFunctions/Set Date.py`
 
+**Automation Type:** General Automation
 **Lines:** 35
-**Size:** 973 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant Set the current date and time to a variable Print the date and time Set a specific date to a variable ## Explanation:
 

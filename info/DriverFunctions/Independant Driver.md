@@ -2,14 +2,26 @@
 
 **Path:** `DriverFunctions/Independant Driver.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 579
-**Size:** 22842 bytes
 
-## Description
+## Purpose
 
-# Me
+Starts the browser with the given browser type.
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 96) (<unknown>, line 96)
+- Web browser control
+
+## Usage Pattern
+
+Object-oriented - Provides classes and methods with standalone execution capability
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
+- `https://chromedevtools.github.io/devtools-protocol/)`
+- `https://example.com")`
+- `http://proxy:3128`
 

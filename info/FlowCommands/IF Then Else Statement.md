@@ -2,14 +2,10 @@
 
 **Path:** `FlowCommands/IF Then Else Statement.py`
 
+**Automation Type:** General Automation
 **Lines:** 25
-**Size:** 706 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid character '’' (U+2019) (<unknown>, line 5)
+# Me # AI Assistant ## Explanation:
 

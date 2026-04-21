@@ -2,14 +2,23 @@
 
 **Path:** `WindowCommands/Move Mouse.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 33
-**Size:** 857 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example Code: Moving the Mouse Set up the webdriver (e.g., ChromeDriver) Navigate to a webpage Find the element to hover over/move to Create an ActionChains object Move the mouse to the element Optionally, you can chain other actions (like clicking or context-click) actions.context_click(element_to_hover).perform()
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Web browser control
+
+## Usage Pattern
+
+Object-oriented - Provides classes and methods
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
 

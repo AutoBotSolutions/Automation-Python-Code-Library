@@ -2,14 +2,10 @@
 
 **Path:** `UserInterfaceLib/Borders.py`
 
+**Automation Type:** General Automation
 **Lines:** 98
-**Size:** 3403 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant ## Explanation ## Example of Extended Options ## Current Code Impact
 

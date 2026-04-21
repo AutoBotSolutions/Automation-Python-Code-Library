@@ -2,14 +2,14 @@
 
 **Path:** `SystemCommands/Copy Folder.py`
 
+**Automation Type:** File Operations
 **Lines:** 28
-**Size:** 953 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example of Copying a Folder Using `shutil` Source folder path (the folder you want to copy) Destination folder path (the folder where the copy will be placed) Copy the folder and all its contents
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- File system manipulation
 

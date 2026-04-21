@@ -2,14 +2,14 @@
 
 **Path:** `FileFunctions/Folder Exits.py`
 
+**Automation Type:** File Operations
 **Lines:** 40
-**Size:** 1163 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Using `os` Module Specify the directory path Check if 'python' folder exists ## Using `pathlib` Module Specify the directory path Check if 'python' folder exists
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- File system manipulation
 

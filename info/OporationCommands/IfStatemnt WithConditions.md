@@ -2,14 +2,10 @@
 
 **Path:** `OporationCommands/IfStatemnt WithConditions.py`
 
+**Automation Type:** General Automation
 **Lines:** 48
-**Size:** 2147 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 47) (<unknown>, line 47)
+# Me # AI Assistant Variables for demonstration If statement with all conditions
 

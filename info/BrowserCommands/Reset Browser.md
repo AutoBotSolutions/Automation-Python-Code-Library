@@ -2,14 +2,22 @@
 
 **Path:** `BrowserCommands/Reset Browser.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 136
-**Size:** 4931 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant # Me # AI Assistant ## 1. **Using Selenium with "Clean" Browser Sessions** ### For Chrome: Set up Chrome with a fresh profile
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 8) (<unknown>, line 8)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
+- `https://example.com")`
+- `https://api.example.com/data",`
+- `https://example.com")`
 

@@ -2,14 +2,19 @@
 
 **Path:** `BrowserFunction/Meta Discription.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 45
-**Size:** 1637 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example Code: Set up the webdriver (e.g., Chrome, Firefox, etc.) Open the web page Find the meta description element Get the content of the meta description Store it in a variable Print the meta description
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com"`
 

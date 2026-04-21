@@ -2,14 +2,22 @@
 
 **Path:** `DataCommands/Remove Table Column.py`
 
+**Automation Type:** File Operations
 **Lines:** 57
-**Size:** 2350 bytes
 
-## Description
+## Purpose
 
-# Me
+Removes a specified column from a CSV file and writes the output to a new file.
 
-## Parse Error
+    :param input_file: Path to the input CSV file
+    :param output_file: Path to the output CSV file
+    :param column_to_remove: The index of the column to be removed (0-based index)
 
-invalid character '’' (U+2019) (<unknown>, line 5)
+## Key Features
+
+- File system manipulation
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
 

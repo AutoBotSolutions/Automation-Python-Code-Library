@@ -2,14 +2,25 @@
 
 **Path:** `EmailCommands/Return Date.py`
 
+**Automation Type:** Email Automation
 **Lines:** 83
-**Size:** 3334 bytes
 
-## Description
+## Purpose
 
-# Me
+Retrieve the email body from a list of email strings.
 
-## Parse Error
+    Args:
+        emails (list of str): List containing email contents as strings.
+        position (int): Position index of the email to retrieve (0-based).
 
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+    Returns:
+        str: The body of the email if the position is valid, otherwise None.
+
+## Key Features
+
+- Email sending/receiving
+
+## Usage Pattern
+
+Function-based - Provides reusable functions with standalone execution capability
 

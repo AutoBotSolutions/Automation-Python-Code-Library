@@ -2,14 +2,14 @@
 
 **Path:** `MathFunctions/Exponent.py`
 
+**Automation Type:** General Automation
 **Lines:** 95
-**Size:** 2291 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Using the `**` Operator Basic usage ## Using the `pow()` Function Using pow() function
 
-## Parse Error
+## Usage Pattern
 
-invalid syntax (<unknown>, line 2)
+Function-based - Provides reusable functions
 

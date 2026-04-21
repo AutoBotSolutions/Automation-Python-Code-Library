@@ -2,14 +2,18 @@
 
 **Path:** `WindowCommands/Set Dialog Box.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 86
-**Size:** 2561 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Handling Alert, Confirmation, and Prompt Dialogs ### 1. **Simple Alert** Create the webdriver instance Trigger the alert (if needed, for example, by clicking a button that opens the dialog) Switch to the alert dialog
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 2)
+- Web browser control
+
+## Usage Pattern
+
+Object-oriented - Provides classes and methods
 

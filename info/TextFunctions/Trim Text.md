@@ -2,14 +2,10 @@
 
 **Path:** `TextFunctions/Trim Text.py`
 
+**Automation Type:** General Automation
 **Lines:** 95
-**Size:** 3951 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 36) (<unknown>, line 36)
+# Me # AI Assistant ## Examples ### Trim Whitespace Removes leading and trailing whitespace ### Trim Specific Characters Removes specific characters from the start and end of the string ## Methods that may also be helpful
 

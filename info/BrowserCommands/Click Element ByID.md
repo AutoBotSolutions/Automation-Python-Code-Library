@@ -2,14 +2,25 @@
 
 **Path:** `BrowserCommands/Click Element ByID.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 164
-**Size:** 8240 bytes
 
-## Description
+## Purpose
 
-Initialize the WebDriver, for instance, Chrome
+Initialize the WebDriver, for instance, Chrome Open a webpage Wait for the element to load Find the element you want to click Click the element Optional: wait to see the result of the click Close the WebDriver ///////////////////////////////////////////////////////////////#
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 28) (<unknown>, line 28)
+- Web browser control
+
+## Usage Pattern
+
+Object-oriented - Provides classes and methods
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
+- `https://example.com"):`
+- `https://example.com")`
 

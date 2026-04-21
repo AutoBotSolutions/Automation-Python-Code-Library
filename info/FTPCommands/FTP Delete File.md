@@ -2,14 +2,10 @@
 
 **Path:** `FTPCommands/FTP Delete File.py`
 
+**Automation Type:** General Automation
 **Lines:** 48
-**Size:** 1450 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid character '’' (U+2019) (<unknown>, line 5)
+# Me # AI Assistant ## Steps: ## Example Code: FTP server details Connect to FTP server
 

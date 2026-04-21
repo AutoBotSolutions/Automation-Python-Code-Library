@@ -2,14 +2,14 @@
 
 **Path:** `FileFunctions/File Exits.py`
 
+**Automation Type:** File Operations
 **Lines:** 52
-**Size:** 1108 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Using `os.path`: ## Using `pathlib.Path` (Preferred for modern Python versions):
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- File system manipulation
 

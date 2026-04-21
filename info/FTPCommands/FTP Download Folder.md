@@ -2,14 +2,18 @@
 
 **Path:** `FTPCommands/FTP Download Folder.py`
 
+**Automation Type:** File Operations
 **Lines:** 89
-**Size:** 4094 bytes
 
-## Description
+## Purpose
 
-## Using Python's `ftplib` to Download a Folder:
+Downloads a single file from the FTP server to the local directory.
 
-## Parse Error
+## Key Features
 
-invalid character '’' (U+2019) (<unknown>, line 4)
+- File system manipulation
+
+## Usage Pattern
+
+Object-oriented - Provides classes and methods with standalone execution capability
 

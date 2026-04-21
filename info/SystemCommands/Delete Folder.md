@@ -2,14 +2,14 @@
 
 **Path:** `SystemCommands/Delete Folder.py`
 
+**Automation Type:** File Operations
 **Lines:** 39
-**Size:** 1230 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Using `os.rmdir()` (for an empty folder) ## Using `shutil.rmtree()` (to delete a folder and all its contents)
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- File system manipulation
 

@@ -2,14 +2,10 @@
 
 **Path:** `MathFunctions/Random Value.py`
 
+**Automation Type:** General Automation
 **Lines:** 45
-**Size:** 1164 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant Generate a random integer between 1 and 100 ## Explanation: ## Other Common Random Values:
 

@@ -2,14 +2,19 @@
 
 **Path:** `SystemCommands/execute shell in the browser.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 47
-**Size:** 2311 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Options for Achieving Your Goal: Start Selenium WebDriver Open a URL (Modify as per your requirement) Run a shell command using subprocess Close the browser
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com`
 

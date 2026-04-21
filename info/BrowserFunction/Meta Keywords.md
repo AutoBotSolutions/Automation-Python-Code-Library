@@ -2,14 +2,20 @@
 
 **Path:** `BrowserFunction/Meta Keywords.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 54
-**Size:** 2002 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant Set up the WebDriver (example using Chrome) Navigate to a webpage Get the meta keywords content using XPath/CSS Selector Store the meta keywords in the variable Quit the driver
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
+- `https://example.com"``
 

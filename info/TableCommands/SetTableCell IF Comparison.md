@@ -2,14 +2,10 @@
 
 **Path:** `TableCommands/SetTableCell IF Comparison.py`
 
+**Automation Type:** General Automation
 **Lines:** 29
-**Size:** 1106 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid character '’' (U+2019) (<unknown>, line 9)
+# Me # AI Assistant Assuming `table` is a 2D list (list of lists) representing the table Example: table[row][column] Let's get the value of a specific cell If condition to check if the value is 3 ## Breakdown:
 

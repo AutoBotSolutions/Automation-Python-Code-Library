@@ -2,14 +2,14 @@
 
 **Path:** `DataFunctions/List From Text.py`
 
+**Automation Type:** File Operations
 **Lines:** 55
-**Size:** 1513 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example: Converting File Contents to List of Lines Open the file and read its contents Remove any extra whitespace, like newline characters, if needed ## Example: Converting a Comma-Separated Values (CSV) File to a List Split the content by commas to create a list
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- File system manipulation
 

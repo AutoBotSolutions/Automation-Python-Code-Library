@@ -2,14 +2,14 @@
 
 **Path:** `BrowserSettingsCommands/Set visibility.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 50
-**Size:** 1902 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Use Explicit Waits Example: Wait for an element to be visible ## Explanation: ## Common Alternatives:
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+- Web browser control
 

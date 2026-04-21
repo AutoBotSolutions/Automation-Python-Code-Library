@@ -2,14 +2,22 @@
 
 **Path:** `CustomScripting/Browsers/os_get_installed_useragent.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 62
-**Size:** 3171 bytes
 
-## Description
+## Purpose
 
-Configure logging to log messages at the INFO level
+Get the User-Agent of the currently installed version of Chrome.
 
-## Imports
+## Key Features
+
+- Web browser control
+
+## Usage Pattern
+
+Function-based - Provides reusable functions with standalone execution capability
+
+## Dependencies
 
 - `subprocess`
 - `platform`

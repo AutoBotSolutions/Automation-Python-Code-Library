@@ -2,14 +2,10 @@
 
 **Path:** `BrowserFunction/Page Rank.py`
 
+**Automation Type:** General Automation
 **Lines:** 53
-**Size:** 1670 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+# Me # AI Assistant ## Steps: ## Example Code: Create a directed graph Add edges (links between pages) Example: Page A links to Page B and Page C
 

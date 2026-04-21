@@ -2,14 +2,14 @@
 
 **Path:** `ListCommands/EportList To .txt File.py`
 
+**Automation Type:** File Operations
 **Lines:** 44
-**Size:** 1771 bytes
 
-## Description
+## Purpose
 
-Sample list
+Sample list Specify the file name Open the file in write mode and save the list to it ////////////////////////////////////////////////////////////#
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 25) (<unknown>, line 25)
+- File system manipulation
 

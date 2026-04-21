@@ -2,14 +2,10 @@
 
 **Path:** `FlowCommands/Wait.py`
 
+**Automation Type:** General Automation
 **Lines:** 21
-**Size:** 631 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant Wait for 5 seconds ## Explanation:
 

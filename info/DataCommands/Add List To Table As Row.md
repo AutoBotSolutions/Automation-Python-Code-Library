@@ -2,14 +2,19 @@
 
 **Path:** `DataCommands/Add List To Table As Row.py`
 
+**Automation Type:** Database Operations
 **Lines:** 60
-**Size:** 1945 bytes
 
-## Description
+## Purpose
 
-# Me
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    age INTEGER,
+    email TEXT
+)
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 2)
+- Database interaction
 

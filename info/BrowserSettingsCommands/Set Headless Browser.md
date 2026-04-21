@@ -2,14 +2,20 @@
 
 **Path:** `BrowserSettingsCommands/Set Headless Browser.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 60
-**Size:** 1866 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## For Chrome: Set up Chrome options Initialize the WebDriver Access a webpage Quit the browser
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://www.example.com")`
+- `https://www.example.com")`
 

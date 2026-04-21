@@ -2,10 +2,10 @@
 
 **Path:** `BrowserFunction/chrome_options.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 73
-**Size:** 6856 bytes
 
-## Parse Error
+## Key Features
 
-unexpected indent (<unknown>, line 2)
+- Web browser control
 

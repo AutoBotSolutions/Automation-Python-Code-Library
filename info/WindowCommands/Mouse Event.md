@@ -2,14 +2,19 @@
 
 **Path:** `WindowCommands/Mouse Event.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 87
-**Size:** 2375 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Common Mouse Events with ActionChains
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 2)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `http://example.com")`
 

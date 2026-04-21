@@ -2,14 +2,14 @@
 
 **Path:** `SystemCommands/Move File.py`
 
+**Automation Type:** File Operations
 **Lines:** 32
-**Size:** 1038 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example Specify source and destination paths Move the file ## Explanation ## Key Notes:
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 2)
+- File system manipulation
 

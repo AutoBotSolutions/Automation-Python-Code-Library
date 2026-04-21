@@ -2,14 +2,19 @@
 
 **Path:** `BrowserCommands/Save Element Image.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 64
-**Size:** 2358 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Steps: ## Example Code: Set up Selenium driver Locate the element you want to save as an image Get element position and size
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com`
 

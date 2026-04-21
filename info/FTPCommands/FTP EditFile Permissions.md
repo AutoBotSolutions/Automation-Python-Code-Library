@@ -2,14 +2,10 @@
 
 **Path:** `FTPCommands/FTP EditFile Permissions.py`
 
+**Automation Type:** General Automation
 **Lines:** 59
-**Size:** 2008 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 22) (<unknown>, line 22)
+# Me # AI Assistant ## Using an FTP Client ## Using Python for FTP
 

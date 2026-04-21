@@ -2,14 +2,14 @@
 
 **Path:** `SystemCommands/Move Folder.py`
 
+**Automation Type:** File Operations
 **Lines:** 33
-**Size:** 1013 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant Source folder path Destination folder path Move the folder ## Explanation: ## Notes:
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- File system manipulation
 

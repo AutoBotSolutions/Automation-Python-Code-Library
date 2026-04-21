@@ -2,14 +2,10 @@
 
 **Path:** `TextFunctions/Text Padding.py`
 
+**Automation Type:** General Automation
 **Lines:** 73
-**Size:** 2164 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 72) (<unknown>, line 72)
+# Me # AI Assistant ## Padding with `.ljust()`, `.rjust()`, and `.center()` Left padding (right justify) Right padding (left justify) Centered padding ## Padding with a specific character Right justify with `-`
 

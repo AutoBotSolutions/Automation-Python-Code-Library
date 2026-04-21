@@ -2,14 +2,18 @@
 
 **Path:** `QualifierFunction/PumpMapping.py`
 
+**Automation Type:** General Automation
 **Lines:** 15
-**Size:** 630 bytes
 
-## Description
+## Purpose
 
-Reduce to 2D coordinate
+Reduce to 2D coordinate Gaussian pump
 
-## Imports
+## Usage Pattern
+
+Function-based - Provides reusable functions
+
+## Dependencies
 
 - `sklearn.decomposition.PCA`
 

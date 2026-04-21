@@ -2,14 +2,19 @@
 
 **Path:** `BrowserFunction/Document Text.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 36
-**Size:** 1339 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant Initialize the Selenium WebDriver (e.g., Chrome) Navigate to a webpage Get the current page's document text Print or use the text Close the browser ## Explanation:
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com`
 

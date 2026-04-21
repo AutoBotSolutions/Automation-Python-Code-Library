@@ -2,14 +2,10 @@
 
 **Path:** `DataCommands/Remove From List.py`
 
+**Automation Type:** General Automation
 **Lines:** 45
-**Size:** 1247 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid syntax (<unknown>, line 2)
+# Me # AI Assistant ## 1. **Using `list.remove(x)`** ## 2. **Using `del`** ## 3. **Using `list.pop(index)`**
 

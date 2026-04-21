@@ -2,14 +2,14 @@
 
 **Path:** `TextFunctions/Spin Text.py`
 
+**Automation Type:** General Automation
 **Lines:** 297
-**Size:** 17901 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example of a Simple Text Spinner Define synonyms or alternate phrases Loop through the synonyms and replace them randomly in the text Example usage
 
-## Parse Error
+## Usage Pattern
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+Function-based - Provides reusable functions
 

@@ -2,14 +2,14 @@
 
 **Path:** `FTPCommands/FTP ConnectTo Server.py`
 
+**Automation Type:** File Operations
 **Lines:** 63
-**Size:** 2281 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example Code for Connecting to an FTP Server Replace with your FTP server details Connect to the FTP server Login to the FTP server List files in the current directory Upload a file
 
-## Parse Error
+## Key Features
 
-invalid character '—' (U+2014) (<unknown>, line 55)
+- File system manipulation
 

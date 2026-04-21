@@ -2,14 +2,17 @@
 
 **Path:** `FTPCommands/FTP Get Folders.py`
 
+**Automation Type:** General Automation
 **Lines:** 106
-**Size:** 3569 bytes
 
-## Description
+## Purpose
 
-# Me
+List folders in the given path on the FTP server.
+    :param ftp: FTP connection object
+    :param path: Path to list folders from
+    :return: List of folder names
 
-## Parse Error
+## Usage Pattern
 
-invalid character '’' (U+2019) (<unknown>, line 5)
+Function-based - Provides reusable functions
 

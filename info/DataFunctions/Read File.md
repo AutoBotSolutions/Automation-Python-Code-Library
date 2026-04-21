@@ -2,14 +2,14 @@
 
 **Path:** `DataFunctions/Read File.py`
 
+**Automation Type:** File Operations
 **Lines:** 24
-**Size:** 732 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example: Open the file in read mode and store its contents in a variable Print the variable to verify the contents ## Explanation:
 
-## Parse Error
+## Key Features
 
-invalid character '’' (U+2019) (<unknown>, line 5)
+- File system manipulation
 

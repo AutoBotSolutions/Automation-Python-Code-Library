@@ -2,14 +2,22 @@
 
 **Path:** `CodeLibrary/src/codelibrary/string_helpers.py`
 
+**Automation Type:** HTTP Requests
 **Lines:** 72
-**Size:** 2085 bytes
 
-## Description
+## Purpose
 
 String manipulation and validation utilities.
 
-## Imports
+## Key Features
+
+- Web API interaction
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
+
+## Dependencies
 
 - `re`
 - `typing.List`
@@ -77,9 +85,35 @@ Extract all numbers from a string.
 
 Mask a string showing only the first and last few characters.
 
-### slugify
+... and 1 more functions
 
-**Parameters:** text
+## Code Examples
 
-Convert a string to a URL-friendly slug.
+### camel_to_snake
+
+```python
+def camel_to_snake(name: str) -> str:
+    """Convert CamelCase to snake_case."""
+    s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+    return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
+```
+
+### snake_to_camel
+
+```python
+def snake_to_camel(name: str) -> str:
+    """Convert snake_case to CamelCase."""
+    components = name.split('_')
+    return ''.join(x.title() for x in components)
+```
+
+### truncate
+
+```python
+def truncate(text: str, max_length: int, suffix: str = "...") -> str:
+    """Truncate text to a maximum length with optional suffix."""
+    if len(text) <= max_length:
+        return text
+    return text[:max_length - len(suffix)] + suffix
+```
 

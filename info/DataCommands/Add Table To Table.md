@@ -2,14 +2,10 @@
 
 **Path:** `DataCommands/Add Table To Table.py`
 
+**Automation Type:** General Automation
 **Lines:** 46
-**Size:** 1688 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant ## Example Code Define the first table as a list of dictionaries (rows with column data) Define the second table in the same structure as the first Append all rows from table2 to table1 Print the merged table
 

@@ -2,14 +2,14 @@
 
 **Path:** `ListCommands/AddListToList.py`
 
+**Automation Type:** General Automation
 **Lines:** 57
-**Size:** 2697 bytes
 
-## Description
+## Purpose
 
 /////////////////////////////////////////////////////////////////#
 
-## Parse Error
+## Usage Pattern
 
-unterminated string literal (detected at line 21) (<unknown>, line 21)
+Function-based - Provides reusable functions with standalone execution capability
 

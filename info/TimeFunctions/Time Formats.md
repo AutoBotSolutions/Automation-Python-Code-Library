@@ -2,14 +2,10 @@
 
 **Path:** `TimeFunctions/Time Formats.py`
 
+**Automation Type:** General Automation
 **Lines:** 87
-**Size:** 3542 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers (<unknown>, line 16)
+# Me # AI Assistant ## **Common Time Format Codes**
 

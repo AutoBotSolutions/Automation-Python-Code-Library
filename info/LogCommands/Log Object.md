@@ -2,14 +2,14 @@
 
 **Path:** `LogCommands/Log Object.py`
 
+**Automation Type:** Threading/Multi-processing
 **Lines:** 84
-**Size:** 3306 bytes
 
-## Description
+## Purpose
 
-## How Does the Log Object Work?
+## How Does the Log Object Work? ## How to Create and Use a Logging Object Create a logger object Set the severity level (default is WARNING) Create a console handler (for output to terminal) Create a file handler (for output to a file) Set the severity level for the handlers if you want different levels
 
-## Parse Error
+## Key Features
 
-invalid character '’' (U+2019) (<unknown>, line 1)
+- Parallel execution
 

@@ -2,14 +2,18 @@
 
 **Path:** `DataCommands/Create Table From File.py`
 
+**Automation Type:** Database Operations
 **Lines:** 60
-**Size:** 2235 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example: Create a Database Table from a CSV File File and database paths Connect to SQLite database (or create it if it doesn't exist) Open the CSV file Create a table based on the header
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Database interaction
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
 

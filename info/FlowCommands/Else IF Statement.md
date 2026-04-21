@@ -2,14 +2,10 @@
 
 **Path:** `FlowCommands/Else IF Statement.py`
 
+**Automation Type:** General Automation
 **Lines:** 18
-**Size:** 632 bytes
 
-## Description
+## Purpose
 
 ## Explanation:
-
-## Parse Error
-
-invalid character '’' (U+2019) (<unknown>, line 1)
 

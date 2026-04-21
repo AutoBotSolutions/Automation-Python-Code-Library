@@ -2,14 +2,22 @@
 
 **Path:** `FileCommands/Advanced File Oporations.py`
 
+**Automation Type:** Database Operations
 **Lines:** 85
-**Size:** 4696 bytes
 
-## Description
+## Purpose
 
 Lists all project files with specified extensions in a given directory.
 
-## Imports
+## Key Features
+
+- Database interaction
+
+## Usage Pattern
+
+Function-based - Provides reusable functions with standalone execution capability
+
+## Dependencies
 
 - `os`
 - `inspect`
@@ -38,4 +46,12 @@ Connect to a database and retrieve table list. Placeholder for actual DB impleme
 ### main
 
 Main driver function of the script.
+
+## External APIs
+
+This script interacts with external services:
+- `base_url`
+- `base_url`
+- `base_url`
+- `base_url`
 

@@ -2,14 +2,14 @@
 
 **Path:** `SystemCommands/Save To File.py`
 
+**Automation Type:** File Operations
 **Lines:** 226
-**Size:** 7054 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example List to be saved Path to save the file Writing the list to the file ## Explanation
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 2)
+- File system manipulation
 

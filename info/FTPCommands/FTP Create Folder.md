@@ -2,14 +2,10 @@
 
 **Path:** `FTPCommands/FTP Create Folder.py`
 
+**Automation Type:** General Automation
 **Lines:** 47
-**Size:** 1896 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant ## Example Code FTP server credentials Name of the directory to create Connect to the FTP server Create a new directory on the server
 

@@ -2,14 +2,10 @@
 
 **Path:** `DataFunctions/Sort List.py`
 
+**Automation Type:** General Automation
 **Lines:** 62
-**Size:** 1565 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid syntax (<unknown>, line 2)
+# Me # AI Assistant ## Using `sorted()` ## Using `sort()`
 

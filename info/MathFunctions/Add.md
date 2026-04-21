@@ -2,14 +2,10 @@
 
 **Path:** `MathFunctions/Add.py`
 
+**Automation Type:** General Automation
 **Lines:** 13
-**Size:** 321 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid syntax (<unknown>, line 2)
+# Me # AI Assistant
 

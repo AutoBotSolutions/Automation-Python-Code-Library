@@ -2,14 +2,10 @@
 
 **Path:** `DataFunctions/Frist N Of List.py`
 
+**Automation Type:** General Automation
 **Lines:** 21
-**Size:** 517 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant Get the first n elements ## Explanation:
 

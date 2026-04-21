@@ -2,14 +2,19 @@
 
 **Path:** `BrowserCommands/Save Downloaded File.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 43
-**Size:** 1294 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant Specify the download directory Chrome Options to handle downloads Initialize the WebDriver Open a website
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 2)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com/a_download_link")`
 

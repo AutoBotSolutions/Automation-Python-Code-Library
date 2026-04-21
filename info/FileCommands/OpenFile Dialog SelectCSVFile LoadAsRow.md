@@ -2,14 +2,18 @@
 
 **Path:** `FileCommands/OpenFile Dialog SelectCSVFile LoadAsRow.py`
 
+**Automation Type:** File Operations
 **Lines:** 88
-**Size:** 4386 bytes
 
-## Description
+## Purpose
 
 /////////////////////////////////////////////////////////////////#
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 60) (<unknown>, line 60)
+- File system manipulation
+
+## Usage Pattern
+
+Function-based - Provides reusable functions with standalone execution capability
 

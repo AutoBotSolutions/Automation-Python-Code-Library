@@ -2,14 +2,10 @@
 
 **Path:** `SystemCommands/Rename File.py`
 
+**Automation Type:** General Automation
 **Lines:** 35
-**Size:** 1083 bytes
 
-## Description
+## Purpose
 
-## Example Code:
-
-## Parse Error
-
-unterminated string literal (detected at line 1) (<unknown>, line 1)
+## Example Code: Current file name New file name Renaming the file ## Explanation:
 

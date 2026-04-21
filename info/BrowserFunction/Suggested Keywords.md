@@ -2,14 +2,14 @@
 
 **Path:** `BrowserFunction/Suggested Keywords.py`
 
+**Automation Type:** General Automation
 **Lines:** 113
-**Size:** 3161 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Steps to Suggest Keywords: ## Python Code Example: Uncomment the first line to download NLTK stopwords if not already done
 
-## Parse Error
+## Usage Pattern
 
-unterminated string literal (detected at line 112) (<unknown>, line 112)
+Function-based - Provides reusable functions
 

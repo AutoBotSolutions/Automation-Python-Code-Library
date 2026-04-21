@@ -2,14 +2,14 @@
 
 **Path:** `QualifierFunction/DashboardVisualization.py`
 
+**Automation Type:** General Automation
 **Lines:** 16
-**Size:** 518 bytes
 
-## Description
+## Purpose
 
-Evolve fields
+Evolve fields Compute observables Generate plotly figures
 
-## Parse Error
+## Usage Pattern
 
-invalid syntax (<unknown>, line 8)
+Function-based - Provides reusable functions
 

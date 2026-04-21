@@ -2,14 +2,14 @@
 
 **Path:** `TextFunctions/SubString.py`
 
+**Automation Type:** General Automation
 **Lines:** 350
-**Size:** 11364 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Extracting Substrings
 
-## Parse Error
+## Usage Pattern
 
-unterminated string literal (detected at line 70) (<unknown>, line 70)
+Function-based - Provides reusable functions
 

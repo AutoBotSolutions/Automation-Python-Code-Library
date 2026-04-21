@@ -2,14 +2,10 @@
 
 **Path:** `QualifierFunction/Either.py`
 
+**Automation Type:** General Automation
 **Lines:** 23
-**Size:** 924 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid syntax (<unknown>, line 2)
+# Me # AI Assistant Example conditions Set "either" based on the conditions ## Explanation:
 

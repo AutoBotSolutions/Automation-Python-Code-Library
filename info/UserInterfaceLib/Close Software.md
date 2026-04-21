@@ -2,14 +2,16 @@
 
 **Path:** `UserInterfaceLib/Close Software.py`
 
+**Automation Type:** General Automation
 **Lines:** 90
-**Size:** 3745 bytes
 
-## Description
+## Purpose
 
-# Me
+Closes the software and any zombie processes tied to it.
 
-## Parse Error
+    :param process_name: Name of the process to terminate (use executable name).
 
-invalid character '’' (U+2019) (<unknown>, line 10)
+## Usage Pattern
+
+Function-based - Provides reusable functions with standalone execution capability
 

@@ -2,14 +2,14 @@
 
 **Path:** `DataFunctions/Table Total Rows.py`
 
+**Automation Type:** Database Operations
 **Lines:** 27
-**Size:** 946 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant Example table represented as a 2D list Calculate total rows Print the total rows ## Explanation:
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Database interaction
 

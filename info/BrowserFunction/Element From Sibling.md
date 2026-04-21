@@ -2,14 +2,18 @@
 
 **Path:** `BrowserFunction/Element From Sibling.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 59
-**Size:** 1777 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Explanation ## Code Example Set up the webdriver (this example uses Chrome, make sure to specify the correct path to your driver) Open the desired webpage Find the target element
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Web browser control
+
+## Usage Pattern
+
+Object-oriented - Provides classes and methods
 

@@ -2,14 +2,22 @@
 
 **Path:** `ThreadingFunctions/Threading For Multi Accont Info.py`
 
+**Automation Type:** File Operations
 **Lines:** 154
-**Size:** 7982 bytes
 
-## Description
+## Purpose
 
-Configure logging to write events to 'app.log' with timestamps, log levels, and thread names
+Configure logging to write events to 'app.log' with timestamps, log levels, and thread names Initialize empty lists to store proxy data and account data Define file paths for proxies and accounts data Initialize global variables for row counters and thread management
 
-## Imports
+## Key Features
+
+- File system manipulation
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
+
+## Dependencies
 
 - `threading`
 - `time`
@@ -27,11 +35,7 @@ representing rows and their corresponding comma-separated values.
 
 :param file_name: The path to the csv file to be loaded
 :type file_name: str
-:return: The table data extracted from the file as a list of lists, where each
-    sub-list represents a row split by commas
-:rtype: list
-:raises FileNotFoundError: If the specified file does not exist
-:raises Exception: For any other error during file reading or processing
+:return: The table data extracted from the file as a list of lists, wher
 
 ### initiate_threading
 
@@ -49,24 +53,5 @@ This function is designed to handle proxy switching, account credentialing and l
 while maintaining thread synchronization and ensuring proper logging of events.
 
 Raises:
-    * No specific errors are raised directly by this function.
-      If there are errors in the surrounding program logic or shared state,
-      they must be managed separately.
-
-Attributes:
-    thread_lock (threading.Lock): A shared lock object used to synchronize threads
-        when accessing and modifying global variables.
-    num_threads (int): A shared global variable used to keep track of the active threads count.
-    row (int): A shared global variable indexing which row in the proxy table
-        should be processed by the current thread.
-    account_row (int): A shared global variable indexing the current account
-        that needs to be processed by the thread.
-    proxy_table (list): A list of proxies, where each proxy is represented as a list
-        containing [proxy_address, proxy_port, proxy_username, proxy_password].
-    accounts_table (list): A list of accounts, where each account is represented
-        as a list containing [username, password].
-    proxies_file (bool): A boolean indicating if a proxies file is present and used
-        in the current operation.
-
-:return: None
+    * No specific errors are raised di
 

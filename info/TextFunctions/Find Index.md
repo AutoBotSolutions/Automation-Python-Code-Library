@@ -2,14 +2,10 @@
 
 **Path:** `TextFunctions/Find Index.py`
 
+**Automation Type:** General Automation
 **Lines:** 150
-**Size:** 8024 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant ## Searching in a List Example with a list ## Searching in a String Example with a string
 

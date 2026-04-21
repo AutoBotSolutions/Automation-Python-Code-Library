@@ -2,14 +2,10 @@
 
 **Path:** `MathFunctions/Ratios.py`
 
+**Automation Type:** General Automation
 **Lines:** 98
-**Size:** 3074 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid syntax (<unknown>, line 2)
+# Me # AI Assistant ## Example 1: **Using Ratios in the `fractions` Module** Representing ratios Arithmetic with ratios ## Example 2: **Scaling Values Using Ratios**
 

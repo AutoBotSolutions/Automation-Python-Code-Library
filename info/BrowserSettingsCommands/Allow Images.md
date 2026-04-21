@@ -2,14 +2,20 @@
 
 **Path:** `BrowserSettingsCommands/Allow Images.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 66
-**Size:** 2185 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Enabling Images in Selenium ### 1. **Using Chrome** Set up Chrome options Initialize the driver
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 10) (<unknown>, line 10)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
+- `https://example.com")`
 

@@ -2,14 +2,19 @@
 
 **Path:** `BrowserSettingsCommands/Change Proxy.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 53
-**Size:** 1605 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example: Changing Proxy in Selenium (Python) Define your proxy settings Setup Proxy Add the proxy to Chrome options Start Chrome WebDriver with Proxy
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `http://www.example.com")`
 

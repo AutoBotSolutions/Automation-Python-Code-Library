@@ -2,14 +2,24 @@
 
 **Path:** `ProxyFunction/ProxySupport.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 77
-**Size:** 2643 bytes
 
-## Description
+## Purpose
 
-Helper functions
+Helper functions Clear the table and read "Proxies" file into the table Initialize proxy_row
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 1)
+- Web browser control
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
+
+## External APIs
+
+This script interacts with external services:
+- `http://whatismyipaddress.com/",`
+- `http://whatismyipaddress.com/",`
 

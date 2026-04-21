@@ -2,14 +2,22 @@
 
 **Path:** `CodeLibrary/src/codelibrary/gui.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 550
-**Size:** 23999 bytes
 
-## Description
+## Purpose
 
 CodeLibrary GUI Application - A visual interface to library utilities.
 
-## Imports
+## Key Features
+
+- Web browser control
+
+## Usage Pattern
+
+Object-oriented - Provides classes and methods with standalone execution capability
+
+## Dependencies
 
 - `tkinter`
 - `tkinter.ttk`
@@ -20,44 +28,6 @@ CodeLibrary GUI Application - A visual interface to library utilities.
 - `codelibrary.datastructures`
 - `codelibrary.time_utils`
 - `codelibrary.indexer.LibraryIndexer`
-
-## Classes
-
-### CodeLibraryGUI
-
-**Methods:**
-- `__init__`
-- `create_search_tab`
-- `create_library_browser_tab`
-- `create_string_tab`
-- `create_math_tab`
-- `create_datastructures_tab`
-- `create_time_tab`
-- `convert_camel_to_snake`
-- `convert_snake_to_camel`
-- `validate_email`
-- `count_words`
-- `calculate_mean`
-- `calculate_median`
-- `check_prime`
-- `generate_fibonacci`
-- `stack_push`
-- `stack_pop`
-- `stack_peek`
-- `update_stack_display`
-- `queue_enqueue`
-- `queue_dequeue`
-- `queue_peek`
-- `update_queue_display`
-- `get_current_time`
-- `timestamp_to_datetime`
-- `datetime_to_timestamp`
-- `calculate_time_ago`
-- `perform_search`
-- `on_search_result_click`
-- `on_module_select`
-- `on_function_select`
-- `show_documentation`
 
 ## Functions
 
@@ -111,25 +81,48 @@ Create time utilities tab.
 
 **Parameters:** self
 
-### validate_email
+... and 23 more functions
 
-**Parameters:** self
+## Classes
 
-### count_words
+### CodeLibraryGUI
 
-**Parameters:** self
+**Methods:**
+- `__init__`
+- `create_search_tab`
+- `create_library_browser_tab`
+- `create_string_tab`
+- `create_math_tab`
+- ... and 27 more
 
-### calculate_mean
+## Code Examples
 
-**Parameters:** self
+### main
 
-### calculate_median
+```python
+def main():
+    root = tk.Tk()
+    app = CodeLibraryGUI(root)
+    root.mainloop()
+```
 
-**Parameters:** self
+### convert_camel_to_snake
 
-### check_prime
+```python
+def convert_camel_to_snake(self):
+        input_text = self.camel_input.get()
+        result = string_helpers.camel_to_snake(input_text)
+        self.camel_output.delete(0, tk.END)
+        self.camel_output.insert(0, result)
+```
 
-**Parameters:** self
+### convert_snake_to_camel
 
-... and 18 more functions
+```python
+def convert_snake_to_camel(self):
+        input_text = self.snake_input.get()
+        result = string_helpers.snake_to_camel(input_text)
+        self.snake_output.delete(0, tk.END)
+        self.snake_output.insert(0, result)
+```
 

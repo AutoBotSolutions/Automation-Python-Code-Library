@@ -2,14 +2,18 @@
 
 **Path:** `FTPCommands/FTP Get Files.py`
 
+**Automation Type:** File Operations
 **Lines:** 63
-**Size:** 2367 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Sample Code: Retrieve Files via FTP Connect to the FTP server Navigate to the directory containing the file (if needed) Open a local file to save the downloaded content Close the connection
 
-## Parse Error
+## Key Features
 
-invalid character '—' (U+2014) (<unknown>, line 62)
+- File system manipulation
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
 

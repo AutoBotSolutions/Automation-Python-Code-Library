@@ -2,14 +2,10 @@
 
 **Path:** `DataFunctions/List Position.py`
 
+**Automation Type:** General Automation
 **Lines:** 40
-**Size:** 1536 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant Creating four lists Set the variable to reference list3 Create a list of lists Find the position of list3 in the list of lists
 

@@ -2,14 +2,18 @@
 
 **Path:** `UserInterfaceLib/UI Stop.py`
 
+**Automation Type:** File Operations
 **Lines:** 85
-**Size:** 3010 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example of how to stop a running process in Python Create a threading event to handle stopping the running process Start function (represents running code) Simulate some long-running task
 
-## Parse Error
+## Key Features
 
-invalid character '’' (U+2019) (<unknown>, line 9)
+- File system manipulation
+
+## Usage Pattern
+
+Function-based - Provides reusable functions with standalone execution capability
 

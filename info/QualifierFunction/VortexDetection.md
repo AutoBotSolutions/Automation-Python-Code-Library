@@ -2,8 +2,12 @@
 
 **Path:** `QualifierFunction/VortexDetection.py`
 
+**Automation Type:** General Automation
 **Lines:** 22
-**Size:** 655 bytes
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
 
 ## Functions
 

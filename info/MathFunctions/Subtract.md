@@ -2,10 +2,6 @@
 
 **Path:** `MathFunctions/Subtract.py`
 
+**Automation Type:** General Automation
 **Lines:** 8
-**Size:** 243 bytes
-
-## Parse Error
-
-invalid character '’' (U+2019) (<unknown>, line 1)
 

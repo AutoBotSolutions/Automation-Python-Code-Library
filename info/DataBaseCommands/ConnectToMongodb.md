@@ -2,14 +2,14 @@
 
 **Path:** `DataBaseCommands/ConnectToMongodb.py`
 
+**Automation Type:** Database Operations
 **Lines:** 110
-**Size:** 4221 bytes
 
-## Description
+## Purpose
 
-Replace 'your_connection_string' with your actual MongoDB connection string
+Replace 'your_connection_string' with your actual MongoDB connection string Create a MongoClient to the running mongod instance Select a database Select a collection Example: Inserting a document Example: Finding a document Example: Closing the connection //////////////////////////////////////////////////////////////////#
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 27) (<unknown>, line 27)
+- Database interaction
 

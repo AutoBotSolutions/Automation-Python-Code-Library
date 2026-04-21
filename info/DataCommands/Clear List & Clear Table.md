@@ -2,14 +2,14 @@
 
 **Path:** `DataCommands/Clear List & Clear Table.py`
 
+**Automation Type:** Database Operations
 **Lines:** 55
-**Size:** 1365 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Clear a List in Python Example list Method 1: Using clear() Method 2: Reassign to an empty list Method 3: Using slice assignment ## Clear a Table Using SQL (Database Operation)
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 23) (<unknown>, line 23)
+- Database interaction
 

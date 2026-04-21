@@ -2,14 +2,22 @@
 
 **Path:** `CodeLibrary/run_gui.py`
 
+**Automation Type:** File Operations
 **Lines:** 15
-**Size:** 271 bytes
 
-## Description
+## Purpose
 
 Launcher script for CodeLibrary GUI application.
 
-## Imports
+## Key Features
+
+- File system manipulation
+
+## Usage Pattern
+
+ with standalone execution capability
+
+## Dependencies
 
 - `sys`
 - `os`

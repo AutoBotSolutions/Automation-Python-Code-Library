@@ -2,14 +2,14 @@
 
 **Path:** `FileFunctions/Get Files.py`
 
+**Automation Type:** File Operations
 **Lines:** 46
-**Size:** 914 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant # Me # AI Assistant ## Using `os.path`: Path to the file Check if the file exists
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 15) (<unknown>, line 15)
+- File system manipulation
 

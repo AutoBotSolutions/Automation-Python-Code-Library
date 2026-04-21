@@ -2,14 +2,19 @@
 
 **Path:** `BrowserCommands/FindRegex StoreAs Variable.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 58
-**Size:** 1981 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Code Breakdown: Initialize the WebDriver Extract the page source Define your regular expression
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 12) (<unknown>, line 12)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `http://example.com")`
 

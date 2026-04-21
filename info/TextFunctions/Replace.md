@@ -2,14 +2,10 @@
 
 **Path:** `TextFunctions/Replace.py`
 
+**Automation Type:** General Automation
 **Lines:** 89
-**Size:** 2667 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant # Me # AI Assistant ## **1. Using `str.replace()` method** ### **Syntax**
 

@@ -2,14 +2,23 @@
 
 **Path:** `TextFunctions/Replace Regulare Expression.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 390
-**Size:** 18046 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Syntax ## Example: Basic Replacement Input string Replace 'Python' with 'coding'
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Web browser control
+
+## Usage Pattern
+
+Object-oriented - Provides classes and methods
+
+## External APIs
+
+This script interacts with external services:
+- `http://example.com")`
 

@@ -2,14 +2,19 @@
 
 **Path:** `BrowserSettingsCommands/Allow Flash.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 58
-**Size:** 2740 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Approach for ChromeDriver Configure Chrome options
 
-## Parse Error
+## Key Features
 
-invalid character '’' (U+2019) (<unknown>, line 9)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `http://example.com")`
 

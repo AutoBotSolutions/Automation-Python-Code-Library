@@ -2,14 +2,10 @@
 
 **Path:** `UserInterfaceLib/UI Background.py`
 
+**Automation Type:** General Automation
 **Lines:** 40
-**Size:** 1279 bytes
 
-## Description
+## Purpose
 
-Create the main window
-
-## Parse Error
-
-invalid syntax (<unknown>, line 5)
+Create the main window Set the size of the window Load the background image Create a Canvas to place the image as a background Place the image on the Canvas Create consistent UI layering: frame for other widgets Add UI elements into the frame (they'll appear over the image)
 

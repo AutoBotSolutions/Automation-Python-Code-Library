@@ -2,10 +2,10 @@
 
 **Path:** `CodeLibrary/tests/__init__.py`
 
+**Automation Type:** General Automation
 **Lines:** 3
-**Size:** 31 bytes
 
-## Description
+## Purpose
 
 Tests for CodeLibrary.
 

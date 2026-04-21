@@ -2,14 +2,18 @@
 
 **Path:** `ListCommands/ClearList OpenFileDialog Select(.txt)File ReadFileToList.py`
 
+**Automation Type:** File Operations
 **Lines:** 111
-**Size:** 4436 bytes
 
-## Description
+## Purpose
 
-Step 1: Open File Dialog to Select .txt file
+Step 1: Open File Dialog to Select .txt file Step 2: Read the file and store contents in a list Step 3: Print the list to the console
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 37) (<unknown>, line 37)
+- File system manipulation
+
+## Usage Pattern
+
+Function-based - Provides reusable functions with standalone execution capability
 

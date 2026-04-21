@@ -2,14 +2,14 @@
 
 **Path:** `DataFunctions/List From Object.py`
 
+**Automation Type:** General Automation
 **Lines:** 110
-**Size:** 2514 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## 1. **If the object is iterable (e.g., a dictionary, set, etc.):** Example ## 2. **If the object is custom (has attributes):**
 
-## Parse Error
+## Usage Pattern
 
-invalid syntax (<unknown>, line 2)
+Object-oriented - Provides classes and methods
 

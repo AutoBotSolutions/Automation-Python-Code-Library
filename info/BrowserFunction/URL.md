@@ -2,14 +2,19 @@
 
 **Path:** `BrowserFunction/URL.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 32
-**Size:** 934 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant Initialize the WebDriver (e.g., using Chrome) Open a webpage Get the current page URL Print or use the URL Close the browser ## Explanation:
 
-## Parse Error
+## Key Features
 
-invalid character '’' (U+2019) (<unknown>, line 5)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `http://example.com")`
 

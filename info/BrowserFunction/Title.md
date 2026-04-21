@@ -2,14 +2,19 @@
 
 **Path:** `BrowserFunction/Title.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 33
-**Size:** 975 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant Example using Chrome Open a website Get the title of the current page Store it in a variable and print it Close the browser ## Breakdown:
 
-## Parse Error
+## Key Features
 
-invalid character '’' (U+2019) (<unknown>, line 5)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
 

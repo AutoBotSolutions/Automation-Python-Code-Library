@@ -2,14 +2,14 @@
 
 **Path:** `DataFunctions/List From Table Row.py`
 
+**Automation Type:** Database Operations
 **Lines:** 88
-**Size:** 2013 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## **1. If the table is hardcoded or manually defined (as a 2D array)** Example table (2D structure) Convert rows of the table to a Python list ## **2. If the table is stored in a database**
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 87) (<unknown>, line 87)
+- Database interaction
 

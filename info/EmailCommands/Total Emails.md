@@ -2,14 +2,14 @@
 
 **Path:** `EmailCommands/Total Emails.py`
 
+**Automation Type:** Email Automation
 **Lines:** 49
-**Size:** 1795 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example Using `imaplib` Email credentials (replace with actual credentials) Connect to the server Login to your email account Select the mailbox you want to use (default is "INBOX") Search for all messages and count them
 
-## Parse Error
+## Key Features
 
-invalid character '’' (U+2019) (<unknown>, line 5)
+- Email sending/receiving
 

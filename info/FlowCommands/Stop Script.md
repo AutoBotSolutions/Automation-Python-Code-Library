@@ -2,14 +2,14 @@
 
 **Path:** `FlowCommands/Stop Script.py`
 
+**Automation Type:** Threading/Multi-processing
 **Lines:** 39
-**Size:** 1361 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## 1. **Using `exit()` or `quit()`** ## 2. **Using `os._exit()`:** ## 3. **Using Exceptions:**
 
-## Parse Error
+## Key Features
 
-invalid character '—' (U+2014) (<unknown>, line 34)
+- Parallel execution
 

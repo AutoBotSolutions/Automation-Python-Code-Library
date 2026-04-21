@@ -2,14 +2,14 @@
 
 **Path:** `FileCommands/Open File.py`
 
+**Automation Type:** General Automation
 **Lines:** 30
-**Size:** 1309 bytes
 
-## Description
+## Purpose
 
-## Example for Adding a Button in GUI
+## Example for Adding a Button in GUI Open a file dialog and get the filename Use the 'open_file' function to read file content Create a GUI window Add a button to open a file Run the main event loop
 
-## Parse Error
+## Usage Pattern
 
-invalid syntax (<unknown>, line 1)
+Function-based - Provides reusable functions
 

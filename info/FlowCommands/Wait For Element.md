@@ -2,14 +2,23 @@
 
 **Path:** `FlowCommands/Wait For Element.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 60
-**Size:** 2219 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Code Example: Waiting for an Element Set up the WebDriver Wait for the element to be present and visible Always close the driver
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+- Web browser control
+
+## Usage Pattern
+
+Object-oriented - Provides classes and methods
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
 

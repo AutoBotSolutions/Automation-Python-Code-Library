@@ -2,14 +2,26 @@
 
 **Path:** `EmailCommands/Return Recipient.py`
 
+**Automation Type:** Email Automation
 **Lines:** 49
-**Size:** 1723 bytes
 
-## Description
+## Purpose
 
-# Me
+Get the email recipient at the specified position in the list.
 
-## Parse Error
+    Args:
+    - recipients (list): List of email recipients as strings.
+    - position (int): Index (1-based) of the recipient to return.
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+    Returns:
+    - str: The email address at the given position.
+    - None: If the position is out of range.
+
+## Key Features
+
+- Email sending/receiving
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
 

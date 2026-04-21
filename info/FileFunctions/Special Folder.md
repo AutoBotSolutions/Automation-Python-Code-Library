@@ -2,14 +2,14 @@
 
 **Path:** `FileFunctions/Special Folder.py`
 
+**Automation Type:** File Operations
 **Lines:** 64
-**Size:** 1829 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Common Special Folders in Python: Using os Using Pathlib
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 10) (<unknown>, line 10)
+- File system manipulation
 

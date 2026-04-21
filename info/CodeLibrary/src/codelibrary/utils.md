@@ -2,14 +2,22 @@
 
 **Path:** `CodeLibrary/src/codelibrary/utils.py`
 
+**Automation Type:** HTTP Requests
 **Lines:** 57
-**Size:** 1638 bytes
 
-## Description
+## Purpose
 
 General utility functions.
 
-## Imports
+## Key Features
+
+- Web API interaction
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
+
+## Dependencies
 
 - `typing.Any`
 - `typing.Callable`
@@ -63,4 +71,36 @@ Convert Python object to JSON string.
 Parse JSON string to Python object.
 
 ### wrapper
+
+## Code Examples
+
+### flatten
+
+```python
+def flatten(nested_list: List[Any]) -> List[Any]:
+    """Flatten a nested list structure."""
+    result = []
+    for item in nested_list:
+        if isinstance(item, list):
+            result.extend(flatten(item))
+        else:
+            result.append(item)
+    return result
+```
+
+### chunk_list
+
+```python
+def chunk_list(items: List[Any], chunk_size: int) -> List[List[Any]]:
+    """Split a list into chunks of specified size."""
+    return [items[i:i + chunk_size] for i in range(0, len(items), chunk_size)]
+```
+
+### safe_get
+
+```python
+def safe_get(dictionary: dict, key: str, default: Any = None) -> Any:
+    """Safely get a value from a dictionary with a default fallback."""
+    return dictionary.get(key, default)
+```
 

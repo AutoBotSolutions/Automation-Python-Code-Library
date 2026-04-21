@@ -2,14 +2,14 @@
 
 **Path:** `FlowCommands/Pause Script.py`
 
+**Automation Type:** General Automation
 **Lines:** 68
-**Size:** 1716 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## 1. **Using `time.sleep()`** ## 2. **Waiting for User Input (`input`)**
 
-## Parse Error
+## Usage Pattern
 
-unterminated string literal (detected at line 8) (<unknown>, line 8)
+Function-based - Provides reusable functions
 

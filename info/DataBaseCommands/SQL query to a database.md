@@ -2,14 +2,14 @@
 
 **Path:** `DataBaseCommands/SQL query to a database.py`
 
+**Automation Type:** Database Operations
 **Lines:** 120
-**Size:** 3523 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example with SQLite (built into Python) Establish a connection to the SQLite database Create a cursor object to interact with the database Write an SQL query Execute the SQL query with parameters (to prevent SQL injection) Fetch results Output the results
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 6) (<unknown>, line 6)
+- Database interaction
 

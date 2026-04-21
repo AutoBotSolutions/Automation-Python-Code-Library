@@ -2,14 +2,14 @@
 
 **Path:** `FTPCommands/FTP Delete Folder.py`
 
+**Automation Type:** General Automation
 **Lines:** 64
-**Size:** 2348 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Python Code to Delete a Folder from an FTP Server List the contents of the folder Attempt to delete the item (file) If it's a directory, recursively call the function to delete its contents Finally remove the now-empty directory Example usage
 
-## Parse Error
+## Usage Pattern
 
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+Function-based - Provides reusable functions
 

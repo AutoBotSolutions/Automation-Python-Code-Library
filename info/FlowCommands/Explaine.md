@@ -2,14 +2,18 @@
 
 **Path:** `FlowCommands/Explaine.py`
 
+**Automation Type:** HTTP Requests
 **Lines:** 126
-**Size:** 4406 bytes
 
-## Description
+## Purpose
 
-# Me
+This function explains the concept of calculating the area of a circle.
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Web API interaction
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
 

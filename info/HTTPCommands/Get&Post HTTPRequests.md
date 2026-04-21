@@ -2,14 +2,23 @@
 
 **Path:** `HTTPCommands/Get&Post HTTPRequests.py`
 
+**Automation Type:** HTTP Requests
 **Lines:** 66
-**Size:** 1829 bytes
 
-## Description
+## Purpose
 
-# AI Assistant
+# AI Assistant ## HTTP GET Request Example: Define the URL of the API endpoint Make a GET request to the API Check the response status code Parse the JSON response ## HTTP POST Request Example:
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 2)
+- Web API interaction
+
+## External APIs
+
+This script interacts with external services:
+- `https://jsonplaceholder.typicode.com/posts"`
+- `https://jsonplaceholder.typicode.com/posts"`
+- `https://jsonplaceholder.typicode.com/posts`)`
+- `endpoint`
+- `endpoint`
 

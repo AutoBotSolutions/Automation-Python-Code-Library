@@ -2,14 +2,23 @@
 
 **Path:** `OporationCommands/IFPage Element DoseNot Exist.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 54
-**Size:** 1862 bytes
 
-## Description
+## Purpose
 
-///////////////////////////////////////////////////////////#
+///////////////////////////////////////////////////////////# Initialize the Chrome driver (or another driver of your choice) Navigate to the desired URL Function to check if an element exists Example usage
 
-## Parse Error
+## Key Features
 
-invalid character '’' (U+2019) (<unknown>, line 1)
+- Web browser control
+
+## Usage Pattern
+
+Object-oriented - Provides classes and methods
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
 

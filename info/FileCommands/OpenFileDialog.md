@@ -2,14 +2,14 @@
 
 **Path:** `FileCommands/OpenFileDialog.py`
 
+**Automation Type:** General Automation
 **Lines:** 52
-**Size:** 3056 bytes
 
-## Description
+## Purpose
 
 ////////////////////////////////////////////////#
 
-## Parse Error
+## Usage Pattern
 
-unterminated string literal (detected at line 27) (<unknown>, line 27)
+Function-based - Provides reusable functions with standalone execution capability
 

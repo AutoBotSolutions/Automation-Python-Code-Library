@@ -2,64 +2,22 @@
 
 **Path:** `CodeLibrary/src/codelibrary/datastructures.py`
 
+**Automation Type:** General Automation
 **Lines:** 130
-**Size:** 3670 bytes
 
-## Description
+## Purpose
 
 Common data structure implementations.
 
-## Imports
+## Usage Pattern
+
+Object-oriented - Provides classes and methods
+
+## Dependencies
 
 - `typing.Any`
 - `typing.Optional`
 - `typing.Iterator`
-
-## Classes
-
-### Stack
-
-A simple stack implementation using a list.
-
-**Methods:**
-- `__init__`
-- `push`
-- `pop`
-- `peek`
-- `is_empty`
-- `size`
-
-### Queue
-
-A simple queue implementation using a list.
-
-**Methods:**
-- `__init__`
-- `enqueue`
-- `dequeue`
-- `peek`
-- `is_empty`
-- `size`
-
-### ListNode
-
-A node for a linked list.
-
-**Methods:**
-- `__init__`
-
-### LinkedList
-
-A simple singly linked list implementation.
-
-**Methods:**
-- `__init__`
-- `append`
-- `prepend`
-- `find`
-- `to_list`
-- `size`
-- `__iter__`
 
 ## Functions
 
@@ -119,31 +77,77 @@ Remove and return the front item from the queue.
 
 Return the front item without removing it.
 
-### is_empty
+... and 10 more functions
 
-**Parameters:** self
+## Classes
 
-Check if the queue is empty.
+### Stack
 
-### size
+A simple stack implementation using a list.
 
-**Parameters:** self
+**Methods:**
+- `__init__`
+- `push`
+- `pop`
+- `peek`
+- `is_empty`
+- ... and 1 more
 
-Return the number of items in the queue.
+### Queue
+
+A simple queue implementation using a list.
+
+**Methods:**
+- `__init__`
+- `enqueue`
+- `dequeue`
+- `peek`
+- `is_empty`
+- ... and 1 more
+
+### ListNode
+
+A node for a linked list.
+
+**Methods:**
+- `__init__`
+
+### LinkedList
+
+A simple singly linked list implementation.
+
+**Methods:**
+- `__init__`
+- `append`
+- `prepend`
+- `find`
+- `to_list`
+- ... and 2 more
+
+## Code Examples
 
 ### __init__
 
-**Parameters:** self, data, next_node
+```python
+def __init__(self):
+        self._items: list = []
+```
 
-### __init__
+### push
 
-**Parameters:** self
+```python
+def push(self, item: Any) -> None:
+        """Push an item onto the stack."""
+        self._items.append(item)
+```
 
-### append
+### pop
 
-**Parameters:** self, data
-
-Add an item to the end of the list.
-
-... and 5 more functions
+```python
+def pop(self) -> Any:
+        """Remove and return the top item from the stack."""
+        if self.is_empty():
+            raise IndexError("pop from empty stack")
+        return self._items.pop()
+```
 

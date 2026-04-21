@@ -2,14 +2,14 @@
 
 **Path:** `BrowserCommands/NavigateTo URL.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 32
-**Size:** 2307 bytes
 
-## Description
+## Purpose
 
-Set up the WebDriver
+Set up the WebDriver Navigate to the URL Optionally, wait for a while to see the page Close the browser //////////////////////////////////////////////////////////#
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 21) (<unknown>, line 21)
+- Web browser control
 

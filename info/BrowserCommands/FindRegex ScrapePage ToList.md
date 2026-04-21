@@ -2,14 +2,20 @@
 
 **Path:** `BrowserCommands/FindRegex ScrapePage ToList.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 66
-**Size:** 4325 bytes
 
-## Description
+## Purpose
 
-////////////////////////////////////////////////#
+////////////////////////////////////////////////# URL to visit Regular expression pattern Set up Selenium WebDriver (Chrome in this example) Navigate to the URL Get the page source or specific element's text
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 55) (<unknown>, line 55)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://search.brave.com/"`
+- `https://chromedriver.chromium.org/downloads)`
 

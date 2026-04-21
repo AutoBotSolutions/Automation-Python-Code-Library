@@ -2,14 +2,18 @@
 
 **Path:** `FlowCommands/Thread.py`
 
+**Automation Type:** File Operations
 **Lines:** 40
-**Size:** 1260 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example Code: Create a thread with my_var set to 5 Start the thread Wait for the thread to complete ## Explanation:
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- File system manipulation
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
 

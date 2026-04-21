@@ -2,14 +2,10 @@
 
 **Path:** `DataFunctions/Table Total Column.py`
 
+**Automation Type:** General Automation
 **Lines:** 77
-**Size:** 1609 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid decimal literal (<unknown>, line 42)
+# Me # AI Assistant ## **Using Pandas** Example table data Create DataFrame Sum of each column
 

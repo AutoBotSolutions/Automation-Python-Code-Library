@@ -2,14 +2,14 @@
 
 **Path:** `DataBaseCommands/list of SQL Query commands.py`
 
+**Automation Type:** Database Operations
 **Lines:** 175
-**Size:** 4492 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## **SQL Query Commands:**
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 1)
+- Database interaction
 

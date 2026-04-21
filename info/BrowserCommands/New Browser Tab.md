@@ -2,14 +2,20 @@
 
 **Path:** `BrowserCommands/New Browser Tab.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 33
-**Size:** 784 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant Launch the browser Open a webpage Open a new tab Switch to the newly opened tab Navigate to a new URL in the new tab Close the new tab Switch back to the first tab Close the original browser window
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 2)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://www.example.com")`
+- `https://www.google.com")`
 

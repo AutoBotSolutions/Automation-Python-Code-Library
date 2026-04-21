@@ -2,14 +2,14 @@
 
 **Path:** `FlowCommands/Include.py`
 
+**Automation Type:** General Automation
 **Lines:** 44
-**Size:** 1343 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Explanation ## Example Code ### File: `my_module.py` This is the file you would "include" in another script ### File: `main.py` Main file that includes `my_module.py`
 
-## Parse Error
+## Usage Pattern
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+Function-based - Provides reusable functions
 

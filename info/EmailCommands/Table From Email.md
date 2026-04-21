@@ -2,14 +2,19 @@
 
 **Path:** `EmailCommands/Table From Email.py`
 
+**Automation Type:** Database Operations
 **Lines:** 88
-**Size:** 2812 bytes
 
-## Description
+## Purpose
 
-# Me
+From: sender@example.com
+To: recipient@example.com
+Subject: Test Email
+Date: Fri, 3 Nov 2023 09:00:00 -0800
 
-## Parse Error
+This is a sample email used to demonstrate table creation.
 
-unterminated string literal (detected at line 13) (<unknown>, line 13)
+## Key Features
+
+- Database interaction
 

@@ -2,12 +2,16 @@
 
 **Path:** `QualifierFunction/FieldEvolution.py`
 
+**Automation Type:** General Automation
 **Lines:** 29
-**Size:** 1015 bytes
 
-## Description
+## Purpose
 
-Field update step for N x N complex tensor
+Field update step for N x N complex tensor Laplacian via roll (discrete diffusion) Multi-field evolution Cross-field coupling Euler integration
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
 
 ## Functions
 
@@ -18,4 +22,14 @@ Field update step for N x N complex tensor
 ### laplacian
 
 **Parameters:** f
+
+## Code Examples
+
+### laplacian
+
+```python
+def laplacian(f):
+        return torch.roll(f, 1, 0) + torch.roll(f, -1, 0) + \
+               torch.roll(f, 1, 1) + torch.roll(f, -1, 1) - 4*f
+```
 

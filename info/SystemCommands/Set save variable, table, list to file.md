@@ -2,14 +2,19 @@
 
 **Path:** `SystemCommands/Set save variable, table, list to file.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 83
-**Size:** 2966 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Steps: ## Code Example Initialize the WebDriver (using Chrome in this example) Open the target website Locate an element by its ID and get its value/text
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
 

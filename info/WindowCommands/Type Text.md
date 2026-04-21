@@ -2,14 +2,19 @@
 
 **Path:** `WindowCommands/Type Text.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 48
-**Size:** 1464 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example: Typing in an Input Field Set up your WebDriver (e.g., for Chrome) Navigate to a URL Locate the input field Type keys into the input field Press Enter Quit the WebDriver session
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
 

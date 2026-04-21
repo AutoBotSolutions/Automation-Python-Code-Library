@@ -2,14 +2,10 @@
 
 **Path:** `QualifierFunction/Comparison.py`
 
+**Automation Type:** General Automation
 **Lines:** 33
-**Size:** 1106 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant Define the two values Compare the two values and set the result Output the result ## Explanation:
 

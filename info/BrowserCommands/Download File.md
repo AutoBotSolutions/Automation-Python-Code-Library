@@ -2,14 +2,19 @@
 
 **Path:** `BrowserCommands/Download File.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 61
-**Size:** 2410 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Steps: ## Example Code: Set up options for Chrome
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 9) (<unknown>, line 9)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com/download_page")`
 

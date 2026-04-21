@@ -2,14 +2,10 @@
 
 **Path:** `DataFunctions/Last N Of List.py`
 
+**Automation Type:** General Automation
 **Lines:** 23
-**Size:** 718 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant To get the last n elements: ## Breakdown: ## Notes:
 

@@ -2,14 +2,19 @@
 
 **Path:** `BrowserCommands/FindRegex & Focus.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 68
-**Size:** 4399 bytes
 
-## Description
+## Purpose
 
-## 1. **Plan of Action**
+## 1. **Plan of Action** ## 2. **Example Code** Set up the WebDriver Define the regular expression Get the page source Search for matches using regex
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
 

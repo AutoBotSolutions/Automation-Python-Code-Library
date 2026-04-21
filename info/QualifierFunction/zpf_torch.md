@@ -2,27 +2,20 @@
 
 **Path:** `QualifierFunction/zpf_torch.py`
 
+**Automation Type:** General Automation
 **Lines:** 23
-**Size:** 510 bytes
 
-## Description
+## Purpose
 
 zpf_torch.py
 
-## Imports
+## Usage Pattern
+
+Object-oriented - Provides classes and methods
+
+## Dependencies
 
 - `torch`
-
-## Classes
-
-### ZPFTensor
-
-**Methods:**
-- `__init__`
-- `apply_constraint`
-- `energy`
-- `renormalize`
-- `step`
 
 ## Functions
 
@@ -45,4 +38,39 @@ zpf_torch.py
 ### step
 
 **Parameters:** self
+
+## Classes
+
+### ZPFTensor
+
+**Methods:**
+- `__init__`
+- `apply_constraint`
+- `energy`
+- `renormalize`
+- `step`
+
+## Code Examples
+
+### __init__
+
+```python
+def __init__(self, dim):
+        super().__init__()
+        self.state = torch.randn(dim, device="cuda")
+```
+
+### apply_constraint
+
+```python
+def apply_constraint(self, C):
+        self.state = C @ self.state
+```
+
+### energy
+
+```python
+def energy(self):
+        return torch.sum(self.state**2)
+```
 

@@ -2,14 +2,18 @@
 
 **Path:** `FTPCommands/FTP UploadFileTo Server.py`
 
+**Automation Type:** File Operations
 **Lines:** 62
-**Size:** 2279 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Code Example: FTP Upload Connect to the FTP server Open the file to be uploaded Upload the file to the specified remote path Close the FTP connection Usage
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 2)
+- File system manipulation
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
 

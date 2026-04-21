@@ -2,14 +2,14 @@
 
 **Path:** `FTPCommands/FTP Rename Directory.py`
 
+**Automation Type:** General Automation
 **Lines:** 50
-**Size:** 1910 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Code Example for Renaming a Directory FTP configuration Connect to the FTP server Define the current directory name and the new name Rename the directory
 
-## Parse Error
+## Usage Pattern
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+Object-oriented - Provides classes and methods
 

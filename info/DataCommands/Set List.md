@@ -2,14 +2,10 @@
 
 **Path:** `DataCommands/Set List.py`
 
+**Automation Type:** General Automation
 **Lines:** 116
-**Size:** 3009 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant ## Examples ### 1. **Set Operations on Lists** Remove duplicates from a list ### 2. **List Intersection** Intersection ### 3. **List Union**
 

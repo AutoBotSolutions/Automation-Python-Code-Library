@@ -2,14 +2,18 @@
 
 **Path:** `FlowCommands/Wait For Condition.py`
 
+**Automation Type:** File Operations
 **Lines:** 84
-**Size:** 1899 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Using `time.sleep` Inside a `while` Loop Condition-checking function Replace with some logic Wait for the condition ## Using `threading.Condition`
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+- File system manipulation
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
 

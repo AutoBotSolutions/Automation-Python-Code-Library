@@ -2,14 +2,14 @@
 
 **Path:** `TextFunctions/Append Line To Text.py`
 
+**Automation Type:** File Operations
 **Lines:** 27
-**Size:** 960 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example Code: File path to the text file Line you want to append Open the file in append mode and write the new line ## Explanation:
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- File system manipulation
 

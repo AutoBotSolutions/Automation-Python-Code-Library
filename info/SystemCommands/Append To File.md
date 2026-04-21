@@ -2,14 +2,14 @@
 
 **Path:** `SystemCommands/Append To File.py`
 
+**Automation Type:** File Operations
 **Lines:** 41
-**Size:** 1259 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant Appending text to a file ## Explanation: ## Output:
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- File system manipulation
 

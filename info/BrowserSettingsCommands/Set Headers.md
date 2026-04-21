@@ -2,14 +2,20 @@
 
 **Path:** `BrowserSettingsCommands/Set Headers.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 94
-**Size:** 2806 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## 1. **Setting Headers in Chrome Using CDP (Chrome DevTools Protocol)** Enable DevTools Protocol Setting headers using DevTools
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 9) (<unknown>, line 9)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
+- `https://example.com")`
 

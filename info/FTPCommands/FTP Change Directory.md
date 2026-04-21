@@ -2,14 +2,10 @@
 
 **Path:** `FTPCommands/FTP Change Directory.py`
 
+**Automation Type:** General Automation
 **Lines:** 34
-**Size:** 1496 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 28) (<unknown>, line 28)
+# Me # AI Assistant ## Example: Changing Directory in FTP Using Python Connect to the FTP server Change directory on the FTP server Close the FTP connection ## Explanation:
 

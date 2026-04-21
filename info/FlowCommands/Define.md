@@ -2,14 +2,14 @@
 
 **Path:** `FlowCommands/Define.py`
 
+**Automation Type:** General Automation
 **Lines:** 41
-**Size:** 1336 bytes
 
-## Description
+## Purpose
 
-# Me
+This function calculates the square of a number.
 
-## Parse Error
+## Usage Pattern
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+Function-based - Provides reusable functions
 

@@ -2,14 +2,10 @@
 
 **Path:** `DataFunctions/Text From List.py`
 
+**Automation Type:** General Automation
 **Lines:** 29
-**Size:** 858 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant ## Example Code: Sample list Combine list elements into a string with spaces between them Print the result ## Output: ## Explanation:
 

@@ -2,20 +2,16 @@
 
 **Path:** `QualifierFunction/holographic_projection.py`
 
+**Automation Type:** General Automation
 **Lines:** 9
-**Size:** 231 bytes
 
-## Imports
+## Usage Pattern
+
+Object-oriented - Provides classes and methods
+
+## Dependencies
 
 - `torch`
-
-## Classes
-
-### HolographicProjection
-
-**Methods:**
-- `__init__`
-- `project`
 
 ## Functions
 
@@ -26,4 +22,28 @@
 ### project
 
 **Parameters:** self, bulk_state
+
+## Classes
+
+### HolographicProjection
+
+**Methods:**
+- `__init__`
+- `project`
+
+## Code Examples
+
+### __init__
+
+```python
+def __init__(self, bulk_dim, boundary_dim):
+        self.P = torch.randn(boundary_dim, bulk_dim, device="cuda")
+```
+
+### project
+
+```python
+def project(self, bulk_state):
+        return self.P @ bulk_state
+```
 

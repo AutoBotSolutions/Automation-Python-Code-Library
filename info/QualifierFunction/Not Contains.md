@@ -2,14 +2,14 @@
 
 **Path:** `QualifierFunction/Not Contains.py`
 
+**Automation Type:** General Automation
 **Lines:** 33
-**Size:** 1613 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant Example usage: ## Explanation:
 
-## Parse Error
+## Usage Pattern
 
-invalid character '’' (U+2019) (<unknown>, line 5)
+Function-based - Provides reusable functions
 

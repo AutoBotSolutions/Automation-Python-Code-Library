@@ -2,14 +2,10 @@
 
 **Path:** `DataFunctions/Set Table Cell.py`
 
+**Automation Type:** General Automation
 **Lines:** 40
-**Size:** 1448 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+# Me # AI Assistant ## Code Example: Define the table as a 2D list Set a variable to the value at a specific row and column Get the value from the table ## Explanation:
 

@@ -2,14 +2,14 @@
 
 **Path:** `FileCommands/GetFiles LoadFile Paths InTo List.py`
 
+**Automation Type:** File Operations
 **Lines:** 47
-**Size:** 3422 bytes
 
-## Description
+## Purpose
 
-## Functionality
+## Functionality ## Instructions: /////////////////////////////////////////////////# Specify the directory path Load file paths into a list Print each file path on a new line /////////////////////////////////////////////////#
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 31) (<unknown>, line 31)
+- File system manipulation
 

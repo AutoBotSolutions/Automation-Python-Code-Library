@@ -2,14 +2,10 @@
 
 **Path:** `SystemCommands/execute shell command.py`
 
+**Automation Type:** General Automation
 **Lines:** 35
-**Size:** 1398 bytes
 
-## Description
+## Purpose
 
-## Example Code
-
-## Parse Error
-
-unterminated string literal (detected at line 3) (<unknown>, line 3)
+## Example Code Example shell command Execute the command ## Explanation:
 

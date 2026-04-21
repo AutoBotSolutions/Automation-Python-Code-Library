@@ -2,14 +2,18 @@
 
 **Path:** `DataFunctions/Object Entity.py`
 
+**Automation Type:** File Operations
 **Lines:** 81
-**Size:** 2499 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Object Entities in Python ### Key Components of Object Entities:
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 2)
+- File system manipulation
+
+## Usage Pattern
+
+Object-oriented - Provides classes and methods
 

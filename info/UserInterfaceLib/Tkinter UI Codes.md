@@ -2,14 +2,18 @@
 
 **Path:** `UserInterfaceLib/Tkinter UI Codes.py`
 
+**Automation Type:** HTTP Requests
 **Lines:** 364
-**Size:** 15535 bytes
 
-## Description
+## Purpose
 
 A basic window with a label and button.
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 342) (<unknown>, line 342)
+- Web API interaction
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
 

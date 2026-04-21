@@ -2,14 +2,10 @@
 
 **Path:** `DataFunctions/Previouse List Item.py`
 
+**Automation Type:** General Automation
 **Lines:** 33
-**Size:** 855 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 32) (<unknown>, line 32)
+# Me # AI Assistant ## Example Iterate through the list starting from the second item ## Output: ## Explanation:
 

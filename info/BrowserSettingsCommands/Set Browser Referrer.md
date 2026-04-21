@@ -2,14 +2,22 @@
 
 **Path:** `BrowserSettingsCommands/Set Browser Referrer.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 41
-**Size:** 892 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant Start the browser Navigate to a webpage with referer header Start the Chrome browser with options Enable CDP on the browser session
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 1)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com/some-path")`
+- `https://my-referer-site.com`
+- `https://example.com")`
+- `https://your-referer-site.com"`
 

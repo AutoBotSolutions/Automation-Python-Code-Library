@@ -2,14 +2,25 @@
 
 **Path:** `ProxyFunction/ProxySupport1.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 89
-**Size:** 3063 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Code Example Helper functions (from sys_proxy.py)
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+- Web browser control
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
+
+## External APIs
+
+This script interacts with external services:
+- `http://{set_proxy}")`
+- `http://whatismyipaddress.com/")`
+- `http://whatismyipaddress.com/``
 

@@ -2,14 +2,14 @@
 
 **Path:** `FlowCommands/Return.py`
 
+**Automation Type:** General Automation
 **Lines:** 28
-**Size:** 825 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example: Return Value from a Function This function takes two numbers and returns their sum Call the function and store the returned value Print the result ## Explanation:
 
-## Parse Error
+## Usage Pattern
 
-invalid syntax (<unknown>, line 2)
+Function-based - Provides reusable functions
 

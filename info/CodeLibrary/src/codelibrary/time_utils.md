@@ -2,14 +2,18 @@
 
 **Path:** `CodeLibrary/src/codelibrary/time_utils.py`
 
+**Automation Type:** General Automation
 **Lines:** 123
-**Size:** 3453 bytes
 
-## Description
+## Purpose
 
 Time and date manipulation utilities.
 
-## Imports
+## Usage Pattern
+
+Function-based - Provides reusable functions
+
+## Dependencies
 
 - `datetime.datetime`
 - `datetime.timedelta`
@@ -75,35 +79,31 @@ Add minutes to a datetime.
 
 Get a human-readable time ago string.
 
-### get_date_range
+... and 6 more functions
 
-**Parameters:** start_date, end_date
+## Code Examples
 
-Get a list of datetimes for each day in a date range.
+### now
 
-### is_weekend
+```python
+def now() -> datetime:
+    """Get the current datetime."""
+    return datetime.now()
+```
 
-**Parameters:** dt
+### now_timestamp
 
-Check if a datetime falls on a weekend.
+```python
+def now_timestamp() -> float:
+    """Get the current Unix timestamp."""
+    return time.time()
+```
 
-### start_of_day
+### datetime_to_timestamp
 
-**Parameters:** dt
-
-Get the start of the day for a given datetime.
-
-### end_of_day
-
-**Parameters:** dt
-
-Get the end of the day for a given datetime.
-
-### time_between
-
-**Parameters:** start, end
-
-Calculate the time difference between two datetimes.
-
-... and 1 more functions
+```python
+def datetime_to_timestamp(dt: datetime) -> float:
+    """Convert a datetime to Unix timestamp."""
+    return dt.timestamp()
+```
 

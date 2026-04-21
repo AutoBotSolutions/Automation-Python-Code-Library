@@ -2,14 +2,10 @@
 
 **Path:** `SystemFunctions/Prompt.py`
 
+**Automation Type:** General Automation
 **Lines:** 21
-**Size:** 834 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid syntax (<unknown>, line 2)
+# Me # AI Assistant Prompt the user to enter something Print the text they typed ## Explanation:
 

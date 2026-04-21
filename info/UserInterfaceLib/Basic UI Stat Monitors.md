@@ -2,14 +2,14 @@
 
 **Path:** `UserInterfaceLib/Basic UI Stat Monitors.py`
 
+**Automation Type:** General Automation
 **Lines:** 88
-**Size:** 4139 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant Frame for stat monitors Monitor 1: CPU Usage Monitor 2: Memory Usage
 
-## Parse Error
+## Usage Pattern
 
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+Object-oriented - Provides classes and methods with standalone execution capability
 

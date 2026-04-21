@@ -2,14 +2,14 @@
 
 **Path:** `SystemFunctions/Confrim.py`
 
+**Automation Type:** General Automation
 **Lines:** 37
-**Size:** 1372 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant Hide the root window Display the confirmation dialog True if "Yes" is pressed, False if "No" is pressed Example usage: ## Explanation of the Code:
 
-## Parse Error
+## Usage Pattern
 
-unterminated string literal (detected at line 34) (<unknown>, line 34)
+Function-based - Provides reusable functions
 

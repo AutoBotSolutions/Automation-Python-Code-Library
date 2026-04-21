@@ -2,14 +2,18 @@
 
 **Path:** `UserInterfaceLib/Stop Run Pause Close.py`
 
+**Automation Type:** File Operations
 **Lines:** 98
-**Size:** 3940 bytes
 
-## Description
+## Purpose
 
-# Me
+Starts the main task in a new thread.
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+- File system manipulation
+
+## Usage Pattern
+
+Object-oriented - Provides classes and methods with standalone execution capability
 

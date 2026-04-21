@@ -2,14 +2,18 @@
 
 **Path:** `EmailCommands/Verify Emails.py`
 
+**Automation Type:** Email Automation
 **Lines:** 109
-**Size:** 3532 bytes
 
-## Description
+## Purpose
 
-# Me
+Add an email to the list.
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 96) (<unknown>, line 96)
+- Email sending/receiving
+
+## Usage Pattern
+
+Object-oriented - Provides classes and methods with standalone execution capability
 

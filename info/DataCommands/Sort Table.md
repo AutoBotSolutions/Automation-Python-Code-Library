@@ -2,14 +2,14 @@
 
 **Path:** `DataCommands/Sort Table.py`
 
+**Automation Type:** Database Operations
 **Lines:** 111
-**Size:** 3280 bytes
 
-## Description
+## Purpose
 
-## Example: Sorting a Table in Memory
+## Example: Sorting a Table in Memory Example table as a list of tuples Sort the table by the first column (id) Sort the table by the second column (name) Sort the table by the third column (age)
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 48) (<unknown>, line 48)
+- Database interaction
 

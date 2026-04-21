@@ -2,10 +2,22 @@
 
 **Path:** `BrowserFunction/proxy_support_initialize_driver.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 197
-**Size:** 12813 bytes
 
-## Imports
+## Purpose
+
+Initialize and return the Selenium WebDriver for Chromium.
+
+## Key Features
+
+- Web browser control
+
+## Usage Pattern
+
+Function-based - Provides reusable functions with standalone execution capability
+
+## Dependencies
 
 - `logging`
 - `os`
@@ -17,4 +29,11 @@
 ## Functions
 
 ### lanuch_initialize_driver
+
+## External APIs
+
+This script interacts with external services:
+- `https://chromedriver.chromium.org/`
+- `https://chromedriver.chromium.org/`
+- `http://whatismyipaddress.com/")`
 

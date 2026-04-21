@@ -2,14 +2,14 @@
 
 **Path:** `DataBaseCommands/Connect To SQL Sever.py`
 
+**Automation Type:** Database Operations
 **Lines:** 70
-**Size:** 2371 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Prerequisites ## Code Example Define your connection configuration Connection string to connect to SQL Server
 
-## Parse Error
+## Key Features
 
-invalid decimal literal (<unknown>, line 8)
+- Database interaction
 

@@ -2,14 +2,10 @@
 
 **Path:** `LogCommands/Log Establish.py`
 
+**Automation Type:** General Automation
 **Lines:** 53
-**Size:** 2031 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid character '’' (U+2019) (<unknown>, line 5)
+# Me # AI Assistant ## Setting Up Logging in Python Configure the logging Example usage
 

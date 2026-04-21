@@ -2,14 +2,19 @@
 
 **Path:** `BrowserCommands/Save Browser Image.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 56
-**Size:** 2063 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Code Example Set up Selenium Locate the image element by its XPath, CSS selector, or ID Download and save the image Close the driver
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
 

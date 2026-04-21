@@ -2,14 +2,14 @@
 
 **Path:** `SystemCommands/Delete File.py`
 
+**Automation Type:** File Operations
 **Lines:** 26
-**Size:** 657 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant Specify the file you want to delete Check if the file exists before deleting ## Key Points:
 
-## Parse Error
+## Key Features
 
-invalid character '’' (U+2019) (<unknown>, line 23)
+- File system manipulation
 

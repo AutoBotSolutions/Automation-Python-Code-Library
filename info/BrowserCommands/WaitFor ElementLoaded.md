@@ -2,14 +2,23 @@
 
 **Path:** `BrowserCommands/WaitFor ElementLoaded.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 61
-**Size:** 2165 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Code Example Initialize the WebDriver (replace "your_webdriver_path" with the actual WebDriver path) Open a webpage Wait for the element to be present in the DOM Wait for the element to be visible
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+- Web browser control
+
+## Usage Pattern
+
+Object-oriented - Provides classes and methods
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
 

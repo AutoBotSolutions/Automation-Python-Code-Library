@@ -2,14 +2,18 @@
 
 **Path:** `DataCommands/Insert Into Table.py`
 
+**Automation Type:** Database Operations
 **Lines:** 62
-**Size:** 1993 bytes
 
-## Description
+## Purpose
 
-# Me
+CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        age INTEGER NOT NULL
+    )
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Database interaction
 

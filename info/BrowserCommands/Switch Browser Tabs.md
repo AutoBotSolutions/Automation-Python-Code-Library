@@ -2,14 +2,21 @@
 
 **Path:** `BrowserCommands/Switch Browser Tabs.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 57
-**Size:** 2018 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Steps to Switch Browser Tabs in Selenium: ## Example Code (Python): Create a WebDriver instance Open the first tab Open a new tab or simulate opening a new tab Get the list of all current tabs
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
+- `https://www.google.com`
+- `https://www.python.org")`
 

@@ -2,14 +2,22 @@
 
 **Path:** `TextFunctions/Find Regex.py`
 
+**Automation Type:** Email Automation
 **Lines:** 127
-**Size:** 5367 bytes
 
-## Description
+## Purpose
 
-# Me
+Find all occurrences in the text that match the given regex pattern.
 
-## Parse Error
+    :param text: The input text to search for matches.
+    :param pattern: The regex pattern to search for.
+    :return: A list of all matched strings.
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+## Key Features
+
+- Email sending/receiving
+
+## Usage Pattern
+
+Function-based - Provides reusable functions with standalone execution capability
 

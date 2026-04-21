@@ -2,10 +2,10 @@
 
 **Path:** `DataFunctions/List Item.py`
 
+**Automation Type:** General Automation
 **Lines:** 7
-**Size:** 175 bytes
 
-## Description
+## Purpose
 
 Select an item by position (e.g., second item)
 

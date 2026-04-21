@@ -2,14 +2,18 @@
 
 **Path:** `EmailCommands/Return Body HTML.py`
 
+**Automation Type:** Email Automation
 **Lines:** 97
-**Size:** 3750 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Code Example: Connect to the email server and log in Select the mail folder (e.g., 'inbox') and search for emails Get the list of email IDs and retrieve the email at the desired position
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+- Email sending/receiving
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
 

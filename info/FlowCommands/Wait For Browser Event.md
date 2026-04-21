@@ -2,14 +2,23 @@
 
 **Path:** `FlowCommands/Wait For Browser Event.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 64
-**Size:** 2563 bytes
 
-## Description
+## Purpose
 
-# AI Assistant
+# AI Assistant ## Example: Waiting for a Specific Browser Event (e.g., an Element to Appear) Initialize the WebDriver Open a webpage Wait for an element to be visible on the page (timeout: 10 seconds)
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 6) (<unknown>, line 6)
+- Web browser control
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
+
+## External APIs
+
+This script interacts with external services:
+- `https://example.com")`
 

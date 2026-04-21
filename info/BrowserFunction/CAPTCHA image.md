@@ -2,14 +2,18 @@
 
 **Path:** `BrowserFunction/CAPTCHA image.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 65
-**Size:** 2111 bytes
 
-## Description
+## Purpose
 
-2captcha reCAPTCHA
+2captcha reCAPTCHA Initialize variables Initialize browser Wait for page to load Click reCAPTCHA checkbox Wait for challenge to load Get banner text
 
-## Imports
+## Key Features
+
+- Web browser control
+
+## Dependencies
 
 - `time`
 - `selenium.webdriver`
@@ -18,4 +22,9 @@
 - `PIL.Image`
 - `random`
 - `os`
+
+## External APIs
+
+This script interacts with external services:
+- `https://goo.gl")`
 

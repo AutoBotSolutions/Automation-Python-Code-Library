@@ -2,14 +2,19 @@
 
 **Path:** `BrowserCommands/Open Code In New Browser.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 37
-**Size:** 1156 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example Code Create a new instance of the Chrome WebDriver Open a URL in the new browser window Perform further actions (e.g., interact with page elements) Close the browser window after use ## Explanation
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 34) (<unknown>, line 34)
+- Web browser control
+
+## External APIs
+
+This script interacts with external services:
+- `https://www.example.com")`
 

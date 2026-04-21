@@ -2,14 +2,14 @@
 
 **Path:** `DataBaseCommands/Connect To MySQL db.py`
 
+**Automation Type:** Database Operations
 **Lines:** 86
-**Size:** 2693 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Steps to Connect to MySQL: Establish the connection
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Database interaction
 

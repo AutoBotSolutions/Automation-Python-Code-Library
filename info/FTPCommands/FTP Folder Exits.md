@@ -2,14 +2,14 @@
 
 **Path:** `FTPCommands/FTP Folder Exits.py`
 
+**Automation Type:** General Automation
 **Lines:** 45
-**Size:** 1661 bytes
 
-## Description
+## Purpose
 
-# Me
+Check if a folder exists on the FTP server.
 
-## Parse Error
+## Usage Pattern
 
-invalid syntax (<unknown>, line 2)
+Function-based - Provides reusable functions
 

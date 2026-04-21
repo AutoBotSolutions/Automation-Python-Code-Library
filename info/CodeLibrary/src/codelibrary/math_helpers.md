@@ -2,14 +2,22 @@
 
 **Path:** `CodeLibrary/src/codelibrary/math_helpers.py`
 
+**Automation Type:** HTTP Requests
 **Lines:** 112
-**Size:** 3332 bytes
 
-## Description
+## Purpose
 
 Mathematical computation helpers.
 
-## Imports
+## Key Features
+
+- Web API interaction
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
+
+## Dependencies
 
 - `math`
 - `typing.List`
@@ -78,9 +86,44 @@ Generate the first n Fibonacci numbers.
 
 Clamp a value between a minimum and maximum.
 
-### lerp
+... and 1 more functions
 
-**Parameters:** start, end, t
+## Code Examples
 
-Linear interpolation between two values.
+### mean
+
+```python
+def mean(numbers: List[float]) -> float:
+    """Calculate the arithmetic mean of a list of numbers."""
+    if not numbers:
+        raise ValueError("Cannot calculate mean of empty list")
+    return sum(numbers) / len(numbers)
+```
+
+### median
+
+```python
+def median(numbers: List[float]) -> float:
+    """Calculate the median of a list of numbers."""
+    if not numbers:
+        raise ValueError("Cannot calculate median of empty list")
+    sorted_numbers = sorted(numbers)
+    n = len(sorted_numbers)
+    mid = n // 2
+    if n % 2 == 0:
+        return (s
+```
+
+### mode
+
+```python
+def mode(numbers: List[float]) -> List[float]:
+    """Calculate the mode(s) of a list of numbers."""
+    if not numbers:
+        raise ValueError("Cannot calculate mode of empty list")
+    frequency = {}
+    for num in numbers:
+        frequency[num] = frequency.get(num, 0) + 1
+    max_freq = max(fr
+```
 

@@ -2,14 +2,19 @@
 
 **Path:** `DataCommands/Set Table Cell.py`
 
+**Automation Type:** General Automation
 **Lines:** 54
-**Size:** 1944 bytes
 
-## Description
+## Purpose
 
-# Me
+Sets the value of a specific cell in the table.
+    
+    :param table: The table represented as a list of lists.
+    :param row: The row index of the cell to update (0-based).
+    :param column: The column index of the cell to update (0-based).
+    :param value: The new value to set in the cell.
 
-## Parse Error
+## Usage Pattern
 
-unterminated string literal (detected at line 51) (<unknown>, line 51)
+Function-based - Provides reusable functions
 

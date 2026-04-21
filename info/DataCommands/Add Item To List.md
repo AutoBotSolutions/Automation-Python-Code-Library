@@ -2,14 +2,10 @@
 
 **Path:** `DataCommands/Add Item To List.py`
 
+**Automation Type:** General Automation
 **Lines:** 34
-**Size:** 663 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid syntax (<unknown>, line 2)
+# Me # AI Assistant ## Example: ## Explanation:
 

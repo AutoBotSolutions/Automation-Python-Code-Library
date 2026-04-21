@@ -2,14 +2,23 @@
 
 **Path:** `BrowserSettingsCommands/Set Proxy Credentials.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 100
-**Size:** 2563 bytes
 
-## Description
+## Purpose
 
-# Me
+background_js = f
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 1)
+- Web browser control
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
+
+## External APIs
+
+This script interacts with external services:
+- `http://www.google.com")`
 

@@ -2,14 +2,10 @@
 
 **Path:** `FTPCommands/FTP RenameFile.py`
 
+**Automation Type:** General Automation
 **Lines:** 47
-**Size:** 1274 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid syntax (<unknown>, line 2)
+# Me # AI Assistant Connect to the FTP server Rename the file Close the connection ## Explanation:
 

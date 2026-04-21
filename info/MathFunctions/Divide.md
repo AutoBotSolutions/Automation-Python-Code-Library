@@ -2,14 +2,10 @@
 
 **Path:** `MathFunctions/Divide.py`
 
+**Automation Type:** General Automation
 **Lines:** 25
-**Size:** 610 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant ## Explanation: ## Example: ## Example of Integer Division:
 

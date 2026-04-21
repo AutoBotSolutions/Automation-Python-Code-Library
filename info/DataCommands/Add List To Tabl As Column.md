@@ -2,14 +2,10 @@
 
 **Path:** `DataCommands/Add List To Tabl As Column.py`
 
+**Automation Type:** General Automation
 **Lines:** 42
-**Size:** 1049 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant ## Example Using `pandas` Example table (dataframe) List to add as a new column Adding the list as a new column ## Output
 

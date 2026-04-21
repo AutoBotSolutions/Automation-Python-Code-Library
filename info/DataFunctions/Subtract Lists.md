@@ -2,14 +2,10 @@
 
 **Path:** `DataFunctions/Subtract Lists.py`
 
+**Automation Type:** General Automation
 **Lines:** 73
-**Size:** 1769 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 21) (<unknown>, line 21)
+# Me # AI Assistant ## **1. Using List Comprehension** ## **2. Using `set` Data Structure**
 

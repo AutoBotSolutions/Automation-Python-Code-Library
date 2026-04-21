@@ -2,14 +2,14 @@
 
 **Path:** `SystemCommands/Create Folder.py`
 
+**Automation Type:** File Operations
 **Lines:** 26
-**Size:** 705 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant Specify the path where you want to create a folder Create the folder if it doesn't already exist ## Explanation:
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 23) (<unknown>, line 23)
+- File system manipulation
 

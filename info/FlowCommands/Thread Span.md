@@ -2,14 +2,18 @@
 
 **Path:** `FlowCommands/Thread Span.py`
 
+**Automation Type:** File Operations
 **Lines:** 40
-**Size:** 816 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant A task function to be executed in the thread Creating threads Starting threads Waiting for threads to finish (Thread Join - ensure completion of the span) Completion message
 
-## Parse Error
+## Key Features
 
-invalid syntax (<unknown>, line 2)
+- File system manipulation
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
 

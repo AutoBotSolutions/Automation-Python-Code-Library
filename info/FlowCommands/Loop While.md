@@ -2,14 +2,10 @@
 
 **Path:** `FlowCommands/Loop While.py`
 
+**Automation Type:** General Automation
 **Lines:** 23
-**Size:** 736 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid character '’' (U+2019) (<unknown>, line 5)
+# Me # AI Assistant Initialize the variable Loop while the variable is less than or equal to 50 ## How it works:
 

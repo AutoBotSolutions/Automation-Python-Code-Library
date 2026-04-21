@@ -2,14 +2,10 @@
 
 **Path:** `DataFunctions/List Total.py`
 
+**Automation Type:** General Automation
 **Lines:** 25
-**Size:** 1110 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid syntax (<unknown>, line 2)
+# Me # AI Assistant Creating a list called 'accounts' with 100 name entries Setting a variable `account_total` to the total number of items in the list 'accounts' Output the total to verify ## Explanation:
 

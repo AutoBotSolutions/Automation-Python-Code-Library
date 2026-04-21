@@ -2,14 +2,10 @@
 
 **Path:** `DataFunctions/Random List Item.py`
 
+**Automation Type:** General Automation
 **Lines:** 27
-**Size:** 977 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid syntax (<unknown>, line 2)
+# Me # AI Assistant Create a list called 'list_items' Select a random list item from 'list_items' Print the selected random item ## Explanation:
 

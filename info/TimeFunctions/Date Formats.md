@@ -2,14 +2,10 @@
 
 **Path:** `TimeFunctions/Date Formats.py`
 
+**Automation Type:** General Automation
 **Lines:** 96
-**Size:** 2982 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-invalid character '→' (U+2192) (<unknown>, line 11)
+# Me # AI Assistant ## Common Date Format Codes ### Year ### Month ### Day ### Time
 

@@ -2,14 +2,14 @@
 
 **Path:** `BrowserCommands/BrowserWaitForCondition.py`
 
+**Automation Type:** Browser Automation
 **Lines:** 98
-**Size:** 3126 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Explicit Wait with `WebDriverWait` ### Example: Assume 'driver' is a valid WebDriver instance Example: Wait until an element is visible Now safely interact with the element
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 7) (<unknown>, line 7)
+- Web browser control
 

@@ -2,14 +2,14 @@
 
 **Path:** `CustomFunctions/Delay Settings Timer.py`
 
+**Automation Type:** General Automation
 **Lines:** 103
-**Size:** 5751 bytes
 
-## Description
+## Purpose
 
 # AI Assistant
 
-## Parse Error
+## Usage Pattern
 
-invalid syntax (<unknown>, line 2)
+Function-based - Provides reusable functions
 

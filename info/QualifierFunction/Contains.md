@@ -2,14 +2,10 @@
 
 **Path:** `QualifierFunction/Contains.py`
 
+**Automation Type:** General Automation
 **Lines:** 33
-**Size:** 1323 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant Define the variable with some random text Define your query Check if the query is contained in the `contains` variable ## Explanation
 

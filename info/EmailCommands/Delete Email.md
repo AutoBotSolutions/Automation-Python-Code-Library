@@ -2,14 +2,14 @@
 
 **Path:** `EmailCommands/Delete Email.py`
 
+**Automation Type:** Email Automation
 **Lines:** 62
-**Size:** 2122 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Example Code: Delete Email via IMAP Email server credentials Connect to the server Select the mailbox you want to delete from (e.g., "inbox") Search for the email to delete (use a specific criteria or delete all) Example criteria: '(SUBJECT "specific subject")' Convert email IDs from bytes to string and split them into a list
 
-## Parse Error
+## Key Features
 
-invalid character '—' (U+2014) (<unknown>, line 50)
+- Email sending/receiving
 

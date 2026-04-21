@@ -2,14 +2,18 @@
 
 **Path:** `EmailCommands/Return Body.py`
 
+**Automation Type:** Email Automation
 **Lines:** 84
-**Size:** 3331 bytes
 
-## Description
+## Purpose
 
-# Me
+# Me # AI Assistant ## Code Implementation Connect to the email server Search for all emails in the mailbox Get the email IDs as a list
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+- Email sending/receiving
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
 

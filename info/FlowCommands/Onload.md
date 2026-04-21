@@ -2,14 +2,14 @@
 
 **Path:** `FlowCommands/Onload.py`
 
+**Automation Type:** General Automation
 **Lines:** 68
-**Size:** 2028 bytes
 
-## Description
+## Purpose
 
-## Example with **Tkinter**
+## Example with **Tkinter** Create the main window Set the window size Call the onload function after the window is initialized Run the application ## Explanation
 
-## Parse Error
+## Usage Pattern
 
-unterminated string literal (detected at line 1) (<unknown>, line 1)
+Object-oriented - Provides classes and methods
 

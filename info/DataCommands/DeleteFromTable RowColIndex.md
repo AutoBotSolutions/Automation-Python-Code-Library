@@ -2,14 +2,10 @@
 
 **Path:** `DataCommands/DeleteFromTable RowColIndex.py`
 
+**Automation Type:** General Automation
 **Lines:** 109
-**Size:** 2270 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant ## 1. Deleting a Row Sample table Deleting a specific row by index (e.g., the second row, index 1) Output ## 2. Deleting a Column
 

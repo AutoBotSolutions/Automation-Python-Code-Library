@@ -2,14 +2,10 @@
 
 **Path:** `DataFunctions/Common List Item.py`
 
+**Automation Type:** General Automation
 **Lines:** 34
-**Size:** 1066 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant ## Using Set Intersection Find common items ## Using List Comprehension Find common items ## Explanation
 

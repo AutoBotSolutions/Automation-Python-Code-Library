@@ -2,14 +2,14 @@
 
 **Path:** `FileCommands/ReadFile ToVariable.py`
 
+**Automation Type:** File Operations
 **Lines:** 36
-**Size:** 1873 bytes
 
-## Description
+## Purpose
 
-## Generic Example for Reading and Printing a File //////////////////////////////////////////////////////#
+## Generic Example for Reading and Printing a File //////////////////////////////////////////////////////# Define the path of the file Open the file in read mode //////////////////////////////////////////////////////# ## Explanation:
 
-## Parse Error
+## Key Features
 
-unterminated string literal (detected at line 35) (<unknown>, line 35)
+- File system manipulation
 

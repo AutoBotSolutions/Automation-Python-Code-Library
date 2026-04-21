@@ -2,14 +2,10 @@
 
 **Path:** `DataCommands/Increment & Decrement.py`
 
+**Automation Type:** General Automation
 **Lines:** 55
-**Size:** 1564 bytes
 
-## Description
+## Purpose
 
-# Me
-
-## Parse Error
-
-unterminated string literal (detected at line 5) (<unknown>, line 5)
+# Me # AI Assistant ## Increment Increment Increment by more than 1 ## Decrement Decrement
 

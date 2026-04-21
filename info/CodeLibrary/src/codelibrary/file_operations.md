@@ -2,14 +2,22 @@
 
 **Path:** `CodeLibrary/src/codelibrary/file_operations.py`
 
+**Automation Type:** File Operations
 **Lines:** 76
-**Size:** 2176 bytes
 
-## Description
+## Purpose
 
 File system utilities.
 
-## Imports
+## Key Features
+
+- File system manipulation
+
+## Usage Pattern
+
+Function-based - Provides reusable functions
+
+## Dependencies
 
 - `os`
 - `shutil`
@@ -79,15 +87,31 @@ Move a file from source to destination.
 
 Read a file and return its lines as a list.
 
-### write_file_lines
+... and 2 more functions
 
-**Parameters:** path, lines, encoding
+## Code Examples
 
-Write lines to a file.
+### ensure_directory
 
-### get_absolute_path
+```python
+def ensure_directory(path: str) -> None:
+    """Ensure a directory exists, creating it if necessary."""
+    Path(path).mkdir(parents=True, exist_ok=True)
+```
 
-**Parameters:** path
+### get_file_size
 
-Get the absolute path from a relative or absolute path.
+```python
+def get_file_size(path: str) -> int:
+    """Get the size of a file in bytes."""
+    return os.path.getsize(path)
+```
+
+### get_file_extension
+
+```python
+def get_file_extension(path: str) -> str:
+    """Get the file extension from a path."""
+    return Path(path).suffix.lower()
+```
 
