@@ -1,0 +1,245 @@
+define $MultiFollowFunctionTwo(#RunFollowFunctionTwo) {
+    thread {
+        AppRunningModule(#RunAppRunningModule)
+        set(#ActiveFunction,$plugin function("HTTP post.dll", "$http get", "http://app.tracking.softwareautomation.org/appstats/piwik.php?&idsite=1&rec=1&_id={#session_id}&rand={#anti_cache}&apiv=1&action_name=[Running Succession Module Function] Follow Function Activated&url=http://app.tracking.org", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0", "", "", 20),"Global")
+    }
+    set(#FollowColor,"#ffff00","Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CLEARING SCRAPE LIST, RESETTING QUEUE - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("Bigtable.dll", "Clear large list", "advanced_follow_scrape")
+    set(#follow_queue,0,"Global")
+    set(#ran_keyword,$spin($plugin function("Bigtable.dll", "Random Large list item", "keywords", "Dont Remove")),"Global")
+    set(#ran_keyword,$replace(#ran_keyword,"#",""),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - THE BOT IS SEARCHING FOR THE KEYWORD [{#ran_keyword}] - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/explore/tags/{#ran_keyword}/")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[1]/h2", "Appear", 5)
+    NavigateFallBackMethod(#RunNavigateFallBackMethod)
+    if($comparison(#top_posts,"= Equals","REMOVE")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - REMOVE TOP POST OPTION SELECTED - REMOVING POPULAR POSTS - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            comment("REMOVES Top Posts OR Populare posts on user request")
+            plugin command("ExBrowser.dll", "ExBrowser Change Attribute", "x://span[@id=\"react-root\"]/section/main/article/div[1]/div", "innertext", "")
+        }
+    }
+    set(#scrape_failed,0,"Global")
+    set(#loop_breakout,0,"Global")
+    CloseInfoBox(#RunCloseInfoBox)
+}
+define $MultiFollowFunctionThree(#RunFollowFunctionThree) {
+    plugin command("Bigtable.dll", "large List from Regex", "advanced_follow_scrape", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!<a\\shref=\"\\/p\\/)[A-Z_a-z0-9]\{9,14\}(?=\\/\\?tagged=)", "add")
+    plugin command("Bigtable.dll", "Large list Remove duplicates", "advanced_follow_scrape")
+    if($comparison($plugin function("Bigtable.dll", "Large list total", "advanced_follow_scrape"),">= Greater than or equal to",$add(#follow_per_tag,10))) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - FOLLOW BOT SCRAPE SUCCESS - TRIGGERING LOOP BREAKOUT - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#loop_breakout,1,"Global")
+        }
+        else if($comparison($plugin function("Bigtable.dll", "Large list total", "advanced_follow_scrape"),"= Equals",0)) {
+            increment(#scrape_failed)
+            if($comparison(#scrape_failed,">= Greater than or equal to",3)) {
+                then {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - FOLLOW BOT SCRAPE FAILED - TRIGGERING LOOP BREAKOUT - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    set(#loop_breakout,1,"Global")
+                }
+            }
+        }
+    }
+    set(#follow_queue,$plugin function("Bigtable.dll", "Large list total", "advanced_follow_scrape"),"Global")
+    plugin command("ExBrowser.dll", "ExBrowser Scroll Browser", 10000, 10000)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[3]/div", "Appear", 3)
+    if($comparison($plugin function("Bigtable.dll", "Large list total", "advanced_follow_scrape"),"= Equals",$nothing)) {
+        then {
+            thread {
+                AppListScrapeingFailed(#RunAppListScrapeingFailed)
+            }
+        }
+    }
+}
+define $MultiFollowFunctionFour(#RunFollowFunctionFour) {
+    if($comparison(#RandomizeScrapeList,"= Equals","YES")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - RANDOMIZE SCRAPED LIST OPTION SELECTED - RANDOMIZING LIST - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Bigtable.dll", "Add Large list to list", "randomized_list", "advanced_follow_scrape")
+            set(#position,0,"Global")
+            loop($plugin function("Bigtable.dll", "Large list total", "randomized_list")) {
+                set(#random_list_item,$plugin function("Bigtable.dll", "Random Large list item", "randomized_list", "Dont Remove"),"Global")
+                set(#position,0,"Global")
+                plugin command("Bigtable.dll", "large List from text", "temp_list", #random_list_item, $new line, "add")
+                loop($plugin function("Bigtable.dll", "Large list total", "randomized_list")) {
+                    if($comparison($plugin function("Bigtable.dll", "Large list item", "randomized_list", #position),"=",#random_list_item)) {
+                        then {
+                            plugin command("Bigtable.dll", "Large list Remove item", "randomized_list", #position)
+                            decrement(#position)
+                        }
+                    }
+                    increment(#position)
+                }
+            }
+            plugin command("Bigtable.dll", "Clear large list", "randomized_list")
+            plugin command("Bigtable.dll", "Add Large list to list", "advanced_follow_scrape", "temp_list")
+            plugin command("Bigtable.dll", "Clear large list", "temp_list")
+        }
+    }
+    divider
+    set(#bottom_list_pos,$plugin function("Bigtable.dll", "Large list total", "advanced_follow_scrape"),"Global")
+    set(#bottom_list_pos,$subtract($plugin function("Bigtable.dll", "Large list total", "advanced_follow_scrape"),1),"Global")
+    if($comparison($plugin function("Bigtable.dll", "Large list total", "advanced_follow_scrape"),">",#follow_per_tag)) {
+        then {
+            loop while($comparison(#follow_per_tag,"!=",$plugin function("Bigtable.dll", "Large list total", "advanced_follow_scrape"))) {
+                plugin command("Bigtable.dll", "Large list Remove item", "advanced_follow_scrape", #bottom_list_pos)
+                decrement(#bottom_list_pos)
+                set(#follow_queue,$plugin function("Bigtable.dll", "Large list total", "advanced_follow_scrape"),"Global")
+            }
+        }
+    }
+    set(#adv_follow_scrape_pos,0,"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - FOLLOW BOT SCRAPE QUEUE TOTAL = [{#follow_queue}] - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    CloseInfoBox(#RunCloseInfoBox)
+}
+define $MultiFollowFunctionFive(#RunFollowFunctionFive) {
+    CloseInfoBox(#RunCloseInfoBox)
+    set(#post_id,$plugin function("Bigtable.dll", "Large list item", "advanced_follow_scrape", #adv_follow_scrape_pos),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SENDING BROWSER REQUEST TO POST ID: [{#post_id}] KEYWORD: [{#ran_keyword}] - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/p/{#post_id}/?tagged={#ran_keyword}")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://a[@role=\"button\"]", "Appear", 5)
+    set(#RunDontFollow,$DontFollowBlacklist(#RunDontFollow),"Global")
+    set(#get_follow_cell,$plugin function("Advanced Data Text File.dll", "$table cell get", &statistics, #FollowRow, 3),"Global")
+    set(#RunInstagramErrorHandeling,$InstagramErrorHandeling(#RunInstagramErrorHandeling),"Global")
+    set(#RunAutoClaculateRatio,$AutoRatioCalculator(#RunAutoClaculateRatio),"Global")
+    set(#RunBioLinkedAccountsSkip,$BioLinkedAccountsSkip(#RunBioLinkedAccountsSkip),"Global")
+    if($comparison(#get_follow_cell,"< Less than",#DisableFollowing)) {
+        then {
+            if($comparison(#skip_user,"= Equals",0)) {
+                then {
+                    if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),">Following<"))) {
+                        then {
+                            plugin command("Bigtable.dll", "Clear large list", "target_user")
+                            plugin command("Bigtable.dll", "large List from Regex", "target_user", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!\",\"username\":\")[A-Za-z.0-9_-]+(?=\",\"blocked)", "add")
+                            plugin command("Bigtable.dll", "Large list Remove duplicates", "target_user")
+                            if($comparison($plugin function("Bigtable.dll", "Large list item", "target_user", 0),"!= Does not equal",$nothing)) {
+                                then {
+                                    set(#target_user,$plugin function("Bigtable.dll", "Large list item", "target_user", 0),"Global")
+                                }
+                            }
+                            set(#run_master_delay,$master_delay_timers(#run_master_delay),"Global")
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SENDING FOLLOW REQUEST TO USER: [{#target_user}] - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                            FollowButtonClick(#RunFollowButtonClick)
+                            if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),">Following<"))) {
+                                comment("wait with wait loop breakout")
+                                then {
+                                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - WAITING FOR FOLLOW REQUEST TO COMPLETE! - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                    set(#wait_breakout,0,"Global")
+                                    set(#wait_trigger,0,"Global")
+                                    loop while($comparison(#wait_trigger,"= Equals",0)) {
+                                        wait(0.1)
+                                        increment(#wait_breakout)
+                                        if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),">Following<")) {
+                                            then {
+                                                set(#wait_trigger,1,"Global")
+                                            }
+                                            else if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+                                                increment(#wait_trigger)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),">Following<")) {
+                                then {
+                                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - THE SOFTWARE HAS SUCCESSFULLY FOLLOWD THE USER: [{#target_user}] - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                    decrement(#follow_queue)
+                                    increment(#follow_counter)
+                                    increment(#AllFunctionCounter)
+                                    set(#FollowsActive,1,"Global")
+                                    set(#RunSuccessionStatistics,$SuccessionStatistics(#RunSuccessionStatistics),"Global")
+                                    set(#FollowsActive,0,"Global")
+                                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - QUEUE AFTER ACTION COMPLETE TOTAL = [{#follow_queue}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - FOLLOW BOT SESSION FOLLOWED USER TOTAL = [{#follow_counter}] - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                    increment(#master_delay_trigger)
+                                    set(#RunSuccessionStopConfig,$SuccessionStopConfig(#RunSuccessionStopConfig),"Global")
+                                }
+                                else {
+                                    thread {
+                                        AppFollowButtonPushFailed(#RunAppFollowButtonPushFailed)
+                                    }
+                                }
+                            }
+                            set(#run_delay_after,$delay_after_action(#run_delay_after),"Global")
+                        }
+                        else {
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - YOUR ALREADY FOLLING THIS USER, SKIPING TO NEXT USER IN LIST - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    increment(#adv_follow_scrape_pos)
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+    if($comparison(#follow_counter,">= Greater than or equal to",#stop_bot_at)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SOFTWARE STOP CRITERIA HAS BEEN MET, STOPPING THE FOLLOW BOT - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            stop script
+        }
+    }
+}
+define $MultiFollowFunctionSix(#RunFollowFunctionSix) {
+    if($comparison(#keyword_file_pos,">= Greater than or equal to",$plugin function("Bigtable.dll", "Large list total", "keywords"))) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - KEYWORD FILE PROCESSING COMPLETE, RESETTING KEYWORD LIST BACK TO TOP OF LIST - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#keyword_file_pos,0,"Global")
+        }
+    }
+    set(#FollowColor,"#d9d9d9","Global")
+    if($comparison(#EnableAccountRotation,"= Equals","YES")) {
+        then {
+            set(#RunSuccessionAccountRotation,$SuccessionAccountRotation(#RunSuccessionAccountRotation),"Global")
+        }
+    }
+    CloseInfoBox(#RunCloseInfoBox)
+}

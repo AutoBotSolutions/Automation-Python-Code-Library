@@ -1,0 +1,413 @@
+define $InstagramErrorHandeling(#RunInstagramErrorHandeling) {
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),">Go back to Instagram.<")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PAGE ERROR HANDELING ACTIVATED - RESENDING REQUEST - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PAGE ERROR HANDELING ACTIVATED PLEASE CLEAN KEYWORD LIST - RESENDING REQUEST - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#skip_user,1,"Global")
+            thread {
+                BackToInstagram(#RunBackToInstagram)
+            }
+        }
+    }
+}
+define Advanced Skip Trigger(#AdvancedSkipTrigger) {
+    if($comparison(#skip_user,"!= Does not equal",1)) {
+        then {
+            set(#LetItRun,0,"Global")
+            if($comparison(#advanced_skip,"!= Does not equal","")) {
+                then {
+                    set(#LetItRun,1,"Global")
+                }
+                else if($comparison(#SkipIfTaggedWithThis,"!= Does not equal","")) {
+                    set(#LetItRun,1,"Global")
+                }
+                else if($comparison(#SkipNopostsyet,"= Equals","YES")) {
+                    set(#LetItRun,1,"Global")
+                }
+                else if($comparison(#SkipNopostsyet,"= Equals","YES")) {
+                    set(#LetItRun,1,"Global")
+                }
+                else if($comparison(#SkipnonEnglishSpeaking,"= Equals","YES")) {
+                    set(#LetItRun,1,"Global")
+                }
+            }
+            set(#skip_user,0,"Global")
+            if($comparison(#LetItRun,"= Equals",1)) {
+                then {
+                    comment("ADVANCED SKIP OPTIONS START HERE!")
+                    if($comparison(#advanced_skip,"= Equals","(Current Month) Skip If Not Contains")) {
+                        then {
+                            set(#skip_date,$plugin function("DateTime Manipulation.dll", "$datetime manipulation", $date, "UBOT", "Long date", "en-US", "en-US"),"Global")
+                            set(#skip_date,$find regular expression(#skip_date,"(?![A-Za-z]+,\\s)[A-Za-z]+(?=\\s\\d+,\\s\\d+)"),"Global")
+                            if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),#skip_date))) {
+                                then {
+                                    comment("SKIP IF NOT CONTAINS CURRENT MONTH")
+                                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SKIPPING POST NOT CONTAINS CURRENT [MONTH] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                    set(#skip_user,1,"Global")
+                                }
+                            }
+                        }
+                    }
+                    if($comparison(#advanced_skip,"= Equals","(Minutes) Skip If Not Contains")) {
+                        then {
+                            if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"minutes"))) {
+                                then {
+                                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SKIPPING POST NOT CONTAINS [MINUETS] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                    comment("SKIP IF NOT CONTAINS MINUETS")
+                                    set(#skip_user,1,"Global")
+                                }
+                            }
+                        }
+                    }
+                    if($comparison(#advanced_skip,"= Equals","(Seconds) Skip If Not Contains")) {
+                        then {
+                            if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"seconds"))) {
+                                then {
+                                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SKIPPING POST NOT CONTAINS [SECONDS] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                    comment("SKIP IF NOT CONTAINS SECONDS")
+                                    set(#skip_user,1,"Global")
+                                }
+                            }
+                        }
+                    }
+                    if($comparison(#SkipIfTaggedWithThis,"!= Does not equal","")) {
+                        then {
+                            comment("IF DOCUMENT CONTAINS DEFINED TAG THEN SKIP")
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SKIP IF NOT TAGGED WITH OPTION ACTIVATED - TAGGED SKIP OPTION - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                            plugin command("Bigtable.dll", "large List from text", "SkipIfTaggedWith", #SkipIfTaggedWithThis, ",", "replace")
+                            set(#SkipIfTaggedWithPos,0,"Global")
+                            loop($plugin function("Bigtable.dll", "Large list total", "SkipIfTaggedWith")) {
+                                if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),$plugin function("Bigtable.dll", "Large list item", "SkipIfTaggedWith", #SkipIfTaggedWithPos))) {
+                                    then {
+                                        set(#skip_user,1,"Global")
+                                    }
+                                }
+                                increment(#SkipIfTaggedWithPos)
+                            }
+                        }
+                    }
+                    if($both($comparison(#SkipPrivateAccount,"= Equals","YES"),$comparison(#skip_user,"!= Does not equal",1))) {
+                        then {
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SKIP IF ACCOUNT IS PRIVATE OPTION ACTIVATED - USER SKIP OPTION - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                            set(#skip_user,0,"Global")
+                            comment("SKIP PRIVATE ACCOUNTS")
+                            if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"This Account is Private")) {
+                                then {
+                                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ACCOUNT IS PRIVATE SKIPPING USER - BIO SKIP OPTION - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                    set(#skip_user,1,"Global")
+                                }
+                            }
+                        }
+                    }
+                    if($both($comparison(#SkipNopostsyet,"= Equals","YES"),$comparison(#skip_user,"!= Does not equal",1))) {
+                        then {
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SKIP IF ACCOUNT HAS NO POSTS OPTION ACTIVATED - USER SKIP OPTION - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                            set(#skip_user,0,"Global")
+                            comment("SKIP ACCOUNT WITH NO POSTS")
+                            if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"No posts yet")) {
+                                then {
+                                    set(#skip_user,1,"Global")
+                                }
+                            }
+                        }
+                    }
+                    if($both($comparison(#SkipnonEnglishSpeaking,"= Equals","YES"),$comparison(#skip_user,"!= Does not equal",1))) {
+                        then {
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SKIP IF ACCOUNT IS NON ENGLISH OPTION ACTIVATED - BIO SKIP OPTION - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                            set(#skip_user,0,"Global")
+                            plugin command("Bigtable.dll", "Clear large list", "NonEnglishScrape")
+                            set(#NONASCII,$nothing,"Global")
+                            set(#NONENGLISH,$nothing,"Global")
+                            plugin command("Bigtable.dll", "large List from Xpath", "NonEnglishScrape", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "//span[@id=\"react-root\"]/section/main/article/header/section/div[2]/span/span", "replace")
+                            set(#NONASCII,$find regular expression($plugin function("Bigtable.dll", "Large list item", "NonEnglishScrape", 0),"[^\\u0000-\\u0080]+"),"Global")
+                            set(#NONENGLISH,$find regular expression(#NONASCII,"\\w"),"Global")
+                            if($comparison(#NONENGLISH,"!= Does not equal",$nothing)) {
+                                then {
+                                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - NON ENGLISH SPEAKING USERS DETECTED - SKIPPING USERS - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                    set(#skip_user,1,"Global")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+define $BioLinkedAccountsSkip(#RunBioLinkedAccountsSkip) {
+    if($comparison(#skip_user,"!= Does not equal",1)) {
+        then {
+            set(#skip_user,0,"Global")
+            if($comparison(#SkipBioLinkAccounts,"= Equals","YES")) {
+                then {
+                    comment("IF BIO CONTAINS LINK THEN SKIP CODE")
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BIO SKIP OPTION ACTIVATED! - BIO SKIP OPTION - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://span[@id=\"react-root\"]/section/main/div/div/article/header/div[2]/div[1]/div[1]")) {
+                        then {
+                            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/div/div/article/header/div[2]/div[1]/div[1]")
+                        }
+                    }
+                    if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"following"))) {
+                        comment("wait with wait loop breakout")
+                        then {
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - WAITING FOR BIO SKIP OPTION REQUEST TO COMPLETE! - BIO SKIP OPTION - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                            set(#wait_breakout,0,"Global")
+                            set(#wait_trigger,0,"Global")
+                            loop while($comparison(#wait_trigger,"= Equals",0)) {
+                                wait(0.1)
+                                increment(#wait_breakout)
+                                if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"following")) {
+                                    then {
+                                        set(#wait_trigger,1,"Global")
+                                    }
+                                    else if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+                                        increment(#wait_trigger)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    plugin command("Bigtable.dll", "Clear large list", "bioScrapeOne")
+                    plugin command("Bigtable.dll", "Clear large list", "bioScrapeTwo")
+                    set(#url1,$nothing,"Global")
+                    set(#url2,$nothing,"Global")
+                    plugin command("Bigtable.dll", "large List from Xpath", "bioScrapeOne", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "//span[@id=\"react-root\"]/section/main/article/header/section/div[2]/span/span", "replace")
+                    plugin command("Bigtable.dll", "large List from Xpath", "bioScrapeTwo", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "//span[@id=\"react-root\"]/section/main/article/header/section/div[2]/a", "replace")
+                    set(#url1,$plugin function("Bigtable.dll", "Large list return", "bioScrapeOne"),"Global")
+                    set(#url2,$plugin function("Bigtable.dll", "Large list return", "bioScrapeTwo"),"Global")
+                    if($comparison($find regular expression(#url1,"(http|https)\\:\\/\\/(www\\.|)[a-zA-Z0-9\\-\\.]+\\.[a-zA-Z]\{2,4\}(\\.[a-zA-Z]\{2,4\}|)(\\/[\\w\\.\\?\\=\\+\\/\\#\\%\\&\\-]+|\\/|)"),"!=",$nothing)) {
+                        then {
+                            comment("Skips If Bio Contains Link")
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BIO LINK FOUND - SKIPPING FOLLOW REQUEST - BIO SKIP OPTION - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                            set(#skip_user,1,"Global")
+                        }
+                    }
+                    if($comparison($find regular expression(#url2,"(http|https)\\:\\/\\/(www\\.|)[a-zA-Z0-9\\-\\.]+\\.[a-zA-Z]\{2,4\}(\\.[a-zA-Z]\{2,4\}|)(\\/[\\w\\.\\?\\=\\+\\/\\#\\%\\&\\-]+|\\/|)"),"!=",$nothing)) {
+                        then {
+                            comment("Skips If Bio Contains Link")
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BIO LINK FOUND - SKIPPING FOLLOW REQUEST - BIO SKIP OPTION - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                            set(#skip_user,1,"Global")
+                        }
+                    }
+                    if($comparison(#AutoFollowColor,"!= Does not equal","#ffff00")) {
+                        then {
+                            plugin command("ExBrowser.dll", "ExBrowser NavigateBack")
+                            if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Add a comment"))) {
+                                comment("wait with wait loop breakout")
+                                then {
+                                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - WAITING FOR BIO SKIP OPTION REQUEST TO COMPLETE! - BIO SKIP OPTION - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                    set(#wait_breakout,0,"Global")
+                                    set(#wait_trigger,0,"Global")
+                                    loop while($comparison(#wait_trigger,"= Equals",0)) {
+                                        wait(0.1)
+                                        increment(#wait_breakout)
+                                        if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Add a comment")) {
+                                            then {
+                                                set(#wait_trigger,1,"Global")
+                                            }
+                                            else if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+                                                increment(#wait_trigger)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+define $AutoRatioCalculator(#RunAutoClaculateRatio) {
+    if($comparison(#skip_user,"!= Does not equal",1)) {
+        then {
+            set(#skip_user,0,"Global")
+            set(#LetRun,0,"Global")
+            if($comparison(#FollowGreaterThen,"!= Does not equal","X")) {
+                then {
+                    set(#LetRun,1,"Global")
+                }
+            }
+            if($comparison(#FollowLessThen,"!= Does not equal","X")) {
+                then {
+                    set(#LetRun,1,"Global")
+                }
+            }
+            if($comparison(#FollowEqualTo,"!= Does not equal","X")) {
+                then {
+                    set(#LetRun,1,"Global")
+                }
+            }
+            if($comparison(#LetRun,"= Equals",1)) {
+                then {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ACCOUNT RATIO OPTION ACTIVATED - RATIO REQUEST - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    plugin command("ExBrowser.dll", "ExBrowser Wait For Dom Ready", 10)
+                    plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/div/div/article/header/div[2]/div[1]/div[1]")
+                    if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Options"))) {
+                        comment("wait with wait loop breakout")
+                        then {
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - WAITING FOR RATIO CALCULATION TO COMPLETE! - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                            set(#wait_breakout,0,"Global")
+                            set(#wait_trigger,0,"Global")
+                            loop while($comparison(#wait_trigger,"= Equals",0)) {
+                                wait(0.1)
+                                increment(#wait_breakout)
+                                if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Options")) {
+                                    then {
+                                        set(#wait_trigger,1,"Global")
+                                    }
+                                    else if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+                                        increment(#wait_trigger)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/header/section/ul", "Appear", 5)
+                    plugin command("Bigtable.dll", "large List from Regex", "Ratio Followers Scrape", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!title=\")[,0-9]+(?=\">[m,0-9.k]+<\\/span>\\s+followers)", "replace")
+                    plugin command("Bigtable.dll", "large List from Regex", "Ratio Following Scrape", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!\\s\">)[.0-9,]+(?=<\\/span>\\sfollowing)", "replace")
+                    set(#Followers,$plugin function("Bigtable.dll", "Large list item", "Ratio Followers Scrape", 0),"Global")
+                    set(#Following,$plugin function("Bigtable.dll", "Large list item", "Ratio Following Scrape", 0),"Global")
+                    set(#Ratio,$divide(#Followers,#Following),"Global")
+                    set(#div,$divide(#Followers,#Following),"Global")
+                    set(#Ratio,$eval("Math.round( {#Ratio} * 10 ) / 10;"),"Global")
+                    if($comparison(#FollowGreaterThen,"!= Does not equal","X")) {
+                        then {
+                            if($comparison(#FollowGreaterThen,"> Greater than",#Ratio)) {
+                                then {
+                                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                                    run javascript("textarea_id.value += \"{#time} - RATIO - FOLLOWERS = {#Followers} FOLLOWING = {#Following} , {#Followers} ÷ {#Following} (x) = [{#Ratio}] ACCOUNT RATIO = ({#Ratio}) FOLLOWING USER - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                }
+                                else {
+                                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                                    run javascript("textarea_id.value += \"{#time} - RATIO - FOLLOWERS = {#Followers} FOLLOWING = {#Following} , {#Followers} ÷ {#Following} (x) = [{#Ratio}] ACCOUNT RATIO = ({#Ratio}) SKIPING USER - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                    set(#skip_user,1,"Global")
+                                }
+                            }
+                        }
+                    }
+                    if($comparison(#FollowLessThen,"!= Does not equal","X")) {
+                        then {
+                            if($comparison(#FollowLessThen,"< Less than",#Ratio)) {
+                                then {
+                                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                                    run javascript("textarea_id.value += \"{#time} - RATIO - FOLLOWERS = {#Followers} FOLLOWING = {#Following} , {#Followers} ÷ {#Following} (x) = [{#Ratio}] ACCOUNT RATIO = ({#Ratio}) FOLLOWING USER - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                }
+                                else {
+                                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                                    run javascript("textarea_id.value += \"{#time} - RATIO - FOLLOWERS = {#Followers} FOLLOWING = {#Following} , {#Followers} ÷ {#Following} (x) = [{#Ratio}] ACCOUNT RATIO = ({#Ratio}) SKIPING USER - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                    set(#skip_user,1,"Global")
+                                }
+                            }
+                        }
+                    }
+                    if($comparison(#FollowEqualTo,"!= Does not equal","X")) {
+                        then {
+                            if($comparison(#FollowEqualTo,"= Equals",#Ratio)) {
+                                then {
+                                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                                    run javascript("textarea_id.value += \"{#time} - RATIO - FOLLOWERS = {#Followers} FOLLOWING = {#Following} , {#Followers} ÷ {#Following} (x) = [{#Ratio}] ACCOUNT RATIO = ({#Ratio}) FOLLOWING USER - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                }
+                                else {
+                                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                                    run javascript("textarea_id.value += \"{#time} - RATIO - FOLLOWERS = {#Followers} FOLLOWING = {#Following} , {#Followers} ÷ {#Following} (x) = [{#Ratio}] ACCOUNT RATIO = ({#Ratio}) SKIPING USER - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                    set(#skip_user,1,"Global")
+                                }
+                            }
+                        }
+                    }
+                    plugin command("ExBrowser.dll", "ExBrowser NavigateBack")
+                    if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"More options"))) {
+                        comment("wait with wait loop breakout")
+                        then {
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - WAITING FOR RATIO CALCULATION TO COMPLETE! - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                            set(#wait_breakout,0,"Global")
+                            set(#wait_trigger,0,"Global")
+                            loop while($comparison(#wait_trigger,"= Equals",0)) {
+                                wait(0.1)
+                                increment(#wait_breakout)
+                                if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"More options")) {
+                                    then {
+                                        set(#wait_trigger,1,"Global")
+                                    }
+                                    else if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+                                        increment(#wait_trigger)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

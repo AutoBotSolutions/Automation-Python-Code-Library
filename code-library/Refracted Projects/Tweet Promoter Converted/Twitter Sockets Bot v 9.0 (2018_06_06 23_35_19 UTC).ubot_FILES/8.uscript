@@ -1,0 +1,381 @@
+plugin command("LocalDictionary.dll", "clear global dictionary")
+clear table(&proxies)
+clear table(&accounts)
+clear list(%user_followers)
+ui stat monitor(#accounts_loaded, "<br />")
+ui button("Load Accounts") {
+    load_accounts(#load_accounts)
+}
+define load_accounts(#load_accounts) {
+    set(#account_file, $plugin function("Advanced Dialog.dll", "$open file dialog", "CSV File |*.csv", $special folder("Desktop")), "Global")
+    if($comparison(#account_file, "!=", $nothing)) {
+        then {
+            set(#accounts_loaded, "<font color=\"black\"><strong>Accounts Loaded</strong></font>", "Global")
+        }
+        else if($comparison(#account_file, "=", $nothing)) {
+            alert("Account loading failed, please try again.")
+            stop script
+        }
+    }
+}
+ui stat monitor(#proxies_loaded, "<br />")
+ui button("Load Proxies <font color=\"#D8D8D8\">..</font>") {
+    load_proxies(#load_proxies)
+}
+define load_proxies(#load_proxies) {
+    set(#proxy_file, $plugin function("Advanced Dialog.dll", "$open file dialog", "CSV File |*.csv", $special folder("Desktop")), "Global")
+    if($comparison(#proxy_file, "!=", $nothing)) {
+        then {
+            set(#proxies_loaded, "<font color=\"black\"><strong>Proxies Loaded</strong></font>", "Global")
+        }
+        else if($comparison(#proxy_file, "=", $nothing)) {
+            alert("Proxy loading failed, please try again.")
+            stop script
+        }
+    }
+}
+ui stat monitor(#usernames_loaded, "<br />")
+ui button("Load Usernames") {
+    load_usernames(#load_usernames)
+}
+define load_usernames(#load_usernames) {
+    set(#action_usernames, $plugin function("Advanced Dialog.dll", "$multiple select files dialog", "TXT |*.txt", $special folder("Desktop")), "Global")
+    add list to list(%action_usernames, $list from file(#action_usernames), "Delete", "Global")
+    set(#action_usernames_pos, 0, "Global")
+    set list position(%action_usernames, #action_usernames_pos)
+    if($comparison(#action_usernames, "!=", $nothing)) {
+        then {
+            set(#usernames_loaded, "<font color=\"black\"><strong>Usernames Loaded</strong></font>", "Global")
+        }
+        else if($comparison(#action_usernames, "=", $nothing)) {
+            alert("Username loading failed, please try again.")
+            stop script
+        }
+    }
+}
+if($comparison(#num_accounts, "=", $nothing)) {
+    then {
+        alert("Please enter a number into the box called \"No. Accounts To Run\".")
+        stop script
+    }
+}
+if($both($comparison(#get_followers, "=", $false), $comparison(#get_following, "=", $false))) {
+    then {
+        alert("Please check one of the boxes called \"Get Followers\" or \"Get Following\".")
+        stop script
+    }
+}
+ui text box("Number To Scrape", #num_to_scrape)
+ui text box("No. Accounts To Run", #num_accounts)
+ui stat monitor(#selected_folder, "<br />")
+ui button("Select Save Folder") {
+    select_save_folder(#select_save_folder)
+}
+ui text box("Master Delay - Seconds", #master_delay)
+ui text box("Run When Complete", #run_when_complete)
+ui stat monitor("Accounts\\Threads : ", #sync_keeper)
+ui drop down("Random Wait .1", "0,1,3,9,15,21,27,33,39,45,51,57,63,69,75,81,87,93,99,105,111,117,123,129,135,141,147,153,159,165,171,177,183,189,195,201,207,213,219,225,231,237,243,249,255,261,267,273,279,285,291,297", #random_wait_one)
+ui drop down("Random Wait .2", "0,6,12,18,24,30,36,42,48,54,60,66,72,78,84,90,96,102,108,114,120,126,132,138,144,150,156,162,168,174,180,186,192,198,204,210,216,222,228,234,240,246,252,258,264,270,276,282,288,294,300", #random_wait_two)
+ui stat monitor("", "<br />")
+ui check box("Get Followers", #get_followers)
+ui check box("Get Following", #get_following)
+define select_save_folder(#select_save_folder) {
+    set(#selected_folder, $nothing, "Global")
+    set(#folder_picker, $nothing, "Global")
+    set(#folder_picker, $plugin function("Advanced Dialog.dll", "$folder browser dialog", "Please select a folder.", "Desktop", #folder_picker, "False"), "Global")
+    if($comparison(#folder_picker, "!=", $nothing)) {
+        then {
+            set(#selected_folder, "<font color=\"black\"><strong>Folder Selected</strong></font>", "Global")
+        }
+        else {
+            alert("Folder selecting failed, please try again!")
+            stop script
+        }
+    }
+}
+if($comparison(#account_file, "!=", $nothing)) {
+    then {
+        create table from file(#account_file, &accounts)
+    }
+    else {
+        alert("Please add your accounts file.")
+        stop script
+    }
+}
+if($comparison(#proxy_file, "!=", $nothing)) {
+    then {
+        create table from file(#proxy_file, &proxies)
+    }
+    else {
+        if($comparison(#proxy_override, "!=", $true)) {
+            then {
+                alert("Please add your proxy file.")
+                stop script
+            }
+        }
+    }
+}
+set(#master_delay_trigger, 0, "Global")
+set(#count_ui_display, 0, "Global")
+set(#action_usernames_pos, "-1", "Global")
+set(#proxy_row, "-1", "Global")
+set(#account_row, "-1", "Global")
+set(#release_loop, 0, "Global")
+set(#sync_keeper, $plugin function("Threads Counter.dll", "threads counter", "reset"), "Global")
+loop while($comparison(#infinite_loop, "=", $nothing)) {
+    increment(#action_usernames_pos)
+    wait(1)
+    if($comparison(#action_usernames_pos, "=", $list total(%action_usernames))) {
+        then {
+            in new browser {
+                thread {
+                    alert("Done!")
+                }
+            }
+            stop script
+        }
+    }
+    thread {
+        plugin command("LocalDictionary.dll", "init local list")
+        plugin command("LocalDictionary.dll", "init local dictionary")
+        lanuch_scrape_script(#run_scrape_script)
+    }
+    set(#release_loop, 0, "Global")
+    set(#sync_keeper, $plugin function("Threads Counter.dll", "threads counter", "increment"), "Global")
+    wait(1)
+    loop while($comparison(#release_loop, "=", 0)) {
+        wait(0.1)
+    }
+    if($comparison(#sync_keeper, "=", #num_accounts)) {
+        then {
+            loop while($comparison(#sync_keeper, "!=", 0)) {
+                set(#sync_keeper, $plugin function("Threads Counter.dll", "threads counter", "read"), "Global")
+                wait(1)
+            }
+        }
+    }
+}
+define lanuch_scrape_script(#run_scrape_script) {
+    set(#local_action_usernames_pos, #action_usernames_pos, "Local")
+    set(#release_loop, 0, "Global")
+    increment(#proxy_row)
+    increment(#account_row)
+    plugin command("LocalDictionary.dll", "local list from file", "action_usernames", #action_usernames)
+    set(#master_delay_trigger, 0, "Local")
+    set(#count_ui_display, 0, "Local")
+    plugin command("HTTP post.dll", "http keep alive", "Yes")
+    plugin command("HTTP post.dll", "http auto redirect", "No")
+    plugin command("HTTP post.dll", "http cookiecontainer mode", "Advanced")
+    if($comparison(#proxy_override, "!=", $true)) {
+        then {
+            if($comparison($table total columns(&proxies), "=", 4)) {
+                then {
+                    set(#set_proxy, "{$table cell(&proxies, #proxy_row, 0)}:{$table cell(&proxies, #proxy_row, 1)}:{$table cell(&proxies, #proxy_row, 2)}:{$table cell(&proxies, #proxy_row, 3)}", "Global")
+                    set(#local_proxy, #set_proxy, "Local")
+                }
+                else if($comparison($table total columns(&proxies), "=", 2)) {
+                    set(#set_proxy, "{$table cell(&proxies, #proxy_row, 0)}:{$table cell(&proxies, #proxy_row, 1)}", "Global")
+                    set(#local_proxy, #set_proxy, "Local")
+                }
+            }
+        }
+    }
+    set(#request_login_page, $plugin function("HTTP post.dll", "$http get", " https://twitter.com/login", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36", " https://twitter.com/", #local_proxy, 60), "Local")
+    plugin command("LocalDictionary.dll", "local dictionary add", "request_login_page", $plugin function("HTTP post.dll", "$http last response"))
+    plugin command("LocalDictionary.dll", "local dictionary add", "login_token", $find regular expression($plugin function("LocalDictionary.dll", "$local dictionary get", "request_login_page"), "(?<=name\\=\\\"authenticity_token\\\"\\svalue\\=\\\").+(?=\\\">)"))
+    set(#request_login_page, $nothing, "Local")
+    set(#global_username, $table cell(&accounts, #account_row, 0), "Global")
+    set(#global_password, $table cell(&accounts, #account_row, 1), "Global")
+    set(#local_username, #global_username, "Local")
+    set(#local_password, #global_password, "Local")
+    set(#post_login_data, $plugin function("HTTP post.dll", "$http post", " https://twitter.com/sessions ", "session%5Busername_or_email%5D={#local_username}&session%5Bpassword%5D={#local_password}&authenticity_token={$plugin function("LocalDictionary.dll", "$local dictionary get", "login_token")}", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36", "https://twitter.com/login", #local_proxy, 60), "Local")
+    set(#post_login_data, $nothing, "Local")
+    set(#logged_in, $plugin function("HTTP post.dll", "$http get", "https://twitter.com", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36", "https://twitter.com/login", #local_proxy, 60), "Local")
+    set(#logged_in, $nothing, "Local")
+    if($comparison(#get_followers, "=", $true)) {
+        then {
+            set(#request_userpage, $plugin function("HTTP post.dll", "$http get", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36", "", #local_proxy, 20), "Local")
+            set(#followers_count, $find regular expression(#request_userpage, "(?!textUserColor\\\"\\stitle=\\\")[0-9,]+(?=\\sFollowers\\\"\\sdata-nav=\\\"followers\\\")"), "Local")
+            set(#followers_count, $replace(#followers_count, ",", ""), "Local")
+            set(#request_userpage, $nothing, "Local")
+            set(#request_followers, $plugin function("HTTP post.dll", "$http get", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}/followers", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}", #local_proxy, 20), "Local")
+        }
+        else if($comparison(#get_following, "=", $true)) {
+            set(#request_userpage, $plugin function("HTTP post.dll", "$http get", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36", "", #local_proxy, 20), "Local")
+            set(#followers_count, $find regular expression(#request_userpage, "(?!ProfileNav-label\\\">Following<\\/span>\\s+<span\\sclass=\\\"ProfileNav-value\\\"\\sdata-is-compact=\\\"[a-z]+\\\">)[0-9,]+(?=<\\/span>\\s+<\\/a>\\s+<\\/li><li\\sclass=\\\"ProfileNav-item\\sProfileNav-item--followers)"), "Local")
+            set(#followers_count, $replace(#followers_count, ",", ""), "Local")
+            set(#request_userpage, $nothing, "Local")
+            set(#request_followers, $plugin function("HTTP post.dll", "$http get", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}/following", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}", #local_proxy, 20), "Local")
+        }
+    }
+    plugin command("LocalDictionary.dll", "local dictionary add", "request_followers", $plugin function("HTTP post.dll", "$http last response"))
+    plugin command("LocalDictionary.dll", "local dictionary add", "user_followers", $find regular expression($plugin function("LocalDictionary.dll", "$local dictionary get", "request_followers"), "(?!unmute-button\\sbtn\\ssmall\\splain-btn\\\"\\stitle=\\\"Unmute\\s@)[A-Za-z0-9_-]+(?=\\\"\\s+data-placement=\\\"top\\\">\\s+<span\\sclass=\"Icon\\sIcon--muted\\s)"))
+    plugin command("LocalDictionary.dll", "local list from text", "user_followers", $plugin function("LocalDictionary.dll", "$local dictionary get", "user_followers"), $new line)
+    plugin command("LocalDictionary.dll", "local dictionary add", "user_id", $find regular expression($plugin function("LocalDictionary.dll", "$local dictionary get", "request_followers"), "(?!similar_to_user_id&quot;:)[0-9]\\d+(?=\\\},&quot;timeline_url)"))
+    plugin command("LocalDictionary.dll", "local dictionary add", "scroll_cursor", $find regular expression($plugin function("LocalDictionary.dll", "$local dictionary get", "request_followers"), "(?!data-cursor=\")[0-9]\{19,19\}(?=\")"))
+    set(#request_followers, $nothing, "Local")
+    set(#loop_trigger, 0, "Local")
+    set(#local_temp, $random text(20), "Local")
+    set(#release_loop, 1, "Global")
+    if($comparison($plugin function("LocalDictionary.dll", "$local dictionary get", "scroll_cursor"), "!=", 0)) {
+        then {
+            if($file exists("{#folder_picker}\\{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)} followers.txt")) {
+                then {
+                    plugin command("Open.Framework.dll", "Thread safe container") {
+                        append to file("{#folder_picker}\\{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)} followers.txt", "{$plugin function("LocalDictionary.dll", "$local dictionary get", "user_followers")}{$new line}", "End")
+                    }
+                }
+                else {
+                    plugin command("Open.Framework.dll", "Thread safe container") {
+                        save to file("{#folder_picker}\\{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)} followers.txt", $nothing)
+                        append to file("{#folder_picker}\\{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)} followers.txt", "{$plugin function("LocalDictionary.dll", "$local dictionary get", "user_followers")}{$new line}", "End")
+                    }
+                }
+            }
+        }
+    }
+    loop while($comparison(#loop_trigger, "=", 0)) {
+        if($comparison(#get_followers, "=", $true)) {
+            then {
+                set(#request_scroll, $plugin function("HTTP post.dll", "$http get", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}/followers/users?cursor={$plugin function("LocalDictionary.dll", "$local dictionary get", "scroll_cursor")}&cursor_index=&cursor_offset=&include_available_features=1&include_entities=1&is_forward=true", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}/followers", #local_proxy, 120), "Local")
+            }
+            else if($comparison(#get_following, "=", $true)) {
+                set(#request_scroll, $plugin function("HTTP post.dll", "$http get", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}/following/users?cursor={$plugin function("LocalDictionary.dll", "$local dictionary get", "scroll_cursor")}&cursor_index=&cursor_offset=&include_available_features=1&include_entities=1&is_forward=true", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}/followers", #local_proxy, 120), "Local")
+            }
+        }
+        if($comparison(#get_followers, "=", $true)) {
+            then {
+                if($comparison(#request_scroll, "=", $nothing)) {
+                    then {
+                        loop while($comparison(#request_scroll, "=", $nothing)) {
+                            set(#request_scroll, $plugin function("HTTP post.dll", "$http get", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}/followers/users?cursor={$plugin function("LocalDictionary.dll", "$local dictionary get", "scroll_cursor")}&cursor_index=&cursor_offset=&include_available_features=1&include_entities=1&is_forward=true", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}/followers", #local_proxy, 120), "Local")
+                            wait(1)
+                        }
+                    }
+                }
+            }
+            else if($comparison(#get_following, "=", $true)) {
+                if($comparison(#request_scroll, "=", $nothing)) {
+                    then {
+                        loop while($comparison(#request_scroll, "=", $nothing)) {
+                            set(#request_scroll, $plugin function("HTTP post.dll", "$http get", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}/following/users?cursor={$plugin function("LocalDictionary.dll", "$local dictionary get", "scroll_cursor")}&cursor_index=&cursor_offset=&include_available_features=1&include_entities=1&is_forward=true", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}/followers", #local_proxy, 120), "Local")
+                            wait(1)
+                        }
+                    }
+                }
+            }
+        }
+        if($comparison(#get_followers, "=", $true)) {
+            then {
+                if($comparison(#request_scroll, "=", "Unable to connect to the remote server")) {
+                    then {
+                        wait(10)
+                        loop while($comparison(#request_scroll, "=", "Unable to connect to the remote server")) {
+                            set(#request_scroll, $plugin function("HTTP post.dll", "$http get", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}/followers/users?cursor={$plugin function("LocalDictionary.dll", "$local dictionary get", "scroll_cursor")}&cursor_index=&cursor_offset=&include_available_features=1&include_entities=1&is_forward=true", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}/followers", #local_proxy, 120), "Local")
+                            wait(10)
+                        }
+                    }
+                }
+            }
+            else if($comparison(#get_following, "=", $true)) {
+                if($comparison(#request_scroll, "=", "Unable to connect to the remote server")) {
+                    then {
+                        wait(10)
+                        loop while($comparison(#request_scroll, "=", "Unable to connect to the remote server")) {
+                            set(#request_scroll, $plugin function("HTTP post.dll", "$http get", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}/following/users?cursor={$plugin function("LocalDictionary.dll", "$local dictionary get", "scroll_cursor")}&cursor_index=&cursor_offset=&include_available_features=1&include_entities=1&is_forward=true", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36", "https://twitter.com/{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)}/followers", #local_proxy, 120), "Local")
+                            wait(10)
+                        }
+                    }
+                }
+            }
+        }
+        if($comparison(#request_scroll, "!=", "\{\"cursor\":\"0\",\"has_more_items\":false,\"items_html\":\"\"\}") OR $contains(#request_scroll, "\"has_more_items\":false,\"items_html\"")) {
+            then {
+                plugin command("LocalDictionary.dll", "local dictionary add", "request_scroll", $plugin function("HTTP post.dll", "$http last response"))
+            }
+        }
+        plugin command("LocalDictionary.dll", "local dictionary add", "has_more_items", $find regular expression($plugin function("LocalDictionary.dll", "$local dictionary get", "request_scroll"), "(?!\\\{\\\"cursor\\\":\\\"0\\\",\\\"has_more_items\\\":)[a-z]\{5,5\}(?=,\"items_html\\\":\\\"\\\"\\\})"))
+        if($comparison($plugin function("LocalDictionary.dll", "$local dictionary get", "has_more_items"), "!=", "false") OR $comparison($plugin function("LocalDictionary.dll", "$local dictionary get", "has_more_items"), "!=", "The remote server returned an error: (503) Server Unavailable.") OR $comparison($plugin function("LocalDictionary.dll", "$local dictionary get", "has_more_items"), "!=", "Unable to connect to the remote server")) {
+            then {
+                plugin command("LocalDictionary.dll", "local dictionary add", "scroll_cursor", $find regular expression($plugin function("LocalDictionary.dll", "$local dictionary get", "request_scroll"), "(?!\\\{\"cursor\\\":\\\")[0-9]+(?=\\\",\\\"has_more_items)"))
+            }
+            else if($comparison($plugin function("LocalDictionary.dll", "$local dictionary get", "has_more_items"), "=", "false")) {
+                plugin command("LocalDictionary.dll", "local dictionary add", "has_more_items", "")
+            }
+        }
+        if($comparison($plugin function("LocalDictionary.dll", "$local dictionary get", "scroll_cursor"), "!=", 0)) {
+            then {
+                plugin command("LocalDictionary.dll", "local dictionary add", "user_followers", $find regular expression($plugin function("LocalDictionary.dll", "$local dictionary get", "request_scroll"), "(?!small\\splain-btn\\\\\\\"\\stitle=\\\\\\\"Unmute\\s@)[A-Za-z0-9_-]+(?=\\\\\\\"\\s+data-placement=\\\\\\\"top\\\\\\\"\\\\\\w\\d+\\w\\\\n\\s+\\\\\\w\\d+cspan\\sclass=\\\\\\\"Icon\\sIcon--unmuted)"))
+                plugin command("LocalDictionary.dll", "local list from text", "user_followers", $plugin function("LocalDictionary.dll", "$local dictionary get", "user_followers"), $new line)
+            }
+        }
+        if($comparison($plugin function("LocalDictionary.dll", "$local dictionary get", "scroll_cursor"), "!=", 0)) {
+            then {
+                if($file exists("{#folder_picker}\\{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)} followers.txt")) {
+                    then {
+                        plugin command("Open.Framework.dll", "Thread safe container") {
+                            append to file("{#folder_picker}\\{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)} followers.txt", "{$plugin function("LocalDictionary.dll", "$local dictionary get", "user_followers")}{$new line}", "End")
+                        }
+                    }
+                    else {
+                        plugin command("Open.Framework.dll", "Thread safe container") {
+                            save to file("{#folder_picker}\\{$plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos)} followers.txt", $nothing)
+                        }
+                    }
+                }
+            }
+        }
+        plugin command("LocalDictionary.dll", "local dictionary add", "user_followers", $nothing)
+        set(#get_username, $plugin function("LocalDictionary.dll", "$local list item", "action_usernames", #local_action_usernames_pos), "Local")
+        plugin command("Bigtable.dll", "Large list from file", "temp{#local_temp}", "{#folder_picker}\\{#get_username} followers.txt")
+        if($comparison($plugin function("Bigtable.dll", "Large list total", "temp{#local_temp}"), "=", #followers_count)) {
+            then {
+                set(#loop_trigger, 1, "Local")
+                set(#debugger, 1, "Global")
+            }
+        }
+        plugin command("Bigtable.dll", "Clear large list", "temp{#local_temp}")
+        if($both($comparison(#num_to_scrape, "!=", $nothing), $comparison($plugin function("LocalDictionary.dll", "$local dictionary get", "user_followers"), ">=", #num_to_scrape))) {
+            then {
+                set(#loop_trigger, 1, "Local")
+                set(#debugger, 2, "Global")
+            }
+        }
+        if($comparison($plugin function("LocalDictionary.dll", "$local dictionary get", "request_scroll"), "=", "The remote server returned an error: (429) Too Many Requests.")) {
+            then {
+                set(#loop_trigger, 1, "Local")
+                set(#debugger, 3, "Global")
+            }
+        }
+        set(#wait, $rand(2, 3), "Local")
+        wait(#wait)
+        if($comparison(#master_delay_trigger, "!=", #run_when_complete)) {
+            then {
+                if($both($comparison(#random_wait_one, "!=", ""), $comparison(#random_wait_two, "!=", "")) AND $both($comparison(#random_wait_one, "!=", 0), $comparison(#random_wait_two, "!=", 0))) {
+                    then {
+                        set(#random_wait, $rand(#random_wait_one, #random_wait_two), "Local")
+                        wait(#random_wait)
+                    }
+                }
+            }
+            else if($both($comparison(#master_delay, "!=", ""), $comparison(#run_when_complete, "!=", ""))) {
+                if($comparison(#master_delay_trigger, ">=", #run_when_complete)) {
+                    then {
+                        set(#master_delay_trigger, 0, "Local")
+                        set(#count_ui_display, #master_delay, "Local")
+                        loop(#master_delay) {
+                            wait(0.9)
+                            decrement(#count_ui_display)
+                        }
+                        set(#count_ui_display, 0, "Local")
+                    }
+                }
+            }
+        }
+        increment(#master_delay_trigger)
+    }
+    set(#sync_keeper, $plugin function("Threads Counter.dll", "threads counter", "decrement"), "Local")
+}
+on load("Bot Loaded") {
+    set(#count_ui_display, 0, "Global")
+}

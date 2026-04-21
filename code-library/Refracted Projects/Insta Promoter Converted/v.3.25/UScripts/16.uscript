@@ -1,0 +1,551 @@
+define $DontFollowBlacklist(#RunDontFollow) {
+    set(#skip_user,0,"Global")
+    if($comparison(#black_list,"!=",$nothing)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACKLIST DETECTED RUNNING BLACKLIST USERNAME CHECK FOR BLACKLISTING OF USERNAME - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Bigtable.dll", "Clear large list", "user_url")
+            plugin command("Bigtable.dll", "large List from Regex", "user_url", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!\"username\":\")[a-z0-9_.]+(?=\",\"blocked_by_viewer)", "add")
+            plugin command("Bigtable.dll", "Large list Remove duplicates", "user_url")
+            if($comparison($plugin function("Bigtable.dll", "Large list item", "user_url", 0),"!= Does not equal",$nothing)) {
+                then {
+                    set(#user_url,$plugin function("Bigtable.dll", "Large list item", "user_url", 0),"Global")
+                    plugin command("Bigtable.dll", "Clear large list", "blacklist")
+                    plugin command("Bigtable.dll", "Large list from file", "blacklist", #black_list)
+                    set(#black_list_pos,0,"Global")
+                    loop($plugin function("Bigtable.dll", "Large list total", "blacklist")) {
+                        if($comparison($plugin function("Bigtable.dll", "Large list item", "blacklist", #black_list_pos),"= Equals",#user_url)) {
+                            then {
+                                set(#skip_user,1,"Global")
+                            }
+                        }
+                        increment(#black_list_pos)
+                    }
+                    if($comparison(#skip_user,"= Equals",1)) {
+                        then {
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACK LISTSTED USER DETECTED [{#user_url}] SKIPING TO NEXT USER IN THE LIST - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+}
+define $DontCommentBlacklist(#RunDontComment) {
+    set(#skip_user,0,"Global")
+    if($comparison(#black_list_comments,"!=",$nothing)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACKLIST DETECTED RUNNING BLACKLIST USERNAME CHECK FOR BLACKLISTING OF USERNAME - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Bigtable.dll", "Clear large list", "user_url")
+            plugin command("Bigtable.dll", "large List from Regex", "user_url", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!\",\"username\":\")[A-Za-z.0-9_-]+(?=\",\"blocked)", "add")
+            plugin command("Bigtable.dll", "Large list Remove duplicates", "user_url")
+            if($comparison($plugin function("Bigtable.dll", "Large list item", "user_url", 0),"!= Does not equal",$nothing)) {
+                then {
+                    set(#user_url,$plugin function("Bigtable.dll", "Large list item", "user_url", 0),"Global")
+                    plugin command("Bigtable.dll", "Clear large list", "blacklistlikescomments")
+                    plugin command("Bigtable.dll", "Large list from file", "blacklistlikescomments", #black_list_comments)
+                    set(#black_comm_pos,0,"Global")
+                    loop($plugin function("Bigtable.dll", "Large list total", "blacklistlikescomments")) {
+                        if($comparison($plugin function("Bigtable.dll", "Large list item", "blacklistlikescomments", #black_comm_pos),"= Equals",#user_url)) {
+                            then {
+                                set(#skip_user,1,"Global")
+                            }
+                        }
+                        increment(#black_comm_pos)
+                    }
+                    if($comparison(#skip_user,"= Equals",1)) {
+                        then {
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACK LISTSTED USER DETECTED [{#user_url}] SKIPING TO NEXT USER IN THE LIST - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+}
+define $ListDontCommentBlacklist(#ListRunDontComment) {
+    set(#skip_user,0,"Global")
+    if($comparison(#black_list_comments,"!=",$nothing)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACKLIST DETECTED RUNNING BLACKLIST USERNAME CHECK FOR BLACKLISTING OF USERNAME - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#user_url,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser URL"),"(?!https:\\/\\/www.instagram.com\\/)[a-z.0-9_]+(?=\\/)"),"Global")
+            if($comparison(#user_url,"!= Does not equal",$nothing)) {
+                then {
+                    set(#user_url,$replace(#user_url,"www.instagram.com",""),"Global")
+                    set(#user_url,$plugin function("Advanced Data Text File.dll", "$remove blank lines", #user_url, "Line by Line", "True", "True"),"Global")
+                    plugin command("Bigtable.dll", "Clear large list", "blacklistlikescomments")
+                    plugin command("Bigtable.dll", "Large list from file", "blacklistlikescomments", #black_list_comments)
+                    set(#black_comm_pos,0,"Global")
+                    loop($plugin function("Bigtable.dll", "Large list total", "blacklistlikescomments")) {
+                        if($comparison($plugin function("Bigtable.dll", "Large list item", "blacklistlikescomments", #black_comm_pos),"= Equals",#user_url)) {
+                            then {
+                                set(#skip_user,1,"Global")
+                            }
+                        }
+                        increment(#black_comm_pos)
+                    }
+                    if($comparison(#skip_user,"= Equals",1)) {
+                        then {
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACK LISTSTED USER DETECTED [{#user_url}] SKIPING TO NEXT USER IN THE LIST - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+}
+define $DontLikeBlacklist(#RunDontLike) {
+    set(#skip_user,0,"Global")
+    if($comparison(#black_list_likes,"!=",$nothing)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACKLIST DETECTED RUNNING BLACKLIST USERNAME CHECK FOR BLACKLISTING OF USERNAME - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Bigtable.dll", "Clear large list", "user_url")
+            plugin command("Bigtable.dll", "large List from Regex", "user_url", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!\",\"username\":\")[A-Za-z.0-9_-]+(?=\",\"blocked)", "add")
+            plugin command("Bigtable.dll", "Large list Remove duplicates", "user_url")
+            if($comparison($plugin function("Bigtable.dll", "Large list item", "user_url", 0),"!= Does not equal",$nothing)) {
+                then {
+                    set(#user_url,$plugin function("Bigtable.dll", "Large list item", "user_url", 0),"Global")
+                    plugin command("Bigtable.dll", "Clear large list", "user_url")
+                    plugin command("Bigtable.dll", "Clear large list", "blacklistlikes")
+                    plugin command("Bigtable.dll", "Large list from file", "blacklistlikes", #black_list_likes)
+                    set(#black_likes_pos,0,"Global")
+                    loop($plugin function("Bigtable.dll", "Large list total", "blacklistlikes")) {
+                        if($comparison($plugin function("Bigtable.dll", "Large list item", "blacklistlikes", #black_likes_pos),"= Equals",#user_url)) {
+                            then {
+                                set(#skip_user,1,"Global")
+                            }
+                        }
+                        increment(#black_likes_pos)
+                    }
+                    if($comparison(#skip_user,"= Equals",1)) {
+                        then {
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACK LISTSTED USER DETECTED [{#user_url}] SKIPING TO NEXT USER IN THE LIST - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+}
+define $ListDontLikeBlacklist(#ListRunDontLike) {
+    set(#skip_user,0,"Global")
+    if($comparison(#black_list_likes,"!=",$nothing)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACKLIST DETECTED RUNNING BLACKLIST USERNAME CHECK FOR BLACKLISTING OF USERNAME - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#user_url,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser URL"),"(?!https:\\/\\/www.instagram.com\\/)[a-z.0-9_]+(?=\\/)"),"Global")
+            if($comparison(#user_url,"!= Does not equal",$nothing)) {
+                then {
+                    set(#user_url,$replace(#user_url,"www.instagram.com",""),"Global")
+                    set(#user_url,$plugin function("Advanced Data Text File.dll", "$remove blank lines", #user_url, "Line by Line", "True", "True"),"Global")
+                    plugin command("Bigtable.dll", "Clear large list", "blacklistlikes")
+                    plugin command("Bigtable.dll", "Large list from file", "blacklistlikes", #black_list_likes)
+                    set(#black_likes_pos,0,"Global")
+                    loop($plugin function("Bigtable.dll", "Large list total", "blacklistlikes")) {
+                        if($comparison($plugin function("Bigtable.dll", "Large list item", "blacklistlikes", #black_likes_pos),"= Equals",#user_url)) {
+                            then {
+                                set(#skip_user,1,"Global")
+                            }
+                        }
+                        increment(#black_likes_pos)
+                    }
+                    if($comparison(#skip_user,"= Equals",1)) {
+                        then {
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACK LISTSTED USER DETECTED [{#user_url}] SKIPING TO NEXT USER IN THE LIST - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+}
+define $ListDontFollowBlackList(#ListRunDontFollow) {
+    set(#skip_user,0,"Global")
+    if($comparison(#black_list,"!=",$nothing)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACKLIST DETECTED RUNNING BLACKLIST USERNAME CHECK FOR BLACKLISTING OF USERNAME - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#user_url,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser URL"),"(?!https:\\/\\/www.instagram.com\\/)[a-z.0-9_]+(?=\\/)"),"Global")
+            if($comparison(#user_url,"!= Does not equal",$nothing)) {
+                then {
+                    set(#user_url,$replace(#user_url,"www.instagram.com",""),"Global")
+                    set(#user_url,$plugin function("Advanced Data Text File.dll", "$remove blank lines", #user_url, "Line by Line", "True", "True"),"Global")
+                    plugin command("Bigtable.dll", "Clear large list", "blacklist")
+                    plugin command("Bigtable.dll", "Large list from file", "blacklist", #black_list)
+                    set(#black_list_pos,0,"Global")
+                    loop($plugin function("Bigtable.dll", "Large list total", "blacklist")) {
+                        if($comparison($plugin function("Bigtable.dll", "Large list item", "blacklist", #black_list_pos),"= Equals",#user_url)) {
+                            then {
+                                set(#skip_user,1,"Global")
+                            }
+                        }
+                        increment(#black_list_pos)
+                    }
+                    if($comparison(#skip_user,"= Equals",1)) {
+                        then {
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACK LISTSTED USER DETECTED [{#user_url}] SKIPING TO NEXT USER IN THE LIST - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+}
+define $DontUnfollowWhiteList(#RunDontUnfollowWhiteList) {
+    set(#skip_user,0,"Global")
+    if($comparison(#white_list,"!=",$nothing)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - WHITELIST DETECTED RUNNING WHITELISTED USERNAME CHECK FOR WHITLISTING OF USERNAME - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Bigtable.dll", "Clear large list", "whitelist")
+            plugin command("Bigtable.dll", "Large list from file", "whitelist", #white_list)
+            set(#white_list_pos,0,"Global")
+            if($comparison(#un_user_name,"!= Does not equal",$nothing)) {
+                then {
+                    loop($plugin function("Bigtable.dll", "Large list total", "whitelist")) {
+                        if($comparison($plugin function("Bigtable.dll", "Large list item", "whitelist", #white_list_pos),"= Equals",#un_user_name)) {
+                            then {
+                                set(#skip_user,1,"Global")
+                            }
+                        }
+                        increment(#white_list_pos)
+                    }
+                    if($comparison(#skip_user,"= Equals",1)) {
+                        then {
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - WHITE LISTSTED USER DETECTED [{#un_user_name}] SKIPING TO NEXT USER IN THE LIST - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+}
+define $FollowBackBlackList(#RunFollowBackBlackList) {
+    set(#skip_user,0,"Global")
+    if($comparison(#black_list,"!=",$nothing)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACKLIST DETECTED RUNNING BLACKLISTED USERNAME CHECK FOR BLACKLISTING OF USERNAME - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Bigtable.dll", "Large list from file", "blacklist", #black_list)
+            set(#black_list_pos,0,"Global")
+            if($comparison(#auto_user_name,"!= Does not equal",$nothing)) {
+                then {
+                    loop($plugin function("Bigtable.dll", "Large list total", "blacklist")) {
+                        if($comparison($plugin function("Bigtable.dll", "Large list item", "blacklist", #black_list_pos),"= Equals",#auto_user_name)) {
+                            then {
+                                set(#skip_user,1,"Global")
+                            }
+                        }
+                        increment(#black_list_pos)
+                    }
+                    if($comparison(#skip_user,"= Equals",1)) {
+                        then {
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACK LISTSTED USER DETECTED [{#auto_user_name}] SKIPING TO NEXT USER IN THE LIST - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+}
+define AutoLoadBlackWhiteList(#RunAutoLoadBlackWhiteList) {
+    if($comparison(#white_list,"!= Does not equal",$nothing)) {
+        then {
+            set(#white_trigger,1,"Global")
+        }
+    }
+    if($comparison(#black_list,"!= Does not equal",$nothing)) {
+        then {
+            set(#black_trigger,1,"Global")
+        }
+    }
+    if($comparison(#black_list_likes,"!= Does not equal",$nothing)) {
+        then {
+            set(#black_like_trigger,1,"Global")
+        }
+    }
+    if($comparison(#black_list_comments,"!= Does not equal",$nothing)) {
+        then {
+            set(#black_comm_trigger,1,"Global")
+        }
+    }
+}
+define AutoLoadCustomListFiles(#AutoListFilesLoaded) {
+    plugin command("Bigtable.dll", "Clear large list", "whitelist")
+    plugin command("Bigtable.dll", "Clear large list", "blacklist")
+    plugin command("Bigtable.dll", "Clear large list", "blacklistlikes")
+    plugin command("Bigtable.dll", "Clear large list", "blacklistlikescomments")
+    if($plugin function("Advanced Ubot.dll", "$compare", #white_trigger, "==", 1)) {
+        then {
+            set(#white_trigger,0,"Global")
+            if($comparison(#white_list,"!= Does not equal",$nothing)) {
+                then {
+                    plugin command("Bigtable.dll", "Large list from file", "whitelist", #white_list)
+                    if($comparison($plugin function("Bigtable.dll", "Large list total", "whitelist"),"!= Does not equal",0)) {
+                        then {
+                            set(#null,$plugin function("Bigtable.dll", "Large list total", "whitelist"),"Global")
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - WHITELIST LOADED SUCCESSFULLY - WHITE LIST TOTAL = [{#null}] USERS -  DO NOT UNFOLLOW - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+                else {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - WHITE LIST DON'T UNFOLLOW FILE NOT LOADED OR DETECTED - PLEASE TRY AGAIN! - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    stop script
+                }
+            }
+        }
+    }
+    if($plugin function("Advanced Ubot.dll", "$compare", #black_trigger, "==", 1)) {
+        then {
+            set(#black_trigger,0,"Global")
+            if($comparison(#black_list,"!= Does not equal",$nothing)) {
+                then {
+                    plugin command("Bigtable.dll", "Large list from file", "blacklist", #black_list)
+                    if($plugin function("Advanced Ubot.dll", "$compare", $plugin function("Bigtable.dll", "Large list total", "blacklist"), "!=", 0)) {
+                        then {
+                            set(#null,$plugin function("Bigtable.dll", "Large list total", "blacklist"),"Global")
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACKLIST LOADED SUCSESSFULLY - BLACKLIST LIST TOTAL = [{#null}] USERS -  DO NOT FOLLOW - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+                else {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACK LIST DON'T FOLLOW FILE NOT LOADED OR DETECTED - PLEASE TRY AGAIN! - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    stop script
+                }
+            }
+        }
+    }
+    if($plugin function("Advanced Ubot.dll", "$compare", #black_like_trigger, "==", 1)) {
+        then {
+            set(#black_like_trigger,0,"Global")
+            if($comparison(#black_list_likes,"!= Does not equal",$nothing)) {
+                then {
+                    plugin command("Bigtable.dll", "Large list from file", "blacklistlikes", #black_list_likes)
+                    if($comparison($plugin function("Bigtable.dll", "Large list total", "blacklistlikes"),"!= Does not equal",0)) {
+                        then {
+                            set(#null,$plugin function("Bigtable.dll", "Large list total", "blacklistlikes"),"Global")
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACKLIST LOADED SUCSESSFULLY - BLACKLIST LIST TOTAL = [{#null}] USERS -  DO NOT LIKE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+                else {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACK LIST DON'T LIKE FILE NOT LOADED OR DETECTED - PLEASE TRY AGAIN! - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    stop script
+                }
+            }
+        }
+    }
+    if($plugin function("Advanced Ubot.dll", "$compare", #black_comm_trigger, "==", 1)) {
+        then {
+            set(#black_comm_trigger,0,"Global")
+            if($comparison(#black_list_comments,"!= Does not equal",$nothing)) {
+                then {
+                    plugin command("Bigtable.dll", "Large list from file", "blacklistlikescomments", #black_list_comments)
+                    if($comparison($plugin function("Bigtable.dll", "Large list total", "blacklistlikescomments"),"!= Does not equal",0)) {
+                        then {
+                            set(#null,$plugin function("Bigtable.dll", "Large list total", "blacklistlikescomments"),"Global")
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACKLIST LOADED SUCSESSFULLY - BLACKLIST LIST TOTAL = [{#null}] USERS -  DO NOT COMMENT -  DO NOT LIKE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+                else {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACK LIST DON'T COMMENT FILE NOT LOADED OR DETECTED - PLEASE TRY AGAIN! - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    stop script
+                }
+            }
+        }
+    }
+}
+define LoadCustomListFiles(#ListFilesLoaded) {
+    if($plugin function("Advanced Ubot.dll", "$compare", #white_trigger, "==", 1)) {
+        then {
+            set(#white_list,$plugin function("Advanced Dialog.dll", "$open file dialog", "All files (*.*)|*.*", ""),"Global")
+            set(#white_trigger,0,"Global")
+            if($comparison(#white_list,"!= Does not equal",$nothing)) {
+                then {
+                    plugin command("Bigtable.dll", "Large list from file", "whitelist", #white_list)
+                    if($comparison($plugin function("Bigtable.dll", "Large list total", "whitelist"),"!= Does not equal",0)) {
+                        then {
+                            set(#null,$plugin function("Bigtable.dll", "Large list total", "whitelist"),"Global")
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - WHITELIST LOADED SUCCESSFULLY - WHITE LIST TOTAL = [{#null}] USERS -  DO NOT UNFOLLOW - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+                else {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - WHITE LIST DON'T UNFOLLOW FILE NOT LOADED OR DETECTED - PLEASE TRY AGAIN! - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    stop script
+                }
+            }
+        }
+    }
+    if($plugin function("Advanced Ubot.dll", "$compare", #black_trigger, "==", 1)) {
+        then {
+            set(#black_list,$plugin function("Advanced Dialog.dll", "$open file dialog", "All files (*.*)|*.*", ""),"Global")
+            set(#black_trigger,0,"Global")
+            if($comparison(#black_list,"!= Does not equal",$nothing)) {
+                then {
+                    plugin command("Bigtable.dll", "Large list from file", "blacklist", #black_list)
+                    if($plugin function("Advanced Ubot.dll", "$compare", $plugin function("Bigtable.dll", "Large list total", "blacklist"), "!=", 0)) {
+                        then {
+                            set(#null,$plugin function("Bigtable.dll", "Large list total", "blacklist"),"Global")
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACKLIST LOADED SUCSESSFULLY - BLACKLIST LIST TOTAL = [{#null}] USERS -  DO NOT FOLLOW - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+                else {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACK LIST DON'T FOLLOW FILE NOT LOADED OR DETECTED - PLEASE TRY AGAIN! - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    stop script
+                }
+            }
+        }
+    }
+    if($plugin function("Advanced Ubot.dll", "$compare", #black_like_trigger, "==", 1)) {
+        then {
+            set(#black_list_likes,$plugin function("Advanced Dialog.dll", "$open file dialog", "TEXT files|*.txt", ""),"Global")
+            set(#black_like_trigger,0,"Global")
+            if($comparison(#black_list_likes,"!= Does not equal",$nothing)) {
+                then {
+                    plugin command("Bigtable.dll", "Large list from file", "blacklistlikes", #black_list_likes)
+                    if($comparison($plugin function("Bigtable.dll", "Large list total", "blacklistlikes"),"!= Does not equal",0)) {
+                        then {
+                            set(#null,$plugin function("Bigtable.dll", "Large list total", "blacklistlikes"),"Global")
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACKLIST LOADED SUCSESSFULLY - BLACKLIST LIST TOTAL = [{#null}] USERS -  DO NOT LIKE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+                else {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACK LIST DON'T LIKE FILE NOT LOADED OR DETECTED - PLEASE TRY AGAIN! - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    stop script
+                }
+            }
+        }
+    }
+    if($plugin function("Advanced Ubot.dll", "$compare", #black_comm_trigger, "==", 1)) {
+        then {
+            set(#black_list_comments,$plugin function("Advanced Dialog.dll", "$open file dialog", "TEXT files|*.txt", ""),"Global")
+            set(#black_comm_trigger,0,"Global")
+            if($comparison(#black_list_comments,"!= Does not equal",$nothing)) {
+                then {
+                    plugin command("Bigtable.dll", "Large list from file", "blacklistlikescomments", #black_list_comments)
+                    if($comparison($plugin function("Bigtable.dll", "Large list total", "blacklistlikescomments"),"!= Does not equal",0)) {
+                        then {
+                            set(#null,$plugin function("Bigtable.dll", "Large list total", "blacklistlikescomments"),"Global")
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACKLIST LOADED SUCSESSFULLY - BLACKLIST LIST TOTAL = [{#null}] USERS -  DO NOT COMMENT -  DO NOT LIKE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                        }
+                    }
+                }
+                else {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BLACK LIST DON'T COMMENT FILE NOT LOADED OR DETECTED - PLEASE TRY AGAIN! - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    stop script
+                }
+            }
+        }
+    }
+}

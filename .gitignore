@@ -42,9 +42,6 @@ tracking_log.txt
 usage_stats.json
 *.log
 
-# Code library (user's actual code library)
-code-library/
-
 # Temporary files
 *.tmp
 *.bak

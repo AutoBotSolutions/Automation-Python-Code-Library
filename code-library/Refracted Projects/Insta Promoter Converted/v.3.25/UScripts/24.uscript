@@ -1,0 +1,953 @@
+define Target Succession(#RunTargetSuccession) {
+    set(#infinite_loop,0,"Global")
+    set(#loaded_list_pos,0,"Global")
+    set(#SettingsCounter,0,"Global")
+    set(#AllFunctionCounter,0,"Global")
+    set(#master_delay_trigger,0,"Global")
+    if($comparison(#RunFromProjectFolder,"= Equals","YES")) {
+        then {
+            CreateProjectPathPosOnStart(#RunCreateProjectPathPosOnStart)
+            CreateProjectFilePaths(#RunCreateProjectFilePaths)
+        }
+    }
+    TargetSettingsConfigError(#RunTargetSettingsConfigError)
+    SetTriggerCountersOff(#RunSetTriggerCountersOff)
+    RestTargetDisabledOperator(#RunRestTargetDisabledOperator)
+    QualifySettingsCounter(#RunQualifySettingsCounter)
+    TargetSuccessionSetup(#RunTargetSuccessionSetup)
+    if($comparison(#RandomizeSuccession,"= Equals","YES")) {
+        then {
+            loop while($comparison(#infinite_loop,"= Equals",0)) {
+                set(#RunTargetSuccessionLoopSetup,$TargetSuccessionLoopSetup(#RunTargetSuccessionLoopSetup),"Global")
+                loop(5) {
+                    set(#random_num_gen,$plugin function("Advanced Data Text File.dll", "$random", 0, 5, "Int", ""),"Global")
+                }
+                TargetCellRoateTrigger(#RunTargetCellRoateTrigger)
+                TargetTestCellDisabled(#RunTargetTestCellDisabled)
+                if($comparison(#get_follow_cell,"< Less than",#DisableFollowing)) {
+                    then {
+                        if($both($comparison(#random_num_gen,"= Equals",0),$comparison(#enable_following,"= Equals",$true))) {
+                            then {
+                                loop(#num_follow) {
+                                    set(#RunTargetFollowModuleTwo,$TargetFollowModuleTwo(#RunTargetFollowModuleTwo),"Global")
+                                }
+                                TargetLightsRest(#RunTargetLightsRest)
+                            }
+                        }
+                    }
+                    else if($both($comparison(#enable_following,"= Equals",$true),$comparison(#DeactivateFollows,"= Equals",0))) {
+                        set(#DeactivateFollows,1,"Global")
+                        decrement(#SettingsCounter)
+                    }
+                }
+                if($comparison(#get_like_cell,"< Less than",#DisableLikeing)) {
+                    then {
+                        if($both($comparison(#random_num_gen,"= Equals",1),$comparison(#enable_likes,"= Equals",$true))) {
+                            then {
+                                loop(#num_like) {
+                                    set(#RunTargetLikeModuleTwo,$TargetLikeModuleTwo(#RunTargetLikeModuleTwo),"Global")
+                                }
+                                TargetLightsRest(#RunTargetLightsRest)
+                            }
+                        }
+                    }
+                    else if($both($comparison(#enable_likes,"= Equals",$true),$comparison(#DeactivateLikes,"= Equals",0))) {
+                        set(#DeactivateLikes,1,"Global")
+                        decrement(#SettingsCounter)
+                    }
+                }
+                if($comparison(#get_comment_cell,"< Less than",#DisableCommenting)) {
+                    then {
+                        if($both($comparison(#random_num_gen,"= Equals",2),$comparison(#enable_commenting,"= Equals",$true))) {
+                            then {
+                                loop(#num_comment) {
+                                    set(#RunCommentModuleTwo,$TargetCommentModuleTwo(#RunCommentModuleTwo),"Global")
+                                }
+                                TargetLightsRest(#RunTargetLightsRest)
+                            }
+                        }
+                    }
+                    else if($both($comparison(#enable_commenting,"= Equals",$true),$comparison(#DeactivateComments,"= Equals",0))) {
+                        set(#DeactivateComments,1,"Global")
+                        decrement(#SettingsCounter)
+                    }
+                }
+                if($plugin function("Advanced Ubot.dll", "$compare 2", $comparison(#get_actions_cell,"< Less than",#DisableMutilTool), "&&", $comparison(#get_comment_cell,"< Less than",#DisableCommenting), "&&", $comparison(#get_like_cell,"< Less than",#DisableLikeing), "&&", $comparison(#get_follow_cell,"< Less than",#DisableFollowing))) {
+                    then {
+                        if($both($comparison(#random_num_gen,"= Equals",3),$comparison(#enable_multi_tool,"= Equals",$true))) {
+                            then {
+                                loop(#num_multi_actions) {
+                                    set(#RunListRunActionSystemTwo,$ListMultiActionSystemTwo(#RunListRunActionSystemTwo),"Global")
+                                }
+                                TargetLightsRest(#RunTargetLightsRest)
+                            }
+                        }
+                    }
+                    else if($both($comparison(#enable_multi_tool,"= Equals",$true),$comparison(#DeactivateActions,"= Equals",0))) {
+                        set(#DeactivateActions,1,"Global")
+                        decrement(#SettingsCounter)
+                    }
+                }
+                if($comparison(#get_unfollow_cell,"< Less than",#DisableUnfollow)) {
+                    then {
+                        if($both($comparison(#random_num_gen,"= Equals",4),$comparison(#enable_unfollowing,"= Equals",$true))) {
+                            then {
+                                loop(#num_unfollow) {
+                                    set(#RunTargetUnfollowModuleTwo,$TargetUnfollowModuleTwo(#RunTargetUnfollowModuleTwo),"Global")
+                                }
+                                TargetLightsRest(#RunTargetLightsRest)
+                            }
+                        }
+                    }
+                    else if($both($comparison(#enable_unfollowing,"= Equals",$true),$comparison(#DeactivateUnfollows,"= Equals",0))) {
+                        set(#DeactivateUnfollows,1,"Global")
+                        decrement(#SettingsCounter)
+                    }
+                }
+                TargetCellStopTrigger(#RunTargetCellStopTrigger)
+            }
+        }
+        else {
+            loop while($comparison(#infinite_loop,"= Equals",0)) {
+                set(#RunTargetSuccessionLoopSetup,$TargetSuccessionLoopSetup(#RunTargetSuccessionLoopSetup),"Global")
+                TargetCellRoateTrigger(#RunTargetCellRoateTrigger)
+                TargetTestCellDisabled(#RunTargetTestCellDisabled)
+                if($comparison(#enable_following,"= Equals",$true)) {
+                    then {
+                        loop(#num_follow) {
+                            set(#RunTargetFollowModuleTwo,$TargetFollowModuleTwo(#RunTargetFollowModuleTwo),"Global")
+                        }
+                        TargetLightsRest(#RunTargetLightsRest)
+                    }
+                }
+                if($comparison(#enable_likes,"= Equals",$true)) {
+                    then {
+                        loop(#num_like) {
+                            set(#RunTargetLikeModuleTwo,$TargetLikeModuleTwo(#RunTargetLikeModuleTwo),"Global")
+                        }
+                        TargetLightsRest(#RunTargetLightsRest)
+                    }
+                }
+                if($comparison(#enable_commenting,"= Equals",$true)) {
+                    then {
+                        loop(#num_comment) {
+                            set(#RunCommentModuleTwo,$TargetCommentModuleTwo(#RunCommentModuleTwo),"Global")
+                        }
+                        TargetLightsRest(#RunTargetLightsRest)
+                    }
+                }
+                if($comparison(#enable_multi_tool,"= Equals",$true)) {
+                    then {
+                        loop(#num_multi_actions) {
+                            set(#RunListRunActionSystemTwo,$ListMultiActionSystemTwo(#RunListRunActionSystemTwo),"Global")
+                        }
+                        TargetLightsRest(#RunTargetLightsRest)
+                    }
+                }
+                if($comparison(#enable_unfollowing,"= Equals",$true)) {
+                    then {
+                        loop(#num_unfollow) {
+                            set(#RunTargetUnfollowModuleTwo,$TargetUnfollowModuleTwo(#RunTargetUnfollowModuleTwo),"Global")
+                        }
+                        TargetLightsRest(#RunTargetLightsRest)
+                    }
+                }
+                TargetCellStopTrigger(#RunTargetCellStopTrigger)
+            }
+        }
+    }
+}
+define SetTriggerCountersOff(#RunSetTriggerCountersOff) {
+    set(#FollowsActive,0,"Global")
+    set(#LikesActive,0,"Global")
+    set(#CommentsActive,0,"Global")
+    set(#ActionsActive,0,"Global")
+    set(#UnfollowActive,0,"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - RESETTING ACTIVE FUNCTION TRIGGERS - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+}
+define QualifySettingsCounter(#RunQualifySettingsCounter) {
+    if($comparison(#enable_following,"= Equals",$true)) {
+        then {
+            increment(#SettingsCounter)
+        }
+    }
+    if($comparison(#enable_likes,"= Equals",$true)) {
+        then {
+            increment(#SettingsCounter)
+        }
+    }
+    if($comparison(#enable_commenting,"= Equals",$true)) {
+        then {
+            increment(#SettingsCounter)
+        }
+    }
+    if($comparison(#enable_multi_tool,"= Equals",$true)) {
+        then {
+            increment(#SettingsCounter)
+        }
+    }
+    if($comparison(#enable_unfollowing,"= Equals",$true)) {
+        then {
+            increment(#SettingsCounter)
+        }
+    }
+    if($comparison(#SettingsCounter,"= Equals",0)) {
+        then {
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - YOU MUST HAVE AT LEAST ONE FUNCTION ENABLED TO USE THE SOFTWARE. - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            alert("You must have at least one function enabled to use the software.")
+            stop script
+        }
+    }
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ENABLED SETTINGS COUNTERS TOTAL = [{#SettingsCounter}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+}
+define $TargetSuccessionStatistics(#RunTargetSuccessionStatistics) {
+    TargetSetZeroOperator(#RunTargetSetZeroOperator)
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - RUNNING SUCCESSION ACCOUNT STATISTICS - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    set(#username,$table cell(&accounts_table,#UsernameRow,0),"Global")
+    set table cell(&statistics,#UsernameRow,0,#username)
+    set(#password,$table cell(&accounts_table,#PasswordRow,1),"Global")
+    if($comparison(#proxy_file,"!= Does not equal","")) {
+        then {
+            set(#proxy,$table cell(&proxy_table,#ProxyRow,0),"Global")
+        }
+    }
+    set table cell(&statistics,#ProxyRow,2,#proxy)
+    if($comparison(#get_follow_cell,"< Less than",#DisableFollowing)) {
+        then {
+            if($comparison(#FollowsActive,"= Equals",1)) {
+                then {
+                    if($comparison($table cell(&statistics,#FollowRow,3),"!= Does not equal","")) {
+                        then {
+                            set(#get_follow_cell,$plugin function("Advanced Data Text File.dll", "$table cell get", &statistics, #FollowRow, 3),"Global")
+                            set(#current_follows,$add(#get_follow_cell,1),"Global")
+                        }
+                    }
+                    if($comparison(#current_follows,"= Equals",0)) {
+                        then {
+                            set(#current_follows,1,"Global")
+                        }
+                    }
+                    set table cell(&statistics,#FollowRow,3,#current_follows)
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ACCOUNT [{#username}] FOLLOW TOTAL = [{#current_follows}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                }
+            }
+        }
+    }
+    if($comparison(#get_like_cell,"< Less than",#DisableLikeing)) {
+        then {
+            if($comparison(#LikesActive,"= Equals",1)) {
+                then {
+                    if($comparison($table cell(&statistics,#LikesRow,4),"!= Does not equal","")) {
+                        then {
+                            set(#get_like_cell,$plugin function("Advanced Data Text File.dll", "$table cell get", &statistics, #LikesRow, 4),"Global")
+                            set(#current_likes,$add(#get_like_cell,1),"Global")
+                        }
+                    }
+                    if($comparison(#current_likes,"= Equals",0)) {
+                        then {
+                            set(#current_likes,1,"Global")
+                        }
+                    }
+                    set table cell(&statistics,#LikesRow,4,#current_likes)
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ACCOUNT [{#username}] LIKE TOTAL = [{#current_likes}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                }
+            }
+        }
+    }
+    if($comparison(#get_comment_cell,"< Less than",#DisableCommenting)) {
+        then {
+            if($comparison(#CommentsActive,"= Equals",1)) {
+                then {
+                    if($comparison($table cell(&statistics,#CommentsRow,5),"!= Does not equal","")) {
+                        then {
+                            set(#get_comment_cell,$plugin function("Advanced Data Text File.dll", "$table cell get", &statistics, #CommentsRow, 5),"Global")
+                            set(#current_comments,$add(#get_comment_cell,1),"Global")
+                        }
+                    }
+                    if($comparison(#current_comments,"= Equals",0)) {
+                        then {
+                            set(#current_comments,1,"Global")
+                        }
+                    }
+                    set table cell(&statistics,#CommentsRow,5,#current_comments)
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ACCOUNT [{#username}] COMMENT TOTAL = [{#current_comments}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                }
+            }
+        }
+    }
+    if($comparison(#get_actions_cell,"< Less than",#DisableMutilTool)) {
+        then {
+            if($comparison(#ActionsActive,"= Equals",1)) {
+                then {
+                    if($comparison($table cell(&statistics,#ActionRow,6),"!= Does not equal","")) {
+                        then {
+                            set(#get_actions_cell,$plugin function("Advanced Data Text File.dll", "$table cell get", &statistics, #ActionRow, 6),"Global")
+                            set(#current_actions,$add(#get_actions_cell,1),"Global")
+                        }
+                    }
+                    if($comparison(#current_actions,"= Equals",0)) {
+                        then {
+                            set(#current_actions,1,"Global")
+                        }
+                    }
+                    set table cell(&statistics,#ActionRow,6,#current_actions)
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ACCOUNT [{#username}] MULTI ACTION TOTAL = [{#current_actions}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                }
+            }
+        }
+    }
+    if($comparison(#get_followback_cell,"< Less than",#DisableFollowBack)) {
+        then {
+            if($comparison(#FollowBackActive,"= Equals",1)) {
+                then {
+                    if($comparison($table cell(&statistics,#FollowBackRow,7),"!= Does not equal","")) {
+                        then {
+                            set(#get_followback_cell,$plugin function("Advanced Data Text File.dll", "$table cell get", &statistics, #FollowBackRow, 7),"Global")
+                            set(#current_follow_backs,$add(#get_followback_cell,1),"Global")
+                        }
+                    }
+                    if($comparison(#current_follow_backs,"= Equals",0)) {
+                        then {
+                            set(#current_follow_backs,1,"Global")
+                        }
+                    }
+                    set table cell(&statistics,#FollowBackRow,7,#current_follow_backs)
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ACCOUNT [{#username}] FOLLOW BACK TOTAL = [{#current_follow_backs}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                }
+            }
+        }
+    }
+    if($comparison(#get_unfollow_cell,"< Less than",#DisableUnfollow)) {
+        then {
+            if($comparison(#UnfollowActive,"= Equals",1)) {
+                then {
+                    if($comparison($table cell(&statistics,#UnfollowRow,8),"!= Does not equal","")) {
+                        then {
+                            set(#get_unfollow_cell,$plugin function("Advanced Data Text File.dll", "$table cell get", &statistics, #UnfollowRow, 8),"Global")
+                            set(#current_unfollows,$add(#get_unfollow_cell,1),"Global")
+                        }
+                    }
+                    if($comparison(#current_unfollows,"= Equals",0)) {
+                        then {
+                            set(#current_unfollows,1,"Global")
+                        }
+                    }
+                    set table cell(&statistics,#UnfollowRow,8,#current_unfollows)
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ACCOUNT [{#username}] UNFOLLOW TOTAL = [{#current_unfollows}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                }
+            }
+        }
+    }
+    TargetTestCellDisabled(#RunTargetTestCellDisabled)
+    set(#cell_counters_total,$add($add($add(#get_follow_cell,#get_like_cell),#get_comment_cell),#get_unfollow_cell),"Global")
+    set table cell(&statistics,#CountersTotalRow,9,"{#cell_counters_total} (actions, follow back not included)")
+    comment("Retains Any Posts Staticstics While in Sucsesstion mode
+if the post bot had been ran before the sucsesstion module
+this retrives the cell data and posts back into the cell")
+    set(#get_post_cell,$plugin function("Advanced Data Text File.dll", "$table cell get", &statistics, #PostRow, 10),"Global")
+    set table cell(&statistics,#PostRow,10,#get_post_cell)
+}
+define TargetSetZeroOperator(#RunTargetSetZeroOperator) {
+    set(#current_follows,0,"Global")
+    set(#current_likes,0,"Global")
+    set(#current_comments,0,"Global")
+    set(#current_actions,0,"Global")
+    set(#current_follow_backs,0,"Global")
+    set(#current_unfollows,0,"Global")
+    set(#cell_counters_total,0,"Global")
+    set(#current_posts,0,"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SETTING UP CURRENT COUNTERS ZERO OPERATORS- LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+}
+define TargetRestCellOperator(#RunRestCellOperator) {
+    set(#get_follow_cell,0,"Global")
+    set(#get_like_cell,0,"Global")
+    set(#get_comment_cell,0,"Global")
+    set(#get_actions_cell,0,"Global")
+    set(#get_followback_cell,0,"Global")
+    set(#get_unfollow_cell,0,"Global")
+    set(#cell_counters_total,0,"Global")
+    set(#get_post_cell,0,"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - RESETTING CELL DATA ZERO OPERATORS ON ROTATION - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+}
+define TargetResetEnabledSetting(#ResetTargetEnabledSetting) {
+    set(#SettingsCounter,0,"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - RESETTING ENABLED SETTINGS COUNTERS - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+}
+define RestTargetDisabledOperator(#RunRestTargetDisabledOperator) {
+    set(#DeactivateFollows,0,"Global")
+    set(#DeactivateLikes,0,"Global")
+    set(#DeactivateComments,0,"Global")
+    set(#DeactivateActions,0,"Global")
+    set(#DeactivateFollowBack,0,"Global")
+    set(#DeactivateUnfollows,0,"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - RESET TRIGGERED - FUNCTION DISABELERS RESET ZERO OPERATORS - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+}
+define TargetSettingsConfigError(#RunTargetSettingsConfigError) {
+    if($both($comparison(#RotateOnEndCriteria,"= Equals","YES"),$comparison(#StopBotOnEndCriteria,"= Equals","NO"))) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE PAUSED - YOU CAN'T HAVE Rotate On End Criteria = YES AND Stop Bot On End Criteria = NO - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE PAUSED - PLEASE CHANGE Stop Bot On End Criteria TO = YES - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            wait(1)
+            plugin command("Advanced Systems.dll", "system sound play", "Hand")
+            pause script
+        }
+    }
+    if($both($comparison(#EnableAccountRotation,"= Equals","NO"),$comparison(#RotateOnEndCriteria,"= Equals","YES"))) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE PAUSED - YOU CAN'T HAVE Enable Account Rotation = NO & Rotate On End Criteria = YES - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE PAUSED - PLEASE CHANGE Enable Account Rotation TO = YES - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            wait(1)
+            plugin command("Advanced Systems.dll", "system sound play", "Hand")
+            pause script
+        }
+    }
+    if($both($comparison(#rotate_account_at,"!= Does not equal","X"),$comparison(#RotateOnEndCriteria,"= Equals","YES"))) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE PAUSED - YOU CAN'T HAVE Rotate Account At Total ENABELED AND Rotate On End Criteria ENABELED TOGETHER, PLEASE CHOSE ONE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            wait(1)
+            plugin command("Advanced Systems.dll", "system sound play", "Hand")
+            pause script
+        }
+    }
+}
+define TargetSuccessionSetup(#RunTargetSuccessionSetup) {
+    plugin command("Bigtable.dll", "Clear all large list")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CLEARING AND RESETING LISTS AND COUNTERS - SUCCESSION BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    if($comparison(#comment_file,"!= Does not equal",$nothing)) {
+        then {
+            plugin command("Bigtable.dll", "Large list from file", "comments", #comment_file_list)
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - COMMENT LIST WAS LOADED AND CREATED SUCCESSFULLY! - COMMENT BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+        }
+        else {
+            if($comparison(#RunFromProjectFolder,"!= Does not equal","YES")) {
+                then {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - TO USE THE COMMENT BOT PLEASE ADD YOUR KEYWORD FILE TO THE SOFTWARE INTERFACE - COMMENT BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    stop script
+                }
+            }
+        }
+    }
+    set(#RunTargetSuccessionValueSets,$TargetSuccessionValueSets(#RunTargetSuccessionValueSets),"Global")
+    if($comparison(#RunFromProjectFolder,"= Equals","YES")) {
+        then {
+            CreateProjectFilePaths(#RunCreateProjectFilePaths)
+        }
+    }
+}
+define $TargetSuccessionValueSets(#RunTargetSuccessionValueSets) {
+    comment("RUNS AT THE BOTTOM OF SUCSESSTION SETUP SCRIPT")
+    if($comparison(#likes_per_user1,"= Equals","")) {
+        then {
+            set(#likes_per_user1,1,"Global")
+        }
+    }
+    if($comparison(#likes_per_user2,"= Equals","")) {
+        then {
+            set(#likes_per_user2,1,"Global")
+        }
+    }
+    if($comparison(#comments_per_user1,"= Equals","")) {
+        then {
+            set(#comments_per_user1,1,"Global")
+        }
+    }
+    if($comparison(#comments_per_user2,"= Equals","")) {
+        then {
+            set(#comments_per_user2,1,"Global")
+        }
+    }
+    if($comparison(#rotate_account_at,"= Equals",$nothing)) {
+        then {
+            set(#rotate_account_at,"X","Global")
+        }
+    }
+    if($comparison(#MultiToolAction,"= Equals","")) {
+        then {
+            set(#MultiToolAction,"Follow - Like","Global")
+        }
+    }
+    if($comparison(#DisableCommenting,"= Equals","")) {
+        then {
+            set(#DisableCommenting,"X","Global")
+        }
+    }
+    if($comparison(#DisableLikeing,"= Equals","")) {
+        then {
+            set(#DisableLikeing,"X","Global")
+        }
+    }
+    if($comparison(#DisableFollowing,"= Equals","")) {
+        then {
+            set(#DisableFollowing,"X","Global")
+        }
+    }
+    if($comparison(#succession_stop_bot_at,"= Equals","")) {
+        then {
+            set(#succession_stop_bot_at,"X","Global")
+        }
+    }
+    if($comparison(#DisableUnfollow,"= Equals","")) {
+        then {
+            set(#DisableUnfollow,"X","Global")
+        }
+    }
+    if($comparison(#FollowGreaterThen,"= Equals","")) {
+        then {
+            set(#FollowGreaterThen,"X","Global")
+        }
+    }
+    if($comparison(#FollowLessThen,"= Equals","")) {
+        then {
+            set(#FollowLessThen,"X","Global")
+        }
+    }
+    if($comparison(#FollowEqualTo,"= Equals","")) {
+        then {
+            set(#FollowEqualTo,"X","Global")
+        }
+    }
+    if($comparison(#DisableMutilTool,"= Equals","")) {
+        then {
+            set(#DisableMutilTool,"Not Recommended","Global")
+        }
+    }
+    set(#diplay_running,"","Global")
+    set(#count_ui_display,0,"Global")
+    set(#delay_ticker,0,"Global")
+    set(#delay_ticker,#delay_time,"Global")
+    set(#keyword_file_pos,0,"Global")
+    set(#comment_file_pos,0,"Global")
+    set(#follow_list_queue,0,"Global")
+    set(#follow_list_counter,0,"Global")
+    set(#multi_tool_queue,0,"Global")
+    set(#mutli_action_counter,0,"Global")
+    set(#likeing_queue,0,"Global")
+    set(#likeing_counter,0,"Global")
+    set(#commeing_queue,0,"Global")
+    set(#commeing_counter,0,"Global")
+    set(#unfollow_list_counter,0,"Global")
+    set(#unfollow_list_queue,0,"Global")
+    set(#FollowColor,"#d9d9d9","Global")
+    set(#LikeColor,"#d9d9d9","Global")
+    set(#CommentColor,"#d9d9d9","Global")
+    set(#ActionsColor,"#d9d9d9","Global")
+    set(#UnfollowColor,"#d9d9d9","Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SUCCESSION SETUP, QUEUE, COUNTERS AND LIST POSITIONS REST -  - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+}
+define $TargetSuccessionLoopSetup(#RunTargetSuccessionLoopSetup) {
+    set(#diplay_running,"","Global")
+    set(#count_ui_display,0,"Global")
+    set(#delay_ticker,0,"Global")
+    set(#delay_ticker,#delay_time,"Global")
+    set(#follow_list_queue,0,"Global")
+    set(#likeing_queue,0,"Global")
+    set(#commeing_queue,0,"Global")
+    set(#multi_tool_queue,0,"Global")
+    set(#unfollow_list_queue,0,"Global")
+    set(#FollowColor,"#d9d9d9","Global")
+    set(#LikeColor,"#d9d9d9","Global")
+    set(#CommentColor,"#d9d9d9","Global")
+    set(#ActionsColor,"#d9d9d9","Global")
+    set(#UnfollowColor,"#d9d9d9","Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SUCCESSION LOOP SETUP - QUEUE AND DELAY TIMERS REST - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+}
+define TargetTestCellDisabled(#RunTargetTestCellDisabled) {
+    if($comparison(#enable_following,"= Equals",$true)) {
+        then {
+            set(#get_follow_cell,$plugin function("Advanced Data Text File.dll", "$table cell get", &statistics, #FollowRow, 3),"Global")
+        }
+    }
+    if($comparison(#enable_likeing,"= Equals",$true)) {
+        then {
+            set(#get_like_cell,$plugin function("Advanced Data Text File.dll", "$table cell get", &statistics, #LikesRow, 4),"Global")
+        }
+    }
+    if($comparison(#enable_commenting,"= Equals",$true)) {
+        then {
+            set(#get_comment_cell,$plugin function("Advanced Data Text File.dll", "$table cell get", &statistics, #CommentsRow, 5),"Global")
+        }
+    }
+    if($comparison(#enable_actioning,"= Equals",$true)) {
+        then {
+            set(#get_actions_cell,$plugin function("Advanced Data Text File.dll", "$table cell get", &statistics, #ActionRow, 6),"Global")
+        }
+    }
+    if($comparison(#unfollow_off_on,"= Equals",$true)) {
+        then {
+            set(#get_unfollow_cell,$plugin function("Advanced Data Text File.dll", "$table cell get", &statistics, #UnfollowRow, 8),"Global")
+        }
+    }
+    comment("TESTING CELL DATA FOR DISABLED END CRITERIA")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - TESTING CELL DATA FOR DISABLED END CRITERIA - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+}
+define TargetCellRoateTrigger(#RunTargetCellRoateTrigger) {
+    if($comparison(#RotateOnEndCriteria,"= Equals","YES")) {
+        then {
+            if($comparison(#SettingsCounter,"<= Less than or equal to",0)) {
+                then {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ROTATE ON END CRITERIA TRIGGER TRIPPED - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    TargetCellStopTrigger(#RunTargetCellStopTrigger)
+                    set(#RunTargetSuccAccRotation,$TargetSuccAccRotation(#RunTargetSuccAccRotation),"Global")
+                }
+            }
+        }
+    }
+}
+define TargetCellStopTrigger(#RunTargetCellStopTrigger) {
+    if($comparison(#StopBotOnEndCriteria,"= Equals","YES")) {
+        then {
+            if($comparison(#SettingsCounter,"<= Less than or equal to",0)) {
+                then {
+                    if($comparison(#account_row,">= Greater than or equal to",$table total rows(&accounts_table))) {
+                        then {
+                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                            run javascript("textarea_id.value += \"{#time} - SOFTWARE STTOPED - STOP ON END CRITERIA SETTING SELECTED AND TRIGGERED - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                            stop script
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+define $TargetSuccessionStop(#RunTargetSuccessionStop) {
+    comment("succession stop function if running just one account")
+    set(#counters_total,$add($add($add(#follow_list_counter,#likeing_counter),#commeing_counter),#unfollow_list_counter),"Global")
+    if($comparison($table total rows(&accounts_table),"= Equals",1)) {
+        then {
+            if($comparison(#counters_total,">= Greater than or equal to",#succession_stop_bot_at)) {
+                then {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SUCCESSION SINGLE ACCOUNT STOP TRIGGER CRITERIA MET - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    set(#FollowColor,"#d9d9d9","Global")
+                    set(#LikeColor,"#d9d9d9","Global")
+                    set(#CommentColor,"#d9d9d9","Global")
+                    set(#ActionsColor,"#d9d9d9","Global")
+                    set(#AutoFollowColor,"#d9d9d9","Global")
+                    set(#UnfollowColor,"#d9d9d9","Global")
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SUCCESSION STOP CRITERIA HAS BEEN MET, SUCCESSION BOT STOPPED - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    stop script
+                }
+            }
+        }
+    }
+    if($comparison($table total rows(&accounts_table),"> Greater than",1)) {
+        then {
+            if($comparison(#AllFunctionCounter,">= Greater than or equal to",#succession_stop_bot_at)) {
+                then {
+                    comment("succession stop function if running multiple accounts")
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SUCCESSION MULTIPLE ACCOUNT STOP TRIGGER CRITERIA MET - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    set(#FollowColor,"#d9d9d9","Global")
+                    set(#LikeColor,"#d9d9d9","Global")
+                    set(#CommentColor,"#d9d9d9","Global")
+                    set(#ActionsColor,"#d9d9d9","Global")
+                    set(#AutoFollowColor,"#d9d9d9","Global")
+                    set(#UnfollowColor,"#d9d9d9","Global")
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SUCCESSION STOP CRITERIA HAS BEEN MET, SUCCESSION BOT STOPPED - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    stop script
+                }
+            }
+        }
+    }
+}
+define $TargetSuccAccRotation(#RunTargetSuccAccRotation) {
+    set(#counters_total,$add($add($add(#follow_list_counter,#likeing_counter),#commeing_counter),#unfollow_list_counter),"Global")
+    if($comparison(#rotate_account_at,"!= Does not equal","X")) {
+        then {
+            if($comparison(#counters_total,">= Greater than or equal to",#rotate_account_at)) {
+                then {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time}  - SOFTWARE ROTATION - SUCCESSION ACCOUNT ROTATION CRITERIA HAS BEEN MET, ROTATING TO NEXT ACCOUNT IN LIST - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    if($comparison(#account_row,"> Greater than",$subtract($table total rows(&accounts_table),1))) {
+                        then {
+                            set(#RunRotationAccountRest,$RotationAccountRest(#RunRotationAccountRest),"Global")
+                        }
+                    }
+                    InstaPromoterDriverKiller(#RunInstaPromoterDriverKiller)
+                    plugin command("ExBrowser.dll", "ExBrowser Delete All Cookies")
+                    set(#RunRotationLogin,$RotationLoginFunction(#RunRotationLogin),"Global")
+                    TargetSuccessionSetup(#RunTargetSuccessionSetup)
+                    TargetRestCellOperator(#RunRestCellOperator)
+                }
+            }
+        }
+    }
+    if($comparison(#RotateOnEndCriteria,"= Equals","YES")) {
+        then {
+            if($comparison(#SettingsCounter,"<= Less than or equal to",0)) {
+                then {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ROTATE ON END CRITERIA MET - ROTATING TO NEXT ACCOUNT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    if($comparison(#account_row,"> Greater than",$subtract($table total rows(&accounts_table),1))) {
+                        then {
+                            set(#RunRotationAccountRest,$RotationAccountRest(#RunRotationAccountRest),"Global")
+                        }
+                    }
+                    InstaPromoterDriverKiller(#RunInstaPromoterDriverKiller)
+                    plugin command("ExBrowser.dll", "ExBrowser Delete All Cookies")
+                    set(#RunRotationLogin,$RotationLoginFunction(#RunRotationLogin),"Global")
+                    TargetSuccessionSetup(#RunTargetSuccessionSetup)
+                    TargetRestCellOperator(#RunRestCellOperator)
+                    RestTargetDisabledOperator(#RunRestTargetDisabledOperator)
+                    TargetResetEnabledSetting(#ResetTargetEnabledSetting)
+                    QualifySettingsCounter(#RunQualifySettingsCounter)
+                }
+            }
+        }
+    }
+}
+define TargetCreateStatsTable(#RunTargetCreateStatsTable) {
+    clear table(&statistics)
+    TargetStatisticsSetup(#RunTargetStatisticsSetup)
+    loop($table total rows(&accounts_table)) {
+        set(#username,$table cell(&accounts_table,#UsernameRow,0),"Global")
+        set table cell(&statistics,#UsernameRow,0,#username)
+        set(#password,$table cell(&accounts_table,#PasswordRow,1),"Global")
+        set table cell(&statistics,#PasswordRow,1,#password)
+        if($comparison(#proxy_file,"!= Does not equal","")) {
+            then {
+                set(#proxy,$table cell(&proxy_table,#ProxyRow,0),"Global")
+            }
+        }
+        set table cell(&statistics,#ProxyRow,2,#proxy)
+        set table cell(&statistics,#FollowRow,3,$nothing)
+        set table cell(&statistics,#LikesRow,4,$nothing)
+        set table cell(&statistics,#CommentsRow,5,$nothing)
+        set table cell(&statistics,#ActionRow,6,$nothing)
+        set table cell(&statistics,#FollowBackRow,7,$nothing)
+        set table cell(&statistics,#UnfollowRow,8,$nothing)
+        set table cell(&statistics,#CountersTotalRow,9,$nothing)
+        set table cell(&statistics,#PostRow,10,$nothing)
+        DateTimeLogStamp(#RunDateTimeLogStamp)
+        run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CREATING STATISTICS TABLE SETUP - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+        TargetIncStatistics(#RunTargetIncStatistics)
+    }
+    TargetStatisticsSetup(#RunTargetStatisticsSetup)
+}
+define TargetStatisticsSetup(#RunTargetStatisticsSetup) {
+    if($comparison(#RunFromProjectFolder,"= Equals","YES")) {
+        then {
+            CreateProjectPathPosOnStart(#RunCreateProjectPathPosOnStart)
+        }
+    }
+    set(#UsernameRow,0,"Global")
+    set(#PasswordRow,0,"Global")
+    set(#ProxyRow,0,"Global")
+    set(#FollowRow,0,"Global")
+    set(#LikesRow,0,"Global")
+    set(#CommentsRow,0,"Global")
+    set(#ActionRow,0,"Global")
+    set(#FollowBackRow,0,"Global")
+    set(#UnfollowRow,0,"Global")
+    set(#CountersTotalRow,0,"Global")
+    set(#PostRow,0,"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - RESETTING CELL DATA STATISTICS ROW - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+}
+define TargetIncStatistics(#RunTargetIncStatistics) {
+    increment(#UsernameRow)
+    increment(#PasswordRow)
+    increment(#ProxyRow)
+    increment(#FollowRow)
+    increment(#LikesRow)
+    increment(#CommentsRow)
+    increment(#ActionRow)
+    increment(#FollowBackRow)
+    increment(#UnfollowRow)
+    increment(#CountersTotalRow)
+    increment(#PostRow)
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - INCREMENTING CELL DATA STATISTICS ROW - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+}
+define TargetRestSoftwareButton(#RunRestTargetRestSoftwareButton) {
+    set(#SettingsCounter,0,"Global")
+    set(#AllFunctionCounter,0,"Global")
+    set(#UsernameRow,0,"Global")
+    set(#PasswordRow,0,"Global")
+    set(#ProxyRow,0,"Global")
+    set(#FollowRow,0,"Global")
+    set(#LikesRow,0,"Global")
+    set(#CommentsRow,0,"Global")
+    set(#ActionRow,0,"Global")
+    set(#FollowBackRow,0,"Global")
+    set(#UnfollowRow,0,"Global")
+    set(#CountersTotalRow,0,"Global")
+    set(#current_follows,0,"Global")
+    set(#current_likes,0,"Global")
+    set(#current_comments,0,"Global")
+    set(#current_actions,0,"Global")
+    set(#current_follow_backs,0,"Global")
+    set(#current_unfollows,0,"Global")
+    set(#cell_counters_total,0,"Global")
+    set(#FollowsActive,0,"Global")
+    set(#LikesActive,0,"Global")
+    set(#CommentsActive,0,"Global")
+    set(#ActionsActive,0,"Global")
+    set(#FollowBackActive,0,"Global")
+    set(#UnfollowActive,0,"Global")
+    set(#get_follow_cell,0,"Global")
+    set(#get_like_cell,0,"Global")
+    set(#get_comment_cell,0,"Global")
+    set(#get_actions_cell,0,"Global")
+    set(#get_followback_cell,0,"Global")
+    set(#get_unfollow_cell,0,"Global")
+    set(#DeactivateFollows,"","Global")
+    set(#DeactivateLikes,"","Global")
+    set(#DeactivateComments,"","Global")
+    set(#DeactivateActions,"","Global")
+    set(#DeactivateFollowBack,"","Global")
+    set(#DeactivateUnfollows,"","Global")
+    set(#master_delay_trigger,0,"Global")
+    set(#diplay_running,"","Global")
+    set(#count_ui_display,"","Global")
+    set(#count_ui_display,0,"Global")
+    set(#delay_ticker,0,"Global")
+    set(#delay_ticker,#delay_time,"Global")
+    set(#keyword_file_pos,0,"Global")
+    set(#comment_file_pos,0,"Global")
+    set(#follow_queue,0,"Global")
+    set(#follow_counter,0,"Global")
+    set(#autofollow_counter,0,"Global")
+    set(#autofollow_queue,0,"Global")
+    set(#action_queue,0,"Global")
+    set(#action_counter,0,"Global")
+    set(#like_queue,0,"Global")
+    set(#like_counter,0,"Global")
+    set(#comment_queue,0,"Global")
+    set(#comment_counter,0,"Global")
+    set(#unfollow_counter,0,"Global")
+    set(#unfollow_queue,0,"Global")
+    set(#FollowColor,"#d9d9d9","Global")
+    set(#LikeColor,"#d9d9d9","Global")
+    set(#CommentColor,"#d9d9d9","Global")
+    set(#ActionsColor,"#d9d9d9","Global")
+    set(#AutoFollowColor,"#d9d9d9","Global")
+    set(#UnfollowColor,"#d9d9d9","Global")
+    set(#follow_list_queue,0,"Global")
+    set(#follow_list_counter,0,"Global")
+    set(#multi_tool_queue,0,"Global")
+    set(#mutli_action_counter,0,"Global")
+    set(#likeing_queue,0,"Global")
+    set(#likeing_counter,0,"Global")
+    set(#commeing_queue,0,"Global")
+    set(#commeing_counter,0,"Global")
+    set(#unfollow_list_counter,0,"Global")
+    set(#unfollow_list_queue,0,"Global")
+    if($comparison(#RunFromProjectFolder,"= Equals","YES")) {
+        then {
+            CreateProjectPathPosOnStart(#RunCreateProjectPathPosOnStart)
+        }
+    }
+    save to file("{$special folder("Application")}\\statistics\\statistics.csv",&statistics)
+    delete file("{$special folder("Application")}\\statistics\\statistics.csv")
+}

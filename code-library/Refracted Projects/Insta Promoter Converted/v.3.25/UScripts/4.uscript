@@ -1,0 +1,750 @@
+define Login System(#LoginSystem) {
+    if($not($exists(<id="textarea_id">))) {
+        then {
+            InstaPromoterDriverKiller(#RunInstaPromoterDriverKiller)
+            set(#browser ui,$read file("{$special folder("Application")}\\htui\\log-ui.html"),"Global")
+            load html(#browser ui)
+            wait for element(<id="textarea_id">,10,"Appear")
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SYSTEM SETUP COMPLETE - LOG LOADDED AND REFRESHED - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+        }
+    }
+    set(#null3,$plugin function("ExBrowser.dll", "$ExBrowser Browser Alive"),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CHEAKING IF BROWSER IS ALIVE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    if($comparison(#null3,"= Equals","true")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BROWSER ALIVE: CLEANING UP & CLOSING THE CURRENT CHROME BROWSER - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("ExBrowser.dll", "ExBrowser CleanUp Light")
+        }
+    }
+    if($comparison(#trigger_one,"=",0)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CLEARING ACCOUNT AND PROXY TABLES - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            clear table(&accounts_table)
+            clear table(&proxy_table)
+        }
+    }
+    if($comparison(#account_file,"!=","")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CREATING ACCOUNT TABLE FROM FILE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            create table from file(#account_file,&accounts_table)
+        }
+        else {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - PLEASE ADD YOUR ACCOUNT FILE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            stop script
+        }
+    }
+    if($comparison(#proxy_file,"!=","")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PROXY FILE DETECTED, CREATING PROXY LIST FROM FILE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            create table from file(#proxy_file,&proxy_table)
+        }
+        else {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - NO PROXY FILE DETECTED - IF YOU USE PROXIES PLEASE LOAD FILE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+        }
+    }
+    if($comparison(#trigger_one,"=",0)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - RESTTING PROXY AND ACCOUNT ROWS AND - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#account_row,0,"Global")
+            set(#proxy_row,0,"Global")
+        }
+    }
+    if($comparison(#proxy_file,"!= Does not equal",$nothing)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PROXY FILE HAS BEEN DETECTED - SETTING UP PROXY CELLS - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#ip_authentication,$table cell(&proxy_table,#proxy_row,0),"Global")
+            set(#user_authentication,$table cell(&proxy_table,#proxy_row,1),"Global")
+            set(#pass_authentication,$table cell(&proxy_table,#proxy_row,2),"Global")
+        }
+    }
+    SetUserAgentString(#RunSetUserAgentString)
+    if($comparison($table total columns(&proxy_table),"=",3)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LAUNCHING NEW INSTANCE OF CHROME - PROXY DETECTED [IP:PORT,USER,PASS] - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", $plugin function("ExBrowser.dll", "$ExBrowser Set HTTP Proxy", #ip_authentication, #user_authentication, #pass_authentication), "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\port\\66.0.3359.139\\App\\Chrome-bin\\insta-promoter.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Window Size", 1073, 728)}{$plugin function("ExBrowser.dll", "$ExBrowser Set User Agent", #user_agent)}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\ext\\6894523.crx")}")
+        }
+        else if($comparison($table total columns(&proxy_table),"=",1)) {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LAUNCHING NEW INSTANCE OF CHROME - PROXY DETECTED [IP:PORT] - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", $plugin function("ExBrowser.dll", "$ExBrowser Set HTTP Proxy", #ip_authentication, "", ""), "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\port\\66.0.3359.139\\App\\Chrome-bin\\insta-promoter.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Window Size", 1073, 728)}{$plugin function("ExBrowser.dll", "$ExBrowser Set User Agent", #user_agent)}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\ext\\6894523.crx")}")
+        }
+        else {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LAUNCHING NEW INSTANCE OF CHROME - NO PROXY DETECTED - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", "", "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\port\\66.0.3359.139\\App\\Chrome-bin\\insta-promoter.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Window Size", 1073, 728)}{$plugin function("ExBrowser.dll", "$ExBrowser Set User Agent", #user_agent)}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\ext\\6894523.crx")}")
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Dom Ready", 10)
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE WARNING - THIS IS THE ONLY SITE AUTHORIZED TO SELL THIS SOFTWARE: [ https://softwareautomation.org/ ] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+textarea_id.value += \"{#time} - SOFTWARE WARNING - IF YOU PURCHASED THIS SOFTWARE FROM ANY OTHER SITE PLEASE CONTACT US [support@softwareautomation.org] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    if($comparison(#trigger_one,"=",0)) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://softwareautomation.org/software/info-rotator.php")
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Dom Ready", 10)
+    if($comparison(#ShowHideBrowser,"= Equals","HIDE")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Hide Portable Browser", "insta-promoter", "Hide Browser(s)")
+        }
+    }
+    wait(5)
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SENDING REQUEST TO THE INSTAGRAM LOGIN PAGE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Dom Ready", 10)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Displayed", "x://a[@href=\"/accounts/login/\"][.=\"Log in\"]", "Wait until Displayed", 30)
+    set(#ran_wait,$rand(2,5),"Global")
+    wait(#ran_wait)
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/accounts/login/\"][.=\"Log in\"]")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Displayed", "x://input[@name=\'username\']", "Wait until Displayed", 30)
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ENTERING INSTAGRAM USERNAME AND PASSWORD IN THE LOGIN PAGE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    set(#ran_wait,$rand(2,5),"Global")
+    wait(#ran_wait)
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ENTERING USERNAME INTO LOGIN FIELD - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Type Text2", "x://input[@name=\"username\"]", "Yes", $table cell(&accounts_table,#account_row,0), 10, 100)
+    set(#ran_wait,$rand(2,5),"Global")
+    wait(#ran_wait)
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ENTERING PASSWORD INTO LOGIN FIELD - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Type Text2", "x://input[@name=\"password\"]", "Yes", $table cell(&accounts_table,#account_row,1), 10, 100)
+    set(#ran_wait,$rand(2,5),"Global")
+    wait(#ran_wait)
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ATTEMPTING TO LOG INTO YOUR INSTAGRAM ACCOUNT - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    loop(2) {
+        set(#react_root,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<span\\sclass=\")[a-z_A-Z-0-9.\\s+]+(?=\"><button\\sclass=\"[a-z_A-Z-0-9.\\s+]+\">Log\\sin)"),"Global")
+        plugin command("ExBrowser.dll", "ExBrowser Move Mouse", "x://span[@class=\"{#react_root}\"][.=\"Log in\"]")
+        plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@class=\"{#react_root}\"][.=\"Log in\"]")
+        set(#react_root,$nothing,"Global")
+    }
+    wait(1)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Displayed", "x://span[@id=\"react-root\"]", "Wait until Displayed", 30)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]", "Appear", 30)
+    increment(#account_row)
+    increment(#proxy_row)
+    increment(#trigger_one)
+    if($not($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://html[@class=\"js logged-in client-root\"]"))) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://html[@class=\"js logged-in client-root\"]", "Appear", 3)
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Dom Ready", 10)
+    wait(3)
+    if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://html/body/div[3]/div/div[2]/div/div/div/div[2]/div[2]")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Move Mouse", "x://html/body/div[3]/div/div[2]/div/div/div/div[2]/div[2]")
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/div/div[2]/div/div/div/div[2]/div[2]")
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[4]/div/button")
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Move Mouse", "x://span[@id=\"react-root\"]/section/div/span")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/div/span")
+    if($not($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://html[@class=\"js logged-in client-root\"]"))) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://html[@class=\"js logged-in client-root\"]", "Appear", 3)
+        }
+    }
+    if($not($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://html[@class=\"js logged-in client-root\"]"))) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://html[@class=\"js logged-in client-root\"]", "Appear", 3)
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[4]/div/button")
+    loop while($comparison($plugin function("Bigtable.dll", "Large list total", "user_profile"),"= Equals",0)) {
+        plugin command("Bigtable.dll", "Clear large list", "user_profile")
+        plugin command("Bigtable.dll", "large List from Regex", "user_profile", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!Profile\"\\shref=\"\\/)[A-Za-z.0-9_-]+(?=\\/\">Profile<\\/a>)", "add")
+        wait(1)
+    }
+    plugin command("Bigtable.dll", "Large list Remove duplicates", "user_profile")
+    set(#user_profile,$plugin function("Bigtable.dll", "Large list item", "user_profile", 0),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SENDING REQUEST TO USER: [{#user_profile}] PROFILE PAGE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/{#user_profile}/\"][.=\"Profile\"]")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/form")
+}
+define Account Rest(#Rest Accounts) {
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ACCOUNT RESET INITIATED, CLEANING AND CLOSING CHROME - PLEASE WAIT! - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    set(#null3,$plugin function("ExBrowser.dll", "$ExBrowser Browser Alive"),"Global")
+    if($comparison(#null3,"= Equals","true")) {
+        then {
+            InstaPromoterDriverKiller(#RunInstaPromoterDriverKiller)
+        }
+    }
+    clear table(&accounts_table)
+    clear table(&proxy_table)
+    set(#proxy_row,0,"Global")
+    set(#account_row,0,"Global")
+    set(#trigger_one,0,"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - ACCOUNT RESET AND BROWSER CLOSED SUCCESSFULLY - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+}
+define $Post Module Login System(#PostLoginSystem) {
+    if($not($exists(<id="textarea_id">))) {
+        then {
+            InstaPromoterDriverKiller(#RunInstaPromoterDriverKiller)
+            set(#browser ui,$read file("{$special folder("Application")}\\htui\\log-ui.html"),"Global")
+            load html(#browser ui)
+            wait(3)
+            wait for element(<id="textarea_id">,10,"Appear")
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SYSTEM SETUP COMPLETE - LOG LOADDED AND REFRESHED - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+        }
+    }
+    set(#null3,$plugin function("ExBrowser.dll", "$ExBrowser Browser Alive"),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CHEAKING IF BROWSER IS ALIVE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    if($comparison(#null3,"= Equals","true")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING -  BROWSER ALIVE: CLEANING & CLOSING THE CURRENT CHROME BROWSER - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            InstaPromoterDriverKiller(#RunInstaPromoterDriverKiller)
+        }
+    }
+    if($comparison(#trigger_one,"=",0)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING -  CLEARING ACCOUNT AND PROXY TABLES - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            clear table(&accounts_table)
+            clear table(&proxy_table)
+        }
+    }
+    if($comparison(#account_file,"!=","")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING -  CLEARING ACCOUNT LIST FROM FILE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            create table from file(#account_file,&accounts_table)
+        }
+        else {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PLEASE ADD YOUR ACCOUNT FILE TO USE THE SOFTWARE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            stop script
+        }
+    }
+    if($comparison(#proxy_file,"!=","")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CREATING PROXY LIST FROM PROXY FILE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            create table from file(#proxy_file,&proxy_table)
+        }
+        else {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - NO PROXY FILE DETECTED - IF YOU USE PROXIES PLEASE LOAD FILE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+        }
+    }
+    if($comparison(#trigger_one,"=",0)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - RESETTING ACCOUNT AND PROXY ROW - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#account_row,0,"Global")
+            set(#proxy_row,0,"Global")
+        }
+    }
+    if($comparison(#proxy_file,"!= Does not equal",$nothing)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PROXY FILE HAS BEEN DETECTED - SETTING UP PROXY CELLS - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#ip_authentication,$table cell(&proxy_table,#proxy_row,0),"Global")
+            set(#user_authentication,$table cell(&proxy_table,#proxy_row,1),"Global")
+            set(#pass_authentication,$table cell(&proxy_table,#proxy_row,2),"Global")
+        }
+    }
+    SetUserAgentString(#RunSetUserAgentString)
+    if($comparison($table total columns(&proxy_table),"=",3)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LAUNCHING NEW INSTANCE OF CHROME - PROXY DETECTED [IP:PORT,USER,PASS] - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", $plugin function("ExBrowser.dll", "$ExBrowser Set HTTP Proxy", #ip_authentication, #user_authentication, #pass_authentication), "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\port\\66.0.3359.139\\App\\Chrome-bin\\insta-promoter.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Set User Agent", #user_agent)}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\ext\\6894523.crx")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\ext\\2569872.crx")}")
+        }
+        else if($comparison($table total columns(&proxy_table),"=",1)) {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LAUNCHING NEW INSTANCE OF CHROME - PROXY DETECTED [IP:PORT] - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", $plugin function("ExBrowser.dll", "$ExBrowser Set HTTP Proxy", #pass_authentication, "", ""), "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\port\\66.0.3359.139\\App\\Chrome-bin\\insta-promoter.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Set User Agent", #user_agent)}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\ext\\6894523.crx")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\ext\\2569872.crx")}")
+        }
+        else {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LAUNCHING NEW INSTANCE OF CHROME - NO PROXY DETECTED - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", "", "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\port\\66.0.3359.139\\App\\Chrome-bin\\insta-promoter.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Set User Agent", #user_agent)}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\ext\\6894523.crx")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\ext\\2569872.crx")}")
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Dom Ready", 10)
+    wait(4)
+    plugin command("ExBrowser.dll", "ExBrowser Close visible Browser Tab")
+    plugin command("ExBrowser.dll", "ExBrowser Close visible Browser Tab")
+    plugin command("ExBrowser.dll", "ExBrowser Switch to Window", "Instagram")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://div[@class=\"introjs-overlay\"]", "Appear", 30)
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://div[@class=\"introjs-overlay\"]")
+    wait(1)
+    if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://a[@href=\"/accounts/login/\"][.=\"Log in\"]")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/accounts/login/\"][.=\"Log in\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/accounts/login/\"][.=\"Log In\"]")
+        }
+        else {
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/article/div/div/div/form/span/button")
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://input[@name=\'username\']", "Appear", 30)
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ENTERING INSTAGRAM USERNAME AND PASSWORD IN THE LOGIN PAGE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Type Text", "x://input[@name=\'username\']", $table cell(&accounts_table,#account_row,0))
+    wait(1)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://input[@name=\'password\']", "Appear", 30)
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ENTERING INSTAGRAM USERNAME AND PASSWORD IN THE LOGIN PAGE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Type Text", "x://input[@name=\'password\']", $table cell(&accounts_table,#account_row,1))
+    wait(1)
+    plugin command("ExBrowser.dll", "ExBrowser Move Mouse", "x://span[@id=\"react-root\"]/section/main/article/div/div/div/form/span/button")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/article/div/div/div/form/span/button")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://a[@title=\"Screenshot Window\"]", "Appear", 30)
+    wait(3)
+    if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://a[@title=\"Screenshot Window\"]")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - INSTAGRAM ACCOUNT LOGIN WAS A SUCCESS! - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+        }
+        else {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SOMETHING WENT WRONG, YOUR INSTAGRAM LOGIN FAILED! - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            stop script
+        }
+    }
+    increment(#account_row)
+    increment(#proxy_row)
+    increment(#trigger_one)
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Not Now")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[6]/div/div[2]/div/div/div/div[2]/div[2]")
+        }
+    }
+    if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://div[@tabindex=\"0\"][.=\"Not Now\"]")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://div[@tabindex=\"0\"][.=\"Not Now\"]")
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[4]/div/button")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://instagram.com")
+}
+define $RotationLoginFunction(#RunRotationLogin) {
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SUCCESSION - ROTATE LOG IN RUNNING - ROTATING TO NEXT ACCOUNT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    if($both($comparison(#trigger_one,"= Equals",0),$comparison(#TargetModuleActive,"= Equals",1))) {
+        then {
+            TargetStatisticsSetup(#RunTargetStatisticsSetup)
+        }
+    }
+    if($both($comparison(#trigger_one,"= Equals",0),$comparison(#SuccessionModuleActive,"= Equals",1))) {
+        then {
+            StatisticsSetup(#RunStatisticsSetup)
+        }
+    }
+    if($both($comparison(#trigger_one,"!= Does not equal",0),$comparison(#TargetModuleActive,"= Equals",1))) {
+        then {
+            SetTriggerCountersOff(#RunSetTriggerCountersOff)
+            TargetIncStatistics(#RunTargetIncStatistics)
+            if($comparison(#RunFromProjectFolder,"= Equals","YES")) {
+                then {
+                    IncreaseProjectPaths(#RunIncreaseProjectPaths)
+                }
+            }
+        }
+    }
+    if($both($comparison(#trigger_one,"!= Does not equal",0),$comparison(#SuccessionModuleActive,"= Equals",1))) {
+        then {
+            SetActiveCounterOff(#RunSetActiveCounterOff)
+            IncrementalStatistics(#RunIncrementalStatistics)
+            if($comparison(#RunFromProjectFolder,"= Equals","YES")) {
+                then {
+                    IncrementProjectPaths(#RunIncrementProjectPaths)
+                }
+            }
+        }
+    }
+    if($not($exists(<id="textarea_id">))) {
+        then {
+            InstaPromoterDriverKiller(#RunInstaPromoterDriverKiller)
+            set(#browser ui,$read file("{$special folder("Application")}\\htui\\log-ui.html"),"Global")
+            load html(#browser ui)
+            wait for element(<id="textarea_id">,10,"Appear")
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SYSTEM SETUP COMPLETE - LOG LOADDED AND REFRESHED - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+        }
+    }
+    set(#null3,$plugin function("ExBrowser.dll", "$ExBrowser Browser Alive"),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CHEAKING IF BROWSER IS ALIVE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    if($comparison(#null3,"= Equals","true")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BROWSER ALIVE: CLEANING UP & CLOSING THE CURRENT CHROME BROWSER - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            InstaPromoterDriverKiller(#RunInstaPromoterDriverKiller)
+        }
+    }
+    if($comparison(#trigger_one,"=",0)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CLEARING ACCOUNT AND PROXY TABLES - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            clear table(&accounts_table)
+            clear table(&proxy_table)
+        }
+    }
+    if($comparison(#account_file,"!=","")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CREATING ACCOUNT TABLE FROM FILE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            create table from file(#account_file,&accounts_table)
+        }
+        else {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - PLEASE ADD YOUR ACCOUNT FILE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            stop script
+        }
+    }
+    if($comparison(#proxy_file,"!=","")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PROXY FILE DETECTED, CREATING PROXY LIST FROM FILE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            create table from file(#proxy_file,&proxy_table)
+        }
+        else {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - NO PROXY FILE DETECTED - IF YOU USE PROXIES PLEASE LOAD FILE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+        }
+    }
+    if($comparison(#trigger_one,"=",0)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - RESTTING PROXY AND ACCOUNT ROWS AND - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#account_row,0,"Global")
+            set(#proxy_row,0,"Global")
+        }
+    }
+    if($comparison(#proxy_file,"!= Does not equal",$nothing)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PROXY FILE HAS BEEN DETECTED - SETTING UP PROXY CELLS - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#ip_authentication,$table cell(&proxy_table,#proxy_row,0),"Global")
+            set(#user_authentication,$table cell(&proxy_table,#proxy_row,1),"Global")
+            set(#pass_authentication,$table cell(&proxy_table,#proxy_row,2),"Global")
+        }
+    }
+    SetUserAgentString(#RunSetUserAgentString)
+    if($comparison($table total columns(&proxy_table),"=",3)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LAUNCHING NEW INSTANCE OF CHROME - PROXY DETECTED [IP:PORT,USER,PASS] - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", $plugin function("ExBrowser.dll", "$ExBrowser Set HTTP Proxy", #ip_authentication, #user_authentication, #pass_authentication), "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\port\\66.0.3359.139\\App\\Chrome-bin\\insta-promoter.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Set User Agent", #user_agent)}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\ext\\6894523.crx")}")
+        }
+        else if($comparison($table total columns(&proxy_table),"=",1)) {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LAUNCHING NEW INSTANCE OF CHROME - PROXY DETECTED [IP:PORT] - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", $plugin function("ExBrowser.dll", "$ExBrowser Set HTTP Proxy", #ip_authentication, "", ""), "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\port\\66.0.3359.139\\App\\Chrome-bin\\insta-promoter.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Set User Agent", #user_agent)}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\ext\\6894523.crx")}")
+        }
+        else {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LAUNCHING NEW INSTANCE OF CHROME - NO PROXY DETECTED - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", "", "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\port\\66.0.3359.139\\App\\Chrome-bin\\insta-promoter.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Set User Agent", #user_agent)}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\ext\\6894523.crx")}")
+        }
+    }
+    if($comparison(#trigger_one,"!= Does not equal",0)) {
+        then {
+            if($comparison(#ShowHideBrowser,"= Equals","HIDE")) {
+                then {
+                    plugin command("ExBrowser.dll", "ExBrowser Hide Portable Browser", "insta-promoter", "Hide Browser(s)")
+                }
+            }
+        }
+    }
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE WARNING - THIS IS THE ONLY SITE AUTHORIZED TO SELL THIS SOFTWARE: [ https://softwareautomation.org/ ] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+textarea_id.value += \"{#time} - SOFTWARE WARNING - IF YOU PURCHASED THIS SOFTWARE FROM ANY OTHER SITE PLEASE CONTACT US [support@softwareautomation.org] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    if($comparison(#trigger_one,"=",0)) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://softwareautomation.org/software/info-rotator.php")
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Dom Ready", 10)
+    wait(5)
+    if($comparison(#trigger_one,"=",0)) {
+        then {
+            if($comparison(#ShowHideBrowser,"= Equals","HIDE")) {
+                then {
+                    plugin command("ExBrowser.dll", "ExBrowser Hide Portable Browser", "insta-promoter", "Hide Browser(s)")
+                }
+            }
+        }
+    }
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SENDING REQUEST TO THE INSTAGRAM LOGIN PAGE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Dom Ready", 10)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Displayed", "x://a[@href=\"/accounts/login/\"][.=\"Log in\"]", "Wait until Displayed", 30)
+    set(#ran_wait,$rand(3,6),"Global")
+    wait(#ran_wait)
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/accounts/login/\"][.=\"Log In\"]")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/account/login/\"][.=\"Log In\"]")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/accounts/login/\"][.=\"Log in\"]")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/accounts/login/\"][.=\"log in\"]")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/account/login/\"][.=\"Log in\"]")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/account/login/\"][.=\"log in\"]")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/head/style[34]/text()")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/article/div[2]/div[2]/p/a")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Displayed", "x://input[@name=\'username\']", "Wait until Displayed", 30)
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ENTERING INSTAGRAM USERNAME AND PASSWORD IN THE LOGIN PAGE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    set(#ran_wait,$rand(2,5),"Global")
+    wait(#ran_wait)
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ENTERING USERNAME INTO LOGIN FIELD - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Type Text2", "x://input[@name=\"username\"]", "Yes", $table cell(&accounts_table,#account_row,0), 10, 100)
+    set(#ran_wait,$rand(2,5),"Global")
+    wait(#ran_wait)
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ENTERING PASSWORD INTO LOGIN FIELD - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Type Text2", "x://input[@name=\"password\"]", "Yes", $table cell(&accounts_table,#account_row,1), 10, 100)
+    set(#ran_wait,$rand(2,5),"Global")
+    wait(#ran_wait)
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ATTEMPTING TO LOG INTO YOUR INSTAGRAM ACCOUNT - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    loop(2) {
+        set(#react_root,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<span\\sclass=\")[a-z_A-Z-0-9.\\s+]+(?=\"><button\\sclass=\"[a-z_A-Z-0-9.\\s+]+\">Log\\sin)"),"Global")
+        plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@class=\"{#react_root}\"][.=\"Log in\"]")
+        set(#react_root,$nothing,"Global")
+    }
+    wait(1)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Displayed", "x://span[@id=\"react-root\"]", "Wait until Displayed", 30)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]", "Appear", 30)
+    divider
+    divider
+    increment(#account_row)
+    increment(#proxy_row)
+    increment(#trigger_one)
+    if($not($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://html[@class=\"js logged-in client-root\"]"))) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://html[@class=\"js logged-in client-root\"]", "Appear", 3)
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Dom Ready", 10)
+    wait(3)
+    if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://html/body/div[3]/div/div[2]/div/div/div/div[2]/div[2]")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Move Mouse", "x://html/body/div[3]/div/div[2]/div/div/div/div[2]/div[2]")
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/div/div[2]/div/div/div/div[2]/div[2]")
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[4]/div/button")
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Move Mouse", "x://span[@id=\"react-root\"]/section/div/span")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/div/span")
+    if($not($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://html[@class=\"js logged-in client-root\"]"))) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://html[@class=\"js logged-in client-root\"]", "Appear", 3)
+        }
+    }
+    if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://html[@class=\"js logged-in client-root\"]")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - YOUR INSTAGRAM ACCOUNT LOGIN WAS A SUCCESS! - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+        }
+        else {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SOMETHING WENT WRONG, YOUR INSTAGRAM LOGIN FAILED - PLEASE TRY AGAIN - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[4]/div/button")
+    loop while($comparison($plugin function("Bigtable.dll", "Large list total", "user_profile"),"= Equals",0)) {
+        plugin command("Bigtable.dll", "Clear large list", "user_profile")
+        plugin command("Bigtable.dll", "large List from Regex", "user_profile", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!Profile\"\\shref=\"\\/)[A-Za-z.0-9_-]+(?=\\/\">Profile<\\/a>)", "add")
+        wait(1)
+    }
+    plugin command("Bigtable.dll", "Large list Remove duplicates", "user_profile")
+    set(#user_profile,$plugin function("Bigtable.dll", "Large list item", "user_profile", 0),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SENDING REQUEST TO USER: [{#user_profile}] PROFILE PAGE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/{#user_profile}/\"][.=\"Profile\"]")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/form")
+}
+define $RotationAccountRest(#RunRotationAccountRest) {
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ROTATE ACCOUNT RESET TRIGGER TRIPPED RESETTING ACCOUNT & PROXY TABLE DATA CLEANING & CLOSING BROWSER - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    set(#null3,$plugin function("ExBrowser.dll", "$ExBrowser Browser Alive"),"Global")
+    if($comparison(#null3,"= Equals","true")) {
+        then {
+            InstaPromoterDriverKiller(#RunInstaPromoterDriverKiller)
+        }
+    }
+    clear table(&accounts_table)
+    clear table(&proxy_table)
+    set(#proxy_row,0,"Global")
+    set(#account_row,0,"Global")
+    set(#trigger_one,0,"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - ACCOUNT RESET AND BROWSER CLOSED SUCCESSFULLY - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+}
+define ProfileLinkGraber(#RunProfileLinkGraber) {
+    if($comparison($plugin function("Bigtable.dll", "Large list total", "user_profile"),"= Equals",0)) {
+        then {
+            plugin command("Bigtable.dll", "Clear large list", "user_profile")
+            plugin command("Bigtable.dll", "large List from Regex", "user_profile", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!Profile\"\\shref=\"\\/)[A-Za-z.0-9_-]+(?=\\/\">Profile<\\/a>)", "add")
+            plugin command("Bigtable.dll", "Large list Remove duplicates", "user_profile")
+            set(#user_profile,$plugin function("Bigtable.dll", "Large list item", "user_profile", 0),"Global")
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PROFILE USERNAME LOCATED ON PAGE - USERNAME = [{#user_profile}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+        }
+    }
+}

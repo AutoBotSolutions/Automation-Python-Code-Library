@@ -1,0 +1,113 @@
+define Login System(#LoginSystem) {
+    if($not($exists(<id="textarea_id">))) {
+        then {
+            InstaPromoterDriverKiller(#RunInstaPromoterDriverKiller)
+            set(#browser ui,$read file("{$special folder("Application")}\\htui\\log-ui.html"),"Global")
+            load html(#browser ui)
+            wait for element(<id="textarea_id">,10,"Appear")
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SYSTEM SETUP COMPLETE - LOG LOADDED AND REFRESHED - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+        }
+    }
+    set(#null3,$plugin function("ExBrowser.dll", "$ExBrowser Browser Alive"),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CHEAKING IF BROWSER IS ALIVE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    if($comparison(#null3,"= Equals","true")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - BROWSER ALIVE: CLEANING UP & CLOSING THE CURRENT CHROME BROWSER - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("ExBrowser.dll", "ExBrowser CleanUp Light")
+        }
+    }
+    if($comparison(#trigger_one,"=",0)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CLEARING ACCOUNT AND PROXY TABLES - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            clear table(&accounts_table)
+            clear table(&proxy_table)
+        }
+    }
+    if($comparison(#account_file,"!=","")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CREATING ACCOUNT TABLE FROM FILE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            create table from file(#account_file,&accounts_table)
+        }
+        else {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - PLEASE ADD YOUR ACCOUNT FILE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            stop script
+        }
+    }
+    if($comparison(#proxy_file,"!=","")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PROXY FILE DETECTED, CREATING PROXY LIST FROM FILE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            create table from file(#proxy_file,&proxy_table)
+        }
+        else {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - NO PROXY FILE DETECTED - IF YOU USE PROXIES PLEASE LOAD FILE - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+        }
+    }
+    if($comparison(#trigger_one,"=",0)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - RESTTING PROXY AND ACCOUNT ROWS AND - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#account_row,0,"Global")
+            set(#proxy_row,0,"Global")
+        }
+    }
+    if($comparison(#proxy_file,"!= Does not equal",$nothing)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PROXY FILE HAS BEEN DETECTED - SETTING UP PROXY CELLS - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#ip_authentication,$table cell(&proxy_table,#proxy_row,0),"Global")
+            set(#user_authentication,$table cell(&proxy_table,#proxy_row,1),"Global")
+            set(#pass_authentication,$table cell(&proxy_table,#proxy_row,2),"Global")
+        }
+    }
+    SetUserAgentString(#RunSetUserAgentString)
+    if($comparison($table total columns(&proxy_table),"=",3)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LAUNCHING NEW INSTANCE OF CHROME - PROXY DETECTED [IP:PORT,USER,PASS] - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", $plugin function("ExBrowser.dll", "$ExBrowser Set HTTP Proxy", #ip_authentication, #user_authentication, #pass_authentication), "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\port\\66.0.3359.139\\App\\Chrome-bin\\insta-promoter.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Window Size", 1073, 728)}{$plugin function("ExBrowser.dll", "$ExBrowser Set User Agent", #user_agent)}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\ext\\6894523.crx")}")
+        }
+        else if($comparison($table total columns(&proxy_table),"=",1)) {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LAUNCHING NEW INSTANCE OF CHROME - PROXY DETECTED [IP:PORT] - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", $plugin function("ExBrowser.dll", "$ExBrowser Set HTTP Proxy", #ip_authentication, "", ""), "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\port\\66.0.3359.139\\App\\Chrome-bin\\insta-promoter.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Window Size", 1073, 728)}{$plugin function("ExBrowser.dll", "$ExBrowser Set User Agent", #user_agent)}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\ext\\6894523.crx")}")
+        }
+        else {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LAUNCHING NEW INSTANCE OF CHROME - NO PROXY DETECTED - ACCOUNT LOGIN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", 

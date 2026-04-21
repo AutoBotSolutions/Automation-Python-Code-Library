@@ -1,0 +1,286 @@
+clear list(%tweets)
+clear table(&proxies)
+clear table(&accounts)
+plugin command("HTTP post.dll", "Clear Cookies", "https://twitter.com/")
+ui stat monitor(#accounts_loaded, "<br />")
+ui button("Load Accounts") {
+    load_accounts(#load_accounts)
+}
+define load_accounts(#load_accounts) {
+    set(#account_file, $plugin function("Advanced Dialog.dll", "$open file dialog", "CSV File |*.csv", $special folder("Desktop")), "Global")
+    if($comparison(#account_file, "!=", $nothing)) {
+        then {
+            set(#accounts_loaded, "<font color=\"black\"><strong>Accounts Loaded</strong></font>", "Global")
+        }
+        else if($comparison(#account_file, "=", $nothing)) {
+            alert("Account loading failed, please try again.")
+            stop script
+        }
+    }
+}
+ui stat monitor(#proxies_loaded, "<br />")
+ui button("Load Proxies <font color=\"#D8D8D8\">..</font>") {
+    load_proxies(#load_proxies)
+}
+define load_proxies(#load_proxies) {
+    set(#proxy_file, $plugin function("Advanced Dialog.dll", "$open file dialog", "CSV File |*.csv", $special folder("Desktop")), "Global")
+    if($comparison(#proxy_file, "!=", $nothing)) {
+        then {
+            set(#proxies_loaded, "<font color=\"black\"><strong>Proxies Loaded</strong></font>", "Global")
+        }
+        else if($comparison(#proxy_file, "=", $nothing)) {
+            alert("Proxy loading failed, please try again.")
+            stop script
+        }
+    }
+}
+ui stat monitor(#tweets_loaded, "<br />")
+ui button("Load Tweets <font color=\"#D8D8D8\">...</font>") {
+    load_tweet_files(#load_tweet_files)
+}
+define load_tweet_files(#load_tweet_files) {
+    set(#tweet_files, $plugin function("Advanced Dialog.dll", "$multiple select files dialog", "TXT |*.txt", $special folder("Desktop")), "Global")
+    add list to list(%tweet_files, $list from text(#tweet_files, $new line), "Delete", "Global")
+    set(#tweet_files_pos, 0, "Global")
+    set list position(%tweet_files, #tweet_files_pos)
+    if($comparison(#tweet_files, "!=", $nothing)) {
+        then {
+            set(#tweets_loaded, "<font color=\"black\"><strong>Tweets Loaded</strong></font>", "Global")
+        }
+        else if($comparison(#tweet_file, "=", $nothing)) {
+            alert("Tweet loading failed, please try again.")
+            stop script
+        }
+    }
+}
+ui text box("No. Tweets Per Account", #num_to_tweet)
+ui text box("No. Account To Run", #num_accounts)
+ui text box("Master Delay - Seconds", #master_delay)
+ui text box("Run When Complete", #run_when_complete)
+ui text box("Wait Before Next Request", #wait_next_requst)
+ui stat monitor("Tweets Complete : ", #tweet_counter)
+ui stat monitor("Incomplete Tweets : ", #incomplete_tweets)
+ui drop down("Random Wait .1", "0,1,3,9,15,21,27,33,39,45,51,57,63,69,75,81,87,93,99,105,111,117,123,129,135,141,147,153,159,165,171,177,183,189,195,201,207,213,219,225,231,237,243,249,255,261,267,273,279,285,291,297", #random_wait_one)
+ui drop down("Random Wait .2", "0,6,12,18,24,30,36,42,48,54,60,66,72,78,84,90,96,102,108,114,120,126,132,138,144,150,156,162,168,174,180,186,192,198,204,210,216,222,228,234,240,246,252,258,264,270,276,282,288,294,300", #random_wait_two)
+ui check box("Override Proxies", #proxy_override)
+ui stat monitor("Accounts\\Threads : ", #sync_keeper)
+ui check box("Stop when complete", #stop_cycle)
+set(#tweet_counter, 0, "Global")
+set(#incomplete_tweets, 0, "Global")
+if($comparison(#account_file, "!=", $nothing)) {
+    then {
+        create table from file(#account_file, &accounts)
+    }
+    else {
+        alert("Please add your accounts file.")
+        stop script
+    }
+}
+if($comparison(#proxy_file, "!=", $nothing)) {
+    then {
+        create table from file(#proxy_file, &proxies)
+    }
+    else {
+        if($comparison(#proxy_override, "!=", $true)) {
+            then {
+                alert("Please add your proxy file.")
+                stop script
+            }
+        }
+    }
+}
+set(#account_row, "-1", "Global")
+set(#proxy_row, "-1", "Global")
+set(#release_loop, 0, "Global")
+set(#sync_keeper, $plugin function("Threads Counter.dll", "threads counter", "reset"), "Global")
+loop while($comparison(#infinite_loop, "=", $nothing)) {
+    add_tweet_files(#add_tweet_files)
+    thread {
+        lanuch_tweet_thread(#lanuch_tweet_thread)
+    }
+    set(#sync_keeper, $plugin function("Threads Counter.dll", "threads counter", "increment"), "Global")
+    wait(1)
+    loop while($comparison(#release_loop, "=", 0)) {
+        wait(0.1)
+    }
+    if($comparison(#sync_keeper, "=", #num_accounts)) {
+        then {
+            loop while($comparison(#sync_keeper, "!=", 0)) {
+                set(#sync_keeper, $plugin function("Threads Counter.dll", "threads counter", "read"), "Global")
+                wait(1)
+            }
+        }
+    }
+    increment(#tweet_files_pos)
+    clear list(%tweets)
+    if($comparison(#account_row, "=", $subtract($table total rows(&accounts), 1))) {
+        then {
+            if($comparison(#stop_cycle, "=", $true)) {
+                then {
+                    in new browser {
+                        thread {
+                            alert("Done!")
+                        }
+                    }
+                    stop script
+                }
+            }
+        }
+    }
+    if($comparison(#account_row, "=", $subtract($table total rows(&accounts), 1))) {
+        then {
+            rest_accounts_proxies(#clear__accounts_proxies)
+        }
+    }
+    if($comparison(#tweet_files_pos, "=", $list total(%tweet_files))) {
+        then {
+            reset_tweets_files(#reset_tweets_files)
+            wait(1)
+        }
+    }
+}
+define lanuch_tweet_thread(#lanuch_tweet_thread) {
+    set(#release_loop, 0, "Global")
+    increment(#account_row)
+    increment(#proxy_row)
+    set(#master_delay_trigger, 0, "Local")
+    set(#count_ui_display, 0, "Local")
+    if($comparison($list total(%tweet_files), "!=", $nothing)) {
+        then {
+            add list to list(%tweets, $list from text(#tweet_temp, $new line), "Delete", "Local")
+            set(#tweet_pos, 0, "Local")
+            set list position(%tweets, #tweet_pos)
+        }
+        else {
+            alert("Please add your Tweet files.")
+            stop script
+        }
+    }
+    plugin command("HTTP post.dll", "http keep alive", "Yes")
+    plugin command("HTTP post.dll", "http auto redirect", "No")
+    plugin command("HTTP post.dll", "http cookiecontainer mode", "Advanced")
+    if($comparison(#proxy_override, "!=", $true)) {
+        then {
+            if($comparison($table total columns(&proxies), "=", 4)) {
+                then {
+                    comment("Here you are testing to see if IP:PORT:USER:PASS formated proxies are being used.
+the variable #set_proxy is set to global so it can go local in the net set command,")
+                    set(#set_proxy, "{$table cell(&proxies, #proxy_row, 0)}:{$table cell(&proxies, #proxy_row, 1)}:{$table cell(&proxies, #proxy_row, 2)}:{$table cell(&proxies, #proxy_row, 3)}", "Global")
+                    comment("Here you are taking the Global variable #set_proxy and
+making it go loacal in the thread, this command is vary
+important to keep the proxies and accounts in sync.")
+                    set(#local_proxy, #set_proxy, "Local")
+                }
+                else if($comparison($table total columns(&proxies), "=", 2)) {
+                    comment("Here you are testing to see if IP:PORT formated proxies are being used.
+the variable #set_proxy is set to global so it can go local in the net set")
+                    set(#set_proxy, "{$table cell(&proxies, #proxy_row, 0)}:{$table cell(&proxies, #proxy_row, 1)}", "Global")
+                    comment("Here you are taking the Global variable #set_proxy and
+making it go loacal in the thread, this command is vary
+important to keep the proxies and accounts in sync.")
+                    set(#local_proxy, #set_proxy, "Local")
+                }
+            }
+        }
+    }
+    set(#request_login_page, $plugin function("HTTP post.dll", "$http get", " https://twitter.com/login", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36", " https://twitter.com/", #local_proxy, 60), "Local")
+    set(#global_username, $table cell(&accounts, #account_row, 0), "Global")
+    set(#global_password, $table cell(&accounts, #account_row, 1), "Global")
+    set(#local_username, #global_username, "Local")
+    set(#local_password, #global_password, "Local")
+    set(#login_token, $find regular expression(#request_login_page, "(?<=name\\=\\\"authenticity_token\\\"\\svalue\\=\\\").+(?=\\\">)"), "Local")
+    set(#request_login_page, $nothing, "Local")
+    set(#post_login_data, $plugin function("HTTP post.dll", "$http post", " https://twitter.com/sessions ", "session%5Busername_or_email%5D={#local_username}&session%5Bpassword%5D={#local_password}&authenticity_token={#login_token}", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36", "https://twitter.com/login", #local_proxy, 60), "Local")
+    set(#post_login_data, $nothing, "Local")
+    set(#logged_in, $plugin function("HTTP post.dll", "$http get", "https://twitter.com", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36", "https://twitter.com/login", #local_proxy, 60), "Local")
+    set(#logged_in, $nothing, "Local")
+    set(#release_loop, 1, "Global")
+    loop(#num_to_tweet) {
+        set(#status, $spin($list item(%tweets, #tweet_pos)), "Local")
+        wait(0.1)
+        if($comparison($text length(#status), ">", 140)) {
+            then {
+                set(#status, $find regular expression(#status, "[A-Za-z_\\-0-9=#%*^@&$!()+<>,.?/\"\':~`;].\{140,140\}(?=)"), "Local")
+            }
+        }
+        if($comparison(#master_delay_trigger, "!=", #run_when_complete)) {
+            then {
+                if($both($comparison(#random_wait_one, "!=", ""), $comparison(#random_wait_two, "!=", "")) AND $both($comparison(#random_wait_one, "!=", 0), $comparison(#random_wait_two, "!=", 0))) {
+                    then {
+                        set(#random_wait, $rand(#random_wait_one, #random_wait_two), "Global")
+                        wait(#random_wait)
+                    }
+                }
+            }
+            else if($both($comparison(#master_delay, "!=", ""), $comparison(#run_when_complete, "!=", ""))) {
+                if($comparison(#master_delay_trigger, ">=", #run_when_complete)) {
+                    then {
+                        set(#master_delay_trigger, 0, "Global")
+                        set(#count_ui_display, #master_delay, "Global")
+                        loop(#master_delay) {
+                            wait(0.9)
+                            decrement(#count_ui_display)
+                        }
+                        set(#count_ui_display, 0, "Global")
+                    }
+                }
+            }
+        }
+        set(#post_tweet, $plugin function("HTTP post.dll", "$http post", " https://twitter.com/i/tweet/create ", "authenticity_token={#login_token}&place_id=&status={#status}&tagged_users=", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36", "https://twitter.com/", #local_proxy, 60), "Local")
+        set(#status, $nothing, "Local")
+        set(#tweet_sucsess, $find regular expression(#post_tweet, "(?!\\\",\\\"message\\\":\\\"\\s)[A-Za-z!]+(?=\\\\n\\\",\\\"unusual\\\":false,\\\"profile_stats\\\":)"), "Local")
+        set(#post_tweet, $nothing, "Local")
+        if($comparison(#tweet_sucsess, "=", "posted!")) {
+            then {
+                increment(#tweet_counter)
+                increment(#master_delay_trigger)
+            }
+            else if($comparison(#tweet_sucsess, "!=", "posted!")) {
+                increment(#incomplete_tweets)
+                increment(#master_delay_trigger)
+            }
+        }
+        set(#tweet_sucsess, $nothing, "Local")
+        increment(#tweet_pos)
+        wait(1)
+        if($comparison(#tweet_pos, "=", $list total(%tweets))) {
+            then {
+                add list to list(%tweets, $list from text(#tweet_temp, $new line), "Delete", "Local")
+                set(#tweet_pos, 0, "Local")
+                set list position(%tweets, #tweet_pos)
+            }
+        }
+        if($comparison(#wait_next_requst, "!=", "")) {
+            then {
+                wait(#wait_next_requst)
+            }
+        }
+    }
+    set(#sync_keeper, $plugin function("Threads Counter.dll", "threads counter", "decrement"), "Local")
+}
+define add_tweet_files(#add_tweet_files) {
+    set(#tweet_temp, $read file($list item(%tweet_files, #tweet_files_pos)), "Global")
+    add list to list(%tweets, $list from text(#tweet_temp, $new line), "Delete", "Global")
+}
+define reset_tweets_files(#reset_tweets_files) {
+    add list to list(%tweet_files, $list from text(#tweet_files, $new line), "Delete", "Global")
+    set(#tweet_files_pos, 0, "Global")
+    set list position(%tweet_files, #tweet_files_pos)
+}
+define rest_accounts_proxies(#clear__accounts_proxies) {
+    comment("You are using this command in the
+thread lanucher, to rest the account
+and proxy file once all the accounts
+have been used.")
+    clear table(&accounts)
+    create table from file(#account_file, &accounts)
+    set(#account_row, "-1", "Global")
+    clear table(&proxies)
+    create table from file(#proxy_file, &proxies)
+    set(#proxy_row, "-1", "Global")
+}
+on load("Bot Loaded") {
+    set(#tweet_counter, 0, "Global")
+    set(#incomplete_tweets, 0, "Global")
+    set(#count_ui_display, 0, "Global")
+}

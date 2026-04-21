@@ -1,0 +1,342 @@
+define $AutoFollowFunctionOne(#AutoFollowFunctionOne) {
+    CloseInfoBox(#RunCloseInfoBox)
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Close")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[4]/div/button")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://*[@id=\"react-root\"]/section/nav/div[2]/div/div/div[1]/div/a[1]", "Appear", 30)
+        }
+    }
+}
+define $AutoFollowFunctionTwo(#AutoFollowFunctionTwo) {
+    CloseInfoBox(#RunCloseInfoBox)
+    set(#AutoFollowColor,"#ffff00","Global")
+    thread {
+        AppRunningModule(#RunAppRunningModule)
+        set(#ActiveFunction,$plugin function("HTTP post.dll", "$http get", "http://app.tracking.softwareautomation.org/appstats/piwik.php?&idsite=1&rec=1&_id={#session_id}&rand={#anti_cache}&apiv=1&action_name=[Running Succession Module Function] Follow Back Function Activated&url=http://app.tracking.org", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0", "", "", 20),"Global")
+    }
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CLEARING SCRAPE LIST, RESETTING QUEUE - FOLLOW BOT - AUTOFOLLOWBACK BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("Bigtable.dll", "Clear large list", "followers_scrape")
+    set(#autofollow_queue,0,"Global")
+    comment("closes the following pop up screen if its open")
+    if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://html/body/div[4]/div/div[2]/div/div[2]/ul/div")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[4]/div/button")
+        }
+    }
+    comment("Waits and navigate to user profile")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Enabled", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[3]/div/div[3]/a", "Wait until Enabled", 5)
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[3]/div/div[3]/a")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Enabled", "x://span[@id=\"react-root\"]/section/footer/div/nav/ul", "Wait until Enabled", 5)
+    wait(2)
+    plugin command("ExBrowser.dll", "ExBrowser Run Javascript", "location.reload();")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Enabled", "x://span[@id=\"react-root\"]/section/footer/div/nav/ul", "Wait until Enabled", 5)
+    if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Edit Profile"))) {
+        comment("wait with wait loop breakout")
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - WAITING FOR FOLLOWER PAGE REQUEST TO COMPLETE! - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#wait_breakout,0,"Global")
+            set(#wait_trigger,0,"Global")
+            loop while($comparison(#wait_trigger,"= Equals",0)) {
+                wait(0.1)
+                increment(#wait_breakout)
+                if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Edit Profile")) {
+                    then {
+                        set(#wait_trigger,1,"Global")
+                    }
+                    else if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+                        increment(#wait_trigger)
+                    }
+                }
+            }
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Scroll Browser", "-10000", "-10000")
+    set(#profile_name,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!\\scoreSpriteDesktopNavProfile\"\\shref=\\\"\\/)[a-z0-9._]+(?=\\/\">Profile<\\/a>)"),"Global")
+    comment("clikc and wait for following screen to pop up.")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SENDING REQUEST TO [{#profile_name}] FOLLOWERS PAGE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/article/header/section/ul/li[2]")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/article/header/section/ul/li[2]/a/span")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/div/header/section/ul/li[2]/a")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Enabled", "x://html/body/div[3]/div/div[2]/div/div[1]", "Wait until Enabled", 10)
+    if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"\">Followers</div>"))) {
+        comment("wait with wait loop breakout")
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - WAITING FOR FOLLOWER PAGE REQUEST TO COMPLETE! - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#wait_breakout,0,"Global")
+            set(#wait_trigger,0,"Global")
+            loop while($comparison(#wait_trigger,"= Equals",0)) {
+                wait(0.1)
+                increment(#wait_breakout)
+                if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"\">Followers</div>")) {
+                    then {
+                        set(#wait_trigger,1,"Global")
+                    }
+                    else if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+                        increment(#wait_trigger)
+                        plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/article/header/section/ul/li[2]")
+                        plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/article/header/section/ul/li[2]/a/span")
+                        plugin command("ExBrowser.dll", "ExBrowser Wait For Element Enabled", "x://html/body/div[4]/div/div[2]/div/div[2]/ul/div", "Wait until Enabled", 10)
+                    }
+                }
+            }
+        }
+    }
+    comment("scrapes the follwing list")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - AUTOFOLLOWBACK BOT IS SCRAPEING USERS TO LIST TO AUTOFOLLOW - AUTOFOLLOWBACK BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    set(#scrape_failed,0,"Global")
+    set(#loop_breakout,0,"Global")
+    set(#fail_counter,0,"Global")
+    set(#remove_element,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<ul\\sclass=\"[A-Z-a-z_0-9\\s]+\"><div\\sclass=\")[A-Z-a-z_0-9\\s]+(?=\"><li\\sclass=\"[A-Z-a-z_0-9\\s]+\"><div\\sclass)"),"Global")
+}
+define $AutoFollowFunctionThree(#AutoFollowFunctionThree) {
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Enabled", "x://html/body/div[3]/div/div[2]/div/div[2]/ul/div/li[*]", "Wait until Enabled", 5)
+    loop(13) {
+        plugin command("Bigtable.dll", "large List from Regex", "followers_scrape", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!\"\\shref=\"\\/)[a-z.0-9_]+(?=\\/\"\\sstyle=\"width:\\s30px;)", "add")
+        plugin command("ExBrowser.dll", "ExBrowser Change Attribute", "x://html/body/div[3]/div/div[2]/div/div[2]/ul/div/li[*]", "innertext", "")
+        plugin command("ExBrowser.dll", "ExBrowser Scroll To Element", "x://a[@style=\"width: 30px; height: 30px;\"]")
+    }
+    plugin command("Bigtable.dll", "Large list Remove duplicates", "followers_scrape")
+    set(#autofollow_queue,$plugin function("Bigtable.dll", "Large list total", "followers_scrape"),"Global")
+    plugin command("ExBrowser.dll", "ExBrowser Change Attribute", "x://div[@class=\"{#remove_element}\"]", "innertext", "")
+    if($comparison($add(#autofollow_queue,20),">= Greater than or equal to",#num_autofollow)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - FOLLOW BACK BOT SCRAPE SUCCESS - TRIGGERING LOOP BREAKOUT - AUTO FOLLOW BACK BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#loop_breakout,1,"Global")
+        }
+        else if($comparison($plugin function("Bigtable.dll", "Large list total", "followers_scrape"),"= Equals",0)) {
+            increment(#scrape_failed)
+            if($comparison(#scrape_failed,">= Greater than or equal to",3)) {
+                then {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - FOLLOW BACK BOT SCRAPE FAILED - TRIGGERING LOOP BREAKOUT - AUTO FOLLOW BACK BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    set(#loop_breakout,1,"Global")
+                }
+            }
+        }
+    }
+    if($comparison($plugin function("Bigtable.dll", "Large list total", "followers_scrape"),"< Less than",#num_autofollow)) {
+        then {
+            increment(#fail_counter)
+            if($comparison(#fail_counter,">= Greater than or equal to",20)) {
+                then {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - NOT ENOUGH USERS IN LIST - TRIGGERING LOOP BREAKOUT - AUTO FOLLOW BACK BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    set(#loop_breakout,1,"Global")
+                }
+            }
+        }
+    }
+    if($comparison($plugin function("Bigtable.dll", "Large list total", "followers_scrape"),"= Equals",$nothing)) {
+        then {
+            thread {
+                AppListScrapeingFailed(#RunAppListScrapeingFailed)
+            }
+        }
+    }
+}
+define $AutoFollowFunctionFour(#AutoFollowFunctionFour) {
+    set(#auto_user_name,$plugin function("Bigtable.dll", "Large list item", "followers_scrape", 0),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - THE AUTOFOLLOWBACK BOT IS LOADING USER [{#auto_user_name}]\'s PROFILE - AUTOFOLLOWBACK BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/{$plugin function("Bigtable.dll", "Large list item", "followers_scrape", 0)}/")
+    plugin command("Bigtable.dll", "Large list Remove item", "followers_scrape", 0)
+    if($comparison(#autofollow_counter,">= Greater than or equal to",#stop_bot_at)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SOFTWARE STOP CRITERIA HAS BEEN MET, STOPPING THE AUTOFOLLOWBACK BOT - AUTOFOLLOWBACK BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            stop script
+        }
+    }
+    set(#delay_ticker,0,"Global")
+    set(#delay_ticker,#delay_time,"Global")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Displayed", "x://span[@id=\"react-root\"]/section/footer/div/nav/ul", "Wait until Displayed", 5)
+    if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),">Following<"))) {
+        then {
+            set(#RunFollowBackBlackList,$FollowBackBlackList(#RunFollowBackBlackList),"Global")
+            set(#RunGetFollowAutoFollowBackCells,$GetFollowAutoFollowBackCells(#RunGetFollowAutoFollowBackCells),"Global")
+            set(#RunInstagramErrorHandeling,$InstagramErrorHandeling(#RunInstagramErrorHandeling),"Global")
+            set(#RunAutoClaculateRatio,$AutoRatioCalculator(#RunAutoClaculateRatio),"Global")
+            set(#RunBioLinkedAccountsSkip,$BioLinkedAccountsSkip(#RunBioLinkedAccountsSkip),"Global")
+            if($both($comparison(#get_followback_cell,"< Less than",#DisableFollowBack),$comparison(#get_follow_cell,"< Less than",#DisableFollowing))) {
+                then {
+                    if($comparison(#skip_user,"= Equals",0)) {
+                        then {
+                            if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),">Following<"))) {
+                                then {
+                                    set(#run_master_delay,$master_delay_timers(#run_master_delay),"Global")
+                                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SENDING AUTOFOLLOWBACK BOT REQUEST TO USER [{#auto_user_name}] - AUTOFOLLOWBACK BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                    FollowButtonClick(#RunFollowButtonClick)
+                                    if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),">Following<"))) {
+                                        comment("wait with wait loop breakout")
+                                        then {
+                                            set(#wait_breakout,0,"Global")
+                                            set(#wait_trigger,0,"Global")
+                                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - WAITING FOR FOLLOW BACK REQUEST TO COMPLETE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                            loop while($comparison(#wait_trigger,"= Equals",0)) {
+                                                wait(0.1)
+                                                increment(#wait_breakout)
+                                                if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),">Following<")) {
+                                                    then {
+                                                        set(#wait_trigger,1,"Global")
+                                                    }
+                                                    else if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+                                                        increment(#wait_trigger)
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),">Following<")) {
+                                        then {
+                                            DateTimeLogStamp(#RunDateTimeLogStamp)
+                                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - AUTOFOLLOWBACK BOT SUCCESSFULLY FOLLOWED USER [{#auto_user_name}] - AUTOFOLLOWBACK BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                            set(#RunFollowAutoFollowBackCounters,$FollowAutoFollowBackCounters(#RunFollowAutoFollowBackCounters),"Global")
+                                            decrement(#autofollow_queue)
+                                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - QUEUE AFTER ACTION COMPLETE TOTAL = [{#autofollow_queue}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                            increment(#master_delay_trigger)
+                                            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - FOLLOW BACK BOT SESSION FOLLOW BACK TOTAL = [{#autofollow_counter}] - FOLLOW BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                            set(#RunSuccessionStopConfig,$SuccessionStopConfig(#RunSuccessionStopConfig),"Global")
+                                        }
+                                        else {
+                                            thread {
+                                                FollowBackButtonPushFailed(#RunFollowBackButtonPushFailed)
+                                            }
+                                        }
+                                    }
+                                }
+                                else {
+                                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - YOU ALREADY FOLLOW USER [{#auto_user_name}] SKIPING TO NEXT LIST USER - AUTOFOLLOWBACK BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            set(#run_delay_after,$delay_after_action(#run_delay_after),"Global")
+            set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+        }
+    }
+    CloseInfoBox(#RunCloseInfoBox)
+}
+define $AutoFollowFunctionFive(#AutoFollowFunctionFive) {
+    if($comparison(#autofollow_counter,">= Greater than or equal to",#stop_bot_at)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SOFTWARE STOP CRITERIA HAS BEEN MET, STOPPING THE AUTOFOLLOWBACK BOT - AUTOFOLLOWBACK BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            stop script
+        }
+    }
+    set(#AutoFollowColor,"#d9d9d9","Global")
+    if($comparison(#EnableAccountRotation,"= Equals","YES")) {
+        then {
+            set(#RunSuccessionAccountRotation,$SuccessionAccountRotation(#RunSuccessionAccountRotation),"Global")
+        }
+    }
+    CloseInfoBox(#RunCloseInfoBox)
+}
+define $AutoFollowFunctionSix(#AutoFollowFunctionSix) {
+    if($comparison(#RandomizeScrapeList,"= Equals","YES")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - RANDOMIZE SCRAPED LIST OPTION SELECTED - RANDOMIZING LIST - AUTOFOLLOWBACK BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Bigtable.dll", "Add Large list to list", "randomized_list", "followers_scrape")
+            set(#position,0,"Global")
+            loop($plugin function("Bigtable.dll", "Large list total", "randomized_list")) {
+                set(#random_list_item,$plugin function("Bigtable.dll", "Random Large list item", "randomized_list", "Dont Remove"),"Global")
+                set(#position,0,"Global")
+                plugin command("Bigtable.dll", "large List from text", "temp_list", #random_list_item, $new line, "add")
+                loop($plugin function("Bigtable.dll", "Large list total", "randomized_list")) {
+                    if($comparison($plugin function("Bigtable.dll", "Large list item", "randomized_list", #position),"=",#random_list_item)) {
+                        then {
+                            plugin command("Bigtable.dll", "Large list Remove item", "randomized_list", #position)
+                            decrement(#position)
+                        }
+                    }
+                    increment(#position)
+                }
+            }
+            plugin command("Bigtable.dll", "Clear large list", "randomized_list")
+            plugin command("Bigtable.dll", "Add Large list to list", "followers_scrape", "temp_list")
+            plugin command("Bigtable.dll", "Clear large list", "temp_list")
+        }
+    }
+    set(#bottom_list_pos,$plugin function("Bigtable.dll", "Large list total", "followers_scrape"),"Global")
+    set(#bottom_list_pos,$subtract($plugin function("Bigtable.dll", "Large list total", "followers_scrape"),1),"Global")
+    if($comparison($plugin function("Bigtable.dll", "Large list total", "followers_scrape"),">",#num_autofollow)) {
+        then {
+            loop while($comparison(#num_autofollow,"!=",$plugin function("Bigtable.dll", "Large list total", "followers_scrape"))) {
+                plugin command("Bigtable.dll", "Large list Remove item", "followers_scrape", #bottom_list_pos)
+                decrement(#bottom_list_pos)
+                set(#autofollow_queue,$plugin function("Bigtable.dll", "Large list total", "followers_scrape"),"Global")
+            }
+        }
+    }
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - AUTOFOLLOWBACK BOT SCRAPE QUEUE TOTAL = [{#autofollow_queue}] - AUTOFOLLOWBACK BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    CloseInfoBox(#RunCloseInfoBox)
+}
+comment("Acturate Counter System")
+define $FollowAutoFollowBackCounters(#RunFollowAutoFollowBackCounters) {
+    set(#FollowsActive,1,"Global")
+    set(#RunSuccessionStatistics,$SuccessionStatistics(#RunSuccessionStatistics),"Global")
+    set(#FollowsActive,0,"Global")
+    set(#FollowBackActive,1,"Global")
+    set(#RunSuccessionStatistics,$SuccessionStatistics(#RunSuccessionStatistics),"Global")
+    set(#FollowBackActive,1,"Global")
+    increment(#follow_counter)
+    increment(#autofollow_counter)
+    increment(#AllFunctionCounter)
+}
+define $GetFollowAutoFollowBackCells(#RunGetFollowAutoFollowBackCells) {
+    set(#get_follow_cell,$plugin function("Advanced Data Text File.dll", "$table cell get", &statistics, #FollowRow, 3),"Global")
+    set(#get_followback_cell,$plugin function("Advanced Data Text File.dll", "$table cell get", &statistics, #FollowBackRow, 7),"Global")
+}

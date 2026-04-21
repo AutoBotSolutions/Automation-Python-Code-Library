@@ -1,0 +1,406 @@
+ui drop down("Choose Post Option",",On Schedule,Post Now,Account Rotation",#post_options)
+ui stat monitor(#main ui,"<br>")
+ui text box("Number To Post Now",#num_post_now)
+ui text box("Date Time Sec Designator",#current_date_time)
+ui stat monitor("<br>","")
+ui text box("Next Post Date Time",#next_post_in)
+ui stat monitor("Successful Posts&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;: ",#post_counter)
+ui block text("Enter Your Post Schedule",#post_schedule)
+ui stat monitor(#diplay_running,"<br>")
+ui stat monitor("<font size=\"2\">MM/dd/yyyy HH:mm:ss tt</font>","")
+ui button("&nbsp;&nbsp;Open Settings&nbsp;&nbsp;") {
+    set(#null,$plugin function("Advanced Dialog.dll", "$dropdown dialog", "Quick Settings View", "", "CLIENT PORTAL,-------------------------------,[ Scrape Module ],[ Succession Module ],[ Target Module ],-------------------------------,Required Files,Delay Settings,Project Settings,Save/Load Settings,Open Account Stats,Open List Spinner,Settings Quick View", 280, 125, "False", 000000, "FFBEEAC4,FDFEFE", "FFF3C1C1,FDFEFE", "Center App", "True", "{$special folder("Application")}\\img\\inp.ico"),"Global")
+    if($comparison(#null,"= Equals","Delay Settings")) {
+        then {
+            StartLogRunning(#OpenLog)
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - DELAY SETTINGS OPENED - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Ubot.dll", "menu item click", "Delay Settings")
+        }
+    }
+    if($comparison(#null,"= Equals","Required Files")) {
+        then {
+            StartLogRunning(#OpenLog)
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - FILE DIALOG SETINGS OPENED - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Ubot.dll", "menu item click", "Required Files")
+        }
+    }
+    if($comparison(#null,"= Equals","Save/Load Settings")) {
+        then {
+            StartLogRunning(#OpenLog)
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SAVE & LOAD SETTINGS OPTION SELECTED - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Ubot.dll", "menu item click", "Save/Load Settings")
+        }
+    }
+    if($comparison(#null,"= Equals","Project Settings")) {
+        then {
+            StartLogRunning(#OpenLog)
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SAVE & LOAD SETTINGS OPTION SELECTED - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Ubot.dll", "menu item click", "Project Settings")
+        }
+    }
+    if($comparison(#null,"= Equals","Settings Quick View")) {
+        then {
+            StartLogRunning(#OpenLog)
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SETTINGS CONFIGURATION OPTION SELECTED - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            QuickView2(#RunQuickView2)
+        }
+    }
+    if($comparison(#null,"= Equals","Open List Spinner")) {
+        then {
+            StartLogRunning(#OpenLog)
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - OPEN LIST SPINNER OPTION SELECTED - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Communication.dll", "run ubot script", "BasicCommentSpinner()")
+        }
+    }
+    if($comparison(#null,"= Equals","CLIENT PORTAL")) {
+        then {
+            StartLogRunning(#OpenLog)
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PROJECT FOLDER SETTINGS OPTION SELECTED - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            ClientFeedback(#RunClientFeedback)
+        }
+    }
+    if($comparison(#null,"= Equals","Open Account Stats")) {
+        then {
+            StartLogRunning(#OpenLog)
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - OPEN ACCOUNT STATS SETTINGS OPTION SELECTED - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            Open Account Stats(#RunOpenAccountStats)
+        }
+    }
+    if($comparison(#null,"= Equals","[ Succession Module ]")) {
+        then {
+            plugin command("Advanced Ubot 2.dll", "tab selected", "[ Succession Module ]", 0, "False")
+        }
+    }
+    if($comparison(#null,"= Equals","[ Scrape Module ]")) {
+        then {
+            plugin command("Advanced Ubot 2.dll", "tab selected", "[ Scrape Module ]", 0, "False")
+        }
+    }
+    if($comparison(#null,"= Equals","[ Target Module ]")) {
+        then {
+            plugin command("Advanced Ubot 2.dll", "tab selected", "[ Target Module ]", 0, "False")
+        }
+    }
+}
+ui button("&nbsp;&nbsp;System Login&nbsp;&nbsp;") {
+    StartLogRunning(#OpenLog)
+    set(#SystemUserError,$UserErrorSystem(#SystemUserError),"Global")
+    wait(1)
+    set(#null,$plugin function("Advanced Dialog.dll", "$alert result dialog", "Are you sure you want to login?", "ALERT!", "Yes/No/Cancel", "Question", "Default Desktop Only", "Button 1"),"Global")
+    if($comparison(#null,"= Equals","Yes")) {
+        then {
+            ChromeDriverKiller(#ChromeKillerCode)
+            set(#PostLoginSystem,$Post Module Login System(#PostLoginSystem),"Global")
+        }
+    }
+}
+ui stat monitor("Master Countdown",#count_ui_display)
+ui button("&nbsp;&nbsp;Start Software&nbsp;&nbsp;") {
+    set(#SystemUserError,$UserErrorSystem(#SystemUserError),"Global")
+    wait(1)
+    set(#null,$plugin function("Advanced Dialog.dll", "$alert result dialog", "Are you sure you want to start the software?", "ALERT!", "Yes/No/Cancel", "Question", "Default Desktop Only", "Button 1"),"Global")
+    if($comparison(#null,"= Equals","Yes")) {
+        then {
+            StartLogRunning(#OpenLog)
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - THE START BUTTON HAS BEEN ENGAGED - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Ubot.dll", "main button click", "Run")
+        }
+    }
+}
+ui button("&nbsp;&nbsp;End Schedule&nbsp;&nbsp;") {
+    set(#ScheduleTrigger,1,"Global")
+    wait(1)
+    plugin command("Advanced Ubot.dll", "main button click", "Stop")
+}
+ui stat monitor(#diplay_running,"<br>")
+ui button("&nbsp;&nbsp;Stop Software&nbsp;&nbsp;") {
+    set(#null,$plugin function("Advanced Dialog.dll", "$alert result dialog", "Stop close session? Stop keep session?", "ALERT!", "Stop close session/Stop keep session?/Cancel request!", "Question", "Default Desktop Only", "Button 1"),"Global")
+    if($comparison(#null,"= Equals","Stop close session")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - STOP CLOSE SESSION OPTION HAS BEEN SELECTED, YOUR SESSION IS CLOSED AND KILLED! - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            ChromeDriverKiller(#ChromeKillerCode)
+            Account Rest(#Rest Accounts)
+            wait(1)
+            SetOnloadVar(#ResetVarOnload)
+            plugin command("Bigtable.dll", "Clear all large list")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            plugin command("Advanced Ubot.dll", "main button click", "Stop")
+            stop script
+        }
+    }
+    else if($comparison(#null,"= Equals","Stop keep session?")) {
+        DateTimeLogStamp(#RunDateTimeLogStamp)
+        run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - STOP KEEP SESSION OPTION HAS BEEN SELECTED, YOUR SESSION HAS STOPPED AND SESSION KEPT ALIVE! - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+        plugin command("Advanced Ubot.dll", "main button click", "Stop")
+        plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+        stop script
+    }
+}
+ui button("&nbsp;&nbsp;Run Schedule&nbsp;&nbsp;") {
+    StartLogRunning(#OpenLog)
+    set(#SystemUserError,$UserErrorSystem(#SystemUserError),"Global")
+    set(#SystemSetUp,$SetPostSystemUp(#SystemSetUp),"Global")
+    set(#TriggerSchedule,$ScheduleTrigger(#TriggerSchedule),"Global")
+    set(#RunRotationTriggerSchedule,$RotationScheduleTrigger(#RunRotationTriggerSchedule),"Global")
+}
+ui window("Delay Settings") {
+    ui text box("Set Delay Counter (Sec.)",#delay_time)
+    ui text box("Stop The Software At",#stop_bot_at)
+    ui stat monitor(#main ui,"<br>")
+    ui text box("Master Delay - Seconds",#master_delay)
+    ui text box("Run When Complete",#run_when_complete)
+    ui stat monitor("<br>","")
+    ui drop down("Random Wait .1","0,1,3,9,15,21,27,33,39,45,51,57,63,69,75,81,87,93,99,105,111,117,123,129,135,141,147,153,159,165,171,177,183,189,195,201,207,213,219,225,231,237,243,249,255,261,267,273,279,285,291,297",#random_wait_one)
+    ui drop down("Random Wait .2","0,6,12,18,24,30,36,42,48,54,60,66,72,78,84,90,96,102,108,114,120,126,132,138,144,150,156,162,168,174,180,186,192,198,204,210,216,222,228,234,240,246,252,258,264,270,276,282,288,294,300",#random_wait_two)
+    ui button("Settings Instructions And Uses") {
+        DateTimeLogStamp(#RunDateTimeLogStamp)
+        run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SETTINGS INSTRUCTIONS OPENED - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+        set(#null,$plugin function("Advanced Dialog.dll", "$alert result dialog", "--------------------------------------------------------------------
+\"Set Delay Counter (Sec.)\" = This is a delay that only waits for a set amount of time. This is a flat wait.
+--------------------------------------------------------------------
+\"Master Delay - Seconds\" & \"Run When Complete\" Are delay settings that work together. The master delay will run after the bot has completed the amount of actions on the site that is filled out in the \"Run When Complete\" box. If you only want to like 100 images and then have the software wait for a set amount of time, this is the setting you would use. Fill the delay time in the \"Master Delay - Seconds\" and then tell the software when to run that delay in the \"Run When Complete\" box.
+--------------------------------------------------------------------
+\"Random Wait .1\" and \"Random Wait .2\" work together this will tell the software to wait a random time between each action. Select a low wait time in the \"Random Wait .1\" drop down and a high wait time in the \"Random Wait .2\"  drop down, then the software will pick a random wait time between each action.
+--------------------------------------------------------------------", "Settings and Their Uses.", "Ok Got it. Close", "Information", "Default Desktop Only", "Button 1"),"Global")
+    }
+}
+ui window("Required Files") {
+    ui stat monitor(#main ui,"")
+    ui text box("Account File Path",#account_file)
+    ui button("Select Account File") {
+        plugin command("Bigtable.dll", "Clear large list", "null")
+        set(#account_file,$plugin function("Advanced Dialog.dll", "$open file dialog", "Excel Files|*.csv", ""),"Global")
+        if($comparison(#account_file,"!= Does not equal",$nothing)) {
+            then {
+                plugin command("Bigtable.dll", "Large list from file", "null", #account_file)
+                set(#null,$plugin function("Bigtable.dll", "Large list total", "null"),"Global")
+                DateTimeLogStamp(#RunDateTimeLogStamp)
+                run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ACCOUNT FILE LOADED ACCOUNTS = [{#null}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            }
+            else {
+                DateTimeLogStamp(#RunDateTimeLogStamp)
+                run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ACCOUNT FILE NOT LOADED OR DETECTED - PLEASE TRY AGAIN! - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            }
+        }
+        stop script
+    }
+    ui stat monitor("<br>","")
+    ui text box("Proxy File Path",#proxy_file)
+    ui button("Select Proxy File") {
+        plugin command("Bigtable.dll", "Clear large list", "null")
+        set(#proxy_file,$plugin function("Advanced Dialog.dll", "$open file dialog", "Excel Files|*.csv", ""),"Global")
+        if($comparison(#proxy_file,"!= Does not equal",$nothing)) {
+            then {
+                plugin command("Bigtable.dll", "Large list from file", "null", #proxy_file)
+                set(#null,$plugin function("Bigtable.dll", "Large list total", "null"),"Global")
+                DateTimeLogStamp(#RunDateTimeLogStamp)
+                run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PROXY FILE LOADED PROXIES = [{#null}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            }
+            else {
+                DateTimeLogStamp(#RunDateTimeLogStamp)
+                run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PROXY FILE NOT LOADED OR DETECTED - PLEASE TRY AGAIN! - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            }
+        }
+        stop script
+    }
+    ui stat monitor("<br>","")
+    ui text box("Image Caption File Path",#image_captions)
+    ui button("Select Caption File") {
+        plugin command("Bigtable.dll", "Clear large list", "null")
+        set(#image_captions,$plugin function("Advanced Dialog.dll", "$open file dialog", "Text files|*.txt", ""),"Global")
+        if($comparison(#image_captions,"!= Does not equal",$nothing)) {
+            then {
+                plugin command("Bigtable.dll", "Large list from file", "null", #image_captions)
+                set(#null,$plugin function("Bigtable.dll", "Large list total", "null"),"Global")
+                DateTimeLogStamp(#RunDateTimeLogStamp)
+                run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CAPTION LIST LOADED, CAPTION FILE LINES = [{#null}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            }
+            else {
+                DateTimeLogStamp(#RunDateTimeLogStamp)
+                run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CAPTION FILE NOT LOADED OR DETECTED - PLEASE TRY AGAIN! - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            }
+        }
+        stop script
+    }
+    ui stat monitor("<br>","")
+    ui drop down("Run From Project Folder",",YES,NO",#UsePostProjectRotation)
+    ui button("Open - Project Folder Directory") {
+        plugin command("Advanced Data Text File.dll", "open file/url", "{$special folder("Application")}\\projects")
+    }
+}
+ui window("Save/Load Settings") {
+    ui stat monitor("SavedLoad Succession","")
+    ui button("Save Settings") {
+        set(#RunSaveSuccessionModules,$SaveSuccessionModules(#RunSaveSuccessionModules),"Global")
+    }
+    ui button("Load Settings") {
+        set(#RunLoadSuccessionModules,$LoadSuccessionModules(#RunLoadSuccessionModules),"Global")
+    }
+    ui stat monitor("SaveLoad Post Module","")
+    ui button("Save Settings") {
+        set(#RunSavePostModule,$SavePostModule(#RunSavePostModule),"Global")
+    }
+    ui button("Load Settings") {
+        set(#RunLoadPostModule,$LoadPostModule(#RunLoadPostModule),"Global")
+    }
+    ui stat monitor("SaveLoad Scrape Module","")
+    ui button("Save Settings") {
+        set(#RunSaveScrapeModule,$SaveScrapeModule(#RunSaveScrapeModule),"Global")
+    }
+    ui button("Load Settings") {
+        set(#RunLoadScrapeModule,$LoadScrapeModule(#RunLoadScrapeModule),"Global")
+    }
+    ui stat monitor("SaveLoad Target Module","")
+    ui button("Save Settings") {
+        set(#RunSaveTargetModule,$SaveTargetModule(#RunSaveTargetModule),"Global")
+    }
+    ui button("Load Settings") {
+        set(#RunLoadTargetModule,$LoadTargetModule(#RunLoadTargetModule),"Global")
+    }
+    ui stat monitor("SavedLoad All Modules","")
+    ui button("Save Settings") {
+        set(#RunSaveAllModules,$SaveAllModules(#RunSaveAllModules),"Global")
+    }
+    ui button("Load Settings") {
+        set(#RunLoadAllModules,$LoadAllModules(#RunLoadAllModules),"Global")
+    }
+    ui text box("Custom SaveLoad Path",#custom_settings_path)
+    ui button("Select Custom SaveLoad Folder") {
+        set(#custom_settings_path,$plugin function("Advanced Dialog.dll", "$folder browser dialog", "Please select a folder.", "", "", "False"),"Global")
+    }
+    ui button("Save Settings") {
+        set(#RunSaveCustomFolder,$SaveCustomFolder(#RunSaveCustomFolder),"Global")
+    }
+    ui button("Load Settings") {
+        set(#RunLoadCustomFolder,$LoadCustomFolder(#RunLoadCustomFolder),"Global")
+    }
+    ui stat monitor(#main ui,"")
+}
+ui window("Project Settings") {
+    ui drop down("Run From Project Folder",",YES,NO",#UsePostProjectRotation)
+    ui stat monitor("<br />","")
+    ui button("Open - Project Folder Directory") {
+        if($comparison(#ipdf_path,"!= Does not equal",$nothing)) {
+            then {
+                plugin command("Advanced Data Text File.dll", "open file/url", "{$special folder("My Documents")}\\Insta Promoter Data Folder\\projects")
+            }
+            else {
+                plugin command("Advanced Data Text File.dll", "open file/url", "{$special folder("Application")}\\projects")
+            }
+        }
+    }
+    ui stat monitor("<font color=\"#ffff00\">Save Project Settings</font>","")
+    ui text box("Project Target Folder",#custom_post_settings_path)
+    ui button("Select The Target Project Folder") {
+        if($comparison(#ipdf_path,"= Equals",$nothing)) {
+            then {
+                set(#custom_post_settings_path,$plugin function("Advanced Dialog.dll", "$folder browser dialog", "Please select a folder.", $special folder("Application"), "{$special folder("Application")}\\projects\\", "True"),"Global")
+            }
+            else {
+                set(#custom_post_settings_path,$plugin function("Advanced Dialog.dll", "$folder browser dialog", "Please select a folder.", $special folder("My Documents"), "{$special folder("My Documents")}\\Insta Promoter Data Folder\\projects\\", "True"),"Global")
+            }
+        }
+        stop script
+    }
+    ui stat monitor("<br />","")
+    ui button("Save Settings To Target Project") {
+        SaveProjectPostModule(#RunSaveProjectPostModule)
+    }
+    ui stat monitor("<br>","")
+    ui text box("Data File Path",#ipdf_path)
+    ui button("Build Insta Promoter Data Folder") {
+        set(#null,$plugin function("Advanced Dialog.dll", "$alert result dialog", "VERY IMPORTANT! if you use this option to \"Build Insta Promoter Data Folder\" you must setup and use this directory \"C:\\Users\\%username%\\Documents\\Insta Promoter Data Folder\" and the software will run from this directory until the \"Insta Promoter Data Folder\" is removed. It\'s highly recommended to use this option and not the installation folders to run from, as the install folders may get replaced during updates, and this directory will only get replaced if you \"Build Insta Promoter Data Folder\" again.", "ALERT!", "Ok Complete Build/Cancel Request", "Question", "None", "Button 1"),"Global")
+        if($comparison(#null,"= Equals","Ok Complete Build")) {
+            then {
+                shell("{$special folder("Application")}\\inst\\ipdf-setup.exe")
+                set(#ipdf_path,"{$special folder("My Documents")}\\Insta Promoter Data Folder","Global")
+            }
+            else {
+                alert("Request Canceled")
+            }
+        }
+    }
+    ui stat monitor(#main ui,"")
+}
+StartLogRunning(#OpenLog)
+set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+if($comparison(#post_options,"= Equals","Post Now")) {
+    then {
+        PostModInfoCloser(#RunPostModInfoCloser)
+        set(#SystemSetUp,$SetPostSystemUp(#SystemSetUp),"Global")
+        wait(1)
+        loop(#num_post_now) {
+            set(#LogClearCommand,$ClearLogSystem(#LogClearCommand),"Global")
+            set(#PostNowCode,$PostNowSystem(#PostNowCode),"Global")
+        }
+    }
+    else if($comparison(#post_options,"= Equals","On Schedule")) {
+        PostModInfoCloser(#RunPostModInfoCloser)
+        set(#SystemSetUp,$SetPostSystemUp(#SystemSetUp),"Global")
+        wait(1)
+        set(#LogClearCommand,$ClearLogSystem(#LogClearCommand),"Global")
+        set(#PostOnScheduleCode,$OnScheduleSystem(#PostOnScheduleCode),"Global")
+    }
+    else if($comparison(#post_options,"= Equals","Account Rotation")) {
+        set(#SelectedPostOption,$plugin function("Advanced Dialog.dll", "$dropdown dialog", "Quick Settings View", "", "Account Rotation - Post Now,Account Rotation - On Schedule", 280, 125, "False", 000000, "FFBEEAC4,FDFEFE", "FFF3C1C1,FDFEFE", "Center App", "True", "{$special folder("Application")}\\img\\inp.ico"),"Global")
+        MainPostExecutionBlock(#RunMainPostExecutionBlock)
+    }
+    else {
+        alert("Select Post Option")
+        stop script
+    }
+}
+on load("Tab Loaded") {
+    set(#delay_ticker,0,"Global")
+    set(#post_counter,0,"Global")
+    StartLoginAccountRest(#RunStartLoginAccountRest)
+}

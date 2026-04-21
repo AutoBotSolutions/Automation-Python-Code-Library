@@ -1,0 +1,395 @@
+clear table(&proxies)
+clear table(&accounts)
+clear list(%keywords)
+clear list(%retweet_links)
+clear list(%retweet_scrape)
+plugin command("HTTP post.dll", "Clear Cookies", "https://twitter.com/")
+ui stat monitor(#accounts_loaded, "<br />")
+ui button("Load Accounts") {
+    load_accounts(#load_accounts)
+}
+define load_accounts(#load_accounts) {
+    set(#account_file, $plugin function("Advanced Dialog.dll", "$open file dialog", "CSV File |*.csv", $special folder("Desktop")), "Global")
+    if($comparison(#account_file, "!=", $nothing)) {
+        then {
+            set(#accounts_loaded, "<font color=\"black\"><strong>Accounts Loaded</strong></font>", "Global")
+        }
+        else if($comparison(#account_file, "=", $nothing)) {
+            alert("Account loading failed, please try again.")
+            stop script
+        }
+    }
+}
+ui stat monitor(#proxies_loaded, "<br />")
+ui button("Load Proxies <font color=\"#D8D8D8\">..</font>") {
+    load_proxies(#load_proxies)
+}
+define load_proxies(#load_proxies) {
+    set(#proxy_file, $plugin function("Advanced Dialog.dll", "$open file dialog", "CSV File |*.csv", $special folder("Desktop")), "Global")
+    if($comparison(#proxy_file, "!=", $nothing)) {
+        then {
+            set(#proxies_loaded, "<font color=\"black\"><strong>Proxies Loaded</strong></font>", "Global")
+        }
+        else if($comparison(#proxy_file, "=", $nothing)) {
+            alert("Proxy loading failed, please try again.")
+            stop script
+        }
+    }
+}
+ui stat monitor(#keywords_loaded, "<br />")
+ui button("Load Keywords") {
+    load_keywords(#load_keywords)
+}
+define load_keywords(#load_keywords) {
+    set(#keyword_files, $plugin function("Advanced Dialog.dll", "$multiple select files dialog", "TXT |*.txt", $special folder("Desktop")), "Global")
+    add list to list(%keyword_files, $list from text(#keyword_files, $new line), "Delete", "Global")
+    set(#keyword_files_pos, 0, "Global")
+    set list position(%keyword_files, #keyword_files_pos)
+    if($comparison(#keyword_files, "!=", $nothing)) {
+        then {
+            set(#keywords_loaded, "<font color=\"black\"><strong>Keywords Loaded</strong></font>", "Global")
+        }
+        else if($comparison(#keyword_files, "=", $nothing)) {
+            alert("Keyword loading failed, please try again.")
+            stop script
+        }
+    }
+    set(#keyword_files, $nothing, "Global")
+}
+ui text box("No. Users To Retweet", #num_users_retweet)
+ui drop down("Retweet Per User", "1,2,3,4,5,6,7,8,9,10", #retweet_per_user)
+ui stat monitor("Complete Retweets : ", #retweet_counter)
+ui stat monitor("Incomplete Retweets", #failed_retweet)
+ui text box("No. Accounts To Run", #num_accounts)
+ui text box("Wait Before Next Request", #wait_next_requst)
+ui text box("Master Delay - Seconds", #master_delay)
+ui text box("Run When Complete", #run_when_complete)
+ui drop down("Random Wait .1", "0,1,3,9,15,21,27,33,39,45,51,57,63,69,75,81,87,93,99,105,111,117,123,129,135,141,147,153,159,165,171,177,183,189,195,201,207,213,219,225,231,237,243,249,255,261,267,273,279,285,291,297", #random_wait_one)
+ui drop down("Random Wait .2", "0,6,12,18,24,30,36,42,48,54,60,66,72,78,84,90,96,102,108,114,120,126,132,138,144,150,156,162,168,174,180,186,192,198,204,210,216,222,228,234,240,246,252,258,264,270,276,282,288,294,300", #random_wait_two)
+ui stat monitor("Accounts\\Threads : ", #sync_keeper)
+ui check box("Stop when complete", #stop_cycle)
+if($comparison(#account_file, "!=", $nothing)) {
+    then {
+        create table from file(#account_file, &accounts)
+    }
+    else {
+        alert("Please add your accounts file.")
+        stop script
+    }
+}
+if($comparison(#proxy_file, "!=", $nothing)) {
+    then {
+        create table from file(#proxy_file, &proxies)
+    }
+    else {
+        if($comparison(#proxy_override, "!=", $true)) {
+            then {
+                alert("Please add your proxy file.")
+                stop script
+            }
+        }
+    }
+}
+set(#account_row, "-1", "Global")
+set(#proxy_row, "-1", "Global")
+set(#retweet_counter, 0, "Global")
+set(#failed_retweet, 0, "Global")
+set(#release_loop, 0, "Global")
+set(#sync_keeper, $plugin function("Threads Counter.dll", "threads counter", "reset"), "Global")
+loop while($comparison(#infinite_loop, "=", $nothing)) {
+    add_keyword_files(#add_keyword_files)
+    thread {
+        lanuch_retweets_routine(#run_retweet_routine)
+    }
+    set(#sync_keeper, $plugin function("Threads Counter.dll", "threads counter", "increment"), "Global")
+    wait(1)
+    loop while($comparison(#release_loop, "=", 0)) {
+        wait(0.1)
+    }
+    if($comparison(#sync_keeper, "=", #num_accounts)) {
+        then {
+            loop while($comparison(#sync_keeper, "!=", 0)) {
+                set(#sync_keeper, $plugin function("Threads Counter.dll", "threads counter", "read"), "Global")
+                wait(1)
+            }
+        }
+    }
+    if($comparison(#account_row, "=", $subtract($table total rows(&accounts), 1))) {
+        then {
+            if($comparison(#stop_cycle, "=", $true)) {
+                then {
+                    in new browser {
+                        thread {
+                            alert("Done!")
+                        }
+                    }
+                    stop script
+                }
+            }
+        }
+    }
+    if($comparison(#account_row, "=", $subtract($table total rows(&accounts), 1))) {
+        then {
+            rest_accounts_proxies(#clear__accounts_proxies)
+        }
+    }
+    increment(#keyword_files_pos)
+    clear list(%keywords)
+    if($comparison(#keyword_files_pos, "=", $list total(%keyword_files))) {
+        then {
+            rest_keyword_files(#rest_keyword_files)
+            wait(1)
+        }
+    }
+}
+define lanuch_retweets_routine(#run_retweet_routine) {
+    set(#release_loop, 0, "Global")
+    increment(#account_row)
+    increment(#proxy_row)
+    set(#count_ui_display, 0, "Local")
+    set(#master_delay_trigger, 0, "Local")
+    plugin command("HTTP post.dll", "http keep alive", "Yes")
+    plugin command("HTTP post.dll", "http auto redirect", "No")
+    plugin command("HTTP post.dll", "http cookiecontainer mode", "Advanced")
+    divider
+    if($comparison($list total(%keyword_files), "!=", $nothing)) {
+        then {
+            add list to list(%keywords, $list from text(#keyword_temp, $new line), "Delete", "Local")
+            set(#keyword_file_pos, 0, "Local")
+            set list position(%keywords, #keyword_file_pos)
+        }
+        else {
+            alert("Please add your keyword files.")
+            stop script
+        }
+    }
+    set(#global_username, $table cell(&accounts, #account_row, 0), "Global")
+    set(#global_password, $table cell(&accounts, #account_row, 1), "Global")
+    set(#local_username, #global_username, "Local")
+    set(#local_password, #global_password, "Local")
+    if($comparison(#proxy_override, "!=", $true)) {
+        then {
+            if($comparison($table total columns(&proxies), "=", 4)) {
+                then {
+                    set(#set_proxy, "{$table cell(&proxies, #proxy_row, 0)}:{$table cell(&proxies, #proxy_row, 1)}:{$table cell(&proxies, #proxy_row, 2)}:{$table cell(&proxies, #proxy_row, 3)}", "Global")
+                    set(#local_proxy, #set_proxy, "Local")
+                }
+                else if($comparison($table total columns(&proxies), "=", 2)) {
+                    set(#set_proxy, "{$table cell(&proxies, #proxy_row, 0)}:{$table cell(&proxies, #proxy_row, 1)}", "Global")
+                    set(#local_proxy, #set_proxy, "Local")
+                }
+            }
+        }
+    }
+    set(#request_login_page, $plugin function("HTTP post.dll", "$http get", " https://twitter.com/login", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36", " https://twitter.com/", #local_proxy, 60), "Local")
+    set(#login_token, $find regular expression(#request_login_page, "(?<=name\\=\\\"authenticity_token\\\"\\svalue\\=\\\").+(?=\\\">)"), "Local")
+    set(#request_login_page, $nothing, "Local")
+    set(#post_login_data, $plugin function("HTTP post.dll", "$http post", " https://twitter.com/sessions ", "session%5Busername_or_email%5D={#local_username}&session%5Bpassword%5D={#local_password}&authenticity_token={#login_token}", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36", "https://twitter.com/login", #local_proxy, 60), "Local")
+    set(#logged_in, $plugin function("HTTP post.dll", "$http get", "https://twitter.com", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36", "https://twitter.com/login", #local_proxy, 60), "Local")
+    set(#post_login_data, $nothing, "Local")
+    set(#logged_in, $nothing, "Local")
+    set(#release_loop, 1, "Global")
+    divider
+    set(#search_string, $list item(%keywords, #keyword_file_pos), "Local")
+    set(#search, $plugin function("HTTP post.dll", "$http get", " https://twitter.com/search?q={#search_string}&src=typd ", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36", "https://twitter.com/", #local_proxy, 20), "Local")
+    set(#search, $nothing, "Local")
+    set(#switch_all, $plugin function("HTTP post.dll", "$http get", " https://twitter.com/search?f=realtime&q={#search_string}&src=typd ", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36", "https://twitter.com/search?q=money&src=typd", #local_proxy, 20), "Local")
+    add list to list(%retweet_scrape, $find regular expression(#switch_all, "(?!data-aria-label-part><s>@<\\/s><b>)[A-Za-z0-9_-]+(?=<\\/b><\\/span>)"), "Delete", "Local")
+    set(#scroll_cursor, $find regular expression(#switch_all, "(?!data-scroll-cursor=\"TWEET-)[A-Za-z0-9-]+\"(?=\\sdata-refresh)"), "Local")
+    set(#switch_all, $nothing, "Local")
+    set(#lastnotets, $rand(50, 350), "Local")
+    set(#loop_trigger, 0, "Local")
+    divider
+    loop while($comparison(#loop_trigger, "=", 0)) {
+        set(#request_scroll, $plugin function("HTTP post.dll", "$http get", " https://twitter.com/i/search/timeline?f=realtime&q={#search_string}&src=typd&include_available_features=1&include_entities=1&last_note_ts={#lastnotets}&scroll_cursor={#scroll_cursor}", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36", "https://twitter.com/search?f=realtime&q={#search_string}&src=typd", #local_proxy, 20), "Local")
+        set(#scroll_cursor, $find regular expression(#request_scroll, "(?!\"is_refresh_request\":false,\"scroll_cursor\":\")[a-z0-9A-Z-]+(?=\",\"refresh_cursor)"), "Local")
+        set(#no_more_results, $find regular expression(#request_scroll, "(?!\\\{\\\"inner\\\":\\\{\\\"has_more_items\\\":)[a-z]\\\{5,5\\\}(?=,\\\"items_html\\\":)"), "Local")
+        add list to list(%retweet_scrape, $find regular expression(#request_scroll, "(?!href=&quot;\\\\/)[a-zA-Z0-9_-]+(?=\\\\/status\\\\/)"), "Delete", "Local")
+        if($comparison(#no_more_results, "=", "false")) {
+            then {
+                set(#loop_trigger, 1, "Local")
+                wait(1)
+            }
+        }
+        if($comparison($list total(%retweet_scrape), ">=", $add(#num_users_retweet, 10))) {
+            then {
+                set(#loop_trigger, 1, "Local")
+                wait(1)
+            }
+        }
+        if($comparison(#request_scroll, "=", "The remote server returned an error: (429) Too Many Requests.")) {
+            then {
+                set(#loop_trigger, 1, "Local")
+                wait(1)
+            }
+        }
+        set(#request_scroll, $nothing, "Local")
+        set(#no_more_results, $nothing, "Local")
+        increment(#lastnotets)
+        wait(0.1)
+    }
+    set(#scroll_cursor, $nothing, "Local")
+    if($comparison($list total(%retweet_scrape), ">", #num_users_retweet)) {
+        then {
+            loop while($comparison(#num_users_retweet, "!=", $list total(%retweet_scrape))) {
+                remove from list(%retweet_scrape, 0)
+            }
+        }
+    }
+    set(#retweet_scrape_pos, 0, "Local")
+    set list position(%retweet_scrape, #retweet_scrape_pos)
+    divider
+    loop(#num_users_retweet) {
+        clear list(%retweet_links)
+        set(#nav_user, $plugin function("HTTP post.dll", "$http get", "https://twitter.com/{$list item(%retweet_scrape, #retweet_scrape_pos)}", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36", "", #local_proxy, 20), "Local")
+        set(#user_id, $find regular expression(#nav_user, "(?!similar_to_user_id&quot;:)[0-9]+(?=\},&quot;isCurrentUser)"), "Local")
+        set(#user, $list item(%retweet_scrape, #retweet_scrape_pos), "Local")
+        add list to list(%retweet_links, $find regular expression(#nav_user, "(?!href=\\\"\\/){#user}\\/status\\/[0-9]+(?=\")"), "Delete", "Local")
+        set(#nav_user, $nothing, "Local")
+        set(#retweet_links_pos, 0, "Local")
+        set list position(%retweet_links, #retweet_links_pos)
+        if($comparison($list total(%retweet_links), ">=", #retweet_per_user)) {
+            then {
+                loop(#retweet_per_user) {
+                    set(#nav_retweet_link, $plugin function("HTTP post.dll", "$http get", "https://twitter.com/{$list item(%retweet_links, #retweet_links_pos)}", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36", "https://twitter.com/{#user}", #local_proxy, 20), "Local")
+                    set(#nav_retweet_link, $nothing, "Local")
+                    set(#retweet_id, $find regular expression($list item(%retweet_links, #retweet_links_pos), "(?![A-Z_a-z-0-9].+\\/)[0-9]+"), "Local")
+                    if($comparison(#master_delay_trigger, "!=", #run_when_complete)) {
+                        then {
+                            if($both($comparison(#random_wait_one, "!=", ""), $comparison(#random_wait_two, "!=", "")) AND $both($comparison(#random_wait_one, "!=", 0), $comparison(#random_wait_two, "!=", 0))) {
+                                then {
+                                    set(#random_wait, $rand(#random_wait_one, #random_wait_two), "Local")
+                                    wait(#random_wait)
+                                }
+                            }
+                        }
+                        else if($both($comparison(#master_delay, "!=", ""), $comparison(#run_when_complete, "!=", ""))) {
+                            if($comparison(#master_delay_trigger, ">=", #run_when_complete)) {
+                                then {
+                                    set(#master_delay_trigger, 0, "Local")
+                                    set(#count_ui_display, #master_delay, "Local")
+                                    loop(#master_delay) {
+                                        wait(0.9)
+                                        decrement(#count_ui_display)
+                                    }
+                                    set(#count_ui_display, 0, "Local")
+                                }
+                            }
+                        }
+                    }
+                    set(#request_retweet, $plugin function("HTTP post.dll", "$http post", " https://twitter.com/i/tweet/retweet ", "authenticity_token={#login_token}&id={#retweet_id}&tweet_stat_count=0", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36", "https://twitter.com/{$list item(%retweet_links, #retweet_links_pos)}", #local_proxy, 20), "Local")
+                    set(#retweet_id, $nothing, "Local")
+                    set(#retweet_sucsess, $find regular expression(#request_retweet, "(?!\")[a-z_]\{20,20\}(?=\")"), "Local")
+                    set(#request_retweet, $nothing, "Local")
+                    if($comparison(#retweet_sucsess, "=", "highline_stat_phrase")) {
+                        then {
+                            increment(#retweet_counter)
+                            increment(#master_delay_trigger)
+                        }
+                        else if($comparison(#retweet_sucsess, "!=", "highline_stat_phrase")) {
+                            increment(#failed_retweet)
+                            increment(#master_delay_trigger)
+                        }
+                    }
+                    set(#retweet_sucsess, $nothing, "Local")
+                    increment(#retweet_links_pos)
+                    if($comparison(#wait_next_requst, "!=", "")) {
+                        then {
+                            wait(#wait_next_requst)
+                        }
+                    }
+                }
+            }
+            else {
+                loop($list total(%retweet_links)) {
+                    set(#nav_retweet_link, $plugin function("HTTP post.dll", "$http get", "https://twitter.com/{$list item(%retweet_links, #retweet_links_pos)}", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36", "https://twitter.com/{#user}", #local_proxy, 20), "Local")
+                    set(#nav_retweet_link, $nothing, "Local")
+                    set(#retweet_id, $find regular expression($list item(%retweet_links, #retweet_links_pos), "(?![A-Z_a-z-0-9].+\\/)[0-9]+"), "Local")
+                    if($comparison(#master_delay_trigger, "!=", #run_when_complete)) {
+                        then {
+                            if($both($comparison(#random_wait_one, "!=", ""), $comparison(#random_wait_two, "!=", "")) AND $both($comparison(#random_wait_one, "!=", 0), $comparison(#random_wait_two, "!=", 0))) {
+                                then {
+                                    set(#random_wait, $rand(#random_wait_one, #random_wait_two), "Local")
+                                    wait(#random_wait)
+                                }
+                            }
+                        }
+                        else if($both($comparison(#master_delay, "!=", ""), $comparison(#run_when_complete, "!=", ""))) {
+                            if($comparison(#master_delay_trigger, ">=", #run_when_complete)) {
+                                then {
+                                    set(#master_delay_trigger, 0, "Local")
+                                    set(#count_ui_display, #master_delay, "Local")
+                                    loop(#master_delay) {
+                                        wait(0.9)
+                                        decrement(#count_ui_display)
+                                    }
+                                    set(#count_ui_display, 0, "Local")
+                                }
+                            }
+                        }
+                    }
+                    set(#request_retweet, $plugin function("HTTP post.dll", "$http post", " https://twitter.com/i/tweet/retweet ", "authenticity_token={#login_token}&id={#retweet_id}&tweet_stat_count=0", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36", "https://twitter.com/{$list item(%retweet_links, #retweet_links_pos)}", #local_proxy, 20), "Local")
+                    set(#retweet_id, $nothing, "Local")
+                    set(#retweet_sucsess, $find regular expression(#request_retweet, "(?!\")[a-z_]\{20,20\}(?=\")"), "Local")
+                    set(#request_retweet, $nothing, "Local")
+                    if($comparison(#retweet_sucsess, "=", "highline_stat_phrase")) {
+                        then {
+                            increment(#retweet_counter)
+                            increment(#master_delay_trigger)
+                        }
+                        else if($comparison(#retweet_sucsess, "!=", "highline_stat_phrase")) {
+                            increment(#failed_retweet)
+                            increment(#master_delay_trigger)
+                        }
+                    }
+                    set(#retweet_sucsess, $nothing, "Local")
+                    increment(#retweet_links_pos)
+                    if($comparison(#wait_next_requst, "!=", "")) {
+                        then {
+                            wait(#wait_next_requst)
+                        }
+                    }
+                }
+            }
+        }
+        set(#user, $nothing, "Local")
+        increment(#retweet_scrape_pos)
+    }
+    if($comparison(#keyword_file_pos, "=", $list total(%keywords))) {
+        then {
+            clear list(%keywords)
+            add list to list(%keywords, $list from text(#keyword_temp, $new line), "Delete", "Local")
+            set(#keyword_file_pos, 0, "Local")
+            set list position(%keywords, #keyword_file_pos)
+        }
+    }
+    set(#sync_keeper, $plugin function("Threads Counter.dll", "threads counter", "decrement"), "Local")
+}
+define rest_accounts_proxies(#clear__accounts_proxies) {
+    comment("You are using this command in the
+thread lanucher, to rest the account
+and proxy file once all the accounts
+have been used.")
+    clear table(&accounts)
+    create table from file(#account_file, &accounts)
+    set(#account_row, "-1", "Global")
+    clear table(&proxies)
+    create table from file(#proxy_file, &proxies)
+    set(#proxy_row, "-1", "Global")
+}
+define add_keyword_files(#add_keyword_files) {
+    set(#keyword_temp, $read file($list item(%keyword_files, #keyword_files_pos)), "Global")
+    add list to list(%keywords, $list from text(#keyword_temp, $new line), "Delete", "Global")
+    set(#keyword_temp, $nothing, "Global")
+}
+define rest_keyword_files(#rest_keyword_files) {
+    add list to list(%keyword_files, $list from text(#keyword_files, $new line), "Delete", "Global")
+    set(#keyword_files, $nothing, "Global")
+    set(#keyword_files_pos, 0, "Global")
+    set list position(%keyword_files, #keyword_files_pos)
+}
+on load("Bot Loaded") {
+    set(#retweet_counter, 0, "Global")
+    set(#failed_retweet, 0, "Global")
+    set(#count_ui_display, 0, "Global")
+}

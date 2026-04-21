@@ -1,0 +1,208 @@
+define QuickView1(#RunQuickView1) {
+    comment("Sucession Module Quick Acsess Settings")
+    set(#SuccessionSettingsConfig,$plugin function("Advanced Dialog.dll", "$text box dialog", "SUCSESSTION MODULE SETTINGS CONFIG", "USER INTERFACE SETTINGS:
+Cycle Follows Per Tag = [{#follow_per_tag}] 
+Cycle Likes Per Tag = [{#like_per_tag}] 
+Cycle Comments Per Tag = [{#comment_per_tag}] 
+Cycle Actions Per Tag = [{#action_per_tag}] 
+Cycle Auto Follow Back = [{#num_autofollow}] 
+Cycle Mass Unfollows = [{#num_unfollow}] 
+Enable Unfollows = [{#unfollow_off_on}] 
+Enable Autofollows = [{#autofollow_off_on}] 
+Enable Multi Tool = [{#enable_actioning}] 
+Enable Comments = [{#enable_commenting}] 
+Enable Likes = [{#enable_likeing}] 
+Enable Following = [{#enable_following}]
+
+DELAY SETTINGS:
+Set Delay Counter (Sec.) = [{#delay_time}]
+Stop The Software At = [{#succession_stop_bot_at}]
+Master Delay - Seconds = [{#master_delay}]
+Run When Complete = [{#run_when_complete}]
+Random Wait .1 = [{#random_wait_one}]
+Random Wait .2 = [{#random_wait_two}]
+Wait After Action Delay = [{#wait_after}]
+
+ADVANCED SETTINGS:
+Likes Per User - Min = [{#likes_per_user1}]
+Likes Per User - Max = [{#likes_per_user2}]
+Comment Per User - Min = [{#comments_per_user1}]
+Comment Per User - Max = [{#comments_per_user2}]
+Select Multi Tool Action = [{#MultiToolAction}]
+Randomize Succession = [{#RandomizeSuccession}]
+End Succession Comment = [{#DisableCommenting}]
+End Succession Liking = [{#DisableLikeing}]
+End Succession Following = [{#DisableFollowing}]
+End Succession Unfollow = [{#DisableUnfollow}]
+EndSuccessionFollowBack = [{#DisableFollowBack}]
+EndSuccessionMultiTool = [{#DisableMutilTool}]
+Stop Succession Module = [{#succession_stop_bot_at}]
+Stop Bot On End Criteria = [{#StopBotOnEndCriteria}]
+Save Log To File = [{#SaveLogToFile}]
+
+ACCOUNT ROTATION:
+Enable Account Rotation = [{#EnableAccountRotation}]
+Rotate Account At Total = [{#rotate_account_at}]
+Rotate On End Criteria = [{#RotateOnEndCriteria}]
+
+SUPERUSER SETTINGS:
+Popular Posts = [{#top_posts}]
+Skip Likes/Comments = [{#advanced_skip}]
+Randomize Scrape List = [{#RandomizeScrapeList}]
+Follow IF Ratio (>) Then = [{#FollowGreaterThen}]
+Follow IF Ratio (<) Then = [{#FollowLessThen}]
+Follow IF Ratio (=) To = [{#FollowEqualTo}]
+Skip - If Tagged With = [{#SkipIfTaggedWithThis}]
+Skip - Likes/Comments = [{#advanced_skip}]
+Skip - Link In Bio = [{#SkipBioLinkAccounts}]
+Skip - Account is Private = [{#SkipPrivateAccount}]
+Skip - No posts yet = [{#SkipNopostsyet}]
+Skip - non-English = [{#SkipnonEnglishSpeaking}]
+
+REQUIRED FILES:
+Account File Path = [{#account_file}]
+Proxy File Path = [{#proxy_file}]
+Keyword File Path = [{#keyword_file}]
+Comment File Path = [{#comment_file}]
+
+BLACK & WHITE LISTS:
+White List Unfollow File = [{#white_list}]
+Black List Follow File = [{#black_list}]
+Black List Likes File = [{#black_list_likes}]
+Black List Comments File = [{#black_list_comments}]", "False", "True", "False", "True", "True,False,False", "300,350", "False", 000000, "FF0000,000000", "FFF3C1C1,000000", "FF778ABD,000000", "Center App"),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+}
+define QuickView2(#RunQuickView2) {
+    comment("Post Module Quick Acsess Settings")
+    set(#PostSettingsConfig,$plugin function("Advanced Dialog.dll", "$text box dialog", "POST MODULE SETTINGS CONFIG", "Choose Post Option = [{#post_options}]
+Number To Post Now = [{#num_post_now}]
+Date Time Sec Designator = [{#current_date_time}]
+Next Post Date Time = [{#next_post_in}]
+Enter Your Post Schedule = [{#post_schedule}]
+Set Delay Counter (Sec.) = [{#delay_time}]
+Stop The Software At = [{#stop_bot_at}]
+Master Delay - Seconds = [{#master_delay}]
+Run When Complete = [{#run_when_complete}]
+Random Wait .1 = [{#random_wait_one}]
+Random Wait .2 = [{#random_wait_two}]
+Account File Path = [{#account_file}]
+Proxy File Path = [{#proxy_file}]
+Image Caption File Path = [{#image_captions}]
+Custom SaveLoad Path = [{#custom_settings_path}]", "False", "True", "False", "True", "True,False,False", "300,350", "False", 000000, "FF0000,000000", "FFF3C1C1,000000", "FF778ABD,000000", "Center App"),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+}
+define QuickView3(#RunQuickView3) {
+    set(#ScrapeSettingsConfig,$plugin function("Advanced Dialog.dll", "$text box dialog", "SCRAPE MODULE SETTINGS CONFIG", "USER INTRFACE SETTINGS:
+Enter Target Username = [{#TargetUsername}]
+Scrape User Option = [{#ScrapeUserOption}]
+Custom Location Scrape = [{#LocationScrape}]
+Select GeoLocation = [{#GeoLocation}]
+Scrape Comment/ers Tag = [{#ScrapeCommTag}]
+Select Comment Scrape = [{#ScrapeCommentOptions}]
+Scrape Tags -Target Tag = [{#ScrapeTag}]
+Scrape Tags Option = [{#ScrapeTagsOption}]
+Scrape Likes - Tag / URL = [{#ScrapelikeTag}]
+Enable Scrape Likes = [{#EnableScrapeLikes}]
+Number To Scrape = [{#NumberToScrape}]
+
+ADVANCED SETTINGS:
+Save Tags As Spintax = [{#spin_scraped_tags}]
+Popular Posts = [{#top_posts}]
+Show Hide Browser = [{#ShowHideBrowser}]
+Randomize Scrape List = [{#RandomizeScrapeList}]
+
+DELAY SETTINGS:
+Set Delay Counter (Sec.) = [{#delay_time}]
+Stop The Software At = [{#stop_bot_at}]
+Master Delay - Seconds = [{#master_delay}]
+Run When Complete = [{#run_when_complete}]
+Random Wait .1 = [{#random_wait_one}]
+Random Wait .2 = [{#random_wait_two}]
+Wait After Action Delay = [{#wait_after}]
+
+FILE LOCATION SETTINGS:
+Account File Path = [{#account_file}]
+Proxy File Path = [{#proxy_file}]
+Custom SaveLoad Path = [{#custom_settings_path}]", "False", "True", "False", "True", "True,False,False", "300,350", "False", 000000, "FF0000,000000", "FFF3C1C1,000000", "FF778ABD,000000", "Center App"),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+}
+define QuickView4(#RunQuickView4) {
+    comment("Target Module Quick Acsess Settings")
+    set(#TargetSettingsConfig,$plugin function("Advanced Dialog.dll", "$text box dialog", "TARGET MODULE SETTINGS CONFIG", "USER INTERFACE SETTINGS:
+Number To Follow (list) = [{#num_follow}]
+Enable Following = [{#enable_following}]
+Number To Like (list) = [{#num_like}]
+Enable Liking = [{#enable_likes}]
+Number Comment (list) = [{#num_comment}]
+Enable Comments = [{#enable_commenting}]
+Number Actions (list) = [{#num_multi_actions}]
+Enable Multi Tool = [{#enable_multi_tool}]
+Number Unfollow (list) = [{#num_unfollow}]
+Enable Unfollowing = [{#enable_unfollowing}]
+
+DELAY SETTINGS:
+Set Delay Counter (Sec.) = [{#delay_time}]
+Stop The Software At = [{#stop_bot_at}]
+Master Delay - Seconds = [{#master_delay}]
+Run When Complete = [{#run_when_complete}]
+Random Wait .1 = [{#random_wait_one}]
+Random Wait .2 = [{#random_wait_two}]
+Wait After Action Delay = [{#wait_after}]
+
+BLACK & WHITE LIST SETTINGS:
+Ban Unfollow Whitelist = [{#white_list}]
+Ban Follow Blacklist = [{#black_list}]
+Ban Like Blacklist = [{#black_list_likes}]
+Ban Comment Blacklist = [{#black_list_comments}]
+
+FILE SETTINGS:
+Account File Path = [{#account_file}]
+Proxy File Path = [{#proxy_file}]
+Target User List = [{#loaded_list}]
+Comment File Path = [{#comment_file_list}]
+
+RATIO SETTINGS:
+Enter Followers Total = [{#Followers}]
+Enter Following Total = [{#Following}]
+
+ADVANCED SETTINGS:
+Likes Per User - Min = [{#likes_per_user1}]
+Likes Per User - Max = [{#likes_per_user2}]
+Show Hide Browser = [{#ShowHideBrowser}]
+Comment Per User - Min = [{#comments_per_user1}]
+Comment Per User - Max = [{#comments_per_user2}]
+Select Multi Tool Action = [{#MultiToolAction}]
+End Target Comments = [{#DisableCommenting}]
+End Target Liking = [{#DisableLikeing}]
+End Target Following = [{#DisableFollowing}]
+End Target Unfollowing = [{#DisableUnfollow}]
+End Target Multi Tool = [{#DisableMutilTool}]
+Remove Targeted Users = [{#RemoveUsers}]
+Stop Target Module = [{#succession_stop_bot_at}]
+Save Log To File = [{#SaveLogToFile}]
+Randomize Succession = [{#RandomizeSuccession}]
+Enable Account Rotation = [{#EnableAccountRotation}]
+Rotate Account At Total = [{#rotate_account_at}]
+Rotate On End Criteria = [{#RotateOnEndCriteria}]
+Stop Bot On End Criteria = [{#StopBotOnEndCriteria}]
+
+SUPERUSER SETTINGS:
+Set User Agent String = [{#user_agent}]
+Popular Posts = [{#top_posts}]
+Skip Likes/Comments = [{#advanced_skip}]
+Follow Ratio Is Grater = [{#FollowGreaterThen}]
+Follow Ratio Is Less = [{#FollowLessThen}]
+Follow Ratio Is Equal = [{#FollowEqualTo}]
+Skip - If Tagged With = [{#SkipIfTaggedWithThis}]
+Skip - Likes/Comments = [{#advanced_skip}]
+Skip - Link In Bio = [{#SkipBioLinkAccounts}]
+Skip - Account is Private = [{#SkipPrivateAccount}]
+Skip - No posts yet = [{#SkipNopostsyet}]
+Skip - non-English = [{#SkipnonEnglishSpeaking}]
+
+PROJECT SETTINGS: 
+Run From Project Folder = [{#RunFromProjectFolder}]
+Project Target Folder = [{#custom_settings_path}]
+Data File Path = [{#ipdf_path}]", "False", "True", "False", "True", "True,False,False", "300,350", "False", 000000, "FF0000,000000", "FFF3C1C1,000000", "FF778ABD,000000", "Center App"),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+}

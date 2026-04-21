@@ -1,0 +1,1000 @@
+define FollowingFollowersScrapeOne(#FollowingFollowersScrapeOne) {
+    plugin command("Bigtable.dll", "Clear large list", "ScrapeUsers")
+    CloseInfoBox(#RunCloseInfoBox)
+    set(#delay_ticker,0,"Global")
+    set(#master_delay_trigger,0,"Global")
+    set(#ScrapeFollowersQueue,0,"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SENDING BROWSER REQUEST TO USER: [{#TargetUsername}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/{#TargetUsername}/")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/footer/div/span", "Appear", 5)
+    if($comparison(#ScrapeUserOption,"= Equals","Scrape Users Followers")) {
+        then {
+            thread {
+                AppRunningModule(#RunAppRunningModule)
+                set(#ActiveFunction,$plugin function("HTTP post.dll", "$http get", "http://app.tracking.softwareautomation.org/appstats/piwik.php?&idsite=1&rec=1&_id={#session_id}&rand={#anti_cache}&apiv=1&action_name=[Running Scrape Module Function] Scrape Followers Function Activated&url=http://app.tracking.org", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0", "", "", 20),"Global")
+            }
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/article/header/section/ul/li[2]/a")
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/div/header/section/ul/li[2]/a")
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/div/header/section/ul/li[2]/a/span")
+        }
+        else if($comparison(#ScrapeUserOption,"= Equals","Scrape Users Following")) {
+            thread {
+                AppRunningModule(#RunAppRunningModule)
+                set(#ActiveFunction,$plugin function("HTTP post.dll", "$http get", "http://app.tracking.softwareautomation.org/appstats/piwik.php?&idsite=1&rec=1&_id={#session_id}&rand={#anti_cache}&apiv=1&action_name=[Running Scrape Module Function] Scrape Following Function Activated&url=http://app.tracking.org", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0", "", "", 20),"Global")
+            }
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/article/header/section/ul/li[3]/a")
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/div/header/section/ul/li[3]/a")
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/div/header/section/ul/li[3]/a/span")
+        }
+        else {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - PLEASE SELECT A SCRAPE OPTION TO USE THE SCRAPE SOFTWARE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            stop script
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://html/body/div[4]/div/div[2]/div/div[1]", "Appear", 5)
+    set(#inc_num,5,"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SENDING SCRAPE REQUEST TO USER: [{#TargetUsername}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    wait(2)
+    set(#remove_element,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<ul\\sclass=\"[A-Z-a-z_0-9\\s]+\"><div\\sclass=\")[A-Z-a-z_0-9\\s]+(?=\"><li\\sclass=\"[A-Z-a-z_0-9\\s]+\"><div\\sclass)"),"Global")
+}
+define FollowingFollowersScrapeTwo(#FollowingFollowersScrapeTwo) {
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Enabled", "x://html/body/div[3]/div/div[2]/div/div[2]/ul/div/li[*]", "Wait until Enabled", 5)
+    loop(13) {
+        plugin command("Bigtable.dll", "large List from Regex", "ScrapeUsers", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!\"\\shref=\"\\/)[a-z.0-9_]+(?=\\/\"\\sstyle=\"width:\\s30px;)", "add")
+        plugin command("ExBrowser.dll", "ExBrowser Change Attribute", "x://html/body/div[3]/div/div[2]/div/div[2]/ul/div/li[*]", "innertext", "")
+        plugin command("ExBrowser.dll", "ExBrowser Scroll To Element", "x://a[@style=\"width: 30px; height: 30px;\"]")
+    }
+    plugin command("Bigtable.dll", "Large list Remove duplicates", "ScrapeUsers")
+    set(#ScrapeFollowersQueue,$plugin function("Bigtable.dll", "Large list total", "ScrapeUsers"),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SCRAPE QUEUE FOR USER [{#TargetUsername}] TOTAL = [{#ScrapeFollowersQueue}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Change Attribute", "x://div[@class=\"{#remove_element}\"]", "innertext", "")
+}
+define FollowingFollowersScrapeThree(#FollowingFollowersScrapeThree) {
+    save to file("{$special folder("Desktop")}\\ScrapeData\\[{#TargetUsername}].txt",$plugin function("Bigtable.dll", "Large list return", "ScrapeUsers"))
+    set(#loaded_list,"{$special folder("Desktop")}\\ScrapeData\\[{#TargetUsername}].txt","Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LIST AUTO TRANSFERED TO TARGET MODULE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SCRAPED LIST SAVED OUTPUT TO [Desktop\\ScrapeData\\[{#TargetUsername}].txt] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    if($comparison($plugin function("Bigtable.dll", "Large list total", "ScrapeUsers"),"= Equals",$nothing)) {
+        then {
+            thread {
+                AppListScrapeingFailed(#RunAppListScrapeingFailed)
+            }
+        }
+    }
+    plugin command("Bigtable.dll", "Clear large list", "ScrapeUsers")
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+}
+define CommentersCommentScrapeOne(#CommentersCommentScrapeOne) {
+    CloseInfoBox(#RunCloseInfoBox)
+    if($comparison(#ScrapeCommentOptions,"= Equals","Scrape Commenters")) {
+        then {
+            thread {
+                AppRunningModule(#RunAppRunningModule)
+                set(#ActiveFunction,$plugin function("HTTP post.dll", "$http get", "http://app.tracking.softwareautomation.org/appstats/piwik.php?&idsite=1&rec=1&_id={#session_id}&rand={#anti_cache}&apiv=1&action_name=[Running Scrape Module Function] Scrape Commenter's Function Activated&url=http://app.tracking.org", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0", "", "", 20),"Global")
+            }
+        }
+    }
+    if($comparison(#ScrapeCommentOptions,"= Equals","Scrape Comments")) {
+        then {
+            thread {
+                AppRunningModule(#RunAppRunningModule)
+                set(#ActiveFunction,$plugin function("HTTP post.dll", "$http get", "http://app.tracking.softwareautomation.org/appstats/piwik.php?&idsite=1&rec=1&_id={#session_id}&rand={#anti_cache}&apiv=1&action_name=[Running Scrape Module Function] Scrape Comments Function Activated&url=http://app.tracking.org", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0", "", "", 20),"Global")
+            }
+        }
+    }
+    set(#ScrapeCommTag,$replace(#ScrapeCommTag,"#",""),"Global")
+    plugin command("Bigtable.dll", "Clear large list", "ScrapeUsers")
+    plugin command("Bigtable.dll", "Clear large list", "target_user")
+    set(#delay_ticker,0,"Global")
+    set(#master_delay_trigger,0,"Global")
+    set(#ScrapeCommentQueue,0,"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SENDING BROWSER REQUEST TO TAG: [{#ScrapeCommTag}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/explore/tags/{#ScrapeCommTag}/")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[1]/h2", "Appear", 5)
+    CommTagNavFallBack(#RunScrapeCommTag)
+    if($comparison(#top_posts,"= Equals","REMOVE")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - REMOVE TOP POST OPTION SELECTED - REMOVING POPULAR POSTS - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            comment("REMOVES Top Posts OR Populare posts on user request")
+            plugin command("ExBrowser.dll", "ExBrowser Change Attribute", "x://span[@id=\"react-root\"]/section/main/article/div[1]/div", "innertext", "")
+        }
+    }
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SCRAPEING PROSSES STARTED FOR TAG: [{#ScrapeCommTag}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+}
+define CommentersCommentScrapeTwo(#CommentersCommentScrapeTwo) {
+    plugin command("Bigtable.dll", "large List from Regex", "ScrapeUsers", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!<a\\shref=\"\\/p\\/)[A-Z_a-z0-9]\{9,14\}(?=\\/\\?tagged=)", "add")
+    plugin command("Bigtable.dll", "Large list Remove duplicates", "ScrapeUsers")
+    set(#ScrapeCommentQueue,$plugin function("Bigtable.dll", "Large list total", "ScrapeUsers"),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ITEMS SCRAPED TO LIST = [{#ScrapeCommentQueue}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Scroll Browser", 10000, 10000)
+    wait(1)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[3]/div", "Appear", 3)
+}
+define CommentersCommentScrapeThree(#CommentersCommentScrapeThree) {
+    set(#ScrapeCommentQueue,0,"Global")
+    plugin command("Bigtable.dll", "Clear large list", "target_user")
+    plugin command("Bigtable.dll", "Clear large list", "comment_scrape")
+    set(#ScrapeUsersPos,0,"Global")
+}
+define CommentersCommentScrapeFour(#CommentersCommentScrapeFour) {
+    set(#run_master_delay,$master_delay_timers(#run_master_delay),"Global")
+    set(#target_key,$plugin function("Bigtable.dll", "Large list item", "ScrapeUsers", #ScrapeUsersPos),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SENDING REQEST TO TAG: [{#target_key}] KEYWORD [{#ScrapeCommTag}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/p/{#target_key}/?tagged={#ScrapeCommTag}")
+    if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"coreSpriteOptionsEllipsis"))) {
+        comment("wait with wait loop breakout")
+        then {
+            set(#wait_breakout,0,"Global")
+            set(#wait_trigger,0,"Global")
+            loop while($comparison(#wait_trigger,"= Equals",0)) {
+                wait(0.1)
+                increment(#wait_breakout)
+                if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"coreSpriteOptionsEllipsis")) {
+                    then {
+                        set(#wait_trigger,1,"Global")
+                    }
+                    else if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+                        increment(#wait_trigger)
+                    }
+                }
+            }
+        }
+    }
+    if($comparison(#ScrapeCommentOptions,"= Equals","Scrape Commenters")) {
+        then {
+            plugin command("Bigtable.dll", "large List from Regex", "target_user", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!\",\"username\":\")[a-z.0-9_]+(?=\"\}\}\})", "add")
+            plugin command("Bigtable.dll", "Large list Remove duplicates", "target_user")
+            save to file("{$special folder("Desktop")}\\ScrapeData\\[{#ScrapeCommTag}] Commenters.txt",$plugin function("Bigtable.dll", "Large list return", "target_user"))
+            set(#loaded_list,"{$special folder("Desktop")}\\ScrapeData\\[{#ScrapeCommTag}] Commenters.txt","Global")
+            set(#ScrapeCommentQueue,$plugin function("Bigtable.dll", "Large list total", "target_user"),"Global")
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - USERS SCRAPED TO LIST = [{#ScrapeCommentQueue}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            if($comparison($plugin function("Bigtable.dll", "Large list total", "target_user"),"= Equals",$nothing)) {
+                then {
+                    thread {
+                        AppListScrapeingFailed(#RunAppListScrapeingFailed)
+                    }
+                }
+            }
+        }
+    }
+    if($comparison(#ScrapeCommentOptions,"= Equals","Scrape Comments")) {
+        then {
+            plugin command("Bigtable.dll", "large List from Regex", "comment_scrape", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!<span>)[a-zA-Z!@#$%^&*()0-9\\s+]+(?=(?:\\uD83C[\\uDF00-\\uDFFF])|(?:\\uD83D[\\uDC00-\\uDDFF])<\\/span>)", "add")
+            plugin command("Bigtable.dll", "Large list Remove duplicates", "comment_scrape")
+            plugin command("Bigtable.dll", "large List from Regex", "comment_scrape", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!<span><span>)[a-zA-Z!@#$%^&*()0-9\\s+]+(?=<\\/span><\\/span>)", "add")
+            plugin command("Bigtable.dll", "Large list Remove duplicates", "comment_scrape")
+            save to file("{$special folder("Desktop")}\\ScrapeData\\[{#ScrapeCommTag}] Comments.txt",$plugin function("Bigtable.dll", "Large list return", "comment_scrape"))
+            set(#comment_file_list,"{$special folder("Desktop")}\\ScrapeData\\[{#ScrapeCommTag}] Comments.txt","Global")
+            set(#ScrapeCommentQueue,$plugin function("Bigtable.dll", "Large list total", "comment_scrape"),"Global")
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - USERS SCRAPED TO LIST = [{#ScrapeCommentQueue}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            if($comparison($plugin function("Bigtable.dll", "Large list total", "comment_scrape"),"= Equals",$nothing)) {
+                then {
+                    thread {
+                        AppListScrapeingFailed(#RunAppListScrapeingFailed)
+                    }
+                }
+            }
+        }
+    }
+    increment(#ScrapeUsersPos)
+    increment(#master_delay_trigger)
+    set(#run_delay_after,$delay_after_action(#run_delay_after),"Global")
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+    if($comparison(#ScrapeCommentOptions,"= Equals","Scrape Comments")) {
+        then {
+            if($comparison($plugin function("Bigtable.dll", "Large list total", "comment_scrape"),">= Greater than or equal to",#NumberToScrape)) {
+                then {
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SOFTWARE STOP SCRAPEING TO LIST COMPLETE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    stop script
+                }
+            }
+        }
+    }
+    if($comparison(#ScrapeCommentOptions,"= Equals","Scrape Commenters")) {
+        then {
+            if($comparison($plugin function("Bigtable.dll", "Large list total", "target_user"),">= Greater than or equal to",#NumberToScrape)) {
+                then {
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SOFTWARE STOP SCRAPEING TO LIST COMPLETE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    stop script
+                }
+            }
+        }
+    }
+    if($comparison(#ScrapeUsersPos,">= Greater than or equal to",#NumberToScrape)) {
+        then {
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SOFTWARE STOP SCRAPEING TO LIST COMPLETE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            stop script
+        }
+    }
+}
+define ScrapeGeoLocationOne(#ScrapeGeoLocationOne) {
+    CloseInfoBox(#RunCloseInfoBox)
+    thread {
+        AppRunningModule(#RunAppRunningModule)
+        set(#ActiveFunction,$plugin function("HTTP post.dll", "$http get", "http://app.tracking.softwareautomation.org/appstats/piwik.php?&idsite=1&rec=1&_id={#session_id}&rand={#anti_cache}&apiv=1&action_name=[Running Scrape Module Function] Scrape GeoLocation Function Activated&url=http://app.tracking.org", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0", "", "", 20),"Global")
+    }
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - GEO LOCATION TARGETING STARTED - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("Bigtable.dll", "Clear large list", "target_user")
+    plugin command("Bigtable.dll", "Clear large list", "ScrapeUsers")
+    set(#delay_ticker,0,"Global")
+    set(#GeoLocationQueue,0,"Global")
+    set(#master_delay_trigger,0,"Global")
+    if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser URL"),#GeoLocation))) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/explore/locations/{#GeoLocation}")
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PLEASE SELECT YOUR TARGET CITIE FROM THE PAGE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+        }
+        else {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PLEASE SELECT YOUR TARGET CITIE FROM THE PAGE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+        }
+    }
+    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+    loop while($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Cities")) {
+        wait(0.1)
+    }
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Locations in")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - PLEASE SELECT YOUR TARGET LOCATION FROM THE PAGE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            loop while($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Locations in")) {
+                wait(0.1)
+            }
+        }
+    }
+    loop while($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Top posts"))) {
+        wait(0.1)
+    }
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - TARGET LOCATION SCRAPING PROCESS HAS BEGUN - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    if($comparison(#top_posts,"= Equals","REMOVE")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - REMOVE TOP POST OPTION SELECTED - REMOVING POPULAR POSTS - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            comment("REMOVES Top Posts OR Populare posts on user request")
+            plugin command("ExBrowser.dll", "ExBrowser Change Attribute", "x://span[@id=\"react-root\"]/section/main/article/div[1]/div", "innertext", "")
+        }
+    }
+}
+define ScrapeGeoLocationTow(#ScrapeGeoLocationTow) {
+    plugin command("Bigtable.dll", "large List from Regex", "ScrapeUsers", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!\\/p\\/)[A-Za-z_0-9]\{9,14\}(?=\\/\\?taken-at)", "add")
+    plugin command("Bigtable.dll", "Large list Remove duplicates", "ScrapeUsers")
+    set(#GeoLocationQueue,$plugin function("Bigtable.dll", "Large list total", "ScrapeUsers"),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - GEO LOCATION SCRAPE TOTAL = [{#GeoLocationQueue}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Scroll Browser", 10000, 10000)
+    wait(1)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[3]/div", "Appear", 3)
+}
+define ScrapeGeoLocationThree(#ScrapeGeoLocationThree) {
+    set(#GeoLocationQueue,0,"Global")
+    plugin command("Bigtable.dll", "Clear large list", "target_user")
+    set(#ScrapeUsersPos,0,"Global")
+}
+define ScrapeGeoLocationFour(#ScrapeGeoLocationFour) {
+    set(#run_master_delay,$master_delay_timers(#run_master_delay),"Global")
+    set(#target_user,$plugin function("Bigtable.dll", "Large list item", "ScrapeUsers", #ScrapeUsersPos),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - GEO LOCATION SENDING REQUEST TO USER ID: [{#target_user}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/p/{#target_user}")
+    if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"coreSpriteOptionsEllipsis"))) {
+        comment("wait with wait loop breakout")
+        then {
+            set(#wait_breakout,0,"Global")
+            set(#wait_trigger,0,"Global")
+            loop while($comparison(#wait_trigger,"= Equals",0)) {
+                wait(0.1)
+                increment(#wait_breakout)
+                if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"coreSpriteOptionsEllipsis")) {
+                    then {
+                        set(#wait_trigger,1,"Global")
+                    }
+                    else if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+                        increment(#wait_trigger)
+                    }
+                }
+            }
+        }
+    }
+    plugin command("Bigtable.dll", "large List from Regex", "target_user", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!\\s\\(@)[a-z.0-9_-]+(?=\\)\\son\\sI)", "add")
+    plugin command("Bigtable.dll", "Large list Remove duplicates", "target_user")
+    plugin command("Bigtable.dll", "large List from Regex", "target_user", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!\"\\shref=\"\\/)[a-z.0-9_-]+(?=\\/\"\\sstyle)", "add")
+    plugin command("Bigtable.dll", "Large list Remove duplicates", "target_user")
+    save to file("{$special folder("Desktop")}\\ScrapeData\\[{#GeoLocation}].txt",$plugin function("Bigtable.dll", "Large list return", "target_user"))
+    set(#loaded_list,"{$special folder("Desktop")}\\ScrapeData\\[{#GeoLocation}].txt","Global")
+    increment(#ScrapeUsersPos)
+    set(#GeoLocationQueue,$plugin function("Bigtable.dll", "Large list total", "target_user"),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - GEO LOCATION SCRAPE TOTAL = [{#GeoLocationQueue}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    increment(#master_delay_trigger)
+    set(#run_delay_after,$delay_after_action(#run_delay_after),"Global")
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+    if($comparison($plugin function("Bigtable.dll", "Large list total", "target_user"),"= Equals",$nothing)) {
+        then {
+            thread {
+                AppListScrapeingFailed(#RunAppListScrapeingFailed)
+            }
+        }
+    }
+}
+define TagsScraperOne(#TagsScraperOne) {
+    CloseInfoBox(#RunCloseInfoBox)
+    if($comparison(#ScrapeTagsOption,"= Equals","Scrape All Tags")) {
+        then {
+            thread {
+                AppRunningModule(#RunAppRunningModule)
+                set(#ActiveFunction,$plugin function("HTTP post.dll", "$http get", "http://app.tracking.softwareautomation.org/appstats/piwik.php?&idsite=1&rec=1&_id={#session_id}&rand={#anti_cache}&apiv=1&action_name=[Running Scrape Module Function] Scrape All Tags Function Activated&url=http://app.tracking.org", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0", "", "", 20),"Global")
+            }
+        }
+    }
+    if($comparison(#ScrapeTagsOption,"= Equals","Scrape Related Tags")) {
+        then {
+            thread {
+                AppRunningModule(#RunAppRunningModule)
+                set(#ActiveFunction,$plugin function("HTTP post.dll", "$http get", "http://app.tracking.softwareautomation.org/appstats/piwik.php?&idsite=1&rec=1&_id={#session_id}&rand={#anti_cache}&apiv=1&action_name=[Running Scrape Module Function] Scrape Related Tags Function Activated&url=http://app.tracking.org", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0", "", "", 20),"Global")
+            }
+        }
+    }
+    if($comparison(#ScrapeTagsOption,"= Equals","Scrape Top Post Tags")) {
+        then {
+            thread {
+                AppRunningModule(#RunAppRunningModule)
+                set(#ActiveFunction,$plugin function("HTTP post.dll", "$http get", "http://app.tracking.softwareautomation.org/appstats/piwik.php?&idsite=1&rec=1&_id={#session_id}&rand={#anti_cache}&apiv=1&action_name=[Running Scrape Module Function] Scrape Top Post Tags Function Activated&url=http://app.tracking.org", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0", "", "", 20),"Global")
+            }
+        }
+    }
+    plugin command("Bigtable.dll", "Clear large list", "TagScrape")
+    plugin command("Bigtable.dll", "Clear large list", "ScrapeTags")
+    clear list(%hashtag)
+    clear list(%prefix_hashtag)
+    set(#ScrapeTag,$replace(#ScrapeTag,"#",""),"Global")
+    set(#delay_ticker,0,"Global")
+    set(#TagsInQueue,0,"Global")
+    set(#master_delay_trigger,0,"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - TAG SCRAPE SENDING REQUEST TO TAG: [{#ScrapeTag}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/explore/tags/{#ScrapeTag}/")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[1]/h2", "Appear", 5)
+    ScrapeTagNavFallBack(#RunScrapeTagNavFallBack)
+    if($comparison(#top_posts,"= Equals","REMOVE")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - REMOVE TOP POST OPTION SELECTED - REMOVING POPULAR POSTS - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            comment("REMOVES Top Posts OR Populare posts on user request")
+            plugin command("ExBrowser.dll", "ExBrowser Change Attribute", "x://span[@id=\"react-root\"]/section/main/article/div[1]/div", "innertext", "")
+        }
+    }
+}
+define TagsScraperTow(#TagsScraperTow) {
+    plugin command("Bigtable.dll", "large List from Regex", "TagScrape", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!<a\\shref=\"\\/p\\/)[A-Z_a-z0-9]\{9,14\}(?=\\/\\?tagged=)", "add")
+    plugin command("Bigtable.dll", "Large list Remove duplicates", "TagScrape")
+    set(#TagsInQueue,$plugin function("Bigtable.dll", "Large list total", "TagScrape"),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - TAG SCRAPE QUEUE TOTAL = [{#TagsInQueue}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Scroll Browser", 10000, 10000)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[3]/div", "Appear", 3)
+    if($comparison($plugin function("Bigtable.dll", "Large list total", "TagScrape"),"= Equals",$nothing)) {
+        then {
+            thread {
+                AppListScrapeingFailed(#RunAppListScrapeingFailed)
+            }
+        }
+    }
+}
+define TagsScraperThree(#TagsScraperThree) {
+    set(#TagsInQueue,0,"Global")
+    set(#TagsInQueuePos,0,"Global")
+}
+define TagsScraperFour(#TagsScraperFour) {
+    set(#run_master_delay,$master_delay_timers(#run_master_delay),"Global")
+    set(#target_user,$plugin function("Bigtable.dll", "Large list item", "TagScrape", #TagsInQueuePos),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SENDING REQUEST TO ID: [{#target_user}] KEYWORD [{#ScrapeTag}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/p/{#target_user}/?tagged={#ScrapeTag}")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://a[@href=\"/about/us/\"][.=\"About us\"]", "Appear", 5)
+    if($comparison(#ScrapeTagsOption,"= Equals","Scrape All Tags")) {
+        then {
+            plugin command("Bigtable.dll", "large List from Regex", "ScrapeTags", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!/explore/tags/[.a-z_]+\\/\">)[@#.a-z0-9_]+(?=</a>)", "add")
+            plugin command("Bigtable.dll", "Large list Remove duplicates", "ScrapeTags")
+            set(#RunRemoveNonTags,$RemoveNonTags(#RunRemoveNonTags),"Global")
+            save to file("{$special folder("Desktop")}\\ScrapeData\\All [{#ScrapeTag}] Tags.txt",$plugin function("Bigtable.dll", "Large list return", "ScrapeTags"))
+            set(#loaded_list,"{$special folder("Desktop")}\\ScrapeData\\All [{#ScrapeTag}] Tags.txt","Global")
+            set(#TagsInQueue,$plugin function("Bigtable.dll", "Large list total", "ScrapeTags"),"Global")
+        }
+    }
+    if($comparison(#ScrapeTagsOption,"= Equals","Scrape Related Tags")) {
+        then {
+            plugin command("Bigtable.dll", "large List from Regex", "ScrapeTags", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!\\/explore\\/tags\\/){#ScrapeTag}\\w+(?=\\/\">#)", "add")
+            plugin command("Bigtable.dll", "Large list Remove duplicates", "ScrapeTags")
+            set(#TagsInQueue,$plugin function("Bigtable.dll", "Large list total", "ScrapeTags"),"Global")
+        }
+    }
+    if($comparison(#ScrapeTagsOption,"= Equals","Scrape Top Post Tags")) {
+        then {
+            plugin command("Bigtable.dll", "large List from Regex", "ScrapeTags", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!\\/explore\\/tags\\/){#ScrapeTag}\\w+(?=\\/\">#)", "add")
+            plugin command("Bigtable.dll", "Large list Remove duplicates", "ScrapeTags")
+            set(#TagsInQueue,$plugin function("Bigtable.dll", "Large list total", "ScrapeTags"),"Global")
+        }
+    }
+    if($comparison($plugin function("Bigtable.dll", "Large list total", "ScrapeTags"),"= Equals",$nothing)) {
+        then {
+            thread {
+                AppListScrapeingFailed(#RunAppListScrapeingFailed)
+            }
+        }
+    }
+    increment(#TagsInQueuePos)
+    increment(#master_delay_trigger)
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+    set(#run_delay_after,$delay_after_action(#run_delay_after),"Global")
+    if($comparison($plugin function("Bigtable.dll", "Large list total", "ScrapeTags"),">= Greater than or equal to",#NumberToScrape)) {
+        then {
+            if($comparison(#ScrapeTagsOption,"= Equals","Scrape Related Tags")) {
+                then {
+                    set(#PrefixHashTags,$PrefixHashTags(#PrefixHashTags),"Global")
+                }
+            }
+            if($both($comparison(#ScrapeTagsOption,"= Equals","Scrape All Tags"),$comparison(#spin_scraped_tags,"= Equals","YES"))) {
+                then {
+                    set(#RunSpinScrapedTags,$SpinScrapedTags(#RunSpinScrapedTags),"Global")
+                }
+            }
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SOFTWARE STOP SCRAPEING TAGS TO LIST COMPLETE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            stop script
+        }
+    }
+}
+define ScrapeLikesOne(#RunScrapeLikesOne) {
+    CloseInfoBox(#RunCloseInfoBox)
+    thread {
+        AppRunningModule(#RunAppRunningModule)
+        set(#ActiveFunction,$plugin function("HTTP post.dll", "$http get", "http://app.tracking.softwareautomation.org/appstats/piwik.php?&idsite=1&rec=1&_id={#session_id}&rand={#anti_cache}&apiv=1&action_name=[Running Scrape Module Function] Scrape Likes Function Activated&url=http://app.tracking.org", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0", "", "", 20),"Global")
+    }
+    plugin command("Bigtable.dll", "Clear large list", "ScrapeUsers")
+    plugin command("Bigtable.dll", "Clear large list", "target_user")
+    set(#delay_ticker,0,"Global")
+    set(#master_delay_trigger,0,"Global")
+    set(#LikesScrapeQueue,0,"Global")
+    set(#ScrapelikeTag,$replace(#ScrapelikeTag,"#",""),"Global")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/explore/tags/{#ScrapelikeTag}/")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[1]/h2", "Appear", 5)
+    LikeScrapeNavFallBack(#RunLikeScrapeNavFallBack)
+    if($comparison(#top_posts,"= Equals","REMOVE")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - REMOVE TOP POST OPTION SELECTED - REMOVING POPULAR POSTS - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            comment("REMOVES Top Posts OR Populare posts on user request")
+            plugin command("ExBrowser.dll", "ExBrowser Change Attribute", "x://span[@id=\"react-root\"]/section/main/article/div[1]/div", "innertext", "")
+        }
+    }
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SCRAPEING PROSSES STARTED FOR TAG: [{#ScrapeCommTag}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+}
+define ScrapeLikesTwo(#RunScrapeLikesTwo) {
+    plugin command("Bigtable.dll", "large List from Regex", "ScrapeUsers", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!<a\\shref=\"\\/p\\/)[A-Z_a-z0-9]\{9,14\}(?=\\/\\?tagged=)", "add")
+    plugin command("Bigtable.dll", "Large list Remove duplicates", "ScrapeUsers")
+    set(#LikesScrapeQueue,$plugin function("Bigtable.dll", "Large list total", "ScrapeUsers"),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - ITEMS SCRAPED TO LIST = [{#LikesScrapeQueue}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Scroll Browser", 10000, 10000)
+    wait(1)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[3]/div", "Appear", 3)
+}
+define ScrapeLikesThree(#RunScrapeLikesThree) {
+    plugin command("Bigtable.dll", "Clear large list", "target_user")
+    set(#ScrapeUsersPos,0,"Global")
+    set(#LikesScrapeQueue,0,"Global")
+}
+define ScrapeLikesFour(#RunScrapeLikesFour) {
+    set(#run_master_delay,$master_delay_timers(#run_master_delay),"Global")
+    set(#target_key,$plugin function("Bigtable.dll", "Large list item", "ScrapeUsers", #ScrapeUsersPos),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SENDING REQEST TO TAG: [{#target_key}] KEYWORD [{#ScrapelikeTag}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+    var textarea = document.getElementById(\'textarea_id\');
+    textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/p/{#target_key}/?tagged={#ScrapelikeTag}")
+    if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"coreSpriteOptionsEllipsis"))) {
+        comment("wait with wait loop breakout")
+        then {
+            set(#wait_breakout,0,"Global")
+            set(#wait_trigger,0,"Global")
+            loop while($comparison(#wait_trigger,"= Equals",0)) {
+                wait(0.1)
+                increment(#wait_breakout)
+                if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"coreSpriteOptionsEllipsis")) {
+                    then {
+                        set(#wait_trigger,1,"Global")
+                    }
+                    else if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+                        increment(#wait_trigger)
+                    }
+                }
+            }
+        }
+    }
+    wait(1)
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"liked_by")) {
+        then {
+            set(#class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<a\\sclass=\")[_a-z0-9\\s]+(?=\"\\shref=\"\\/p\\/{#target_key}\\/liked_by\\/\"><span>[,0-9.]+<\\/span>\\slikes<\\/a>)"),"Global")
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@class=\"{#class}\"]")
+        }
+        else {
+            comment("Fallback method, they may change it to")
+            set(#class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<a\\sclass=\")[.a-z0-9_\\s]+(?=\"\\shref=\"#\"\\srole=\"button\"><span>)"),"Global")
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@class=\"{#class}\"]")
+        }
+    }
+    wait(1)
+    plugin command("Bigtable.dll", "large List from Regex", "target_user", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!\"\\shref=\"\\/)[a-z.0-9_]+(?=\\/\"\\sstyle=\"width:\\s30px;)", "add")
+    plugin command("Bigtable.dll", "large List from Regex", "target_user", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!title=\"[.a-z_0-9]+\"\\shref=\"\\/)[.a-z_0-9]+(?=\\/\">[.a-z_0-9]+<\\/a>)", "add")
+    plugin command("Bigtable.dll", "Large list Remove duplicates", "target_user")
+    set(#LikesScrapeQueue,$plugin function("Bigtable.dll", "Large list total", "target_user"),"Global")
+    save to file("{$special folder("Desktop")}\\ScrapeData\\[{#ScrapelikeTag}] Likes.txt",$plugin function("Bigtable.dll", "Large list return", "target_user"))
+    set(#loaded_list,"{$special folder("Desktop")}\\ScrapeData\\[{#ScrapelikeTag}] Likes.txt","Global")
+    if($comparison($plugin function("Bigtable.dll", "Large list total", "target_user"),"= Equals",$nothing)) {
+        then {
+            thread {
+                AppListScrapeingFailed(#RunAppListScrapeingFailed)
+            }
+        }
+    }
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - USERS SCRAPED TO LIST = [{#ScrapelikeTag}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+    var textarea = document.getElementById(\'textarea_id\');
+    textarea.scrollTop = textarea.scrollHeight;")
+    increment(#ScrapeUsersPos)
+    increment(#master_delay_trigger)
+    set(#run_delay_after,$delay_after_action(#run_delay_after),"Global")
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+    if($comparison(#ScrapeCommentOptions,"= Equals","Scrape Comments")) {
+        then {
+            if($comparison($plugin function("Bigtable.dll", "Large list total", "comment_scrape"),">= Greater than or equal to",#NumberToScrape)) {
+                then {
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SOFTWARE STOP SCRAPEING TO LIST COMPLETE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+    var textarea = document.getElementById(\'textarea_id\');
+    textarea.scrollTop = textarea.scrollHeight;")
+                    stop script
+                }
+            }
+        }
+    }
+    if($comparison(#ScrapeCommentOptions,"= Equals","Scrape Commenters")) {
+        then {
+            if($comparison($plugin function("Bigtable.dll", "Large list total", "target_user"),">= Greater than or equal to",#NumberToScrape)) {
+                then {
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SOFTWARE STOP SCRAPEING TO LIST COMPLETE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+    var textarea = document.getElementById(\'textarea_id\');
+    textarea.scrollTop = textarea.scrollHeight;")
+                    stop script
+                }
+            }
+        }
+    }
+    if($comparison(#ScrapeUsersPos,">= Greater than or equal to",#NumberToScrape)) {
+        then {
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SOFTWARE STOP SCRAPEING TO LIST COMPLETE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+    var textarea = document.getElementById(\'textarea_id\');
+    textarea.scrollTop = textarea.scrollHeight;")
+            stop script
+        }
+    }
+}
+define ScrapeLikesFive(#RunScrapeLikesFive) {
+    comment("SCrape likes from url")
+    plugin command("Bigtable.dll", "Clear large list", "ScrapeUsers")
+    plugin command("Bigtable.dll", "Clear large list", "target_user")
+    set(#delay_ticker,0,"Global")
+    set(#master_delay_trigger,0,"Global")
+    set(#LikesScrapeQueue,0,"Global")
+    set(#run_master_delay,$master_delay_timers(#run_master_delay),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SENDING REQEST TO TAG: [{#target_key}] KEYWORD [{#ScrapelikeTag}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+    var textarea = document.getElementById(\'textarea_id\');
+    textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", #ScrapelikeTag)
+    if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"coreSpriteOptionsEllipsis"))) {
+        comment("wait with wait loop breakout")
+        then {
+            set(#wait_breakout,0,"Global")
+            set(#wait_trigger,0,"Global")
+            loop while($comparison(#wait_trigger,"= Equals",0)) {
+                wait(0.1)
+                increment(#wait_breakout)
+                if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"coreSpriteOptionsEllipsis")) {
+                    then {
+                        set(#wait_trigger,1,"Global")
+                    }
+                    else if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+                        increment(#wait_trigger)
+                    }
+                }
+            }
+        }
+    }
+    wait(1)
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser URL"),"tagged")) {
+        then {
+            set(#target_key,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser URL"),"(?!https://www.instagram.com/p/)[-a-zA-Z0-9_]+(?=\\/\\?tagged=\\w+)"),"Global")
+        }
+        else {
+            set(#target_key,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser URL"),"(?<=https://www.instagram.com/p/)[-a-zA-Z0-9_]+(?=\\/)"),"Global")
+        }
+    }
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"liked_by")) {
+        then {
+            set(#class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<a\\sclass=\")[_a-z0-9\\s]+(?=\"\\shref=\"\\/p\\/{#target_key}\\/liked_by\\/\"><span>[,0-9.]+<\\/span>\\slikes<\\/a>)"),"Global")
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@class=\"{#class}\"]")
+        }
+        else {
+            comment("Fallback method, they may change it to")
+            set(#class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<a\\sclass=\")[.a-z0-9_\\s]+(?=\"\\shref=\"#\"\\srole=\"button\"><span>)"),"Global")
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@class=\"{#class}\"]")
+        }
+    }
+    wait(1)
+    divider
+    set(#inc_num,24,"Global")
+    loop while($comparison(#NumberToScrape,"> Greater than",#LikesScrapeQueue)) {
+        loop(2) {
+            plugin command("ExBrowser.dll", "ExBrowser Scroll To Element", "x://html/body/div[3]/div/div[2]/div/div/div[2]/ul/div/li[{#inc_num}]")
+        }
+        plugin command("Variablemulti.dll", "Bulk Variable Increment/decrement", 5, "#inc_num", "Increment")
+        plugin command("Bigtable.dll", "large List from Regex", "target_user", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!\"\\shref=\"\\/)[a-z.0-9_]+(?=\\/\"\\sstyle=\"width:\\s30px;)", "add")
+        plugin command("Bigtable.dll", "large List from Regex", "target_user", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!title=\"[.a-z_0-9]+\"\\shref=\"\\/)[.a-z_0-9]+(?=\\/\">[.a-z_0-9]+<\\/a>)", "add")
+        plugin command("Bigtable.dll", "Large list Remove duplicates", "target_user")
+        save to file("{$special folder("Desktop")}\\ScrapeData\\[{#target_key}] Likes.txt",$plugin function("Bigtable.dll", "Large list return", "target_user"))
+        set(#loaded_list,"{$special folder("Desktop")}\\ScrapeData\\[{#target_key}] Likes.txt","Global")
+        set(#LikesScrapeQueue,$plugin function("Bigtable.dll", "Large list total", "target_user"),"Global")
+    }
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - USERS SCRAPED TO LIST = [{#ScrapelikeTag}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+    var textarea = document.getElementById(\'textarea_id\');
+    textarea.scrollTop = textarea.scrollHeight;")
+    increment(#ScrapeUsersPos)
+    increment(#master_delay_trigger)
+    set(#run_delay_after,$delay_after_action(#run_delay_after),"Global")
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+    if($comparison(#ScrapeCommentOptions,"= Equals","Scrape Comments")) {
+        then {
+            if($comparison($plugin function("Bigtable.dll", "Large list total", "comment_scrape"),">= Greater than or equal to",#NumberToScrape)) {
+                then {
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SOFTWARE STOP SCRAPEING TO LIST COMPLETE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+    var textarea = document.getElementById(\'textarea_id\');
+    textarea.scrollTop = textarea.scrollHeight;")
+                    stop script
+                }
+            }
+        }
+    }
+    if($comparison(#ScrapeCommentOptions,"= Equals","Scrape Commenters")) {
+        then {
+            if($comparison($plugin function("Bigtable.dll", "Large list total", "target_user"),">= Greater than or equal to",#NumberToScrape)) {
+                then {
+                    plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SOFTWARE STOP SCRAPEING TO LIST COMPLETE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+    var textarea = document.getElementById(\'textarea_id\');
+    textarea.scrollTop = textarea.scrollHeight;")
+                    stop script
+                }
+            }
+        }
+    }
+    if($comparison(#ScrapeUsersPos,">= Greater than or equal to",#NumberToScrape)) {
+        then {
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SOFTWARE STOP SCRAPEING TO LIST COMPLETE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+    var textarea = document.getElementById(\'textarea_id\');
+    textarea.scrollTop = textarea.scrollHeight;")
+            stop script
+        }
+    }
+}
+define LikeScrapeNavFallBack(#RunLikeScrapeNavFallBack) {
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Go Back")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser NavigateBack")
+            wait(2)
+            if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://html/body/div[3]/div/button")) {
+                then {
+                    plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/div/button")
+                }
+            }
+            ProfileLinkGraber(#RunProfileLinkGraber)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/{#user_profile}/\"][.=\"Profile\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div/div/span[1]", "Appear", 5)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div/div/span[1]")
+            plugin command("ExBrowser.dll", "ExBrowser Type Text", "x://input[@value=\"\"]", "#{#ScrapelikeTag}")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div[2]/div[2]", "Appear", 5)
+            set(#class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<span\\sclass=\")[_a-z0-9\\s]+(?=\">#{#ScrapelikeTag}</span>)"),"Global")
+            set(#class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<input\\stype=\"text\"\\sclass=\")[_a-z0-9\\s]+(?=\"\\splaceholder=\"Search\")"),"Global")
+            wait(1)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@class=\"{#class}\"][.=\"#{#ScrapelikeTag}\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[1]/h2", "Appear", 5)
+        }
+    }
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Go back")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser NavigateBack")
+            wait(2)
+            if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://html/body/div[3]/div/button")) {
+                then {
+                    plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/div/button")
+                }
+            }
+            ProfileLinkGraber(#RunProfileLinkGraber)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/{#user_profile}/\"][.=\"Profile\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div/div/span[1]", "Appear", 5)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div/div/span[1]")
+            plugin command("ExBrowser.dll", "ExBrowser Type Text", "x://input[@value=\"\"]", "#{#ScrapelikeTag}")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div[2]/div[2]", "Appear", 5)
+            set(#class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<span\\sclass=\")[_a-z0-9\\s]+(?=\">#{#ScrapelikeTag}</span>)"),"Global")
+            set(#class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<input\\stype=\"text\"\\sclass=\")[_a-z0-9\\s]+(?=\"\\splaceholder=\"Search\")"),"Global")
+            wait(1)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@class=\"{#class}\"][.=\"#{#ScrapelikeTag}\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[1]/h2", "Appear", 5)
+        }
+    }
+}
+define ScrapeVariableListClear(#ScrapeVariableListClear) {
+    if($not($file exists("{$special folder("Desktop")}\\ScrapeData"))) {
+        then {
+            create folder($special folder("Desktop"),"ScrapeData")
+        }
+    }
+    plugin command("Bigtable.dll", "Clear all large list")
+    set(#TagsInQueue,0,"Global")
+    set(#GeoLocationQueue,0,"Global")
+    set(#ScrapeFollowersQueue,0,"Global")
+    set(#ScrapeCommentQueue,0,"Global")
+    set(#master_delay_trigger,0,"Global")
+    set(#delay_ticker,0,"Global")
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+}
+define $PrefixHashTags(#PrefixHashTags) {
+    set(#prefix_hashtag,$plugin function("Bigtable.dll", "Large list return", "ScrapeTags"),"Global")
+    add list to list(%prefix_hashtag,$list from text(#prefix_hashtag,$new line),"Delete","Global")
+    add list to list(%hashtag,$plugin function("Advanced Data Text File.dll", "$list append prefix/suffix", %prefix_hashtag, "#", ""),"Delete","Global")
+    plugin command("Bigtable.dll", "Clear large list", "ScrapeTags")
+    if($comparison(#spin_scraped_tags,"= Equals","YES")) {
+        then {
+            set(#hashtag,$plugin function("Advanced Data Text File.dll", "$list to spin syntax", %hashtag, "\{", "\}", "|"),"Global")
+            clear list(%hashtag)
+            add list to list(%hashtag,$list from text(#hashtag,$new line),"Delete","Global")
+        }
+    }
+    plugin command("Bigtable.dll", "ubot list to large list", "ScrapeTags", %hashtag)
+    save to file("{$special folder("Desktop")}\\ScrapeData\\Related To [{#ScrapeTag}] Tags.txt",$plugin function("Bigtable.dll", "Large list return", "ScrapeTags"))
+    set(#loaded_list,"{$special folder("Desktop")}\\ScrapeData\\Related To [{#ScrapeTag}] Tags.txt","Global")
+    plugin command("Bigtable.dll", "Clear large list", "ScrapeTags")
+    plugin command("Bigtable.dll", "Clear large list", "TagScrape")
+    clear list(%hashtag)
+    clear list(%prefix_hashtag)
+}
+define $SpinScrapedTags(#RunSpinScrapedTags) {
+    set(#hashtag,$plugin function("Bigtable.dll", "Large list return", "ScrapeTags"),"Global")
+    add list to list(%hashtag,$list from text(#hashtag,$new line),"Delete","Global")
+    plugin command("Bigtable.dll", "Clear large list", "ScrapeTags")
+    set(#hashtag,$plugin function("Advanced Data Text File.dll", "$list to spin syntax", %hashtag, "\{", "\}", "|"),"Global")
+    clear list(%hashtag)
+    add list to list(%hashtag,$list from text(#hashtag,$new line),"Delete","Global")
+    plugin command("Bigtable.dll", "ubot list to large list", "ScrapeTags", %hashtag)
+    save to file("{$special folder("Desktop")}\\ScrapeData\\All [{#ScrapeTag}] Tags.txt",$plugin function("Bigtable.dll", "Large list return", "ScrapeTags"))
+    set(#loaded_list,"{$special folder("Desktop")}\\ScrapeData\\All [{#ScrapeTag}] Tags.txt","Global")
+}
+define $RemoveNonTags(#RunRemoveNonTags) {
+    set(#position,0,"Global")
+    loop($plugin function("Bigtable.dll", "Large list total", "ScrapeTags")) {
+        if($not($contains($plugin function("Bigtable.dll", "Large list item", "ScrapeTags", #position),"#"))) {
+            then {
+                plugin command("Bigtable.dll", "Large list Remove item", "ScrapeTags", #position)
+                decrement(#position)
+            }
+        }
+        increment(#position)
+    }
+}
+define ScrapeTagNavFallBack(#RunScrapeTagNavFallBack) {
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Go Back")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser NavigateBack")
+            wait(2)
+            if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://html/body/div[3]/div/button")) {
+                then {
+                    plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/div/button")
+                }
+            }
+            ProfileLinkGraber(#RunProfileLinkGraber)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/{#user_profile}/\"][.=\"Profile\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div/div/span[1]", "Appear", 5)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div/div/span[1]")
+            plugin command("ExBrowser.dll", "ExBrowser Type Text", "x://input[@value=\"\"]", "#{#ScrapeTag}")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div[2]/div[2]", "Appear", 5)
+            set(#class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<span\\sclass=\")[_a-z0-9\\s]+(?=\">#{#ScrapeTag}</span>)"),"Global")
+            set(#class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<input\\stype=\"text\"\\sclass=\")[_a-z0-9\\s]+(?=\"\\splaceholder=\"Search\")"),"Global")
+            wait(1)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@class=\"{#class}\"][.=\"#{#ScrapeTag}\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[1]/h2", "Appear", 5)
+        }
+    }
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Go back")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser NavigateBack")
+            wait(2)
+            if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://html/body/div[3]/div/button")) {
+                then {
+                    plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/div/button")
+                }
+            }
+            ProfileLinkGraber(#RunProfileLinkGraber)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/{#user_profile}/\"][.=\"Profile\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div/div/span[1]", "Appear", 5)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div/div/span[1]")
+            plugin command("ExBrowser.dll", "ExBrowser Type Text", "x://input[@value=\"\"]", "#{#ScrapeTag}")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div[2]/div[2]", "Appear", 5)
+            set(#class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<span\\sclass=\")[_a-z0-9\\s]+(?=\">#{#ScrapeTag}</span>)"),"Global")
+            set(#class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<input\\stype=\"text\"\\sclass=\")[_a-z0-9\\s]+(?=\"\\splaceholder=\"Search\")"),"Global")
+            wait(1)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@class=\"{#class}\"][.=\"#{#ScrapeTag}\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[1]/h2", "Appear", 5)
+        }
+    }
+}
+define CommTagNavFallBack(#RunScrapeCommTag) {
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Go Back")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser NavigateBack")
+            wait(2)
+            if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://html/body/div[3]/div/button")) {
+                then {
+                    plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/div/button")
+                }
+            }
+            ProfileLinkGraber(#RunProfileLinkGraber)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/{#user_profile}/\"][.=\"Profile\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div/div/span[1]", "Appear", 5)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div/div/span[1]")
+            plugin command("ExBrowser.dll", "ExBrowser Type Text", "x://input[@value=\"\"]", "#{#ScrapeCommTag}")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div[2]/div[2]", "Appear", 5)
+            set(#class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<span\\sclass=\")[_a-z0-9\\s]+(?=\">#{#ScrapeCommTag}</span>)"),"Global")
+            set(#class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<input\\stype=\"text\"\\sclass=\")[_a-z0-9\\s]+(?=\"\\splaceholder=\"Search\")"),"Global")
+            wait(1)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@class=\"{#class}\"][.=\"#{#ScrapeCommTag}\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[1]/h2", "Appear", 5)
+        }
+    }
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Go back")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser NavigateBack")
+            wait(2)
+            if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://html/body/div[3]/div/button")) {
+                then {
+                    plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/div/button")
+                }
+            }
+            ProfileLinkGraber(#RunProfileLinkGraber)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/{#user_profile}/\"][.=\"Profile\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div/div/span[1]", "Appear", 5)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div/div/span[1]")
+            plugin command("ExBrowser.dll", "ExBrowser Type Text", "x://input[@value=\"\"]", "#{#ScrapeCommTag}")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div[2]/div[2]", "Appear", 5)
+            set(#class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<span\\sclass=\")[_a-z0-9\\s]+(?=\">#{#ScrapeCommTag}</span>)"),"Global")
+            set(#class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<input\\stype=\"text\"\\sclass=\")[_a-z0-9\\s]+(?=\"\\splaceholder=\"Search\")"),"Global")
+            wait(1)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@class=\"{#class}\"][.=\"#{#ScrapeCommTag}\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[1]/h2", "Appear", 5)
+        }
+    }
+}
+define ValidateNumScrape(#RunValidateNumScrape) {
+    if($comparison(#NumberToScrape,"= Equals",$nothing)) {
+        then {
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - PLEASE ENTER A NUMBER TO SCRAPE TO USE THIS FUNCTION - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            alert("Please enter a number to scrape.")
+            stop script
+        }
+    }
+}

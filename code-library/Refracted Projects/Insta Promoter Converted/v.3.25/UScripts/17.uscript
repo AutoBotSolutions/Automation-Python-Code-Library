@@ -1,0 +1,267 @@
+define $MultiLikeFunctionTwo(#RunLikeFunctionTwo) {
+    set(#LikeColor,"#ffff00","Global")
+    thread {
+        AppRunningModule(#RunAppRunningModule)
+        set(#ActiveFunction,$plugin function("HTTP post.dll", "$http get", "http://app.tracking.softwareautomation.org/appstats/piwik.php?&idsite=1&rec=1&_id={#session_id}&rand={#anti_cache}&apiv=1&action_name=[Running Succession Function] Like Function Activated&url=http://app.tracking.org", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0", "", "", 20),"Global")
+    }
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - CLEARING SCRAPE LIST, RESETTING QUEUE - LIKE BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("Bigtable.dll", "Clear large list", "advanced_like_scrape")
+    set(#like_queue,0,"Global")
+    set(#ran_keyword,$spin($plugin function("Bigtable.dll", "Random Large list item", "keywords", "Dont Remove")),"Global")
+    set(#ran_keyword,$replace(#ran_keyword,"#",""),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LIKE BOT SENDING BROWSER REQUEST TO KEYWORD [{#ran_keyword}] - LIKE BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/explore/tags/{#ran_keyword}/")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[1]/h2", "Appear", 5)
+    NavigateFallBackMethod(#RunNavigateFallBackMethod)
+    if($comparison(#top_posts,"= Equals","REMOVE")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - REMOVE TOP POST OPTION SELECTED - REMOVING POPULAR POSTS - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            comment("REMOVES Top Posts OR Populare posts on user request")
+            plugin command("ExBrowser.dll", "ExBrowser Change Attribute", "x://span[@id=\"react-root\"]/section/main/article/div[1]/div", "innertext", "")
+        }
+    }
+    set(#scrape_failed,0,"Global")
+    set(#loop_breakout,0,"Global")
+    CloseInfoBox(#RunCloseInfoBox)
+}
+define $MultiLikeFunctionThree(#RunLikeFunctionThree) {
+    plugin command("Bigtable.dll", "large List from Regex", "advanced_like_scrape", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!<a\\shref=\"\\/p\\/)[A-Z_a-z0-9]\{9,14\}(?=\\/\\?tagged=)", "add")
+    plugin command("Bigtable.dll", "Large list Remove duplicates", "advanced_like_scrape")
+    if($comparison($plugin function("Bigtable.dll", "Large list total", "advanced_like_scrape"),">= Greater than or equal to",$add(#like_per_tag,10))) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LIKE BOT SCRAPE SUCCESS - TRIGGERING LOOP BREAKOUT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#loop_breakout,1,"Global")
+        }
+        else if($comparison($plugin function("Bigtable.dll", "Large list total", "advanced_like_scrape"),"= Equals",0)) {
+            increment(#scrape_failed)
+            if($comparison(#scrape_failed,">= Greater than or equal to",3)) {
+                then {
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LIKE BOT SCRAPE FAILED - TRIGGERING LOOP BREAKOUT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    set(#loop_breakout,1,"Global")
+                }
+            }
+        }
+    }
+    set(#like_queue,$plugin function("Bigtable.dll", "Large list total", "advanced_like_scrape"),"Global")
+    plugin command("ExBrowser.dll", "ExBrowser Scroll Browser", 10000, 10000)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/article/div[3]/div", "Appear", 3)
+    if($comparison($plugin function("Bigtable.dll", "Large list total", "advanced_like_scrape"),"= Equals",$nothing)) {
+        then {
+            thread {
+                AppListScrapeingFailed(#RunAppListScrapeingFailed)
+            }
+        }
+    }
+}
+define $MultiLikeFunctionFour(#RunLikeFunctionFour) {
+    if($comparison(#RandomizeScrapeList,"= Equals","YES")) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - RANDOMIZE SCRAPED LIST OPTION SELECTED - RANDOMIZING LIST - LIKE BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Bigtable.dll", "Add Large list to list", "randomized_list", "advanced_like_scrape")
+            set(#position,0,"Global")
+            loop($plugin function("Bigtable.dll", "Large list total", "randomized_list")) {
+                set(#random_list_item,$plugin function("Bigtable.dll", "Random Large list item", "randomized_list", "Dont Remove"),"Global")
+                set(#position,0,"Global")
+                plugin command("Bigtable.dll", "large List from text", "temp_list", #random_list_item, $new line, "add")
+                loop($plugin function("Bigtable.dll", "Large list total", "randomized_list")) {
+                    if($comparison($plugin function("Bigtable.dll", "Large list item", "randomized_list", #position),"=",#random_list_item)) {
+                        then {
+                            plugin command("Bigtable.dll", "Large list Remove item", "randomized_list", #position)
+                            decrement(#position)
+                        }
+                    }
+                    increment(#position)
+                }
+            }
+            plugin command("Bigtable.dll", "Clear large list", "randomized_list")
+            plugin command("Bigtable.dll", "Add Large list to list", "advanced_like_scrape", "temp_list")
+            plugin command("Bigtable.dll", "Clear large list", "temp_list")
+        }
+    }
+    divider
+    set(#bottom_list_pos,$plugin function("Bigtable.dll", "Large list total", "advanced_like_scrape"),"Global")
+    set(#bottom_list_pos,$subtract($plugin function("Bigtable.dll", "Large list total", "advanced_like_scrape"),1),"Global")
+    if($comparison($plugin function("Bigtable.dll", "Large list total", "advanced_like_scrape"),">",#like_per_tag)) {
+        then {
+            loop while($comparison(#like_per_tag,"!=",$plugin function("Bigtable.dll", "Large list total", "advanced_like_scrape"))) {
+                plugin command("Bigtable.dll", "Large list Remove item", "advanced_like_scrape", #bottom_list_pos)
+                decrement(#bottom_list_pos)
+                set(#like_queue,$plugin function("Bigtable.dll", "Large list total", "advanced_like_scrape"),"Global")
+            }
+        }
+    }
+    set(#adv_like_scrape_pos,0,"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LIKE BOT SCRAPE QUEUE TOTAL = [{#like_queue}] - LIKE BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    CloseInfoBox(#RunCloseInfoBox)
+}
+define $MultiLikeFunctionFive(#RunLikeFunctionFive) {
+    CloseInfoBox(#RunCloseInfoBox)
+    set(#post_id,$plugin function("Bigtable.dll", "Large list item", "advanced_like_scrape", #adv_like_scrape_pos),"Global")
+    DateTimeLogStamp(#RunDateTimeLogStamp)
+    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - SENDING BROWSER REQUEST TO POST ID: [{#post_id}] KEYWORD: [{#ran_keyword}] - LIKE BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/p/{#post_id}/?tagged={#ran_keyword}")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://a[@role=\"button\"]", "Appear", 5)
+    set(#RunDontLike,$DontLikeBlacklist(#RunDontLike),"Global")
+    set(#RunInstagramErrorHandeling,$InstagramErrorHandeling(#RunInstagramErrorHandeling),"Global")
+    if($comparison(#skip_user,"= Equals",0)) {
+        then {
+            if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),">Unlike<"))) {
+                then {
+                    plugin command("Bigtable.dll", "Clear large list", "target_user")
+                    plugin command("Bigtable.dll", "large List from Regex", "target_user", $plugin function("ExBrowser.dll", "$ExBrowser Document Text"), "(?!\",\"username\":\")[a-zA-Z.0-9_-]+(?=\",\"blocked)", "add")
+                    plugin command("Bigtable.dll", "Large list Remove duplicates", "target_user")
+                    if($comparison($plugin function("Bigtable.dll", "Large list item", "target_user", 0),"!= Does not equal",$nothing)) {
+                        then {
+                            set(#target_user,$plugin function("Bigtable.dll", "Large list item", "target_user", 0),"Global")
+                        }
+                    }
+                    plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/div/div/article/header/div[2]/div[1]/div[1]")
+                    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]/section/main/div/header", "Appear", 5)
+                    plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/main/div/article/div[1]/div/div[1]/div[1]/a/div[1]")
+                    set(#likes_per_user,$rand(#likes_per_user1,#likes_per_user2),"Global")
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - REQUEST FOR [{#likes_per_user}] LIKE/S ON USER [{#target_user}] PROFILE PAGE RECIVED - LIKE BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    loop(#likes_per_user) {
+                        set(#get_like_cell,$plugin function("Advanced Data Text File.dll", "$table cell get", &statistics, #LikesRow, 4),"Global")
+                        if($comparison(#get_like_cell,"< Less than",#DisableLikeing)) {
+                            then {
+                                Advanced Skip Trigger(#AdvancedSkipTrigger)
+                                if($comparison(#skip_user,"!= Does not equal",1)) {
+                                    then {
+                                        if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://a[@role=\"button\"][.=\"Next\"][1]")) {
+                                            then {
+                                                set(#run_master_delay,$master_delay_timers(#run_master_delay),"Global")
+                                                plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://html/body/div[4]/div/div[2]/div/article/div[2]/section[1]/a[1]", "Appear", 3)
+                                                if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),">Unlike<"))) {
+                                                    then {
+                                                        LikeButtonClick(#RunLikeButtonClick)
+                                                        if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),">Unlike<"))) {
+                                                            comment("wait with wait loop breakout")
+                                                            then {
+                                                                set(#wait_breakout,0,"Global")
+                                                                set(#wait_trigger,0,"Global")
+                                                                DateTimeLogStamp(#RunDateTimeLogStamp)
+                                                                run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - WAITING FOR LIKE REQUEST TO COMPLETE - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                                                loop while($comparison(#wait_trigger,"= Equals",0)) {
+                                                                    wait(0.1)
+                                                                    increment(#wait_breakout)
+                                                                    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),">Unlike<")) {
+                                                                        then {
+                                                                            set(#wait_trigger,1,"Global")
+                                                                        }
+                                                                        else if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+                                                                            increment(#wait_trigger)
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),">Unlike<")) {
+                                                            then {
+                                                                DateTimeLogStamp(#RunDateTimeLogStamp)
+                                                                run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - THE SOFTWARE HAS SUCCESSFULLY LIKED THE USER [{#target_user}] POST - LIKE BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                                                increment(#like_counter)
+                                                                increment(#AllFunctionCounter)
+                                                                set(#LikesActive,1,"Global")
+                                                                set(#RunSuccessionStatistics,$SuccessionStatistics(#RunSuccessionStatistics),"Global")
+                                                                set(#LikesActive,0,"Global")
+                                                                run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - LIKE BOT SESSION LIKES TOTAL = [{#like_counter}] - LIKE BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                                                                increment(#master_delay_trigger)
+                                                                set(#RunSuccessionStopConfig,$SuccessionStopConfig(#RunSuccessionStopConfig),"Global")
+                                                            }
+                                                            else {
+                                                                thread {
+                                                                    AppLikeButtonPushFailed(#RunAppLikeButtonPushFailed)
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                set(#run_delay_after,$delay_after_action(#run_delay_after),"Global")
+                                            }
+                                        }
+                                    }
+                                }
+                                plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@role=\"button\"][.=\"Next\"][1]")
+                            }
+                        }
+                    }
+                    decrement(#like_queue)
+                    DateTimeLogStamp(#RunDateTimeLogStamp)
+                    run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - QUEUE AFTER ACTION COMPLETE TOTAL = [{#like_queue}] - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                }
+                else {
+                    else {
+                        DateTimeLogStamp(#RunDateTimeLogStamp)
+                        run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - YOUR ALREADY FOLLING THIS USER, SKIPING TO NEXT USER IN LIST - LIKE BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+                    }
+                }
+            }
+        }
+    }
+    increment(#adv_like_scrape_pos)
+    set(#ClearLogSystem,$ClearLogSystem(#LogClearCommand),"Global")
+    if($comparison(#like_counter,">= Greater than or equal to",#stop_bot_at)) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE STOPPED - SOFTWARE STOP CRITERIA HAS BEEN MET, STOPPING THE LIKE BOT - LIKE BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            plugin command("Advanced Systems.dll", "system sound play", "Exclamation")
+            stop script
+        }
+    }
+}
+define $MultiLikeFunctionSix(#RunLikeFunctionSix) {
+    if($comparison(#keyword_file_pos,">= Greater than or equal to",$plugin function("Bigtable.dll", "Large list total", "keywords"))) {
+        then {
+            DateTimeLogStamp(#RunDateTimeLogStamp)
+            run javascript("textarea_id.value += \"{#time} - SOFTWARE RUNNING - KEYWORD FILE PROCESSING COMPLETE, RESETTING KEYWORD LIST BACK TO TOP OF LIST - LIKE BOT - LOG RUNNING - INTERNALIZING COMPLETE - {#time}\\n\"
+var textarea = document.getElementById(\'textarea_id\');
+textarea.scrollTop = textarea.scrollHeight;")
+            set(#keyword_file_pos,0,"Global")
+        }
+    }
+    set(#LikeColor,"#d9d9d9","Global")
+    if($comparison(#EnableAccountRotation,"= Equals","YES")) {
+        then {
+            set(#RunSuccessionAccountRotation,$SuccessionAccountRotation(#RunSuccessionAccountRotation),"Global")
+        }
+    }
+    CloseInfoBox(#RunCloseInfoBox)
+}

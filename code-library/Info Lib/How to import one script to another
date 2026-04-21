@@ -1,0 +1,80 @@
+# Define the path to your module and its name
+module_path = '0.pyscript.py'  # Replace with the correct path
+module_name = 'account_login'
+# Dynamically load the module
+spec = importlib.util.spec_from_file_location(module_name, module_path)
+account_login = importlib.util.module_from_spec(spec)
+# Add module to sys.modules to ensure it's discoverable
+sys.modules[module_name] = account_login
+
+Exacute where needed.
+spec.loader.exec_module(account_login)
+
+################################################################################
+
+## Me
+how to add multipal import script with this code
+
+```python
+# Define the path to your module and its name
+module_path = '0.pyscript.py'  # Replace with the correct path
+module_name = 'account_login'
+# Dynamically load the module
+spec = importlib.util.spec_from_file_location(module_name, module_path)
+account_login = importlib.util.module_from_spec(spec)
+# Add module to sys.modules to ensure it's discoverable
+sys.modules[module_name] = account_login
+```
+
+
+## AI Assistant
+To add multiple import scripts dynamically using the same logic as in your code, you can define a list of module paths and their corresponding names, and iterate through this list to load them dynamically.
+
+Here's an updated version of the code:
+
+```python
+import importlib.util
+import sys
+
+# List of modules to import dynamically
+modules_to_import = [
+    {'module_path': '0.pyscript.py', 'module_name': 'account_login'},  # Replace with actual paths and names
+    {'module_path': '1.pyscript.py', 'module_name': 'user_profile'},  # Add more modules as needed
+    {'module_path': '2.pyscript.py', 'module_name': 'payment_processor'}
+]
+
+# Iterate over the module list and dynamically load each module
+dynamically_loaded_modules = {}
+
+for module in modules_to_import:
+    module_path = module['module_path']
+    module_name = module['module_name']
+    
+    # Dynamically load the module
+    spec = importlib.util.spec_from_file_location(module_name, module_path)
+    loaded_module = importlib.util.module_from_spec(spec)
+    
+    # Execute the module if the spec is valid
+    if spec.loader:
+        spec.loader.exec_module(loaded_module)
+    
+    # Add module to sys.modules to ensure it's discoverable
+    sys.modules[module_name] = loaded_module
+    
+    # Save the loaded module reference in a dictionary (optional)
+    dynamically_loaded_modules[module_name] = loaded_module
+
+# You can now access dynamically loaded modules from the dynamically_loaded_modules dictionary:
+# Example usage:
+# dynamically_loaded_modules['account_login']
+```
+
+### Explanation:
+1. **Modules Definition**: The `modules_to_import` list contains dictionaries with `module_path` and `module_name` keys, describing each module to be imported dynamically.
+2. **Iteration**: A `for` loop processes each module in the list.
+3. **Dynamic Loading**: Each module is dynamically loaded using `importlib.util.spec_from_file_location` and `importlib.util.module_from_spec`.
+4. **Adding to `sys.modules`**: Each module is added to `sys.modules` to make it discoverable by other parts of the application.
+5. **Optional Dictionary**: A `dynamically_loaded_modules` dictionary holds references to the loaded modules, making it easy to access them.
+
+You can now dynamically load as many scripts as you need by simply adding them to the `modules_to_import` list.
+

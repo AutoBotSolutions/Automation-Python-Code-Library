@@ -1,0 +1,76 @@
+ui text box("Account Username", #account_username)
+ui text box("Account Password", #account_password)
+ui text box("Number To Follow", #num_follow)
+ui text box("Enter Proxy", #proxy)
+ui open file("Usernames", #username_file)
+ui stat monitor("Complete Follows : ", #follow_counter)
+ui stat monitor("Incomplete Follows : ", #incomplete_follows)
+ui text box("Master Delay - Seconds", #master_delay)
+ui text box("Run When Complete", #run_when_complete)
+ui drop down("Random Wait .1", "0,1,3,9,15,21,27,33,39,45,51,57,63,69,75,81,87,93,99,105,111,117,123,129,135,141,147,153,159,165,171,177,183,189,195,201,207,213,219,225,231,237,243,249,255,261,267,273,279,285,291,297", #random_wait_one)
+ui drop down("Random Wait .2", "0,6,12,18,24,30,36,42,48,54,60,66,72,78,84,90,96,102,108,114,120,126,132,138,144,150,156,162,168,174,180,186,192,198,204,210,216,222,228,234,240,246,252,258,264,270,276,282,288,294,300", #random_wait_two)
+set(#follow_counter, 0, "Global")
+set(#incomplete_follows, 0, "Global")
+plugin command("Bigtable.dll", "Large list from file", "usernames", #username_file)
+set(#master_delay_trigger, 0, "Global")
+set(#count_ui_display, 0, "Global")
+plugin command("HTTP post.dll", "http keep alive", "Yes")
+plugin command("HTTP post.dll", "http auto redirect", "No")
+plugin command("HTTP post.dll", "http cookiecontainer mode", "Advanced")
+set(#request_login_page, $plugin function("HTTP post.dll", "$http get", " https://twitter.com/login", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36", " https://twitter.com/", #proxy, 60), "Global")
+load html(#request_login_page)
+set(#username, #account_username, "Global")
+set(#password, #account_password, "Global")
+set(#login_token, $find regular expression(#request_login_page, "(?<=name\\=\\\"authenticity_token\\\"\\svalue\\=\\\").+(?=\\\">)"), "Global")
+set(#post_login_data, $plugin function("HTTP post.dll", "$http post", " https://twitter.com/sessions ", "session%5Busername_or_email%5D={#username}&session%5Bpassword%5D={#password}&authenticity_token={#login_token}", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36", "https://twitter.com/login", #proxy, 60), "Global")
+set(#logged_in, $plugin function("HTTP post.dll", "$http get", "https://twitter.com", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36", "https://twitter.com/login", #proxy, 60), "Global")
+load html(#logged_in)
+loop(#num_follow) {
+    set(#user_navigate, $plugin function("HTTP post.dll", "$http get", "https://twitter.com/{$plugin function("Bigtable.dll", "Large list item", "usernames", 0)}", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36", "", #proxy, 60), "Global")
+    load html(#user_navigate)
+    set(#user_id, $find regular expression(#user_navigate, "(?!similar_to_user_id&quot;:)[0-9]+(?=\\\},&quot;isCurrentUser)"), "Global")
+    if($comparison(#master_delay_trigger, "!=", #run_when_complete)) {
+        then {
+            if($both($comparison(#random_wait_one, "!=", ""), $comparison(#random_wait_two, "!=", "")) AND $both($comparison(#random_wait_one, "!=", 0), $comparison(#random_wait_two, "!=", 0))) {
+                then {
+                    set(#random_wait, $rand(#random_wait_one, #random_wait_two), "Global")
+                    wait(#random_wait)
+                }
+            }
+        }
+        else if($both($comparison(#master_delay, "!=", ""), $comparison(#run_when_complete, "!=", ""))) {
+            if($comparison(#master_delay_trigger, ">=", #run_when_complete)) {
+                then {
+                    set(#master_delay_trigger, 0, "Global")
+                    set(#count_ui_display, #master_delay, "Global")
+                    loop(#master_delay) {
+                        wait(0.9)
+                        decrement(#count_ui_display)
+                    }
+                    set(#count_ui_display, 0, "Global")
+                }
+            }
+        }
+    }
+    set(#request_follow, $plugin function("HTTP post.dll", "$http post", " https://twitter.com/i/user/follow ", "authenticity_token={#login_token}&challenges_passed=false&handles_challenges=1&inject_tweet=false&user_id={#user_id}", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36", "https://twitter.com/{$plugin function("Bigtable.dll", "Large list item", "usernames", 0)}", #proxy, 60), "Global")
+    plugin command("Bigtable.dll", "Large list Remove item", "usernames", 0)
+    save to file(#username_file, $plugin function("Bigtable.dll", "Large list return", "usernames"))
+    load html(#request_follow)
+    set(#follow_sucsess, $find regular expression(#request_follow, "(?!\{\"new_state\":\")[a-z]+(?=\",\"is_follow_back\")"), "Global")
+    if($comparison(#follow_sucsess, "=", "following")) {
+        then {
+            increment(#follow_counter)
+            increment(#master_delay_trigger)
+        }
+        else if($comparison(#follow_sucsess, "!=", "following")) {
+            increment(#incomplete_follows)
+            increment(#master_delay_trigger)
+        }
+    }
+    set(#follow_sucsess, $nothing, "Global")
+}
+on load("Bot Loaded") {
+    set(#follow_counter, 0, "Global")
+    set(#incomplete_follows, 0, "Global")
+    set(#count_ui_display, 0, "Global")
+}

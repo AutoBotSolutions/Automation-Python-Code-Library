@@ -1,0 +1,496 @@
+ui drop down("Choose Post Option",",On Schedule,Post Now",#post_options)
+ui stat monitor(#main ui,"<br>")
+ui text box("Number To Post Now",#num_post_now)
+ui text box("Date Time Sec Designator",#current_date_time)
+ui stat monitor("<br>","")
+ui text box("Next Post Date Time",#next_post_in)
+ui stat monitor("Successful Posts&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;: ",#post_counter)
+ui block text("Enter Your Post Schedule",#post_schedule)
+ui stat monitor(#diplay_running,"<br>")
+ui stat monitor("<font size=\"2\">MM/dd/yyyy HH:mm:ss tt</font>","")
+ui stat monitor("","")
+ui button("End Schedule") {
+    set(#ScheduleTrigger,1,"Global")
+    wait(1)
+    plugin command("Advanced Ubot.dll", "main button click", "Stop")
+}
+ui button("Run Schedule") {
+    UserErrorSystem(#SystemUserError)
+    SetPostSystemUp(#SystemSetUp)
+    ScheduleTrigger(#TriggerSchedule)
+}
+ui stat monitor("Flat Delay Count : ",#delay_ticker)
+ui button("Stop Software") {
+    set(#null,$plugin function("Advanced Dialog.dll", "$alert result dialog", "Stop close session? Stop keep session?", "ALERT!", "Stop close session/Stop keep session?/Cancel request!", "Question", "Default Desktop Only", "Button 1"),"Global")
+    if($comparison(#null,"= Equals","Stop close session")) {
+        then {
+            type text(<id="textarea_id">,"{$date}- STOP CLOSE SESSION OPTION HAS BEEN SELECTED, YOUR SESSION IS CLOSED AND KILLED! - LOG RUNNING - {$date}{$new line}","Standard")
+            ChromeDriverKiller(#ChromeKillerCode)
+            Account Rest(#Rest Accounts)
+            wait(1)
+            plugin command("Advanced Ubot.dll", "main button click", "Stop")
+            stop script
+        }
+    }
+    else if($comparison(#null,"= Equals","Stop keep session?")) {
+        type text(<id="textarea_id">,"{$date}- STOP KEEP SESSION OPTION HAS BEEN SELECTED, YOUR SESSION HAS STOPPED AND SESSION KEPT ALIVE! - LOG RUNNING - {$date}{$new line}","Standard")
+        plugin command("Advanced Ubot.dll", "main button click", "Stop")
+        stop script
+    }
+}
+ui button("Start Software") {
+    UserErrorSystem(#SystemUserError)
+    wait(1)
+    set(#null,$plugin function("Advanced Dialog.dll", "$alert result dialog", "Are you sure you want to start the software?", "ALERT!", "Yes/No/Cancel", "Question", "Default Desktop Only", "Button 1"),"Global")
+    if($comparison(#null,"= Equals","Yes")) {
+        then {
+            wait(1)
+            plugin command("Advanced Ubot.dll", "main button click", "Run")
+        }
+    }
+}
+ui stat monitor("Master Countdown",#count_ui_display)
+ui button("System Login") {
+    UserErrorSystem(#SystemUserError)
+    wait(1)
+    set(#null,$plugin function("Advanced Dialog.dll", "$alert result dialog", "Are you sure you want to login?", "ALERT!", "Yes/No/Cancel", "Question", "Default Desktop Only", "Button 1"),"Global")
+    if($comparison(#null,"= Equals","Yes")) {
+        then {
+            ChromeDriverKiller(#ChromeKillerCode)
+            Post Module Login System(#PostLoginSystem)
+        }
+    }
+}
+ui button("Open &nbsp;Settings") {
+    set(#null,$plugin function("Advanced Dialog.dll", "$alert result dialog", "Open settings command: What settings would you like to open? Choose option below.", "ALERT!", "Delay Settings/File Dialog Settings/Cancel Request", "Question", "Default Desktop Only", "Button 1"),"Global")
+    if($comparison(#null,"= Equals","Delay Settings")) {
+        then {
+            plugin command("Advanced Ubot.dll", "menu item click", "Delay Settings")
+        }
+        else if($comparison(#null,"= Equals","File Dialog Settings")) {
+            plugin command("Advanced Ubot.dll", "menu item click", "File Dialog Settings")
+        }
+        else {
+            alert("Request Canceled")
+        }
+    }
+}
+ui stat monitor("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;","")
+ui window("Delay Settings") {
+    ui text box("Set Delay Counter (Sec.)",#delay_time)
+    ui text box("Stop The Software At",#stop_bot_at)
+    ui stat monitor(#main ui,"<br>")
+    ui text box("Master Delay - Seconds",#master_delay)
+    ui text box("Run When Complete",#run_when_complete)
+    ui stat monitor("<br>","")
+    ui drop down("Random Wait .1","0,1,3,9,15,21,27,33,39,45,51,57,63,69,75,81,87,93,99,105,111,117,123,129,135,141,147,153,159,165,171,177,183,189,195,201,207,213,219,225,231,237,243,249,255,261,267,273,279,285,291,297",#random_wait_one)
+    ui drop down("Random Wait .2","0,6,12,18,24,30,36,42,48,54,60,66,72,78,84,90,96,102,108,114,120,126,132,138,144,150,156,162,168,174,180,186,192,198,204,210,216,222,228,234,240,246,252,258,264,270,276,282,288,294,300",#random_wait_two)
+    ui button("Settings Instructions And Uses") {
+        set(#null,$plugin function("Advanced Dialog.dll", "$alert result dialog", "--------------------------------------------------------------------
+\"Set Delay Counter (Sec.)\" = This is a delay that only waits for a set amount of time. This is a flat wait.
+--------------------------------------------------------------------
+\"Master Delay - Seconds\" & \"Run When Complete\" Are delay settings that work together. The master delay will run after the bot has completed the amount of actions on the site that is filled out in the \"Run When Complete\" box. If you only want to like 100 images and then have the software wait for a set amount of time, this is the setting you would use. Fill the delay time in the \"Master Delay - Seconds\" and then tell the software when to run that delay in the \"Run When Complete\" box.
+--------------------------------------------------------------------
+\"Random Wait .1\" and \"Random Wait .2\" work together this will tell the software to wait a random time between each action. Select a low wait time in the \"Random Wait .1\" drop down and a high wait time in the \"Random Wait .2\"  drop down, then the software will pick a random wait time between each action.
+--------------------------------------------------------------------", "Settings and Their Uses.", "Ok Got it. Close", "Information", "Default Desktop Only", "Button 1"),"Global")
+    }
+}
+ui window("File Dialog Settings") {
+    ui stat monitor(#main ui,"")
+    ui open file("Accounts:",#account_file)
+    ui open file("Proxies:",#proxy_file)
+    ui open file("Image Captions",#image_captions)
+}
+if($comparison(#post_options,"= Equals","Post Now")) {
+    then {
+        SetPostSystemUp(#SystemSetUp)
+        wait(1)
+        loop(#num_post_now) {
+            ClearLogSystem(#LogClearCommand)
+            PostNowSystem(#PostNowCode)
+        }
+    }
+    else if($comparison(#post_options,"= Equals","On Schedule")) {
+        SetPostSystemUp(#SystemSetUp)
+        wait(1)
+        ClearLogSystem(#LogClearCommand)
+        OnScheduleSystem(#PostOnScheduleCode)
+    }
+    else {
+        alert("Select Post Option")
+        stop script
+    }
+}
+define SetPostSystemUp(#SystemSetUp) {
+    clear list(%post_schedule)
+    clear list(%image_paths)
+    clear list(%image_captions)
+    add list to list(%image_paths,$get files("{$special folder("Application")}\\uploads","Yes"),"Delete","Global")
+    type text(<id="textarea_id">,"{$date}- RESETTING ALL INTERNALIZED LIST AND PATHS - LOG RUNNING - {$date}{$new line}","Standard")
+    if($comparison($list total(%image_paths),"!= Does not equal",0)) {
+        then {
+            type text(<id="textarea_id">,"{$date}- YOUR POST IMAGES FOLDER HAS IMAGES BOTTING CAN COMMENCE - LOG RUNNING - {$date}{$new line}","Standard")
+        }
+        else if($comparison($list total(%image_paths),"= Equals",0)) {
+            type text(<id="textarea_id">,"{$date}- YOUR POST IMAGES FOLDER IS EMPTY PLEASE LOAD MORE IMAGES TO USE THE POST BOT - {$date}{$new line}","Standard")
+            stop script
+        }
+    }
+    if($comparison(#image_captions,"!= Does not equal",$nothing)) {
+        then {
+            add list to list(%image_captions,$list from file(#image_captions),"Delete","Global")
+            plugin command("Advanced Data Text File.dll", "list remove empty", %image_captions)
+            plugin command("Advanced Data Text File.dll", "list trim excess", %image_captions)
+            type text(<id="textarea_id">,"{$date}- IMAGE CAPTIONS LIST DETECTED AND LOADED SUCCESSFULLY - LOG RUNNING - {$date}{$new line}","Standard")
+        }
+        else {
+            type text(<id="textarea_id">,"{$date}- CAPTIONS LIST NOT DETECTED PLEASE LOAD CAPTION FILE TO POST WITH CAPTIONS - LOG RUNNING - {$date}{$new line}","Standard")
+        }
+    }
+    if($comparison(#post_schedule,"!= Does not equal",$nothing)) {
+        then {
+            add list to list(%post_schedule,$list from text(#post_schedule,$new line),"Delete","Global")
+            plugin command("Advanced Data Text File.dll", "list remove empty", %post_schedule)
+            plugin command("Advanced Data Text File.dll", "list trim excess", %post_schedule)
+            type text(<id="textarea_id">,"{$date}- SCHEDULED DATE AND TIMESTAMPS DETECTED SCHEDULED POSTING CAN COMMENCE - LOG RUNNING - {$date}{$new line}","Standard")
+        }
+        else {
+            type text(<id="textarea_id">,"{$date}- DATE & TIME STAMPS NOT DETECTED PLEASE LOAD IF RUNNING SCHEDULED POSTS - LOG RUNNING - {$date}{$new line}","Standard")
+        }
+    }
+    set(#image_captions_pos,0,"Global")
+    set(#post_schedule_pos,0,"Global")
+    set(#image_paths_pos,0,"Global")
+    set(#master_delay_trigger,0,"Global")
+    set(#count_ui_display,0,"Global")
+    set(#diplay_running,"","Global")
+    set(#post_counter,0,"Global")
+    set(#delay_ticker,0,"Global")
+    set(#delay_ticker,#delay_time,"Global")
+}
+define PostNowSystem(#PostNowCode) {
+    set(#react_class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!coreSpriteMobileNavSearchInactive\"><\\/div><\\/a><\\/div><div\\sclass=\"[a-z_A-Z-0-9.\\s+]+\"><div\\sclass=\")[a-z_A-Z-0-9.\\s+]+(?=\"><\\/div><\\/div><div\\sclass=\")"),"Global")
+    if($comparison(#master_delay_trigger,"!=",#run_when_complete)) {
+        then {
+            if($both($comparison(#random_wait_one,"!=",$nothing),$comparison(#random_wait_two,"!=",$nothing))) {
+                then {
+                    if($both($comparison(#random_wait_one,"!=",0),$comparison(#random_wait_two,"!=",0))) {
+                        then {
+                            set(#diplay_running,"<font color=\"#FF0000\"><strong>Random Delay Running!</stong></font>","Global")
+                            set(#random_wait,$rand(#random_wait_one,#random_wait_two),"Global")
+                            set(#count_ui_display,#random_wait,"Global")
+                            set(#Random Loop,#random_wait,"Local")
+                            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - RANDOM WAIT HAS STARTED - RANDOM WAIT WAITING FOR [{#random_wait}] SECONDS - LOG RUNNING! - {$date}{$new line}","Standard")
+                            loop(#Random Loop) {
+                                wait(1)
+                                decrement(#count_ui_display)
+                            }
+                            set(#count_ui_display,0,"Global")
+                            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - RANDOM WAIT HAS COMPLETED - BOTTING CONTINUING IN [{#count_ui_display}] SECONDS - LOG RUNNING! - {$date}{$new line}","Standard")
+                            set(#diplay_running,$nothing,"Global")
+                            set(#Random Loop,$nothing,"Local")
+                        }
+                    }
+                }
+            }
+        }
+        else if($both($comparison(#master_delay,"!=",""),$comparison(#run_when_complete,"!=",""))) {
+            if($comparison(#master_delay_trigger,">=",#run_when_complete)) {
+                then {
+                    set(#diplay_running,"<font color=\"#FF0000\"><strong>Master Delay Running!</stong></font>","Global")
+                    set(#master_delay_trigger,0,"Global")
+                    set(#count_ui_display,#master_delay,"Global")
+                    type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - MASTER DELAY HAS STARTED - DELAYING FOR [{#master_delay}] SECONDS - LOG RUNNING! - {$date}{$new line}","Standard")
+                    loop(#master_delay) {
+                        wait(0.9)
+                        decrement(#count_ui_display)
+                    }
+                    set(#count_ui_display,0,"Global")
+                    type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - MASTER DELAY HAS COMPLETED - BOTTING CONTINUING IN [{#count_ui_display}] SECONDS - LOG RUNNING! - {$date}{$new line}","Standard")
+                    set(#diplay_running,"","Global")
+                }
+            }
+        }
+    }
+    if($comparison(#delay_time,"> Greater than",0)) {
+        then {
+            type text(<id="textarea_id">,"{$date}- THE DELAY TIME HAS BEEN INITIATED AND IS RUNNING FOR [{#delay_time}] SECONDS - {$date}{$new line}","Standard")
+            set(#delay_ticker,0,"Global")
+            set(#delay_ticker,#delay_time,"Global")
+            loop(#delay_time) {
+                wait(1)
+                decrement(#delay_ticker)
+            }
+            type text(<id="textarea_id">,"{$date}- THE DELAY TIME HAS COMPLETED SUCCESSFULLY RUNNING BOT IT [{#delay_ticker}] SECONDS - {$date}{$new line}","Standard")
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://div[@class=\"{#react_class}\"]")
+    wait(3)
+    type text(<id="textarea_id">,"{$date}- POST UPLOAD RUNNING POST PROCESS STARTED SUCCESSFULLY - LOG RUNNING - {$date}{$new line}","Standard")
+    plugin command("ExBrowser.dll", "ExBrowser Switch to Window", "Open")
+    set(#image_upload,$list item(%image_paths,#image_paths_pos),"Global")
+    plugin command("ExBrowser.dll", "ExBrowser File Upload Dialog Window", "Open", #image_upload)
+    wait(3)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]", "Appear", 30)
+    set(#react_class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!New\\sPost<\\/h1><div\\sclass=\"[a-z_A-Z-0-9.\\s+]+\"><button\\sclass=\")[a-z_A-Z-0-9.\\s+]+(?=\">Next<\\/button><\\/div><\\/header>)"),"Global")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://button[@class=\"{#react_class}\"]")
+    wait(3)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://textarea[@placeholder=\"Write a caption…\"]", "Appear", 30)
+    set(#spun_caption,$spin($list item(%image_captions,#image_captions_pos)),"Global")
+    if($comparison(#spun_caption,"!= Does not equal",$nothing)) {
+        then {
+            type text(<id="textarea_id">,"{$date}- CAPTION POST - POSTING CAPTION TO POST IMAGE - LOG RUNNING - {$date}{$new line}","Standard")
+            plugin command("ExBrowser.dll", "ExBrowser Type Text2", "x://textarea[@placeholder=\"Write a caption…\"]", "Yes", #spun_caption, 10, 50)
+        }
+        else {
+            type text(<id="textarea_id">,"{$date}- CAPTION POST - NO CAPTIONS DETECTED SKIPPING CAPTION POST ON IMAGE - LOG RUNNING - {$date}{$new line}","Standard")
+        }
+    }
+    set(#react_class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!New\\sPost<\\/h1><div\\sclass=\"[a-z_A-Z-0-9.\\s+]+\"><button\\sclass=\")[a-z_A-Z-0-9.\\s+]+(?=\">Share<\\/button><\\/div><\\/header>)"),"Global")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://button[@class=\"{#react_class}\"][.=\"Share\"]")
+    wait(3)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]", "Appear", 30)
+    if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://span[@id=\"react-root\"]")) {
+        then {
+            increment(#post_counter)
+            type text(<id="textarea_id">,"{$date}- SUCCESS! YOUR IMAGE WAS SUCCESSFULLY UPLOADED AND POSTED, POST COUNT = [{#post_counter}] - LOG RUNNING - {$date}{$new line}","Standard")
+        }
+    }
+    if($plugin function("Advanced Ubot.dll", "$compare", #stop_bot_at, "==", #post_counter)) {
+        then {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE STOP CRITERIA HAS BEEN MET, STOPPING THE UPLOAD BOT - {$date}{$new line}","Standard")
+            stop script
+        }
+    }
+    increment(#image_paths_pos)
+    increment(#image_captions_pos)
+    if($comparison(#image_paths_pos,">= Greater than or equal to",$list total(%image_paths))) {
+        then {
+            type text(<id="textarea_id">,"{$date}- UPLOAD FOLDER DEPLETED, PLEASE RELOAD THE UPLOAD FOLDER - LOG RUNNING - {$date}{$new line}","Standard")
+            stop script
+        }
+    }
+    if($comparison(#image_captions_pos,"> Greater than",$list total(%image_captions))) {
+        then {
+            set(#image_captions_pos,0,"Global")
+            type text(<id="textarea_id">,"{$date}- CAPTIONS HAVE BEEN DEPLETED RESETTING LIST BACK TO TOP - SPINTAX SUPPORTED - LOG RUNNING - {$date}{$new line}","Standard")
+        }
+    }
+}
+define OnScheduleSystem(#PostOnScheduleCode) {
+    type text(<id="textarea_id">,"{$date}- SCHEDULE POST BOT STARTED SUCCESSFULLY - LOG RUNNING - {$date}{$new line}","Standard")
+    loop while($comparison(#post_schedule_pos,"< Less than",$list total(%post_schedule))) {
+        if($comparison(#master_delay_trigger,"!=",#run_when_complete)) {
+            then {
+                if($both($comparison(#random_wait_one,"!=",$nothing),$comparison(#random_wait_two,"!=",$nothing))) {
+                    then {
+                        if($both($comparison(#random_wait_one,"!=",0),$comparison(#random_wait_two,"!=",0))) {
+                            then {
+                                set(#diplay_running,"<font color=\"#FF0000\"><strong>Random Delay Running!</stong></font>","Global")
+                                set(#random_wait,$rand(#random_wait_one,#random_wait_two),"Global")
+                                set(#count_ui_display,#random_wait,"Global")
+                                set(#Random Loop,#random_wait,"Local")
+                                type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - RANDOM WAIT HAS STARTED - RANDOM WAIT WAITING FOR [{#random_wait}] SECONDS - LOG RUNNING! - {$date}{$new line}","Standard")
+                                loop(#Random Loop) {
+                                    wait(1)
+                                    decrement(#count_ui_display)
+                                }
+                                set(#count_ui_display,0,"Global")
+                                type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - RANDOM WAIT HAS COMPLETED - BOTTING CONTINUING IN [{#count_ui_display}] SECONDS - LOG RUNNING! - {$date}{$new line}","Standard")
+                                set(#diplay_running,$nothing,"Global")
+                                set(#Random Loop,$nothing,"Local")
+                            }
+                        }
+                    }
+                }
+            }
+            else if($both($comparison(#master_delay,"!=",""),$comparison(#run_when_complete,"!=",""))) {
+                if($comparison(#master_delay_trigger,">=",#run_when_complete)) {
+                    then {
+                        set(#diplay_running,"<font color=\"#FF0000\"><strong>Master Delay Running!</stong></font>","Global")
+                        set(#master_delay_trigger,0,"Global")
+                        set(#count_ui_display,#master_delay,"Global")
+                        type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - MASTER DELAY HAS STARTED - DELAYING FOR [{#master_delay}] SECONDS - LOG RUNNING! - {$date}{$new line}","Standard")
+                        loop(#master_delay) {
+                            wait(0.9)
+                            decrement(#count_ui_display)
+                        }
+                        set(#count_ui_display,0,"Global")
+                        type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - MASTER DELAY HAS COMPLETED - BOTTING CONTINUING IN [{#count_ui_display}] SECONDS - LOG RUNNING! - {$date}{$new line}","Standard")
+                        set(#diplay_running,"","Global")
+                    }
+                }
+            }
+        }
+        if($comparison(#delay_time,"> Greater than",0)) {
+            then {
+                type text(<id="textarea_id">,"{$date}- THE DELAY TIME HAS BEEN INITIATED AND IS RUNNING FOR [{#delay_time}] SECONDS - {$date}{$new line}","Standard")
+                set(#delay_ticker,0,"Global")
+                set(#delay_ticker,#delay_time,"Global")
+                loop(#delay_time) {
+                    wait(1)
+                    decrement(#delay_ticker)
+                }
+                type text(<id="textarea_id">,"{$date}- THE DELAY TIME HAS COMPLETED SUCCESSFULLY RUNNING BOT IT [{#delay_ticker}] SECONDS - {$date}{$new line}","Standard")
+            }
+        }
+        set(#PostTrigger,0,"Global")
+        comment("THIS IS YOUR SCEDULE RELEASE LOOP CODE")
+        type text(<id="textarea_id">,"{$date}- TRIGGER COUGHT SUCSESSFULLY - NEXT POST @[{#next_post_in}] - LOG RUNNING - {$date}{$new line}","Standard")
+        loop while($plugin function("Advanced Ubot.dll", "$compare 2", $list item(%post_schedule,#post_schedule_pos), "!=", #current_date_time, "&&", #PostTrigger, "==", 0)) {
+            if($comparison($list item(%post_schedule,#post_schedule_pos),"= Equals",#current_date_time)) {
+                then {
+                    set(#PostTrigger,1,"Global")
+                }
+            }
+            wait(0.1)
+        }
+        increment(#post_schedule_pos)
+        if($comparison(#post_schedule_pos,">= Greater than or equal to",$list total(%post_schedule))) {
+            then {
+                type text(<id="textarea_id">,"{$date}- POST DATE TIMES DEPLETED, PLEASE RELOAD MORE TO CONTINUE POSTING - LOG STOPPED - {$date}{$new line}","Standard")
+                stop script
+            }
+        }
+        comment("PLACE YOUR RUN CODE UNDER THIS COMMENT.")
+        set(#react_class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!coreSpriteMobileNavSearchInactive\"><\\/div><\\/a><\\/div><div\\sclass=\"[a-z_A-Z-0-9.\\s+]+\"><div\\sclass=\")[a-z_A-Z-0-9.\\s+]+(?=\"><\\/div><\\/div><div\\sclass=\")"),"Global")
+        plugin command("ExBrowser.dll", "ExBrowser Click", "x://div[@class=\"{#react_class}\"]")
+        wait(3)
+        type text(<id="textarea_id">,"{$date}- POST UPLOAD RUNNING POST PROCESS STARTED SUCCESSFULLY - LOG RUNNING - {$date}{$new line}","Standard")
+        plugin command("ExBrowser.dll", "ExBrowser Switch to Window", "Open")
+        set(#image_upload,$list item(%image_paths,#image_paths_pos),"Global")
+        plugin command("ExBrowser.dll", "ExBrowser File Upload Dialog Window", "Open", #image_upload)
+        wait(3)
+        plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]", "Appear", 30)
+        set(#react_class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!New\\sPost<\\/h1><div\\sclass=\"[a-z_A-Z-0-9.\\s+]+\"><button\\sclass=\")[a-z_A-Z-0-9.\\s+]+(?=\">Next<\\/button><\\/div><\\/header>)"),"Global")
+        plugin command("ExBrowser.dll", "ExBrowser Click", "x://button[@class=\"{#react_class}\"]")
+        wait(3)
+        plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://textarea[@placeholder=\"Write a caption…\"]", "Appear", 30)
+        set(#spun_caption,$spin($list item(%image_captions,#image_captions_pos)),"Global")
+        if($comparison(#spun_caption,"!= Does not equal",$nothing)) {
+            then {
+                type text(<id="textarea_id">,"{$date}- CAPTION POST - POSTING CAPTION TO POST IMAGE - LOG RUNNING - {$date}{$new line}","Standard")
+                plugin command("ExBrowser.dll", "ExBrowser Type Text2", "x://textarea[@placeholder=\"Write a caption…\"]", "Yes", #spun_caption, 10, 50)
+            }
+            else {
+                type text(<id="textarea_id">,"{$date}- CAPTION POST - NO CAPTIONS DETECTED SKIPPING CAPTION POST ON IMAGE - LOG RUNNING - {$date}{$new line}","Standard")
+            }
+        }
+        set(#react_class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!New\\sPost<\\/h1><div\\sclass=\"[a-z_A-Z-0-9.\\s+]+\"><button\\sclass=\")[a-z_A-Z-0-9.\\s+]+(?=\">Share<\\/button><\\/div><\\/header>)"),"Global")
+        plugin command("ExBrowser.dll", "ExBrowser Click", "x://button[@class=\"{#react_class}\"][.=\"Share\"]")
+        wait(3)
+        plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]", "Appear", 30)
+        if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://span[@id=\"react-root\"]")) {
+            then {
+                increment(#post_counter)
+                type text(<id="textarea_id">,"{$date}- SUCCESS! YOUR IMAGE WAS SUCCESSFULLY UPLOADED AND POSTED, POST COUNT = [{#post_counter}] - LOG RUNNING - {$date}{$new line}","Standard")
+            }
+        }
+        if($comparison(#stop_bot_at,"= Equals",#post_counter)) {
+            then {
+                type text(<id="textarea_id">,"{$date}- SOFTWARE STOP CRITERIA HAS BEEN MET, STOPPING THE UPLOAD BOT - {$date}{$new line}","Standard")
+                stop script
+            }
+        }
+        increment(#image_paths_pos)
+        increment(#image_captions_pos)
+        increment(#master_delay_trigger)
+        if($comparison(#image_paths_pos,">= Greater than or equal to",$list total(%image_paths))) {
+            then {
+                type text(<id="textarea_id">,"{$date}- UPLOAD FOLDER DEPLETED, PLEASE RELOAD THE UPLOAD FOLDER - LOG RUNNING - {$date}{$new line}","Standard")
+                stop script
+            }
+        }
+        if($comparison(#image_captions_pos,"> Greater than",$list total(%image_captions))) {
+            then {
+                set(#image_captions_pos,0,"Global")
+                type text(<id="textarea_id">,"{$date}- CAPTIONS HAVE BEEN DEPLETED RESETTING LIST BACK TO TOP - SPINTAX SUPPORTED - LOG RUNNING - {$date}{$new line}","Standard")
+            }
+        }
+    }
+}
+define ScheduleTrigger(#TriggerSchedule) {
+    set(#ScheduleTrigger,0,"Global")
+    type text(<id="textarea_id">,"{$date}- SCHEDULER TRIGGERS HAVE BEEN INITIATED - POST SCHEDULER TRIGGERS RUNNING - LOG RUNNING - {$date}{$new line}","Standard")
+    loop while($comparison(#ScheduleTrigger,"= Equals",0)) {
+        set(#current_date_time,$plugin function("DateTime Manipulation.dll", "$datetime manipulation", $date, "UBOT", "MM/dd/yyyy HH:mm:ss tt", "en-US", "en-US"),"Global")
+        wait(0.1)
+        set(#next_post_in,$list item(%post_schedule,#post_schedule_pos),"Global")
+    }
+    type text(<id="textarea_id">,"{$date}- SCHEDULER STOPPED - POST SCHEDULER TRIGGERS STOPPED - LOG STOPPED - {$date}{$new line}","Standard")
+}
+define UserErrorSystem(#SystemUserError) {
+    if($not($exists(<id="textarea_id">))) {
+        then {
+            set(#browser ui,$read file("{$special folder("Application")}\\html-ui\\log-ui.html"),"Global")
+            load html(#browser ui)
+            wait(3)
+            wait for element(<id="textarea_id">,10,"Appear")
+            type text(<id="textarea_id">,"{$date}- THE LOG HAS BEEN LOADED AND STARTED SUCCESSFULLY - LOG RUNNING - {$date}{$new line}","Standard")
+        }
+    }
+    type text(<id="textarea_id">,"{$date}- INSTAGRAM POST BOT STARTED SUCCESSFULLY - AND IS RUNNING - LOG RUNNING - {$date}{$new line}","Standard")
+    if($comparison(#post_options,"= Equals","")) {
+        then {
+            type text(<id="textarea_id">,"{$date}- TO USE THE POST BOT YOU MUST FIRST SELECT A POST OPTION FROM THE DROPDOWN- LOG RUNNING - {$date}{$new line}","Standard")
+            stop script
+        }
+    }
+    if($comparison(#account_file,"= Equals",$nothing)) {
+        then {
+            type text(<id="textarea_id">,"{$date}- TO USE THE POST BOT YOU MUST FIRST SELECT YOUR ACCOUNT FILE - LOG RUNNING - {$date}{$new line}","Standard")
+            type text(<id="textarea_id">,"{$date}- IF YOU USE PROXIES FOR YOUR ACCOUNTS PLEASE SELECT A PROXY FILE - LOG RUNNING - {$date}{$new line}","Standard")
+            stop script
+        }
+    }
+    if($comparison(#image_captions,"= Equals",$nothing)) {
+        then {
+            type text(<id="textarea_id">,"{$date}- IF YOU USE CAPTIONS PLEASE SELECT A CAPTION FILE - SIPINTEXT SUPPORTED - LOG RUNNING - {$date}{$new line}","Standard")
+        }
+    }
+    if($comparison(#post_options,"= Equals","On Scedule")) {
+        then {
+            set(#num_post_now,$nothing,"Global")
+            set(#stop_bot_at,$nothing,"Global")
+            set(#delay_time,$nothing,"Global")
+            if($comparison(#ScheduleTrigger,"= Equals","")) {
+                then {
+                    type text(<id="textarea_id">,"{$date}- PLEASE PRESS THE RUN SCHEDULE BUTTON BEFORE LOGGING IN WITH THE BOT - LOG RUNNING - {$date}{$new line}","Standard")
+                    stop script
+                }
+            }
+            if($comparison(#post_schedule,"= Equals",$nothing)) {
+                then {
+                    type text(<id="textarea_id">,"{$date}- PLEASE ADD YOUR DATE AND TIME STAMPS INTO THE POST SCHEDULED BOX - LOG RUNNING - {$date}{$new line}","Standard")
+                    stop script
+                }
+            }
+        }
+    }
+    if($comparison(#post_options,"= Equals","Post Now")) {
+        then {
+            if($comparison(#num_post_now,"= Equals",$nothing)) {
+                then {
+                    type text(<id="textarea_id">,"{$date}- TO USE THE POST NOW SETTING ENTER A NUMBER IN THE BOX TO POST NOW BOX - LOG RUNNING - {$date}{$new line}","Standard")
+                    stop script
+                }
+            }
+            if($comparison(#delay_time,"= Equals","")) {
+                then {
+                    type text(<id="textarea_id">,"{$date}- TO USE THE POST NOW SETTING ENTER A NUMBER IN THE DELAY BOX TO DELAY YOUR POSTS - LOG RUNNING - {$date}{$new line}","Standard")
+                    stop script
+                }
+            }
+            if($comparison(#stop_bot_at,"= Equals",$nothing)) {
+                then {
+                    type text(<id="textarea_id">,"{$date}- TO USE THE POST NOW SETTING PLEASE TELL THE SOFTWARE WHEN TO STOP POSTING - LOG RUNNING - {$date}{$new line}","Standard")
+                    stop script
+                }
+            }
+        }
+    }
+}
+on load("Tab Loaded") {
+    set(#delay_ticker,0,"Global")
+    set(#post_counter,0,"Global")
+}

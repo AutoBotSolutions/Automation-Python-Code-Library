@@ -1,0 +1,111 @@
+comment("Gets All Project Upload Folder Paths")
+define GetUploadProjectFolder(#RunGetUploadProjectFolder) {
+    clear list(%UploadFolders)
+    clear list(%CountProjectFolders)
+    LoadDataFolderPath(#RunLoadDataFolderPath)
+    comment("Gets the total number of project 
+folders so we know what number of 
+folder we can remove with the loop 
+remove code below.")
+    if($comparison(#ipdf_path,"= Equals",$nothing)) {
+        then {
+            add list to list(%CountProjectFolders,$plugin function("Advanced Data Text File.dll", "$get folders", "{$special folder("Application")}\\projects", "False", "True"),"Delete","Global")
+        }
+        else {
+            add list to list(%CountProjectFolders,$plugin function("Advanced Data Text File.dll", "$get folders", "{$special folder("My Documents")}\\Insta Promoter Data Folder\\projects", "False", "True"),"Delete","Global")
+        }
+    }
+    comment("Gets all folders and sub directory\'s, 
+then the remove loop code below will 
+remove the non upload file directory\'s 
+using the total count from the above 
+list total")
+    if($comparison(#ipdf_path,"= Equals",$nothing)) {
+        then {
+            add list to list(%UploadFolders,$plugin function("Advanced Data Text File.dll", "$get folders", "{$special folder("Application")}\\projects", "True", "True"),"Delete","Global")
+        }
+        else {
+            add list to list(%UploadFolders,$plugin function("Advanced Data Text File.dll", "$get folders", "{$special folder("My Documents")}\\Insta Promoter Data Folder\\projects", "True", "True"),"Delete","Global")
+        }
+    }
+    loop($list total(%CountProjectFolders)) {
+        comment("Removes all files and and folder 
+that are not upload folders, this 
+uses the total count of the project 
+files and then removes half that 
+amount.")
+        remove from list(%UploadFolders,0)
+    }
+    comment("Clears out the unnecessarily stored 
+list, and set the list position to 
+zero for the upload folder directories ")
+    clear list(%CountProjectFolders)
+}
+comment("Gets Image Paths From Upload Folder")
+define PullUploadFolderImagePaths(#RunPullUploadFolderImagePaths) {
+    if($comparison(#UsePostProjectRotation,"= Equals","YES")) {
+        then {
+            comment("Gets the current accounts 
+images paths from the correct 
+upload folder based on position 
+(Project Folder Rotation)")
+            clear list(%image_paths)
+            set(#GetAccountImages,$nothing,"Global")
+            set(#GetAccountImages,$get files($list item(%UploadFolders,#UploadFoldersPos),"Yes"),"Global")
+            add list to list(%image_paths,$list from text(#GetAccountImages,$new line),"Delete","Global")
+        }
+    }
+}
+comment("Creates Full Caption File Paths")
+define GetProjectCaptionFiles(#RunGetProjectCaptionFiles) {
+    clear list(%CaptionPaths)
+    LoadDataFolderPath(#RunLoadDataFolderPath)
+    if($comparison(#ipdf_path,"= Equals",$nothing)) {
+        then {
+            add list to list(%CaptionPaths,$plugin function("Advanced Data Text File.dll", "$get folders", "{$special folder("Application")}\\projects", "False", "True"),"Delete","Global")
+        }
+        else {
+            add list to list(%CaptionPaths,$plugin function("Advanced Data Text File.dll", "$get folders", "{$special folder("My Documents")}\\Insta Promoter Data Folder\\projects", "False", "True"),"Delete","Global")
+        }
+    }
+    plugin command("Advanced Data Text File.dll", "list append prefix/suffix", %CaptionPaths, "", "\\Captions.txt")
+    set(#CaptionPathsPos,0,"Global")
+}
+comment("Creates Caption List From Paths")
+define CreatesCaptionListFromPath(#CreatesCaptionListFromPath) {
+    clear list(%image_captions)
+    set(#image_captions,$list item(%CaptionPaths,#CaptionPathsPos),"Global")
+    add list to list(%image_captions,$list from file(#image_captions),"Delete","Global")
+    plugin command("Advanced Data Text File.dll", "list remove empty", %image_captions)
+    plugin command("Advanced Data Text File.dll", "list trim excess", %image_captions)
+}
+comment("Removes Used Images From Projects")
+define RemoveUsedImages(#RunRemoveUsedImages) {
+    set(#UsedImagesListTotal,$list total(%UsedImages),"Global")
+    set(#UsedImagesPos,0,"Global")
+    loop(#UsedImagesListTotal) {
+        delete file($list item(%UsedImages,0))
+        remove from list(%UsedImages,0)
+    }
+}
+comment("Creates Full Project Settings File Paths")
+define GetProjectSettingsFiles(#RunGetProjectSettingsFiles) {
+    clear list(%ProjectSettingsPaths)
+    LoadDataFolderPath(#RunLoadDataFolderPath)
+    if($comparison(#ipdf_path,"= Equals",$nothing)) {
+        then {
+            add list to list(%ProjectSettingsPaths,$plugin function("Advanced Data Text File.dll", "$get folders", "{$special folder("Application")}\\projects", "False", "True"),"Delete","Global")
+        }
+        else {
+            add list to list(%ProjectSettingsPaths,$plugin function("Advanced Data Text File.dll", "$get folders", "{$special folder("My Documents")}\\Insta Promoter Data Folder\\projects", "False", "True"),"Delete","Global")
+        }
+    }
+    plugin command("Advanced Data Text File.dll", "list append prefix/suffix", %ProjectSettingsPaths, "", "\\Post Module.ini")
+    set(#ProjectSettingsPathsPos,0,"Global")
+}
+comment("Loades project settings on rotation")
+define AutoLoadPostProjectSettings(#RunAutoLoadPostProjectSettings) {
+    set(#ActivePostProjectSettingsPath,$nothing,"Global")
+    set(#ActivePostProjectSettingsPath,$list item(%ProjectSettingsPaths,#ProjectSettingsPathsPos),"Global")
+    AutoLoadPostModule(#RunAutoLoadPostModule)
+}

@@ -1,0 +1,390 @@
+define LikeSystemOne(#LikeBotOne) {
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Page Not Found")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/\"][.=\"Go back to Instagram.\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/div/button")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/{#user_profile}/\"][.=\"Profile\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+        }
+    }
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Close")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[4]/div/button")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://*[@id=\"react-root\"]/section/nav/div[2]/div/div/div[1]/div/a[1]", "Appear", 30)
+        }
+    }
+    clear list(%keywords)
+    if($comparison(#keyword_file,"!= Does not equal",$nothing)) {
+        then {
+            add list to list(%keywords,$list from file(#keyword_file),"Delete","Global")
+            plugin command("Advanced Data Text File.dll", "list remove empty", %keywords)
+            plugin command("Advanced Data Text File.dll", "list trim excess", %keywords)
+        }
+        else {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - TO USE THE LIKE BOT PLEASE ADD YOUR KEYWORD FILE TO THE SOFTWARE INTERFACE - LOG RUNNING - {$date}{$new line}","Standard")
+            stop script
+        }
+    }
+    type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - KEYWORD LIST WAS LOADED AND CREATED SUCCESSFULLY! - LOG RUNNING - {$date}{$new line}","Standard")
+    set(#like_counter,0,"Global")
+    set(#l_delay_ticker,#delay_time,"Global")
+    set(#master_delay_trigger,0,"Global")
+    set(#count_ui_display,0,"Global")
+    set(#diplay_running,"","Global")
+    set(#loop_counter,0,"Global")
+}
+define LikeSystemTwo(#LikeBotTwo) {
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Page Not Found")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/\"][.=\"Go back to Instagram.\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/div/button")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/{#user_profile}/\"][.=\"Profile\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+        }
+    }
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Sorry, something went wrong.")) {
+        then {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - INSTAGRAM ERROR PAGE HANDLING RUNNING - DON'T STOP THE SOFTWARE FROM RUNNING - LOG RUNNING - {$date}{$new line}","Standard")
+            wait(5)
+            plugin command("ExBrowser.dll", "ExBrowser Run Javascript", "location.reload();")
+            wait(5)
+        }
+    }
+    if($comparison(#stop_bot_at,"= Equals",#like_counter)) {
+        then {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - SOFTWARE STOP CRITERIA HAS BEEN MET, STOPPING THE FOLLOW BOT - LOG RUNNING - {$date}{$new line}","Standard")
+            stop script
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/div/button")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/{#user_profile}/\"][.=\"Profile\"]")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+    set(#ran_keyword,$spin($random list item(%keywords)),"Global")
+    type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - LIKE BOT IS SEARCHING FOR THE KEYWORD [{#ran_keyword}] - LOG RUNNING - {$date}{$new line}","Standard")
+    plugin command("ExBrowser.dll", "ExBrowser Type Text2", "x://span[@id=\'react-root\']/section/nav/div[2]/div/div/div[2]/input", "Yes", #ran_keyword, 50, 200)
+    wait(1)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"No results found")) {
+        then {
+            set(#ran_keyword,$spin($random list item(%keywords)),"Global")
+            plugin command("ExBrowser.dll", "ExBrowser Type Text2", "x://span[@id=\'react-root\']/section/nav/div[2]/div/div/div[2]/input", "Yes", #ran_keyword, 50, 200)
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Displayed", "x://span[@id=\'react-root\']/section/nav/div[2]/div/div/div[2]/div[2]/div[2]/div/a[1]/div", "Wait until Displayed", 5)
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"No results found")) {
+        then {
+            set(#loop_break,1,"Global")
+        }
+    }
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Page Not Found")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/\"][.=\"Go back to Instagram.\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/div/button")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/{#user_profile}/\"][.=\"Profile\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\'react-root\']/section/nav/div[2]/div/div/div[2]/div[2]/div[2]/div/a[1]/div")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\'react-root\']/section/main/article/div[2]/div[1]/div[1]/div[1]/a/div/div[2]")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div[2]/div[2]/div/a[1]")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Dom Ready", 10)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Displayed", "x://span[@id=\"react-root\"]/section/main/article/div[2]/div[1]", "Wait until Displayed", 5)
+    if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Most recent"))) {
+        comment("wait with wait loop breakout")
+        then {
+            set(#wait_breakout,0,"Global")
+            set(#wait_trigger,0,"Global")
+            loop while($comparison(#wait_trigger,"= Equals",0)) {
+                wait(0.1)
+                increment(#wait_breakout)
+                if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Most recent")) {
+                    then {
+                        set(#wait_trigger,1,"Global")
+                    }
+                    else if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+                        increment(#wait_trigger)
+                    }
+                }
+            }
+        }
+    }
+    if($comparison(#loop_counter,"= Equals",0)) {
+        then {
+            set(#scroll_loop_count,$division remainder(10,#follow_per_tag),"Global")
+            set(#round_to_ner_int,$eval("Math.round( {#scroll_loop_count});"),"Global")
+            loop(#round_to_ner_int) {
+                plugin command("ExBrowser.dll", "ExBrowser Run Javascript", "window.scrollTo(0,document.body.scrollHeight)")
+                wait(2)
+            }
+            plugin command("ExBrowser.dll", "ExBrowser Scroll To Element", "x://span[@id=\"react-root\"]/section/main/article/div[1]/h2")
+            wait(2)
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\'react-root\']/section/main/article/div[2]/div[1]/div[1]/div[1]/a/div/div[2]")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Dom Ready", 10)
+    if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Add a comment…"))) {
+        comment("wait with wait loop breakout")
+        then {
+            set(#wait_breakout,0,"Global")
+            set(#wait_trigger,0,"Global")
+            loop while($comparison(#wait_trigger,"= Equals",0)) {
+                wait(0.1)
+                increment(#wait_breakout)
+                if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Add a comment…")) {
+                    then {
+                        set(#wait_trigger,1,"Global")
+                    }
+                    else if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+                        increment(#wait_trigger)
+                    }
+                }
+            }
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Displayed", "x://html/body/div[3]/div/div[2]/div/article/div[2]/section[3]", "Wait until Displayed", 5)
+    set(#loop_counter,0,"Global")
+    set(#loop_count,0,"Global")
+    set(#loop_break,0,"Global")
+    if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div[2]/div[2]/div/a[1]")) {
+        then {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - INSTAGRAM ERROR PAGE HANDLING RUNNING - DON'T STOP THE SOFTWARE FROM RUNNING - LOG RUNNING - {$date}{$new line}","Standard")
+            set(#loop_break,1,"Global")
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div[2]")
+            wait(5)
+            plugin command("ExBrowser.dll", "ExBrowser Run Javascript", "location.reload();")
+            wait(5)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div[2]")
+        }
+    }
+    if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+        then {
+            set(#loop_break,1,"Global")
+        }
+    }
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Page Not Found")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/\"][.=\"Go back to Instagram.\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/div/button")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/{#user_profile}/\"][.=\"Profile\"]")
+            plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+        }
+    }
+}
+define LikeSystemThree(#LikeBotThree) {
+    set(#l_delay_ticker,0,"Global")
+    set(#l_delay_ticker,#delay_time,"Global")
+    if($comparison(#loop_counter,"= Equals",0)) {
+        then {
+            wait(2)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[*]/div/div[1]/div/div/a")
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[*]/div/div[1]/div/div/a[2]")
+            increment(#loop_counter)
+        }
+        else {
+            wait(2)
+            plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[*]/div/div[1]/div/div/a[2]")
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Dom Ready", 10)
+    if($not($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Add a comment…"))) {
+        comment("wait with wait loop breakout")
+        then {
+            set(#wait_breakout,0,"Global")
+            set(#wait_trigger,0,"Global")
+            loop while($comparison(#wait_trigger,"= Equals",0)) {
+                wait(0.1)
+                increment(#wait_breakout)
+                if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Add a comment…")) {
+                    then {
+                        set(#wait_trigger,1,"Global")
+                    }
+                    else if($comparison(#wait_breakout,">= Greater than or equal to",100)) {
+                        increment(#wait_trigger)
+                    }
+                }
+            }
+        }
+    }
+    if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Go back to Instagram")) {
+        then {
+            set(#loop_break,1,"Global")
+            wait(0.5)
+        }
+    }
+    set(#user_url,$plugin function("ExBrowser.dll", "$ExBrowser Scrape Element", "x://html/body/div[3]/div/div[2]/div/article/header/div[2]/div[1]/div[1]/a"),"Global")
+    set(#skip_user,0,"Global")
+    if($comparison(#black_list_likes,"!=",$nothing)) {
+        then {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - BLACKLIST DETECTED RUNNING BLACKLIST USERNAME CHECK FOR BLACKLISTING OF USERNAME - LOG RUNNING! - {$date}{$new line}","Standard")
+            plugin command("Bigtable.dll", "Clear large list", "blacklistlikes")
+            plugin command("Bigtable.dll", "Large list from file", "blacklistlikes", #black_list_likes)
+            set(#black_likes_pos,0,"Global")
+            loop($plugin function("Bigtable.dll", "Large list total", "blacklistlikes")) {
+                if($comparison($plugin function("Bigtable.dll", "Large list item", "blacklistlikes", #black_likes_pos),"= Equals",#user_url)) {
+                    then {
+                        set(#skip_user,1,"Global")
+                    }
+                }
+                increment(#black_likes_pos)
+            }
+            if($comparison(#skip_user,"= Equals",1)) {
+                then {
+                    type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - BLACK LISTSTED USER DETECTED [{#user_url}] SKIPING TO NEXT USER IN THE LIST - LOG RUNNING! - {$date}{$new line}","Standard")
+                }
+            }
+        }
+    }
+    if($comparison(#loop_break,"= Equals",1)) {
+        then {
+            set(#skip_user,1,"Global")
+        }
+    }
+    if($comparison(#skip_user,"= Equals",0)) {
+        then {
+            if($comparison(#loop_break,"= Equals",0)) {
+                then {
+                    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Displayed", "x://html/body/div[3]/div/div[2]/div/article/div[3]/button/span", "Wait until Displayed", 5)
+                    wait(2)
+                    set(#like_reader,$plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Global")
+                    wait(2)
+                    if($not($contains(#like_reader,">Unlike<"))) {
+                        then {
+                            if($comparison(#master_delay_trigger,"!=",#run_when_complete)) {
+                                then {
+                                    if($both($comparison(#random_wait_one,"!=",$nothing),$comparison(#random_wait_two,"!=",$nothing))) {
+                                        then {
+                                            if($both($comparison(#random_wait_one,"!=",0),$comparison(#random_wait_two,"!=",0))) {
+                                                then {
+                                                    set(#diplay_running,"<font color=\"#FF0000\"><strong>Random Delay Running!</stong></font>","Global")
+                                                    set(#random_wait,$rand(#random_wait_one,#random_wait_two),"Global")
+                                                    set(#count_ui_display,#random_wait,"Global")
+                                                    set(#Random Loop,#random_wait,"Local")
+                                                    type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - RANDOM WAIT HAS STARTED - RANDOM WAIT WAITING FOR [{#random_wait}] SECONDS - LOG RUNNING! - {$date}{$new line}","Standard")
+                                                    loop(#Random Loop) {
+                                                        wait(1)
+                                                        decrement(#count_ui_display)
+                                                    }
+                                                    set(#count_ui_display,0,"Global")
+                                                    type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - RANDOM WAIT HAS COMPLETED - BOTTING CONTINUING IN [{#count_ui_display}] SECONDS - LOG RUNNING! - {$date}{$new line}","Standard")
+                                                    set(#diplay_running,$nothing,"Global")
+                                                    set(#Random Loop,$nothing,"Local")
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else if($both($comparison(#master_delay,"!=",""),$comparison(#run_when_complete,"!=",""))) {
+                                    if($comparison(#master_delay_trigger,">=",#run_when_complete)) {
+                                        then {
+                                            set(#diplay_running,"<font color=\"#FF0000\"><strong>Master Delay Running!</stong></font>","Global")
+                                            set(#master_delay_trigger,0,"Global")
+                                            set(#count_ui_display,#master_delay,"Global")
+                                            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - MASTER DELAY HAS STARTED - DELAYING FOR [{#master_delay}] SECONDS - LOG RUNNING! - {$date}{$new line}","Standard")
+                                            loop(#master_delay) {
+                                                wait(0.9)
+                                                decrement(#count_ui_display)
+                                            }
+                                            set(#count_ui_display,0,"Global")
+                                            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - MASTER DELAY HAS COMPLETED - BOTTING CONTINUING IN [{#count_ui_display}] SECONDS - LOG RUNNING! - {$date}{$new line}","Standard")
+                                            set(#diplay_running,"","Global")
+                                        }
+                                    }
+                                }
+                            }
+                            if($comparison(#delay_time,"> Greater than",0)) {
+                                then {
+                                    type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - THE DELAY TIME HAS BEEN INITIATED AND IS RUNNING [{#delay_time}] - LOG RUNNING - {$date}{$new line}","Standard")
+                                    set(#diplay_running,"<font color=\"#FF0000\"><strong>Flat Wait Delay Running!</stong></font>","Global")
+                                    loop(#delay_time) {
+                                        wait(1)
+                                        decrement(#l_delay_ticker)
+                                        set(#count_ui_display,#l_delay_ticker,"Global")
+                                    }
+                                    set(#diplay_running,"","Global")
+                                    set(#count_ui_display,0,"Global")
+                                    type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - THE DELAY TIME HAS COMPLETED  - LIKING COMMENCING IN [{#l_delay_ticker}] SECONDS - LOG RUNNING - {$date}{$new line}","Standard")
+                                }
+                            }
+                            plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/div/div[2]/div/article/div[2]/section[1]/a[1]/span")
+                            plugin command("ExBrowser.dll", "ExBrowser Wait For Dom Ready", 10)
+                            wait(2)
+                            set(#like_reader,$plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Global")
+                            wait(2)
+                            if($contains(#like_reader,">Unlike<")) {
+                                then {
+                                    set(#user_url,$plugin function("ExBrowser.dll", "$ExBrowser Scrape Element", "x://html/body/div[3]/div/div[2]/div/article/header/div[2]/div[1]/div[1]/a"),"Global")
+                                    increment(#like_counter)
+                                    increment(#loop_count)
+                                    set(#like_reader,$nothing,"Global")
+                                    type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - THE LIKE BOT HAS SUCCESSFULLY LIKE THE USER [{#user_url}] POST - LOG RUNNING - {$date}{$new line}","Standard")
+                                }
+                            }
+                            if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Sorry, this page isn\'t available.")) {
+                                then {
+                                    set(#loop_break,1,"Global")
+                                }
+                            }
+                            if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"No results found")) {
+                                then {
+                                    set(#loop_break,1,"Global")
+                                }
+                            }
+                            if($contains($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"Page Not Found")) {
+                                then {
+                                    plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/\"][.=\"Go back to Instagram.\"]")
+                                    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+                                    plugin command("ExBrowser.dll", "ExBrowser Click", "x://html/body/div[3]/div/button")
+                                    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+                                    plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/{#user_profile}/\"][.=\"Profile\"]")
+                                    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+                                    set(#loop_break,1,"Global")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if($comparison(#loop_count,"= Equals",#like_per_tag)) {
+        then {
+            set(#loop_break,1,"Global")
+            set(#loop_count,0,"Global")
+            wait(0.5)
+        }
+    }
+    if($plugin function("Advanced Ubot.dll", "$compare", #stop_bot_at, "==", #like_counter)) {
+        then {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - SOFTWARE STOP CRITERIA HAS BEEN MET, STOPPING THE LIKE BOT - LOG RUNNING - {$date}{$new line}","Standard")
+            stop script
+        }
+    }
+    clear list(%log_scrape)
+    set(#log_scrape,$scrape attribute(<id="textarea_id">,"value"),"Global")
+    add list to list(%log_scrape,$list from text(#log_scrape,$new line),"Don\'t Delete","Global")
+    wait(0.01)
+    if($comparison($list total(%log_scrape),">= Greater than or equal to",150)) {
+        then {
+            change attribute(<id="textarea_id">,"value","")
+            if($exists(<id="textarea_id">)) {
+                then {
+                    set(#browser ui,$read file("{$special folder("Application")}\\html-ui\\log-ui.html"),"Global")
+                    load html(#browser ui)
+                    wait(3)
+                    wait for element(<id="textarea_id">,10,"Appear")
+                }
+            }
+        }
+    }
+    clear list(%log_scrape)
+    set(#log_scrape,$nothing,"Global")
+}

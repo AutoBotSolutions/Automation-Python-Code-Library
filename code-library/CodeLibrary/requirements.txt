@@ -1,0 +1,12 @@
+# Core dependencies
+# (Add your library dependencies here)
+
+# GUI dependencies
+# Note: Tkinter is included with Python standard library, no installation needed
+
+# Development dependencies
+pytest>=7.0.0
+pytest-cov>=4.0.0
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.0.0

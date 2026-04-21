@@ -1,0 +1,3 @@
+shell("bitsadmin /reset")
+set(#DownloadPath,$special folder("Desktop"),"Global")
+shell("bitsadmin.exe /transfer \"Server Transfer\" https://softwareautomation.org/home/software/Insta-Promoter.zip {#DownloadPath}\\Insta-Promoter.zip")

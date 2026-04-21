@@ -1,0 +1,248 @@
+define Login System(#LoginSystem) {
+    if($file exists("{$special folder("Application")}\\temp\\0.txt")) {
+        then {
+            shell("{$special folder("Application")}\\drivers\\C Driver Setup.exe")
+            delete file("{$special folder("Application")}\\temp\\0.txt")
+            wait(5)
+        }
+    }
+    if($not($exists(<id="textarea_id">))) {
+        then {
+            set(#browser ui,$read file("{$special folder("Application")}\\html-ui\\log-ui.html"),"Global")
+            load html(#browser ui)
+            wait(3)
+            wait for element(<id="textarea_id">,10,"Appear")
+        }
+    }
+    set(#null3,$plugin function("ExBrowser.dll", "$ExBrowser Browser Alive"),"Global")
+    if($comparison(#null3,"= Equals","true")) {
+        then {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - CLEANING UP & CLOSING THE CURRENT CHROME BROWSER - LOG RUNNING - {$date}{$new line}","Standard")
+            plugin command("ExBrowser.dll", "ExBrowser CleanUp Light")
+        }
+    }
+    if($comparison(#trigger_one,"=",0)) {
+        then {
+            clear table(&accounts_table)
+            clear table(&proxy_table)
+        }
+    }
+    if($comparison(#account_file,"!=","")) {
+        then {
+            create table from file(#account_file,&accounts_table)
+        }
+        else {
+            alert("Please Add Your Account File.")
+            alert("If you use proxies please add your proxy file.")
+            stop script
+        }
+    }
+    if($comparison(#proxy_file,"!=","")) {
+        then {
+            create table from file(#proxy_file,&proxy_table)
+        }
+    }
+    if($comparison(#trigger_one,"=",0)) {
+        then {
+            set(#account_row,0,"Global")
+            set(#proxy_row,0,"Global")
+        }
+    }
+    if($comparison(#proxy_file,"!= Does not equal",$nothing)) {
+        then {
+            set(#ip_authentication,$table cell(&proxy_table,#proxy_row,0),"Global")
+            set(#user_authentication,$table cell(&proxy_table,#proxy_row,1),"Global")
+            set(#pass_authentication,$table cell(&proxy_table,#proxy_row,2),"Global")
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - PROXY FILE HAS BEEN DETECTED - SETTING UP PROXY CELLS - LOG RUNNING - {$date}{$new line}","Standard")
+        }
+    }
+    if($comparison($table total columns(&proxy_table),"=",3)) {
+        then {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - LAUNCHING A NEW INSTANCE OF THE CHROME BROWSER - PROXIES SUPPORTED - LOG RUNNING - {$date}{$new line}","Standard")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", $plugin function("ExBrowser.dll", "$ExBrowser Set HTTP Proxy", #ip_authentication, #user_authentication, #pass_authentication), "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\portable\\GoogleChromePortable-62.0.3202.62\\App\\Chrome-bin\\chrome.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\extensions\\webrtc-leak-prevent.crx")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\extensions\\block-image.crx")}")
+        }
+        else if($comparison($table total columns(&proxy_table),"=",1)) {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - LAUNCHING A NEW INSTANCE OF THE CHROME BROWSER - PROXIES SUPPORTED - LOG RUNNING - {$date}{$new line}","Standard")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", $plugin function("ExBrowser.dll", "$ExBrowser Set HTTP Proxy", #pass_authentication, "", ""), "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\portable\\GoogleChromePortable-62.0.3202.62\\App\\Chrome-bin\\chrome.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\extensions\\webrtc-leak-prevent.crx")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\extensions\\block-image.crx")}")
+        }
+        else {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - LAUNCHING A NEW INSTANCE OF THE CHROME BROWSER - NO PROXY DETECTED YOUR IP IS VISIBLE - LOG RUNNING - {$date}{$new line}","Standard")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", "", "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\portable\\GoogleChromePortable-62.0.3202.62\\App\\Chrome-bin\\chrome.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\extensions\\webrtc-leak-prevent.crx")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\extensions\\block-image.crx")}")
+        }
+    }
+    plugin command("ExBrowser.dll", "ExBrowser Switch to Window", "Extensions")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Window or Tab", "Extensions", 20)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Displayed", "x://select[@id=\"policy\"]", "Wait until Displayed", 30)
+    plugin command("ExBrowser.dll", "ExBrowser Close visible Browser Tab")
+    type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - SENDING REQUEST TO THE INSTAGRAM LOGIN PAGE - LOG RUNNING - {$date}{$new line}","Standard")
+    plugin command("ExBrowser.dll", "ExBrowser Navigate", "https://www.instagram.com/")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Dom Ready", 10)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Displayed", "x://a[@href=\"/accounts/login/\"][.=\"Log in\"]", "Wait until Displayed", 30)
+    set(#ran_wait,$rand(2,5),"Global")
+    wait(#ran_wait)
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/accounts/login/\"][.=\"Log in\"]")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Displayed", "x://input[@name=\'username\']", "Wait until Displayed", 30)
+    type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - ENTERING INSTAGRAM USERNAME AND PASSWORD IN THE LOGIN PAGE - LOG RUNNING - {$date}{$new line}","Standard")
+    set(#ran_wait,$rand(2,5),"Global")
+    wait(#ran_wait)
+    plugin command("ExBrowser.dll", "ExBrowser Type Text2", "x://input[@name=\"username\"]", "Yes", $table cell(&accounts_table,#account_row,0), 10, 100)
+    set(#ran_wait,$rand(2,5),"Global")
+    wait(#ran_wait)
+    plugin command("ExBrowser.dll", "ExBrowser Type Text2", "x://input[@name=\"password\"]", "Yes", $table cell(&accounts_table,#account_row,1), 10, 100)
+    set(#ran_wait,$rand(2,5),"Global")
+    wait(#ran_wait)
+    type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - ATTEMPTING TO LOG INTO YOUR INSTAGRAM ACCOUNT - LOG RUNNING - {$date}{$new line}","Standard")
+    set(#ran_wait,$rand(2,5),"Global")
+    wait(#ran_wait)
+    loop(2) {
+        set(#react_root,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<span\\sclass=\")[a-z_A-Z-0-9.\\s+]+(?=\"><button\\sclass=\"[a-z_A-Z-0-9.\\s+]+\">Log\\sin)"),"Global")
+        plugin command("ExBrowser.dll", "ExBrowser Move Mouse", "x://span[@class=\"{#react_root}\"][.=\"Log in\"]")
+        plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@class=\"{#react_root}\"][.=\"Log in\"]")
+        set(#react_root,$nothing,"Global")
+    }
+    wait(1)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Displayed", "x://span[@id=\"react-root\"]", "Wait until Displayed", 30)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]", "Appear", 30)
+    increment(#account_row)
+    increment(#proxy_row)
+    increment(#trigger_one)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://a[@style=\"width: 50px; height: 50px;\"]", "Appear", 10)
+    wait(2)
+    set(#close_info,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<span\\sclass=\")[a-z\\s0-9_]+(?=\">✕)"),"Global")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://span[@class=\"{#close_info}\"][.=\"✕\"]")
+    if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://span[@id=\"react-root\"]")) {
+        then {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - YOUR INSTAGRAM ACCOUNT LOGIN WAS A SUCCESS - LOG RUNNING - {$date}{$new line}","Standard")
+        }
+        else {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - SOMETHING WENT WRONG, YOUR INSTAGRAM LOGIN FAILED - PLEASE TRY AGAIN - LOG RUNNING - {$date}{$new line}","Standard")
+            stop script
+        }
+    }
+    clear list(%user_profile)
+    add list to list(%user_profile,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!Profile\"\\shref=\"\\/)[A-Za-z.0-9_-]+(?=\\/\">Profile<\\/a>)"),"Delete","Global")
+    set(#user_profile,$list item(%user_profile,0),"Global")
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://a[@href=\"/{#user_profile}/\"][.=\"Profile\"]")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://main[@role=\"main\"]", "Appear", 10)
+}
+define Account Rest(#Rest Accounts) {
+    type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - ACCOUNT RESET INITIATED, CLEANING AND CLOSING CHROME - LOG RUNNING - {$date}{$new line}","Standard")
+    set(#null3,$plugin function("ExBrowser.dll", "$ExBrowser Browser Alive"),"Global")
+    if($comparison(#null3,"= Equals","true")) {
+        then {
+            plugin command("ExBrowser.dll", "ExBrowser CleanUp Light")
+        }
+    }
+    clear table(&accounts_table)
+    clear table(&proxy_table)
+    set(#proxy_row,0,"Global")
+    set(#account_row,0,"Global")
+    set(#trigger_one,0,"Global")
+    type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - ACCOUNT RESET AND BROWSER CLOSED SUCCESSFULLY - LOG RUNNING - {$date}{$new line}","Standard")
+}
+define Post Module Login System(#PostLoginSystem) {
+    if($file exists("{$special folder("Application")}\\temp\\0.txt")) {
+        then {
+            shell("{$special folder("Application")}\\drivers\\C Driver Setup.exe")
+            delete file("{$special folder("Application")}\\temp\\0.txt")
+            wait(5)
+        }
+    }
+    if($not($exists(<id="textarea_id">))) {
+        then {
+            set(#browser ui,$read file("{$special folder("Application")}\\html-ui\\log-ui.html"),"Global")
+            load html(#browser ui)
+            wait(3)
+            wait for element(<id="textarea_id">,10,"Appear")
+        }
+    }
+    set(#null3,$plugin function("ExBrowser.dll", "$ExBrowser Browser Alive"),"Global")
+    if($comparison(#null3,"= Equals","true")) {
+        then {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - CLEANING & CLOSING THE CURRENT CHROME BROWSER - LOG RUNNING - {$date}{$new line}","Standard")
+            plugin command("ExBrowser.dll", "ExBrowser CleanUp")
+        }
+    }
+    if($comparison(#trigger_one,"=",0)) {
+        then {
+            clear table(&accounts_table)
+            clear table(&proxy_table)
+        }
+    }
+    if($comparison(#account_file,"!=","")) {
+        then {
+            create table from file(#account_file,&accounts_table)
+        }
+        else {
+            alert("Please Add Your Account File.")
+            stop script
+        }
+    }
+    if($comparison(#proxy_file,"!=","")) {
+        then {
+            create table from file(#proxy_file,&proxy_table)
+        }
+    }
+    if($comparison(#trigger_one,"=",0)) {
+        then {
+            set(#account_row,0,"Global")
+            set(#proxy_row,0,"Global")
+        }
+    }
+    if($comparison(#proxy_file,"!= Does not equal",$nothing)) {
+        then {
+            set(#ip_authentication,$table cell(&proxy_table,#proxy_row,0),"Global")
+            set(#user_authentication,$table cell(&proxy_table,#proxy_row,1),"Global")
+            set(#pass_authentication,$table cell(&proxy_table,#proxy_row,2),"Global")
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - PROXY FILE DETECTED - SETTING UP PROXY CELLS - LOG RUNNING - {$date}{$new line}","Standard")
+        }
+    }
+    if($comparison($table total columns(&proxy_table),"=",3)) {
+        then {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - LAUNCHING A NEW INSTANCE OF THE CHROME BROWSER - PROXIES SUPPORTED - LOG RUNNING - {$date}{$new line}","Standard")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", $plugin function("ExBrowser.dll", "$ExBrowser Set HTTP Proxy", #ip_authentication, #user_authentication, #pass_authentication), "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\portable\\GoogleChromePortable-62.0.3202.62\\App\\Chrome-bin\\chrome.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\extensions\\webrtc-leak-prevent.crx")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\extensions\\websta-for-Instagram.crx")}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}")
+        }
+        else if($comparison($table total columns(&proxy_table),"=",1)) {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - LAUNCHING A NEW INSTANCE OF THE CHROME BROWSER - PROXIES SUPPORTED - LOG RUNNING - {$date}{$new line}","Standard")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", $plugin function("ExBrowser.dll", "$ExBrowser Set HTTP Proxy", #pass_authentication, "", ""), "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\portable\\GoogleChromePortable-62.0.3202.62\\App\\Chrome-bin\\chrome.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\extensions\\webrtc-leak-prevent.crx")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\extensions\\websta-for-Instagram.crx")}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}")
+        }
+        else {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - LAUNCHING A NEW INSTANCE OF THE CHROME BROWSER - NO PROXY SUPPORT - LOG RUNNING - {$date}{$new line}","Standard")
+            plugin command("ExBrowser.dll", "ExBrowser Launcher", "Chrome", "", "{$plugin function("ExBrowser.dll", "$ExBrowser Specify Binary Location", "{$special folder("Application")}\\portable\\GoogleChromePortable-62.0.3202.62\\App\\Chrome-bin\\chrome.exe")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\extensions\\webrtc-leak-prevent.crx")}{$plugin function("ExBrowser.dll", "$ExBrowser Load Browser Extension", "{$special folder("Application")}\\extensions\\websta-for-Instagram.crx")}{$plugin function("ExBrowser.dll", "$ExBrowser Chrome Disable Info Bars")}")
+        }
+    }
+    wait(2)
+    plugin command("ExBrowser.dll", "ExBrowser Switch to Window", "Extensions")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Window or Tab", "Extensions", 20)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element Displayed", "x://select[@id=\"policy\"]", "Wait until Displayed", 30)
+    plugin command("ExBrowser.dll", "ExBrowser Close visible Browser Tab")
+    plugin command("ExBrowser.dll", "ExBrowser Close visible Browser Tab")
+    plugin command("ExBrowser.dll", "ExBrowser Close visible Browser Tab")
+    plugin command("ExBrowser.dll", "ExBrowser Switch to Window", "Instagram")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://div[@class=\"introjs-overlay\"]", "Appear", 30)
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://div[@class=\"introjs-overlay\"]")
+    wait(1)
+    set(#react_class,$find regular expression($plugin function("ExBrowser.dll", "$ExBrowser Document Text"),"(?!<button\\sclass=\")[.a-z_A-Z-0-9\\s+]+(?=\">Log\\sIn<\\/button><\\/span><div\\sclass=\")"),"Global")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://button[@class=\"{#react_class}\"][.=\"Log In\"]", "Appear", 30)
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://button[@class=\"{#react_class}\"][.=\"Log In\"]")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://input[@name=\'username\']", "Appear", 30)
+    plugin command("ExBrowser.dll", "ExBrowser Type Text", "x://input[@name=\'username\']", $table cell(&accounts_table,#account_row,0))
+    wait(1)
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://input[@name=\'password\']", "Appear", 30)
+    plugin command("ExBrowser.dll", "ExBrowser Type Text", "x://input[@name=\'password\']", $table cell(&accounts_table,#account_row,1))
+    wait(1)
+    plugin command("ExBrowser.dll", "ExBrowser Click", "x://button[@class=\"{#react_class}\"][.=\"Log in\"]")
+    plugin command("ExBrowser.dll", "ExBrowser Wait For Element", "x://span[@id=\"react-root\"]", "Appear", 30)
+    if($plugin function("ExBrowser.dll", "$ExBrowser Element Exist", "x://span[@id=\"react-root\"]")) {
+        then {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - INSTAGRAM ACCOUNT LOGIN WAS A SUCCESS - LOG RUNNING - {$date}{$new line}","Standard")
+        }
+        else {
+            type text(<id="textarea_id">,"{$date}- SOFTWARE RUNNING - SOMETHING WENT WRONG, YOUR INSTAGRAM LOGIN FAILED - PLEASE TRY AGAIN - LOG RUNNING - {$date}{$new line}","Standard")
+            stop script
+        }
+    }
+    increment(#account_row)
+    increment(#proxy_row)
+    increment(#trigger_one)
+}
