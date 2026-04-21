@@ -19,6 +19,10 @@ from pathlib import Path
 # Use environment variable or resolve relative to script location
 script_dir = Path(__file__).parent.resolve()
 library_path = os.environ.get('CODE_LIBRARY_PATH', str(script_dir / 'code-library'))
+
+# Resolve to absolute path before changing directory
+library_path = str(Path(library_path).resolve())
+
 if library_path in sys.path:
     sys.path.remove(library_path)
 
@@ -53,8 +57,13 @@ class SystemTracker:
     def __init__(self, library_path):
         self.library_path = library_path
         script_dir = Path(__file__).parent.resolve()
-        self.log_file = os.environ.get('TRACKING_LOG_FILE', str(script_dir / 'tracking_log.txt'))
-        self.stats_file = os.environ.get('STATS_FILE', str(script_dir / 'usage_stats.json'))
+        log_file = os.environ.get('TRACKING_LOG_FILE', str(script_dir / 'tracking_log.txt'))
+        stats_file = os.environ.get('STATS_FILE', str(script_dir / 'usage_stats.json'))
+        
+        # Resolve to absolute paths
+        self.log_file = str(Path(log_file).resolve())
+        self.stats_file = str(Path(stats_file).resolve())
+        
         self.file_hashes = {}
         self.usage_stats = {
             'file_accesses': {},
@@ -560,9 +569,8 @@ class CodeLibraryGUI:
         style = ttk.Style()
         style.theme_use('clam')
         
-        # Set the code library path from environment variable or relative path
-        script_dir = Path(__file__).parent.resolve()
-        self.library_path = os.environ.get('CODE_LIBRARY_PATH', str(script_dir / 'code-library'))
+        # Set the code library path from the already-resolved module-level variable
+        self.library_path = library_path
         
         # Initialize tracker
         self.tracker = SystemTracker(self.library_path)
