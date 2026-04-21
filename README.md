@@ -40,8 +40,8 @@ A modern, dark-themed Python code library browser with advanced text editing cap
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/code-library-gui.git
-cd code-library-gui
+git clone https://github.com/AutoBotSolutions/Automation-Python-Code-Library.git
+cd Automation-Python-Code-Library
 ```
 
 2. Run the application:
