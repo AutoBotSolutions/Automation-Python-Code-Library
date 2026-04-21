@@ -73,10 +73,10 @@ def analyze_code_functionality(content, filename):
     
     # Detect automation type based on imports and patterns
     selenium_keywords = ['selenium', 'webdriver', 'chrome', 'firefox', 'browser']
-    db_keywords = ['sqlite', 'mysql', 'postgres', 'database', 'sql', 'cursor', 'imap']
+    db_keywords = ['sqlite', 'mysql', 'postgres', 'database', 'sql', 'cursor']
     file_keywords = ['open(', 'read(', 'write(', 'os.path', 'shutil']
     http_keywords = ['requests', 'urllib', 'http', 'post(', 'get(']
-    email_keywords = ['smtp', 'email', 'sendmail']
+    email_keywords = ['smtp', 'email', 'sendmail', 'imap']
     threading_keywords = ['threading', 'Thread', 'thread']
     
     if any(kw in content_to_analyze.lower() for kw in selenium_keywords):
