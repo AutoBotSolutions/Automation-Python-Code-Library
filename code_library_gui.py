@@ -31,24 +31,81 @@ original_cwd = os.getcwd()
 temp_dir = os.environ.get('TEMP_DIR', '/tmp')
 os.chdir(temp_dir)
 
-# Modern Color Palette (Dark Theme)
-COLORS = {
-    'bg_primary': '#1e1e2e',        # Main background
-    'bg_secondary': '#313244',      # Secondary background
-    'bg_tertiary': '#45475a',       # Tertiary background
-    'fg_primary': '#cdd6f4',       # Primary text
-    'fg_secondary': '#a6adc8',      # Secondary text
-    'accent': '#89b4fa',            # Accent color (blue)
-    'accent_hover': '#b4befe',      # Accent hover
-    'success': '#a6e3a1',           # Success (green)
-    'warning': '#f9e2af',           # Warning (yellow)
-    'error': '#f38ba8',             # Error (red)
-    'border': '#45475a',            # Border color
-    'highlight': '#f5c2e7',         # Highlight (pink)
-    'code_bg': '#11111b',           # Code editor background
-    'line_number_bg': '#1e1e2e',    # Line number background
-    'line_number_fg': '#6c7086',    # Line number text
+# Color Schemes
+COLOR_SCHEMES = {
+    'Dark': {
+        'bg_primary': '#1e1e2e',
+        'bg_secondary': '#313244',
+        'bg_tertiary': '#45475a',
+        'fg_primary': '#cdd6f4',
+        'fg_secondary': '#a6adc8',
+        'accent': '#89b4fa',
+        'accent_hover': '#b4befe',
+        'success': '#a6e3a1',
+        'warning': '#f9e2af',
+        'error': '#f38ba8',
+        'border': '#45475a',
+        'highlight': '#f5c2e7',
+        'code_bg': '#11111b',
+        'line_number_bg': '#1e1e2e',
+        'line_number_fg': '#6c7086',
+    },
+    'Light': {
+        'bg_primary': '#ffffff',
+        'bg_secondary': '#f0f0f0',
+        'bg_tertiary': '#e0e0e0',
+        'fg_primary': '#333333',
+        'fg_secondary': '#666666',
+        'accent': '#0078d4',
+        'accent_hover': '#106ebe',
+        'success': '#107c10',
+        'warning': '#d83b01',
+        'error': '#d13438',
+        'border': '#cccccc',
+        'highlight': '#8b4789',
+        'code_bg': '#f5f5f5',
+        'line_number_bg': '#f0f0f0',
+        'line_number_fg': '#999999',
+    },
+    'High Contrast': {
+        'bg_primary': '#000000',
+        'bg_secondary': '#0a0a0a',
+        'bg_tertiary': '#1a1a1a',
+        'fg_primary': '#ffffff',
+        'fg_secondary': '#e0e0e0',
+        'accent': '#ffff00',
+        'accent_hover': '#e6e600',
+        'success': '#00ff00',
+        'warning': '#ffff00',
+        'error': '#ff0000',
+        'border': '#ffffff',
+        'highlight': '#00ffff',
+        'code_bg': '#000000',
+        'line_number_bg': '#0a0a0a',
+        'line_number_fg': '#ffffff',
+    },
+    'Ocean': {
+        'bg_primary': '#0f172a',
+        'bg_secondary': '#1e293b',
+        'bg_tertiary': '#334155',
+        'fg_primary': '#f1f5f9',
+        'fg_secondary': '#cbd5e1',
+        'accent': '#38bdf8',
+        'accent_hover': '#0ea5e9',
+        'success': '#4ade80',
+        'warning': '#fbbf24',
+        'error': '#f87171',
+        'border': '#475569',
+        'highlight': '#c084fc',
+        'code_bg': '#020617',
+        'line_number_bg': '#0f172a',
+        'line_number_fg': '#64748b',
+    },
 }
+
+# Current color scheme (default: Dark)
+current_scheme = 'Dark'
+COLORS = COLOR_SCHEMES[current_scheme]
 
 
 class SystemTracker:
@@ -219,6 +276,7 @@ class AdvancedTextEditor:
         self.file_path = file_path
         self.modified = False
         self.tracker = tracker
+        self.parent = parent
         
         self.create_editor_layout()
         
@@ -554,6 +612,28 @@ class AdvancedTextEditor:
             start_index = f"1.0+{start}c"
             end_index = f"1.0+{end}c"
             self.text.tag_add(tag, start_index, end_index)
+    
+    def update_editor_colors(self):
+        """Update editor colors when color scheme changes"""
+        # Update window background
+        self.editor_window.configure(bg=COLORS['bg_primary'])
+        
+        # Update text widget
+        self.text.configure(bg=COLORS['code_bg'], fg=COLORS['fg_primary'],
+                          insertbackground=COLORS['accent'], selectbackground=COLORS['accent'])
+        
+        # Update line numbers
+        self.line_numbers.configure(bg=COLORS['line_number_bg'], fg=COLORS['line_number_fg'])
+        
+        # Update file label
+        self.file_label.configure(bg=COLORS['bg_secondary'], fg=COLORS['fg_secondary'])
+        
+        # Re-configure syntax highlighting tags
+        self.configure_syntax_tags()
+        
+        # Re-apply syntax highlighting if content exists
+        if self.text.get(1.0, tk.END).strip():
+            self.apply_syntax_highlighting()
 
 
 class CodeLibraryGUI:
@@ -577,6 +657,9 @@ class CodeLibraryGUI:
         self.tracker.start_session()
         self.tracker.detect_changes()  # Initial scan
         
+        # Track open editor windows for color scheme updates
+        self.open_editors = []
+        
         # Create main layout
         self.create_layout()
         
@@ -592,19 +675,23 @@ class CodeLibraryGUI:
         style = ttk.Style()
         style.theme_use('clam')
         
-        # Style configuration
+        # Style configuration with Windows-friendly fonts
+        font_family = 'Segoe UI' if sys.platform == 'win32' else 'Arial'
         style.configure('TFrame', background=COLORS['bg_primary'])
         style.configure('TPanedWindow', background=COLORS['bg_primary'])
-        style.configure('TLabel', background=COLORS['bg_primary'], foreground=COLORS['fg_primary'], font=('Arial', 10))
+        style.configure('TLabel', background=COLORS['bg_primary'], foreground=COLORS['fg_primary'], 
+                       font=(font_family, 10))
         style.configure('TButton', background=COLORS['bg_tertiary'], foreground=COLORS['fg_primary'], 
-                       borderwidth=0, focuscolor='none', padding=5)
+                       borderwidth=0, focuscolor='none', padding=(8, 4), font=(font_family, 9))
         style.map('TButton', background=[('active', COLORS['accent'])])
         style.configure('TEntry', fieldbackground=COLORS['bg_secondary'], foreground=COLORS['fg_primary'],
-                       borderwidth=1, insertcolor=COLORS['accent'])
+                       borderwidth=1, insertcolor=COLORS['accent'], font=(font_family, 9))
+        style.configure('TCombobox', fieldbackground=COLORS['bg_secondary'], foreground=COLORS['fg_primary'],
+                       background=COLORS['bg_tertiary'], borderwidth=1, font=(font_family, 9))
         style.configure('Treeview', background=COLORS['bg_secondary'], foreground=COLORS['fg_primary'],
-                       fieldbackground=COLORS['bg_secondary'], borderwidth=0)
+                       fieldbackground=COLORS['bg_secondary'], borderwidth=0, font=(font_family, 9))
         style.configure('Treeview.Heading', background=COLORS['bg_tertiary'], foreground=COLORS['fg_primary'],
-                       borderwidth=0)
+                       borderwidth=0, font=(font_family, 9, 'bold'))
         style.map('Treeview', background=[('selected', COLORS['accent'])], 
                   foreground=[('selected', COLORS['bg_primary'])])
         style.configure('TScrollbar', background=COLORS['bg_tertiary'], troughcolor=COLORS['bg_secondary'])
@@ -624,20 +711,22 @@ class CodeLibraryGUI:
         # === LEFT PANEL ===
         # Search box
         search_frame = tk.Frame(left_frame, bg=COLORS['bg_primary'])
-        search_frame.pack(fill=tk.X, padx=5, pady=5)
+        search_frame.pack(fill=tk.X, padx=8, pady=(8, 5))
         
-        tk.Label(search_frame, text="Search:", bg=COLORS['bg_primary'], fg=COLORS['fg_secondary']).pack(side=tk.LEFT)
+        font_family = 'Segoe UI' if sys.platform == 'win32' else 'Arial'
+        tk.Label(search_frame, text="Search:", bg=COLORS['bg_primary'], fg=COLORS['fg_secondary'], 
+                font=(font_family, 9)).pack(side=tk.LEFT)
         self.search_var = tk.StringVar()
         self.search_entry = ttk.Entry(search_frame, textvariable=self.search_var)
-        self.search_entry.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=5)
+        self.search_entry.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=8)
         self.search_entry.bind('<KeyRelease>', self.on_search)
         
         # Categories tree
-        tk.Label(left_frame, text="Categories", font=('Arial', 11, 'bold'), 
-                bg=COLORS['bg_primary'], fg=COLORS['accent']).pack(anchor=tk.W, padx=5, pady=(10, 5))
+        tk.Label(left_frame, text="Categories", font=(font_family, 11, 'bold'), 
+                bg=COLORS['bg_primary'], fg=COLORS['accent']).pack(anchor=tk.W, padx=8, pady=(12, 5))
         
         tree_frame = tk.Frame(left_frame, bg=COLORS['bg_primary'])
-        tree_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+        tree_frame.pack(fill=tk.BOTH, expand=True, padx=8, pady=(0, 5))
         
         self.category_tree = ttk.Treeview(tree_frame, columns=('name',), show='tree headings', height=15)
         self.category_tree.heading('#0', text='Category')
@@ -652,11 +741,11 @@ class CodeLibraryGUI:
         tree_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         
         # Files list
-        tk.Label(left_frame, text="Files", font=('Arial', 11, 'bold'), 
-                bg=COLORS['bg_primary'], fg=COLORS['accent']).pack(anchor=tk.W, padx=5, pady=(10, 5))
+        tk.Label(left_frame, text="Files", font=(font_family, 11, 'bold'), 
+                bg=COLORS['bg_primary'], fg=COLORS['accent']).pack(anchor=tk.W, padx=8, pady=(12, 5))
         
         files_frame = tk.Frame(left_frame, bg=COLORS['bg_primary'])
-        files_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+        files_frame.pack(fill=tk.BOTH, expand=True, padx=8, pady=(0, 8))
         
         self.files_listbox = tk.Listbox(files_frame, height=15, bg=COLORS['bg_secondary'], 
                                        fg=COLORS['fg_primary'], selectbackground=COLORS['accent'],
@@ -674,15 +763,35 @@ class CodeLibraryGUI:
         # === RIGHT PANEL ===
         # Code viewer header
         header_frame = tk.Frame(right_frame, bg=COLORS['bg_primary'])
-        header_frame.pack(fill=tk.X, padx=5, pady=5)
+        header_frame.pack(fill=tk.X, padx=8, pady=(8, 5))
         
         self.file_label = tk.Label(header_frame, text="Select a file to view code", 
-                                  font=('Arial', 11, 'bold'), bg=COLORS['bg_primary'], fg=COLORS['accent'])
+                                  font=(font_family, 11, 'bold'), bg=COLORS['bg_primary'], fg=COLORS['accent'])
         self.file_label.pack(side=tk.LEFT)
         
         # Action buttons
         button_frame = tk.Frame(header_frame, bg=COLORS['bg_primary'])
         button_frame.pack(side=tk.RIGHT)
+        
+        # Color scheme selector
+        tk.Label(button_frame, text="Theme:", bg=COLORS['bg_primary'], fg=COLORS['fg_secondary'],
+                font=(font_family, 9)).pack(side=tk.LEFT, padx=(0, 5))
+        self.scheme_var = tk.StringVar(value=current_scheme)
+        self.scheme_combo = ttk.Combobox(button_frame, textvariable=self.scheme_var, 
+                                        values=list(COLOR_SCHEMES.keys()), state='readonly', width=10)
+        self.scheme_combo.pack(side=tk.LEFT, padx=2)
+        self.scheme_combo.bind('<<ComboboxSelected>>', self.change_color_scheme)
+        
+        # Wrap mode selector
+        tk.Label(button_frame, text="Wrap:", bg=COLORS['bg_primary'], fg=COLORS['fg_secondary'],
+                font=(font_family, 9)).pack(side=tk.LEFT, padx=(10, 5))
+        self.wrap_var = tk.StringVar(value='None')
+        self.wrap_combo = ttk.Combobox(button_frame, textvariable=self.wrap_var,
+                                      values=['None', 'Word', 'Char'], state='readonly', width=8)
+        self.wrap_combo.pack(side=tk.LEFT, padx=2)
+        self.wrap_combo.bind('<<ComboboxSelected>>', self.change_wrap_mode)
+        
+        ttk.Separator(button_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, padx=10, fill=tk.Y)
         
         self.stats_btn = ttk.Button(button_frame, text="Statistics", command=self.show_statistics)
         self.stats_btn.pack(side=tk.LEFT, padx=2)
@@ -697,22 +806,23 @@ class CodeLibraryGUI:
         self.open_btn.pack(side=tk.LEFT, padx=2)
         
         # Code text area
-        tk.Label(right_frame, text="Code Content", font=('Arial', 11, 'bold'), 
-                bg=COLORS['bg_primary'], fg=COLORS['accent']).pack(anchor=tk.W, padx=5, pady=(5, 5))
+        tk.Label(right_frame, text="Code Content", font=(font_family, 11, 'bold'), 
+                bg=COLORS['bg_primary'], fg=COLORS['accent']).pack(anchor=tk.W, padx=8, pady=(12, 5))
         
-        self.code_text = scrolledtext.ScrolledText(right_frame, wrap=tk.NONE, font=('Consolas', 10),
+        code_font = 'Consolas' if sys.platform == 'win32' else 'Courier New'
+        self.code_text = scrolledtext.ScrolledText(right_frame, wrap=tk.NONE, font=(code_font, 10),
                                                    bg=COLORS['code_bg'], fg=COLORS['fg_primary'],
                                                    insertbackground=COLORS['accent'],
                                                    selectbackground=COLORS['accent'],
                                                    borderwidth=0, highlightthickness=0)
-        self.code_text.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+        self.code_text.pack(fill=tk.BOTH, expand=True, padx=8, pady=(0, 8))
         
         # Status bar
         self.status_var = tk.StringVar()
         self.status_var.set("Ready")
-        status_bar = tk.Label(self.root, textvariable=self.status_var, relief=tk.FLAT, anchor=tk.W,
+        self.status_bar = tk.Label(self.root, textvariable=self.status_var, relief=tk.FLAT, anchor=tk.W,
                             bg=COLORS['bg_secondary'], fg=COLORS['fg_secondary'], padx=5, pady=3)
-        status_bar.pack(fill=tk.X, side=tk.BOTTOM)
+        self.status_bar.pack(fill=tk.X, side=tk.BOTTOM)
         
         self.current_file_path = None
     
@@ -881,6 +991,9 @@ class CodeLibraryGUI:
             category_name = os.path.basename(category_path)
             self.file_label.config(text=f"{category_name}/{filename}")
             
+            # Apply syntax highlighting
+            self.apply_code_syntax_highlighting()
+            
             # Enable buttons
             self.copy_btn.config(state=tk.NORMAL)
             self.open_btn.config(state=tk.NORMAL)
@@ -909,7 +1022,16 @@ class CodeLibraryGUI:
         """Open file in advanced text editor"""
         try:
             if self.current_file_path and os.path.exists(self.current_file_path):
-                AdvancedTextEditor(self.root, self.current_file_path, self.tracker)
+                editor = AdvancedTextEditor(self.root, self.current_file_path, self.tracker)
+                self.open_editors.append(editor)
+                
+                # Clean up from list when editor is closed
+                def on_editor_close():
+                    if editor in self.open_editors:
+                        self.open_editors.remove(editor)
+                
+                editor.editor_window.protocol("WM_DELETE_WINDOW", lambda: [on_editor_close(), editor.editor_window.destroy()])
+                
                 self.status_var.set(f"Opened {os.path.basename(self.current_file_path)} in editor")
             else:
                 messagebox.showerror("Error", "No file selected or file not found")
@@ -950,7 +1072,7 @@ class CodeLibraryGUI:
         
         stats_window = tk.Toplevel(self.root)
         stats_window.title("Usage Statistics")
-        stats_window.geometry("600x500")
+        stats_window.geometry("600x600")
         stats_window.configure(bg=COLORS['bg_primary'])
         
         # Content frame
@@ -960,6 +1082,26 @@ class CodeLibraryGUI:
         # Title
         tk.Label(content, text="Code Library Statistics", font=('Arial', 14, 'bold'),
                 bg=COLORS['bg_primary'], fg=COLORS['accent']).pack(pady=(0, 20))
+        
+        # Current file statistics (if a file is selected)
+        if self.current_file_path:
+            current_file_name = os.path.basename(self.current_file_path)
+            file_access_count = self.tracker.usage_stats['file_accesses'].get(current_file_name, 0)
+            
+            # Find file rank
+            sorted_files = sorted(self.tracker.usage_stats['file_accesses'].items(), 
+                                 key=lambda x: x[1], reverse=True)
+            file_rank = next((i + 1 for i, (name, _) in enumerate(sorted_files) if name == current_file_name), "N/A")
+            
+            current_file_frame = tk.Frame(content, bg=COLORS['bg_secondary'], padx=10, pady=10)
+            current_file_frame.pack(fill=tk.X, pady=5)
+            
+            tk.Label(current_file_frame, text=f"Current File: {current_file_name}", font=('Arial', 11, 'bold'),
+                    bg=COLORS['bg_secondary'], fg=COLORS['accent']).pack(anchor=tk.W)
+            tk.Label(current_file_frame, text=f"Access Count: {file_access_count}",
+                    bg=COLORS['bg_secondary'], fg=COLORS['fg_primary'], font=('Arial', 11)).pack(anchor=tk.W)
+            tk.Label(current_file_frame, text=f"Popularity Rank: #{file_rank} of {len(sorted_files)}",
+                    bg=COLORS['bg_secondary'], fg=COLORS['fg_primary'], font=('Arial', 11)).pack(anchor=tk.W)
         
         # Session info
         session_frame = tk.Frame(content, bg=COLORS['bg_secondary'], padx=10, pady=10)
@@ -1003,6 +1145,198 @@ class CodeLibraryGUI:
         # Close button
         ttk.Button(content, text="Close", command=stats_window.destroy).pack(pady=20)
     
+    def change_color_scheme(self, event=None):
+        """Change the color scheme and update all UI elements"""
+        global current_scheme, COLORS
+        new_scheme = self.scheme_var.get()
+        if new_scheme in COLOR_SCHEMES:
+            current_scheme = new_scheme
+            COLORS = COLOR_SCHEMES[current_scheme]
+            self.update_colors()
+            
+            # Update all open editor windows
+            for editor in self.open_editors:
+                editor.update_editor_colors()
+    
+    def update_colors(self):
+        """Update all UI elements with new color scheme"""
+        # Update main window
+        self.root.configure(bg=COLORS['bg_primary'])
+        
+        # Update style
+        style = ttk.Style()
+        style.theme_use('clam')
+        
+        # Style configuration with Windows-friendly fonts
+        font_family = 'Segoe UI' if sys.platform == 'win32' else 'Arial'
+        style.configure('TFrame', background=COLORS['bg_primary'])
+        style.configure('TPanedWindow', background=COLORS['bg_primary'])
+        style.configure('TLabel', background=COLORS['bg_primary'], foreground=COLORS['fg_primary'], 
+                       font=(font_family, 10))
+        style.configure('TButton', background=COLORS['bg_tertiary'], foreground=COLORS['fg_primary'], 
+                       borderwidth=0, focuscolor='none', padding=(8, 4), font=(font_family, 9))
+        style.map('TButton', background=[('active', COLORS['accent'])])
+        style.configure('TEntry', fieldbackground=COLORS['bg_secondary'], foreground=COLORS['fg_primary'],
+                       borderwidth=1, insertcolor=COLORS['accent'], font=(font_family, 9))
+        style.configure('TCombobox', fieldbackground=COLORS['bg_secondary'], foreground=COLORS['fg_primary'],
+                       background=COLORS['bg_tertiary'], borderwidth=1, font=(font_family, 9))
+        style.configure('Treeview', background=COLORS['bg_secondary'], foreground=COLORS['fg_primary'],
+                       fieldbackground=COLORS['bg_secondary'], borderwidth=0, font=(font_family, 9))
+        style.configure('Treeview.Heading', background=COLORS['bg_tertiary'], foreground=COLORS['fg_primary'],
+                       borderwidth=0, font=(font_family, 9, 'bold'))
+        style.map('Treeview', background=[('selected', COLORS['accent'])], 
+                  foreground=[('selected', COLORS['bg_primary'])])
+        style.configure('TScrollbar', background=COLORS['bg_tertiary'], troughcolor=COLORS['bg_secondary'])
+        
+        # Update search frame and all children
+        for widget in self.paned_window.winfo_children():
+            self.update_widget_colors(widget)
+        
+        # Update code text
+        self.code_text.configure(bg=COLORS['code_bg'], fg=COLORS['fg_primary'], 
+                               insertbackground=COLORS['accent'], selectbackground=COLORS['accent'])
+        
+        # Update status bar
+        self.status_bar.configure(bg=COLORS['bg_secondary'], fg=COLORS['fg_secondary'])
+        
+        # Update labels
+        self.file_label.configure(bg=COLORS['bg_primary'], fg=COLORS['accent'])
+        
+        # Update header labels (Theme and Wrap)
+        for widget in self.paned_window.winfo_children():
+            for child in widget.winfo_children():
+                if child.winfo_class() == 'Label':
+                    text = child.cget('text')
+                    if text in ['Theme:', 'Wrap:', 'Search:']:
+                        child.configure(bg=COLORS['bg_primary'], fg=COLORS['fg_secondary'])
+                    elif text in ['Categories', 'Files', 'Code Content']:
+                        child.configure(bg=COLORS['bg_primary'], fg=COLORS['accent'])
+        
+        # Re-apply syntax highlighting if code is loaded
+        if self.current_file_path:
+            self.apply_code_syntax_highlighting()
+    
+    def update_widget_colors(self, widget):
+        """Recursively update widget colors"""
+        try:
+            widget_class = widget.winfo_class()
+            
+            if widget_class == 'Frame':
+                widget.configure(bg=COLORS['bg_primary'])
+            elif widget_class == 'Label':
+                widget.configure(bg=COLORS['bg_primary'], fg=COLORS['fg_primary'])
+            elif widget_class == 'Listbox':
+                widget.configure(bg=COLORS['bg_secondary'], fg=COLORS['fg_primary'],
+                               selectbackground=COLORS['accent'], selectforeground=COLORS['bg_primary'])
+            elif widget_class == 'Entry':
+                widget.configure(bg=COLORS['bg_secondary'], fg=COLORS['fg_primary'],
+                               insertbackground=COLORS['accent'])
+            elif widget_class == 'Text':
+                # Don't update code_text here, it's handled separately
+                if widget != self.code_text:
+                    widget.configure(bg=COLORS['bg_secondary'], fg=COLORS['fg_primary'],
+                                   insertbackground=COLORS['accent'])
+            elif widget_class == 'Toplevel':
+                widget.configure(bg=COLORS['bg_primary'])
+            elif widget_class == 'Panedwindow':
+                # Panedwindow uses style, not direct bg config
+                pass
+            
+            # Recursively update children
+            for child in widget.winfo_children():
+                self.update_widget_colors(child)
+        except Exception:
+            pass
+    
+    def change_wrap_mode(self, event=None):
+        """Change text wrapping mode"""
+        wrap_mode = self.wrap_var.get()
+        if wrap_mode == 'None':
+            self.code_text.configure(wrap=tk.NONE)
+        elif wrap_mode == 'Word':
+            self.code_text.configure(wrap=tk.WORD)
+        elif wrap_mode == 'Char':
+            self.code_text.configure(wrap=tk.CHAR)
+    
+    def apply_code_syntax_highlighting(self):
+        """Apply syntax highlighting to the code text widget"""
+        import re
+        
+        # Configure syntax highlighting tags
+        self.code_text.tag_config('keyword', foreground=COLORS['accent'], font=('Consolas', 10, 'bold'))
+        self.code_text.tag_config('string', foreground=COLORS['success'])
+        self.code_text.tag_config('comment', foreground=COLORS['fg_secondary'], font=('Consolas', 10, 'italic'))
+        self.code_text.tag_config('function', foreground=COLORS['highlight'])
+        self.code_text.tag_config('number', foreground=COLORS['warning'])
+        self.code_text.tag_config('decorator', foreground=COLORS['highlight'], font=('Consolas', 10, 'bold'))
+        self.code_text.tag_config('builtin', foreground=COLORS['accent'])
+        
+        # Remove existing tags
+        for tag in ['keyword', 'string', 'comment', 'function', 'number', 'decorator', 'builtin']:
+            self.code_text.tag_remove(tag, '1.0', tk.END)
+        
+        content = self.code_text.get(1.0, tk.END)
+        
+        # Keywords
+        keywords = ['def', 'class', 'if', 'else', 'elif', 'for', 'while', 'try', 'except',
+                   'import', 'from', 'return', 'print', 'pass', 'break', 'continue', 'with',
+                   'as', 'lambda', 'yield', 'raise', 'finally', 'assert', 'global', 'nonlocal',
+                   'True', 'False', 'None', 'and', 'or', 'not', 'in', 'is', 'async', 'await']
+        
+        for keyword in keywords:
+            self.highlight_code_pattern(keyword, 'keyword', word=True)
+        
+        # Built-in functions
+        builtins = ['len', 'range', 'str', 'int', 'float', 'list', 'dict', 'set', 'tuple',
+                   'bool', 'type', 'isinstance', 'hasattr', 'getattr', 'setattr', 'open',
+                   'print', 'input', 'abs', 'min', 'max', 'sum', 'sorted', 'enumerate', 'zip']
+        
+        for builtin in builtins:
+            self.highlight_code_pattern(builtin, 'builtin', word=True)
+        
+        # Decorators
+        self.highlight_code_pattern(r'@\w+', 'decorator')
+        
+        # Strings (single and double quoted, including triple quotes)
+        self.highlight_code_pattern(r'""".*?"""', 'string', multiline=True)
+        self.highlight_code_pattern(r"'''.*?'''", 'string', multiline=True)
+        self.highlight_code_pattern(r'".*?"', 'string')
+        self.highlight_code_pattern(r".*?'", 'string')
+        
+        # Comments
+        self.highlight_code_pattern(r'#.*$', 'comment')
+        
+        # Numbers
+        self.highlight_code_pattern(r'\b\d+\b', 'number')
+        self.highlight_code_pattern(r'\b\d+\.\d+\b', 'number')
+        
+        # Function definitions
+        self.highlight_code_pattern(r'def\s+(\w+)', 'function')
+    
+    def highlight_code_pattern(self, pattern, tag, word=False, multiline=False):
+        """Highlight a pattern with a tag in the code text"""
+        import re
+        content = self.code_text.get(1.0, tk.END)
+        
+        flags = 0
+        if multiline:
+            flags = re.DOTALL
+        else:
+            flags = re.MULTILINE
+        
+        if word:
+            pattern = rf'\b{pattern}\b'
+        
+        try:
+            for match in re.finditer(pattern, content, flags):
+                start = match.start()
+                end = match.end()
+                start_index = f"1.0+{start}c"
+                end_index = f"1.0+{end}c"
+                self.code_text.tag_add(tag, start_index, end_index)
+        except Exception:
+            pass
+
     def on_closing(self):
         """Handle window closing event"""
         try:
