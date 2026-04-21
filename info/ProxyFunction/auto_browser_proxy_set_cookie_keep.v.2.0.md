@@ -50,6 +50,10 @@ Load cookies into the WebDriver instance from a file.
 
 ### lanuch_initialize_driver
 
+## Classes
+
+No classes defined in this script.
+
 ## External APIs
 
 This script interacts with external services:

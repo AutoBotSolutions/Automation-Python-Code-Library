@@ -30,9 +30,17 @@ Function-based - Provides reusable functions with standalone execution capabilit
 - `selenium.webdriver.chrome.service.Service`
 - `selenium.webdriver.chrome.options.Options`
 
+## Function Descriptions
+
+No function descriptions available.
+
 ## Functions
 
 ### lanuch_initialize_driver
+
+## Classes
+
+No classes defined in this script.
 
 ## External APIs
 
@@ -40,4 +48,8 @@ This script interacts with external services:
 - `https://chromedriver.chromium.org/`
 - `https://chromedriver.chromium.org/`
 - `http://whatismyipaddress.com/")`
+
+## Code Examples
+
+No code examples available.
 

@@ -13,6 +13,10 @@ dynamic_metric.py simplified scalar curvature proxy
 
 This script is part of the general automation library, providing utility functions for common automation tasks.
 
+## Key Features
+
+No specific features documented.
+
 ## Usage Pattern
 
 Object-oriented - Provides classes and methods
@@ -66,6 +70,10 @@ Object-oriented - Provides classes and methods
 - `update_metric`
 - `step`
 - ... and 1 more
+
+## External APIs
+
+No external API interactions identified.
 
 ## Code Examples
 

@@ -50,6 +50,14 @@ Function-based - Provides reusable functions
 
 ### close
 
+## Classes
+
+No classes defined in this script.
+
+## External APIs
+
+No external API interactions identified.
+
 ## Code Examples
 
 ### add_log

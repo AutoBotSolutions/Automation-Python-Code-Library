@@ -5,9 +5,17 @@
 **Automation Type:** General Automation
 **Lines:** 23
 
+## Purpose
+
+No specific purpose documented in the file.
+
 ## Library Context
 
 This script is part of the general automation library, providing utility functions for common automation tasks.
+
+## Key Features
+
+No specific features documented.
 
 ## Usage Pattern
 
@@ -51,6 +59,10 @@ Object-oriented - Provides classes and methods
 - `loss`
 - `fisher_metric`
 - `natural_step`
+
+## External APIs
+
+No external API interactions identified.
 
 ## Code Examples
 

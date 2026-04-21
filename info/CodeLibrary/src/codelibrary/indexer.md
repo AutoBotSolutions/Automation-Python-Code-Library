@@ -111,6 +111,10 @@ Indexes the code library for searching.
 - `get_module_functions`
 - ... and 1 more
 
+## External APIs
+
+No external API interactions identified.
+
 ## Code Examples
 
 ### __init__

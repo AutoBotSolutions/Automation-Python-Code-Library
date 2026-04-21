@@ -13,6 +13,10 @@ Common data structure implementations.
 
 This script is part of the general automation library, providing utility functions for common automation tasks.
 
+## Key Features
+
+No specific features documented.
+
 ## Usage Pattern
 
 Object-oriented - Provides classes and methods
@@ -135,6 +139,10 @@ A simple singly linked list implementation.
 - `find`
 - `to_list`
 - ... and 2 more
+
+## External APIs
+
+No external API interactions identified.
 
 ## Code Examples
 

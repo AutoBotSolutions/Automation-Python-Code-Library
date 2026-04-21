@@ -17,6 +17,10 @@ This script is part of the browser automation library, providing functions for c
 
 - Web browser control
 
+## Usage Pattern
+
+Usage pattern not identified.
+
 ## Dependencies
 
 - `selenium.webdriver`
@@ -30,8 +34,24 @@ This script is part of the browser automation library, providing functions for c
 - `PIL.Image`
 - `io`
 
+## Function Descriptions
+
+No function descriptions available.
+
+## Functions
+
+No functions defined in this script.
+
+## Classes
+
+No classes defined in this script.
+
 ## External APIs
 
 This script interacts with external services:
 - `https://example-captcha-website.com`
+
+## Code Examples
+
+No code examples available.
 

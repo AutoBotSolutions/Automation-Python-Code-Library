@@ -61,6 +61,10 @@ Initialize and return the Selenium WebDriver for Chromium.
 
 Test a proxy using Selenium WebDriver.
 
+## Classes
+
+No classes defined in this script.
+
 ## External APIs
 
 This script interacts with external services:

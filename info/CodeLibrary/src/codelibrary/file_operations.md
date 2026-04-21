@@ -101,6 +101,14 @@ Read a file and return its lines as a list.
 
 ... and 2 more functions
 
+## Classes
+
+No classes defined in this script.
+
+## External APIs
+
+No external API interactions identified.
+
 ## Code Examples
 
 ### ensure_directory

@@ -41,6 +41,10 @@ Function-based - Provides reusable functions
 
 **Parameters:** proxy_file
 
+## Classes
+
+No classes defined in this script.
+
 ## External APIs
 
 This script interacts with external services:

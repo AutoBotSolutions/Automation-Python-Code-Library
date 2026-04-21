@@ -27,6 +27,10 @@ Function-based - Provides reusable functions with standalone execution capabilit
 - `inspect`
 - `sqlite3`
 
+## Function Descriptions
+
+No function descriptions available.
+
 ## Functions
 
 ### list_project_files
@@ -51,6 +55,10 @@ Connect to a database and retrieve table list. Placeholder for actual DB impleme
 
 Main driver function of the script.
 
+## Classes
+
+No classes defined in this script.
+
 ## External APIs
 
 This script interacts with external services:
@@ -58,4 +66,8 @@ This script interacts with external services:
 - `base_url`
 - `base_url`
 - `base_url`
+
+## Code Examples
+
+No code examples available.
 

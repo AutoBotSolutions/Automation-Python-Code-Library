@@ -100,6 +100,14 @@ Clamp a value between a minimum and maximum.
 
 ... and 1 more functions
 
+## Classes
+
+No classes defined in this script.
+
+## External APIs
+
+No external API interactions identified.
+
 ## Code Examples
 
 ### mean

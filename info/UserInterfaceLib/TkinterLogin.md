@@ -5,6 +5,10 @@
 **Automation Type:** HTTP Requests
 **Lines:** 71
 
+## Purpose
+
+No specific purpose documented in the file.
+
 ## Library Context
 
 This script is part of the HTTP/Network library, providing functions for making HTTP requests, interacting with web APIs, and handling network communications.
@@ -32,6 +36,14 @@ Function-based - Provides reusable functions
 ### show_selection
 
 ### start
+
+## Classes
+
+No classes defined in this script.
+
+## External APIs
+
+No external API interactions identified.
 
 ## Code Examples
 

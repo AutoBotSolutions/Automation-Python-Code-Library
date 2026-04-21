@@ -47,6 +47,14 @@ Function to process a large list in batches to avoid memory issues.
 Example function to process a batch of data.
 Replace this logic with your actual processing code.
 
+## Classes
+
+No classes defined in this script.
+
+## External APIs
+
+No external API interactions identified.
+
 ## Code Examples
 
 ### process_large_list

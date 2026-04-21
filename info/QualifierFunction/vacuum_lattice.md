@@ -13,6 +13,10 @@ vacuum_lattice.py
 
 This script is part of the general automation library, providing utility functions for common automation tasks.
 
+## Key Features
+
+No specific features documented.
+
 ## Usage Pattern
 
 Object-oriented - Provides classes and methods
@@ -61,6 +65,10 @@ Object-oriented - Provides classes and methods
 - `apply_plate_boundary`
 - `renormalize`
 - `step`
+
+## External APIs
+
+No external API interactions identified.
 
 ## Code Examples
 

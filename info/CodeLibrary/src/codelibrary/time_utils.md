@@ -13,6 +13,10 @@ Time and date manipulation utilities.
 
 This script is part of the general automation library, providing utility functions for common automation tasks.
 
+## Key Features
+
+No specific features documented.
+
 ## Usage Pattern
 
 Function-based - Provides reusable functions
@@ -92,6 +96,14 @@ Add minutes to a datetime.
 Get a human-readable time ago string.
 
 ... and 6 more functions
+
+## Classes
+
+No classes defined in this script.
+
+## External APIs
+
+No external API interactions identified.
 
 ## Code Examples
 

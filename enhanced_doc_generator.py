@@ -168,6 +168,9 @@ def generate_enhanced_markdown(file_path, analysis, basic_info):
     if analysis['purpose']:
         md += "## Purpose\n\n"
         md += f"{analysis['purpose']}\n\n"
+    else:
+        md += "## Purpose\n\n"
+        md += "No specific purpose documented in the file.\n\n"
     
     # Library context
     if analysis['library_context']:
@@ -180,11 +183,17 @@ def generate_enhanced_markdown(file_path, analysis, basic_info):
         for feature in analysis['key_features']:
             md += f"- {feature}\n"
         md += "\n"
+    else:
+        md += "## Key Features\n\n"
+        md += "No specific features documented.\n\n"
     
     # Usage pattern
     if analysis['usage_pattern']:
         md += "## Usage Pattern\n\n"
         md += f"{analysis['usage_pattern']}\n\n"
+    else:
+        md += "## Usage Pattern\n\n"
+        md += "Usage pattern not identified.\n\n"
     
     # Dependencies
     if basic_info['imports']:
@@ -194,6 +203,9 @@ def generate_enhanced_markdown(file_path, analysis, basic_info):
         if len(basic_info['imports']) > 15:
             md += f"- ... and {len(basic_info['imports']) - 15} more\n"
         md += "\n"
+    else:
+        md += "## Dependencies\n\n"
+        md += "No external dependencies identified.\n\n"
     
     # Functions
     if analysis['function_descriptions']:
@@ -201,6 +213,9 @@ def generate_enhanced_markdown(file_path, analysis, basic_info):
         for desc in analysis['function_descriptions']:
             md += f"- {desc}\n"
         md += "\n"
+    else:
+        md += "## Function Descriptions\n\n"
+        md += "No function descriptions available.\n\n"
     
     if basic_info['functions']:
         md += "## Functions\n\n"
@@ -212,6 +227,9 @@ def generate_enhanced_markdown(file_path, analysis, basic_info):
                 md += f"{func['docstring'][:300]}\n\n"
         if len(basic_info['functions']) > 10:
             md += f"... and {len(basic_info['functions']) - 10} more functions\n\n"
+    else:
+        md += "## Functions\n\n"
+        md += "No functions defined in this script.\n\n"
     
     # Classes
     if basic_info['classes']:
@@ -227,6 +245,9 @@ def generate_enhanced_markdown(file_path, analysis, basic_info):
                 if len(cls['methods']) > 5:
                     md += f"- ... and {len(cls['methods']) - 5} more\n"
                 md += "\n"
+    else:
+        md += "## Classes\n\n"
+        md += "No classes defined in this script.\n\n"
     
     # External APIs
     if analysis['external_apis']:
@@ -235,6 +256,9 @@ def generate_enhanced_markdown(file_path, analysis, basic_info):
         for api in analysis['external_apis'][:5]:
             md += f"- `{api}`\n"
         md += "\n"
+    else:
+        md += "## External APIs\n\n"
+        md += "No external API interactions identified.\n\n"
     
     # Code examples
     if analysis['code_examples']:
@@ -244,6 +268,9 @@ def generate_enhanced_markdown(file_path, analysis, basic_info):
             md += "```python\n"
             md += snippet['code']
             md += "\n```\n\n"
+    else:
+        md += "## Code Examples\n\n"
+        md += "No code examples available.\n\n"
     
     return md
 

@@ -42,6 +42,10 @@ Function-based - Provides reusable functions
 
 **Parameters:** locator_type, locator_value, timeout
 
+## Classes
+
+No classes defined in this script.
+
 ## External APIs
 
 This script interacts with external services:

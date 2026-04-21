@@ -99,6 +99,14 @@ Mask a string showing only the first and last few characters.
 
 ... and 1 more functions
 
+## Classes
+
+No classes defined in this script.
+
+## External APIs
+
+No external API interactions identified.
+
 ## Code Examples
 
 ### camel_to_snake

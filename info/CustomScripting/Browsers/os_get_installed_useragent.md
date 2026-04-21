@@ -27,9 +27,25 @@ Function-based - Provides reusable functions with standalone execution capabilit
 - `platform`
 - `logging`
 
+## Function Descriptions
+
+No function descriptions available.
+
 ## Functions
 
 ### get_chrome_user_agent
 
 Get the User-Agent of the currently installed version of Chrome.
+
+## Classes
+
+No classes defined in this script.
+
+## External APIs
+
+No external API interactions identified.
+
+## Code Examples
+
+No code examples available.
 

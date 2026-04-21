@@ -84,6 +84,14 @@ Parse JSON string to Python object.
 
 ### wrapper
 
+## Classes
+
+No classes defined in this script.
+
+## External APIs
+
+No external API interactions identified.
+
 ## Code Examples
 
 ### flatten

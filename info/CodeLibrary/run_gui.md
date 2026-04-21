@@ -27,3 +27,23 @@ This script is part of the file operations library, providing functions for file
 - `os`
 - `codelibrary.gui.main`
 
+## Function Descriptions
+
+No function descriptions available.
+
+## Functions
+
+No functions defined in this script.
+
+## Classes
+
+No classes defined in this script.
+
+## External APIs
+
+No external API interactions identified.
+
+## Code Examples
+
+No code examples available.
+

@@ -17,6 +17,10 @@ This script is part of the browser automation library, providing functions for c
 
 - Web browser control
 
+## Usage Pattern
+
+Usage pattern not identified.
+
 ## Dependencies
 
 - `time`
@@ -26,6 +30,18 @@ This script is part of the browser automation library, providing functions for c
 - `PIL.Image`
 - `requests`
 
+## Function Descriptions
+
+No function descriptions available.
+
+## Functions
+
+No functions defined in this script.
+
+## Classes
+
+No classes defined in this script.
+
 ## External APIs
 
 This script interacts with external services:
@@ -34,4 +50,8 @@ This script interacts with external services:
 - `http://2captcha.com/res.php?key={api_key}&action=get&id={captcha_id}&json=1"`
 - `api_key`
 - `api_key`
+
+## Code Examples
+
+No code examples available.
 

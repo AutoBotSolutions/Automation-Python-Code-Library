@@ -49,6 +49,10 @@ Function-based - Provides reusable functions
 
 **Parameters:** sender, to, subject, message_text
 
+## Classes
+
+No classes defined in this script.
+
 ## External APIs
 
 This script interacts with external services:
