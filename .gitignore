@@ -46,6 +46,10 @@ file_hashes.json
 # Backup directory
 backup/
 
+# GitHub setup guides (internal use)
+docs/GITHUB_SETUP.md
+docs/GITHUB_2FA_SETUP.md
+
 # Temporary files
 *.tmp
 *.bak
