@@ -16,13 +16,16 @@ import subprocess
 from pathlib import Path
 
 # Prevent accidental imports from code library
-library_path = "/home/robbie/Desktop/CodeLibrary/code-library"
+# Use environment variable or resolve relative to script location
+script_dir = Path(__file__).parent.resolve()
+library_path = os.environ.get('CODE_LIBRARY_PATH', str(script_dir / 'code-library'))
 if library_path in sys.path:
     sys.path.remove(library_path)
 
 # Change working directory to avoid Python compiling files in code library
 original_cwd = os.getcwd()
-os.chdir("/tmp")
+temp_dir = os.environ.get('TEMP_DIR', '/tmp')
+os.chdir(temp_dir)
 
 # Modern Color Palette (Dark Theme)
 COLORS = {
@@ -49,8 +52,9 @@ class SystemTracker:
     
     def __init__(self, library_path):
         self.library_path = library_path
-        self.log_file = "/home/robbie/Desktop/CodeLibrary/tracking_log.txt"
-        self.stats_file = "/home/robbie/Desktop/CodeLibrary/usage_stats.json"
+        script_dir = Path(__file__).parent.resolve()
+        self.log_file = os.environ.get('TRACKING_LOG_FILE', str(script_dir / 'tracking_log.txt'))
+        self.stats_file = os.environ.get('STATS_FILE', str(script_dir / 'usage_stats.json'))
         self.file_hashes = {}
         self.usage_stats = {
             'file_accesses': {},
@@ -58,7 +62,7 @@ class SystemTracker:
             'total_sessions': 0,
             'session_start': None
         }
-        
+
         self.load_tracking_data()
     
     def load_tracking_data(self):
@@ -556,8 +560,9 @@ class CodeLibraryGUI:
         style = ttk.Style()
         style.theme_use('clam')
         
-        # Set the code library path
-        self.library_path = "/home/robbie/Desktop/CodeLibrary/code-library"
+        # Set the code library path from environment variable or relative path
+        script_dir = Path(__file__).parent.resolve()
+        self.library_path = os.environ.get('CODE_LIBRARY_PATH', str(script_dir / 'code-library'))
         
         # Initialize tracker
         self.tracker = SystemTracker(self.library_path)

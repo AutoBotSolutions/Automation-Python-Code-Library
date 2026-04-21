@@ -14,10 +14,12 @@ import subprocess
 app = Flask(__name__)
 CORS(app)
 
-# Configuration
-CODE_LIBRARY_PATH = "/home/robbie/Desktop/CodeLibrary/code-library"
-LOG_FILE = "/home/robbie/Desktop/CodeLibrary/tracking_log.txt"
-STATS_FILE = "/home/robbie/Desktop/CodeLibrary/usage_stats.json"
+# Configuration - Use environment variables or relative paths
+from pathlib import Path
+script_dir = Path(__file__).parent.resolve()
+CODE_LIBRARY_PATH = os.environ.get('CODE_LIBRARY_PATH', str(script_dir / 'code-library'))
+LOG_FILE = os.environ.get('TRACKING_LOG_FILE', str(script_dir / 'tracking_log.txt'))
+STATS_FILE = os.environ.get('STATS_FILE', str(script_dir / 'usage_stats.json'))
 
 # Initialize tracking data
 def load_tracking_data():
@@ -269,7 +271,7 @@ def detect_changes():
         file_hashes = {}
         
         # Load existing hashes
-        hashes_file = "/home/robbie/Desktop/CodeLibrary/file_hashes.json"
+        hashes_file = os.environ.get('HASHES_FILE', str(script_dir / 'file_hashes.json'))
         if os.path.exists(hashes_file):
             with open(hashes_file, 'r') as f:
                 file_hashes = json.load(f)

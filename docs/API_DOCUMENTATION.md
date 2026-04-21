@@ -237,13 +237,20 @@ Get API configuration.
 {
   "success": true,
   "config": {
-    "code_library_path": "/home/robbie/Desktop/CodeLibrary/code-library",
-    "log_file": "/home/robbie/Desktop/CodeLibrary/tracking_log.txt",
-    "stats_file": "/home/robbie/Desktop/CodeLibrary/usage_stats.json",
+    "code_library_path": "<resolved from CODE_LIBRARY_PATH env var or relative path>",
+    "log_file": "<resolved from TRACKING_LOG_FILE env var or relative path>",
+    "stats_file": "<resolved from STATS_FILE env var or relative path>",
     "version": "1.0.0"
   }
 }
 ```
+
+**Environment Variables:**
+- `CODE_LIBRARY_PATH`: Path to the code library directory (default: script_dir/code-library)
+- `TRACKING_LOG_FILE`: Path to the tracking log file (default: script_dir/tracking_log.txt)
+- `STATS_FILE`: Path to the usage stats file (default: script_dir/usage_stats.json)
+- `HASHES_FILE`: Path to the file hashes file (default: script_dir/file_hashes.json)
+- `TEMP_DIR`: Temporary directory for operations (default: /tmp)
 
 ---
 
