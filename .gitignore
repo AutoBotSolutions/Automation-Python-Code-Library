@@ -41,6 +41,10 @@ Thumbs.db
 tracking_log.txt
 usage_stats.json
 *.log
+file_hashes.json
+
+# Backup directory
+backup/
 
 # Temporary files
 *.tmp
