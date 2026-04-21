@@ -87,10 +87,13 @@ python code_library_gui.py
 
 ### Windows-Specific Configuration
 
-The code library path in `code_library_gui.py` uses Linux-style paths. For Windows, update line 31:
-```python
-self.library_path = r"C:\path\to\your\code-library"
+Set the environment variable before running the application:
+```cmd
+set CODE_LIBRARY_PATH=C:\path\to\your\code-library
+python code_library_gui.py
 ```
+
+Or set it permanently in System Environment Variables.
 
 ---
 
@@ -163,10 +166,13 @@ Categories=Development;IDE;
 
 ### Linux-Specific Configuration
 
-The default path should work for Linux:
-```python
-self.library_path = "/home/username/code-library"
+Set the environment variable before running the application:
+```bash
+export CODE_LIBRARY_PATH="/home/username/code-library"
+python3 code_library_gui.py
 ```
+
+Or add to your ~/.bashrc or ~/.profile for permanent configuration.
 
 ---
 
@@ -232,10 +238,13 @@ end tell
 
 ### macOS-Specific Configuration
 
-The default path should work for macOS:
-```python
-self.library_path = "/Users/username/code-library"
+Set the environment variable before running the application:
+```bash
+export CODE_LIBRARY_PATH="/Users/username/code-library"
+python3 code_library_gui.py
 ```
+
+Or add to your ~/.zshrc or ~/.bash_profile for permanent configuration.
 
 ---
 
@@ -243,37 +252,54 @@ self.library_path = "/Users/username/code-library"
 
 ### Setting Your Code Library Path
 
-The code library path is configured in `code_library_gui.py` at line 31:
+The application uses environment variables for configuration with sensible defaults. All paths are resolved to absolute paths before changing the working directory.
 
 **Windows:**
-```python
-self.library_path = r"C:\Users\YourName\code-library"
+```cmd
+set CODE_LIBRARY_PATH=C:\Users\YourName\code-library
+set TRACKING_LOG_FILE=C:\Users\YourName\tracking_log.txt
+set STATS_FILE=C:\Users\YourName\usage_stats.json
 ```
 
 **Linux:**
-```python
-self.library_path = "/home/username/code-library"
+```bash
+export CODE_LIBRARY_PATH="/home/username/code-library"
+export TRACKING_LOG_FILE="/home/username/tracking_log.txt"
+export STATS_FILE="/home/username/usage_stats.json"
 ```
 
 **macOS:**
-```python
-self.library_path = "/Users/username/code-library"
+```bash
+export CODE_LIBRARY_PATH="/Users/username/code-library"
+export TRACKING_LOG_FILE="/Users/username/tracking_log.txt"
+export STATS_FILE="/Users/username/usage_stats.json"
 ```
 
-### Configuring the Library Path
+### Environment Variables
 
-1. Open `code_library_gui.py` in a text editor
-2. Find line 31
-3. Update the path to point to your code library directory
-4. Save the file
+- `CODE_LIBRARY_PATH`: Path to the code library directory (default: script_dir/code-library)
+- `TRACKING_LOG_FILE`: Path to the tracking log file (default: script_dir/tracking_log.txt)
+- `STATS_FILE`: Path to the usage stats file (default: script_dir/usage_stats.json)
+- `HASHES_FILE`: Path to the file hashes file (default: script_dir/file_hashes.json)
+- `TEMP_DIR`: Temporary directory for operations (default: /tmp)
 
-### Path Format Notes
+### Permanent Configuration
 
-- **Windows**: Use raw strings (r"path") or double backslashes (\\)
-- **Linux/macOS**: Use forward slashes (/)
-- **Network Paths**: 
-  - Windows: `r"\\network\share\path"`
-  - Linux: `"/mnt/share/path"`
+**Windows:**
+- Add to System Environment Variables through Control Panel
+- Or create a batch script to set variables before running
+
+**Linux:**
+- Add to ~/.bashrc or ~/.profile
+```bash
+echo 'export CODE_LIBRARY_PATH="/path/to/code-library"' >> ~/.bashrc
+```
+
+**macOS:**
+- Add to ~/.zshrc or ~/.bash_profile
+```bash
+echo 'export CODE_LIBRARY_PATH="/path/to/code-library"' >> ~/.zshrc
+```
 
 ---
 

@@ -51,11 +51,22 @@ python3 code_library_gui.py
 
 ## Configuration
 
-The code library path is configured in the `code_library_gui.py` file. To change the default path:
+The application uses environment variables for configuration with sensible defaults. Set the following environment variables to customize paths:
 
-```python
-self.library_path = "/path/to/your/code/library"
+```bash
+export CODE_LIBRARY_PATH="/path/to/your/code-library"
+export TRACKING_LOG_FILE="/path/to/tracking_log.txt"
+export STATS_FILE="/path/to/usage_stats.json"
+export HASHES_FILE="/path/to/file_hashes.json"
+export TEMP_DIR="/tmp"
 ```
+
+If not set, the application will use relative paths based on the script location:
+- `CODE_LIBRARY_PATH`: script_dir/code-library
+- `TRACKING_LOG_FILE`: script_dir/tracking_log.txt
+- `STATS_FILE`: script_dir/usage_stats.json
+- `HASHES_FILE`: script_dir/file_hashes.json
+- `TEMP_DIR`: /tmp
 
 ## Usage
 

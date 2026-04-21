@@ -134,15 +134,26 @@ Accents:
 
 ## Configuration
 
-### Code Library Path
-Configured in `code_library_gui.py` line 31:
-```python
-self.library_path = "/path/to/your/code-library"
+The GUI uses environment variables for configuration with sensible defaults. All paths are resolved to absolute paths before changing the working directory.
+
+### Environment Variables
+- `CODE_LIBRARY_PATH`: Path to the code library directory (default: script_dir/code-library)
+- `TRACKING_LOG_FILE`: Path to the tracking log file (default: script_dir/tracking_log.txt)
+- `STATS_FILE`: Path to the usage stats file (default: script_dir/usage_stats.json)
+- `HASHES_FILE`: Path to the file hashes file (default: script_dir/file_hashes.json)
+- `TEMP_DIR`: Temporary directory for operations (default: /tmp)
+
+### Example Configuration
+```bash
+export CODE_LIBRARY_PATH="/path/to/your/code-library"
+export TRACKING_LOG_FILE="/path/to/tracking_log.txt"
+export STATS_FILE="/path/to/usage_stats.json"
 ```
 
 ### Tracking Files
 - `tracking_log.txt`: Event logs (auto-generated)
 - `usage_stats.json`: Usage statistics (auto-generated)
+- `file_hashes.json`: File change detection hashes (auto-generated)
 
 ## Error Handling
 
