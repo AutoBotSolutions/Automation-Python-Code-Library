@@ -43,5 +43,22 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Example table as a list of tuples
+table = [
+    (2, "Alice", 25),
+    (1, "Charlie", 35),
+    (3, "Bob", 30)
+]
+
+# Sort the table by the first column (id)
+sorted_table = sorted(table, key=lambda row: row[0])
+print("Sorted by ID:")
+for row in sorted_table:
+    print(row)
+
+# Sort the table by the sec
+```
 

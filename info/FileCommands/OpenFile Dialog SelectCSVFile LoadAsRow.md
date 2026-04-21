@@ -27,7 +27,8 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- open_file_dialog - Performs a specific operation.
+- import_list_as_column - Parameters: file_path. Performs a specific operation.
 
 ## Functions
 

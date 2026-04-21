@@ -43,5 +43,13 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Using set() function
+my_set = set([1, 2, 3])
+
+# Using curly braces
+my_set = {1, 2, 3}
+```
 

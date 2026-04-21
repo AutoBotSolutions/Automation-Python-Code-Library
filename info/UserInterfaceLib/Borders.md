@@ -43,5 +43,9 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+window.configure(bg='#333333')
+```
 

@@ -23,7 +23,10 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `selenium`
+- `Shell`
+- `webdriver`
+- `subprocess`
 
 ## Function Descriptions
 
@@ -44,5 +47,19 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import subprocess
+   from selenium import webdriver
+
+   # Start Selenium WebDriver
+   driver = webdriver.Chrome()
+
+   # Open a URL (Modify as per your requirement)
+   driver.get('https://example.com')
+
+   # Run a shell command using subprocess
+   result = subprocess.run(["echo", "Hello from Shell"],
+```
 

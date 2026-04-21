@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `random`
 
 ## Function Descriptions
 
@@ -43,5 +43,14 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import random
+
+# Generate a random integer between 1 and 100
+random_variable = random.randint(1, 100)
+
+print(random_variable)
+```
 

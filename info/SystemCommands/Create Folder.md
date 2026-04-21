@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `os`
 
 ## Function Descriptions
 
@@ -43,5 +43,19 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import os
+
+# Specify the path where you want to create a folder
+folder_path = 'path/to/new_folder'
+
+# Create the folder if it doesn't already exist
+if not os.path.exists(folder_path):
+    os.makedirs(folder_path)
+    print(f"Folder created: {folder_path}")
+else:
+    print(f"Folder already exists: {f
+```
 

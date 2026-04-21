@@ -43,5 +43,11 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+text = "Hello, World!"
+   substring = text[7:12]  # Extracts 'World' (start index is inclusive, end index is exclusive)
+   print(substring)  # Output: World
+```
 

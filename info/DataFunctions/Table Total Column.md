@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `pandas`
 
 ## Function Descriptions
 
@@ -43,5 +43,24 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import pandas as pd
+
+# Example table data
+data = {
+    'Column1': [10, 20, 30],
+    'Column2': [5, 15, 25],
+    'Column3': [1, 2, 3]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Sum of each column
+column_totals = df.sum()
+
+print(column_totals)
+```
 

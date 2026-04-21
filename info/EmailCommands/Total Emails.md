@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `imaplib`
 
 ## Function Descriptions
 
@@ -43,5 +43,19 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import imaplib
+
+# Email credentials (replace with actual credentials)
+EMAIL = "your_email@example.com"
+PASSWORD = "your_password"
+IMAP_SERVER = "imap.gmail.com"  # Replace with your email provider's IMAP server
+
+# Connect to the server
+mail = imaplib.IMAP4_SSL(IMAP_SERVER)
+
+# Login to your email acc
+```
 

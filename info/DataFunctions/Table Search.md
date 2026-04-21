@@ -43,5 +43,19 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Example table as a list of lists
+table = [
+    ["Name", "Age", "City"],
+    ["Alice", 30, "New York"],
+    ["Bob", 25, "Los Angeles"],
+    ["Charlie", 35, "Chicago"]
+]
+
+# Search for a value in the table (e.g., find rows with "Chicago")
+target = "Chicago"
+result = [row for row in table[1:] if targe
+```
 

@@ -43,5 +43,12 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Example with a list
+my_list = [10, 20, 30, 40, 50]
+index = my_list.index(30)  # Finds the index of 30
+print(index)  # Output: 2
+```
 

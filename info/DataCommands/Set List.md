@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `a`
 
 ## Function Descriptions
 
@@ -43,5 +43,12 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Remove duplicates from a list
+my_list = [1, 2, 2, 3, 4, 4, 5]
+unique_list = list(set(my_list))
+print(unique_list)  # Output: [1, 2, 3, 4, 5] (order may vary)
+```
 

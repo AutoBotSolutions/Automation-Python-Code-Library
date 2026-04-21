@@ -43,5 +43,13 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Prompt the user to enter something
+user_input = input("Please type something and press Enter: ")
+
+# Print the text they typed
+print("You typed:", user_input)
+```
 

@@ -23,7 +23,9 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `time`
+- `webdriver`
+- `selenium`
 
 ## Function Descriptions
 
@@ -46,5 +48,20 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+import time
+
+# Create a WebDriver instance
+driver = webdriver.Chrome()
+
+# Open the first tab
+driver.get("https://example.com")
+print("First Tab Title:", driver.title)
+
+# Open a new tab or simulate opening a new tab
+driver.execute_script("window.open('https://www.google
+```
 

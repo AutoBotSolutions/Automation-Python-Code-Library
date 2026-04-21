@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `webdriver`
+- `selenium`
 
 ## Function Descriptions
 
@@ -44,5 +45,23 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+
+# Example using Chrome
+driver = webdriver.Chrome()
+
+# Open a website
+driver.get("https://example.com")
+
+# Get the title of the current page
+page_title = driver.title
+
+# Store it in a variable and print it
+print("The title of the page is:", page_title)
+
+# Close the bro
+```
 

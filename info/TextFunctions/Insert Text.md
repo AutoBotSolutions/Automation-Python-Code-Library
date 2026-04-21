@@ -43,5 +43,14 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Example: Insert "world" into "Hello!"
+original_text = "Hello!"
+position = 5  # Position to insert the new text
+new_text = original_text[:position] + " world" + original_text[position:]
+print(new_text)
+# Output: Hello world!
+```
 

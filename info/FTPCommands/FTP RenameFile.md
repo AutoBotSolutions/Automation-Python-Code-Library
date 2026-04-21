@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `ftplib`
+- `FTP`
 
 ## Function Descriptions
 
@@ -43,5 +44,22 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from ftplib import FTP
+
+# Connect to the FTP server
+ftp = FTP('ftp.example.com')
+ftp.login('username', 'password')
+
+# Rename the file
+old_name = 'old_filename.txt'
+new_name = 'new_filename.txt'
+
+try:
+    ftp.rename(old_name, new_name)
+    print(f"File renamed from {old_name} to {new_name}")
+except E
+```
 

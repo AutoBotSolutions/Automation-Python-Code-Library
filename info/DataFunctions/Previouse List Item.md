@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `the`
 
 ## Function Descriptions
 
@@ -43,5 +43,15 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+my_list = [10, 20, 30, 40, 50]
+
+# Iterate through the list starting from the second item
+for i in range(1, len(my_list)):
+    current_item = my_list[i]
+    previous_item = my_list[i - 1]
+    print(f"Current: {current_item}, Previous: {previous_item}")
+```
 

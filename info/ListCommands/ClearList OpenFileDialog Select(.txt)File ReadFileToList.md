@@ -27,7 +27,10 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- open_file - Performs a specific operation.
+- read_file_to_list - Parameters: file_path. Performs a specific operation.
+- open_file - Performs a specific operation.
+- read_file_to_list - Parameters: file_path. Performs a specific operation.
 
 ## Functions
 

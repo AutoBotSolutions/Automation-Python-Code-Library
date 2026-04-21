@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `the`
+- `requests`
 
 ## Function Descriptions
 
@@ -47,5 +48,20 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import requests
+
+url = "https://api.example.com/resource"
+params = {
+    "param1": "value1",
+    "param2": "value2",
+}
+
+response = requests.get(url, params=params)
+
+# Print the response from the server
+print(response.text)
+```
 

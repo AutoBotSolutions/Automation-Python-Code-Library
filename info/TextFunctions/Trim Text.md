@@ -43,5 +43,12 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Removes leading and trailing whitespace
+text = "   Hello, World!   "
+trimmed_text = text.strip()
+print(trimmed_text)  # Output: "Hello, World!"
+```
 

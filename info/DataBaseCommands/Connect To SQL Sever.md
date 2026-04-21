@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `pyodbc`
 
 ## Function Descriptions
 
@@ -43,5 +43,16 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import pyodbc
+
+# Define your connection configuration
+server = 'your_server_name'  # Server name or IP address, e.g., 'localhost' or '192.168.0.1'
+database = 'your_database_name'  # Name of the database
+username = 'your_username'  # SQL Server username
+password = 'your_password'  # User password
+dri
+```
 

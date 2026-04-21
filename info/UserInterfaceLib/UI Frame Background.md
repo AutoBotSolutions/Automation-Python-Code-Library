@@ -23,7 +23,9 @@ Function-based - Provides reusable functions with standalone execution capabilit
 
 ## Dependencies
 
-No external dependencies identified.
+- `Image`
+- `tkinter`
+- `PIL`
 
 ## Function Descriptions
 
@@ -43,5 +45,20 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import tkinter as tk
+from PIL import Image, ImageTk
+
+def main():
+    root = tk.Tk()
+    root.geometry("800x540")
+
+    # Load the image
+    image = Image.open("/home/tompots/Pictures/mx-background.png")  # Replace with your image file
+    background_image = ImageTk.PhotoImage(image)
+
+    # Create a F
+```
 

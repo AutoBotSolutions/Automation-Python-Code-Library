@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `os`
 
 ## Function Descriptions
 
@@ -43,5 +43,22 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import os
+
+# Current file name
+old_file_name = "old_file_name.txt"
+
+# New file name
+new_file_name = "new_file_name.txt"
+
+try:
+    # Renaming the file
+    os.rename(old_file_name, new_file_name)
+    print(f"File renamed successfully from {old_file_name} to {new_file_name}")
+except FileNotFoundError:
+
+```
 

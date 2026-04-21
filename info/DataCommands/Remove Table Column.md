@@ -23,7 +23,9 @@ Function-based - Provides reusable functions
 
 ## Dependencies
 
-No external dependencies identified.
+- `csv`
+- `a`
+- `the`
 
 ## Function Descriptions
 
@@ -43,5 +45,17 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import csv
+
+def remove_column_from_csv(input_file, output_file, column_to_remove):
+    """
+    Removes a specified column from a CSV file and writes the output to a new file.
+
+    :param input_file: Path to the input CSV file
+    :param output_file: Path to the output CSV file
+    :param column_to_r
+```
 

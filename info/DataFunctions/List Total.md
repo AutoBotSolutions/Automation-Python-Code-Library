@@ -43,5 +43,16 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Creating a list called 'accounts' with 100 name entries
+accounts = [f"Account_{i}" for i in range(1, 101)]
+
+# Setting a variable `account_total` to the total number of items in the list 'accounts'
+account_total = len(accounts)
+
+# Output the total to verify
+print("Total accounts:", account_total)
+```
 

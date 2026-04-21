@@ -43,5 +43,17 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Define two variables with values between 1 and 20
+value1 = 10
+value2 = 5
+
+# Check if the sum of the two values equals 15
+if value1 + value2 == 15:
+    print("Great!")  # Alert if the condition is met
+else:
+    print("Bummer!")  # Alert if the condition is not met
+```
 

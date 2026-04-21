@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- open_file_dialog - Performs a specific operation.
 
 ## Functions
 

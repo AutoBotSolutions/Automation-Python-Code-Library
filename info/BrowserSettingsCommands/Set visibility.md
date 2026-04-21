@@ -23,7 +23,10 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `selenium`
+- `WebDriverWait`
+- `expected_conditions`
+- `By`
 
 ## Function Descriptions
 
@@ -43,5 +46,15 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# Example: Wait for an element to be visible
+wait = WebDriverWait(driver, 10)  # Wait up to 10 seconds
+element = wait.until(EC.visibil
+```
 

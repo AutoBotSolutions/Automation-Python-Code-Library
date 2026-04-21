@@ -43,5 +43,24 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Creating four lists
+list1 = []
+list2 = []
+list3 = []
+list4 = []
+
+# Set the variable to reference list3
+position = list3
+
+# Create a list of lists
+list_of_lists = [list1, list2, list3, list4]
+
+# Find the position of list3 in the list of lists
+list_position = list_of_lists.index(position)
+
+# Print t
+```
 

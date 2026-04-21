@@ -43,5 +43,20 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# List to be saved
+my_list = ["apple", "banana", "cherry"]
+
+# Path to save the file
+file_path = "my_list.txt"
+
+# Writing the list to the file
+with open(file_path, "w") as file:
+    for item in my_list:
+        file.write(item + "\n")
+
+print(f"List saved to {file_path}")
+```
 

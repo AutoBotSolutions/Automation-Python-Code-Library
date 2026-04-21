@@ -43,5 +43,14 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+
+result = list1 + list2
+print(result)
+# Output: [1, 2, 3, 4, 5, 6]
+```
 

@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `os`
 
 ## Function Descriptions
 
@@ -43,5 +43,19 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import os
+
+# Specify the file you want to delete
+file_path = "path/to/your/file.txt"
+
+# Check if the file exists before deleting
+if os.path.exists(file_path):
+    os.remove(file_path)
+    print(f"{file_path} has been deleted.")
+else:
+    print(f"{file_path} does not exist.")
+```
 

@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `ftplib`
+- `FTP`
 
 ## Function Descriptions
 
@@ -43,5 +44,21 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from ftplib import FTP
+
+# FTP configuration
+ftp_host = "ftp.example.com"
+ftp_user = "your_username"
+ftp_password = "your_password"
+
+# Connect to the FTP server
+ftp = FTP(ftp_host)
+ftp.login(user=ftp_user, passwd=ftp_password)
+
+# Define the current directory name and the new name
+current_dir_name = "
+```
 

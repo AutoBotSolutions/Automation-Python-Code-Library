@@ -43,5 +43,10 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+result = 1 - 1
+print(result)  # Output will be 0
+```
 

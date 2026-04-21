@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `shutil`
 
 ## Function Descriptions
 
@@ -43,5 +43,20 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import shutil
+
+# Source folder path
+source = "/path/to/source/folder"
+
+# Destination folder path
+destination = "/path/to/destination/folder"
+
+# Move the folder
+shutil.move(source, destination)
+
+print(f"Folder moved from {source} to {destination}")
+```
 

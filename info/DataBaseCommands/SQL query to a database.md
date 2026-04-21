@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `sqlite3`
 
 ## Function Descriptions
 
@@ -43,5 +43,18 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import sqlite3
+
+# Establish a connection to the SQLite database
+connection = sqlite3.connect("example.db")  # Replace "example.db" with your database file
+
+# Create a cursor object to interact with the database
+cursor = connection.cursor()
+
+# Write an SQL query
+sql_query = "SELECT * FROM my_table WH
+```
 

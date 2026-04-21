@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `mysql`
+- `Error`
 
 ## Function Descriptions
 
@@ -43,5 +44,17 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import mysql.connector
+   from mysql.connector import Error
+
+   try:
+       # Establish the connection
+       connection = mysql.connector.connect(
+           host='localhost',        # Replace with your database server host
+           database='your_database', # Replace with your database name
+    
+```
 

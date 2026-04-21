@@ -43,5 +43,16 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Increment
+a = 5
+a += 1  # Equivalent to a = a + 1
+print(a)  # Output: 6
+
+# Increment by more than 1
+a += 5  # Equivalent to a = a + 5
+print(a)  # Output: 11
+```
 

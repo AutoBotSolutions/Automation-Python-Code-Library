@@ -23,7 +23,11 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `DesiredCapabilities`
+- `Server`
+- `selenium`
+- `browsermobproxy`
+- `webdriver`
 
 ## Function Descriptions
 
@@ -48,5 +52,18 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from browsermobproxy import Server
+   from selenium import webdriver
+   from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+   
+   # Start the BrowserMob Proxy server
+   server = Server("<path_to_browsermob-proxy>")
+   server.start()
+   proxy = server.create_proxy()
+   
+  
+```
 

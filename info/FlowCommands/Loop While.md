@@ -43,5 +43,15 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Initialize the variable
+variable = 0
+
+# Loop while the variable is less than or equal to 50
+while variable <= 50:
+    print(variable)  # Optional: Print the current value of the variable
+    variable += 2  # Increment the variable by 2
+```
 

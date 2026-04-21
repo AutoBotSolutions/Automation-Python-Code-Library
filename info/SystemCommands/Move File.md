@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `shutil`
 
 ## Function Descriptions
 
@@ -43,5 +43,18 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import shutil
+
+# Specify source and destination paths
+src_path = 'path/to/source/file.txt'
+dst_path = 'path/to/destination/directory/file.txt'
+
+# Move the file
+shutil.move(src_path, dst_path)
+
+print(f"File moved from {src_path} to {dst_path}")
+```
 

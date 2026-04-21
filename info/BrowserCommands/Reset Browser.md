@@ -23,7 +23,10 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `selenium`
+- `Service`
+- `webdriver`
+- `Options`
 
 ## Function Descriptions
 
@@ -47,5 +50,16 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+
+# Set up Chrome with a fresh profile
+chrome_options = Options()
+chrome_options.add_argument("--incognito")  # Use incognito for a clean session
+chrome_options.a
+```
 

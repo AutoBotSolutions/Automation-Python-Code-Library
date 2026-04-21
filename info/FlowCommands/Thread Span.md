@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- task_function - Parameters: span_name. Performs a specific operation.
 
 ## Functions
 

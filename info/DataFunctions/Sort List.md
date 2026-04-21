@@ -43,5 +43,13 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+numbers = [5, 2, 9, 1, 5, 6]
+sorted_numbers = sorted(numbers)
+
+print(sorted_numbers)  # Output: [1, 2, 5, 5, 6, 9]
+print(numbers)         # Original list remains unchanged
+```
 

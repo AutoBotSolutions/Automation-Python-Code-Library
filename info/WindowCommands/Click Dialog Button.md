@@ -23,7 +23,11 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `ActionChains`
+- `Alert`
+- `By`
+- `selenium`
+- `webdriver`
 
 ## Function Descriptions
 
@@ -44,5 +48,15 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.alert import Alert
+from selenium.webdriver.common.action_chains import ActionChains
+
+# Start the browser and navigate to the URL
+driver = webdriver.Chrome()  # You can use other drivers as well,
+```
 

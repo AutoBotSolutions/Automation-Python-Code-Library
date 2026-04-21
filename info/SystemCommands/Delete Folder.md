@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `os`
 
 ## Function Descriptions
 
@@ -43,5 +43,17 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import os
+
+folder_path = "path/to/your/folder"
+
+try:
+    os.rmdir(folder_path)  # This will only work if the folder is empty
+    print(f"Folder '{folder_path}' deleted successfully.")
+except OSError as e:
+    print(f"Error: {e.strerror}")
+```
 

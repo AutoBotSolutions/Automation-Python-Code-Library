@@ -23,7 +23,8 @@ Function-based - Provides reusable functions
 
 ## Dependencies
 
-No external dependencies identified.
+- `csv`
+- `sqlite3`
 
 ## Function Descriptions
 
@@ -43,5 +44,21 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import sqlite3
+import csv
+
+# File and database paths
+csv_file_path = "your_file.csv"
+database_path = "example.db"
+
+def create_table_from_csv(csv_file, db_path):
+    # Connect to SQLite database (or create it if it doesn't exist)
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    # O
+```
 

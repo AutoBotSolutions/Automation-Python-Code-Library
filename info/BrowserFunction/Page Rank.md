@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `networkx`
 
 ## Function Descriptions
 
@@ -43,5 +43,26 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import networkx as nx
+
+# Create a directed graph
+G = nx.DiGraph()
+
+# Add edges (links between pages)
+# Example: Page A links to Page B and Page C
+edges = [
+    ("A", "B"),
+    ("A", "C"),
+    ("B", "C"),
+    ("C", "A"),
+    ("C", "B")
+]
+G.add_edges_from(edges)
+
+# Calculate PageRank
+pagerank = nx.pag
+```
 

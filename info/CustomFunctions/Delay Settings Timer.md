@@ -23,7 +23,8 @@ Function-based - Provides reusable functions
 
 ## Dependencies
 
-No external dependencies identified.
+- `tkinter`
+- `messagebox`
 
 ## Function Descriptions
 
@@ -43,5 +44,16 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import tkinter as tk
+from tkinter import messagebox, ttk
+
+def show_instructions():
+    instructions = """
+    --------------------------------------------------------------------
+    "Set Delay Counter (Sec.)" = This is a delay that only waits for a set amount of time. This is a flat wait.
+    -----
+```
 

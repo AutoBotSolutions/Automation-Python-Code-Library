@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `sys`
 
 ## Function Descriptions
 
@@ -43,5 +43,12 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import sys
+     print("This will run.")
+     sys.exit()
+     print("This will not run.")
+```
 

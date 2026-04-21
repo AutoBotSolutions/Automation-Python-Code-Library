@@ -27,7 +27,8 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- add_list_to_list - Parameters: list1, list2. Performs a specific operation.
+- add_list_to_list - Parameters: list1, list2. Performs a specific operation.
 
 ## Functions
 

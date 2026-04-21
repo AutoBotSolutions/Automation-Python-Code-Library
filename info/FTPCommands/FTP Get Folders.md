@@ -23,7 +23,8 @@ Function-based - Provides reusable functions
 
 ## Dependencies
 
-No external dependencies identified.
+- `ftplib`
+- `FTP`
 
 ## Function Descriptions
 
@@ -43,5 +44,20 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from ftplib import FTP
+
+def list_folders(ftp, path="."):
+    """
+    List folders in the given path on the FTP server.
+    :param ftp: FTP connection object
+    :param path: Path to list folders from
+    :return: List of folder names
+    """
+    folders = []
+    try:
+        # List all items in the 
+```
 

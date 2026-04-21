@@ -23,7 +23,9 @@ Function-based - Provides reusable functions
 
 ## Dependencies
 
-No external dependencies identified.
+- `default`
+- `email`
+- `imaplib`
 
 ## Function Descriptions
 
@@ -43,5 +45,17 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import imaplib
+import email
+from email.policy import default
+
+def get_email_body_at_position(position, email_server, email_user, email_password, mailbox="INBOX"):
+    try:
+        # Connect to the email server
+        mail = imaplib.IMAP4_SSL(email_server)
+        mail.login(email_user, email_passwo
+```
 

@@ -23,7 +23,9 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `pathlib`
+- `os`
+- `Path`
 
 ## Function Descriptions
 
@@ -43,5 +45,16 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import os
+   from pathlib import Path
+
+   # Using os
+   home_dir = os.path.expanduser("~")
+
+   # Using Pathlib
+   home_dir_pathlib = Path.home()
+```
 

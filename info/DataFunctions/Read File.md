@@ -43,5 +43,14 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Open the file in read mode and store its contents in a variable
+with open("filename.txt", "r") as file:
+    file_contents = file.read()
+
+# Print the variable to verify the contents
+print(file_contents)
+```
 

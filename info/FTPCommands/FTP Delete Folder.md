@@ -23,7 +23,8 @@ Function-based - Provides reusable functions
 
 ## Dependencies
 
-No external dependencies identified.
+- `ftplib`
+- `FTP`
 
 ## Function Descriptions
 
@@ -43,5 +44,19 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from ftplib import FTP
+
+def delete_folder(ftp, folder_path):
+    try:
+        # List the contents of the folder
+        for item in ftp.nlst(folder_path):
+            try:
+                # Attempt to delete the item (file)
+                ftp.delete(item)
+            except Exception as e:
+        
+```
 

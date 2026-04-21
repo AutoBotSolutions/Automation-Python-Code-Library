@@ -43,5 +43,15 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Define a list
+my_list = [1, 2, 3, 4, 5]
+
+# Set the third position (index 2) to a new value
+my_list[2] = 10
+
+print(my_list)  # Output: [1, 2, 10, 4, 5]
+```
 

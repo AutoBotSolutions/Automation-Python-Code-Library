@@ -23,7 +23,9 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `requests`
+- `webdriver`
+- `selenium`
 
 ## Function Descriptions
 
@@ -44,5 +46,17 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+import requests
+
+# Set up Selenium
+driver = webdriver.Chrome()  # You can use any browser driver
+driver.get("https://example.com")
+
+# Locate the image element by its XPath, CSS selector, or ID
+img_element = driver.find_element("xpath", "//img[@id='image_id']")  # Adjus
+```
 

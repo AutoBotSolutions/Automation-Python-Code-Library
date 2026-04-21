@@ -23,7 +23,9 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `selenium`
+- `webdriver`
+- `Options`
 
 ## Function Descriptions
 
@@ -45,5 +47,16 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+# Set up Chrome options
+chrome_options = Options()
+chrome_options.add_argument("--headless")  # Enable headless mode
+chrome_options.add_argument("--disable-gpu")  # Disable GPU (for Windows OS)
+chrome_options.add_a
+```
 

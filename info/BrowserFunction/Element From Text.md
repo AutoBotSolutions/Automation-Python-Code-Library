@@ -23,7 +23,9 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `selenium`
+- `webdriver`
+- `By`
 
 ## Function Descriptions
 
@@ -44,5 +46,16 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+# Initialize the WebDriver (e.g., Chrome)
+driver = webdriver.Chrome()  # Make sure to have the ChromeDriver installed and accessible
+
+# Open the web page
+driver.get("https://example.com")  # Replace with the URL of the page 
+```
 

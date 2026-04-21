@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `webdriver`
+- `selenium`
 
 ## Function Descriptions
 
@@ -45,5 +46,21 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+
+# Launch the browser
+driver = webdriver.Chrome()
+
+# Open two tabs/windows for example purposes
+driver.get("https://example.com")
+driver.execute_script("window.open('https://google.com');")
+
+# Get all window handles
+window_handles = driver.window_handles
+
+# Switch to t
+```
 

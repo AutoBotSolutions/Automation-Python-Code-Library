@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- is_element_present - Parameters: driver, by, value. Performs a specific operation.
 
 ## Functions
 

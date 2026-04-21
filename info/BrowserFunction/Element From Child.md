@@ -23,7 +23,9 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `selenium`
+- `webdriver`
+- `By`
 
 ## Function Descriptions
 
@@ -44,5 +46,19 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+# Setup the webdriver (e.g., for Chrome)
+driver = webdriver.Chrome()
+
+# Open a website or navigate to the desired URL
+driver.get('https://example.com')
+
+# Locate the parent element
+parent_element = driver.find_element(By.ID,
+```
 

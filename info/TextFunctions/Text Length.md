@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `random`
+- `string`
 
 ## Function Descriptions
 
@@ -43,5 +44,19 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import random
+import string
+
+# Generate a random string of a specific length, e.g., 10 characters
+random_string = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+
+# Print the random string
+print("Random String:", random_string)
+
+# Print the length of the random string
+print("Leng
+```
 

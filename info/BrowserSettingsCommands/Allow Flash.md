@@ -23,7 +23,10 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `selenium`
+- `Service`
+- `webdriver`
+- `Options`
 
 ## Function Descriptions
 
@@ -44,5 +47,17 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+   from selenium.webdriver.chrome.service import Service
+   from selenium.webdriver.chrome.options import Options
+
+   # Configure Chrome options
+   chrome_options = Options()
+   prefs = {
+       "profile.default_content_setting_values.plugins": 1,  # Enable plugins
+   
+```
 

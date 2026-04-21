@@ -43,5 +43,14 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+my_dict = {"key1": "value1", "key2": "value2"}
+
+if "key1" in my_dict:
+    print("Key exists!")
+else:
+    print("Key does not exist.")
+```
 

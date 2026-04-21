@@ -43,5 +43,11 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+my_list = [1, 2, 3, 4, 3]
+my_list.remove(3)  # Removes the first occurrence of 3
+print(my_list)  # Output: [1, 2, 4, 3]
+```
 

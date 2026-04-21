@@ -43,5 +43,15 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+my_list = [1, 2, 3, 4, 5]
+
+# Get the first n elements
+n = 3
+first_n = my_list[:n]
+
+print(first_n)  # Output: [1, 2, 3]
+```
 

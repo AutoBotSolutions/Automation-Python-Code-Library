@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `ttk`
+- `tkinter`
 
 ## Function Descriptions
 
@@ -43,5 +44,21 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import tkinter as tk
+from tkinter import ttk
+
+# Create the main application window
+root = tk.Tk()
+root.title("UI Stat Monitors")
+root.geometry("600x400")
+
+# Create a frame to hold all the monitors
+stats_frame = ttk.Frame(root, padding=10)
+stats_frame.grid(row=0, column=0, sticky="nsew")
+
+# Define mo
+```
 

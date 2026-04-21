@@ -23,7 +23,8 @@ Function-based - Provides reusable functions with standalone execution capabilit
 
 ## Dependencies
 
-No external dependencies identified.
+- `a`
+- `our`
 
 ## Function Descriptions
 
@@ -43,5 +44,16 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Sample function to get the email body at a specific position
+def get_email_body(emails, position):
+    """
+    Retrieve the email body from a list of email strings.
+
+    Args:
+        emails (list of str): List containing email contents as strings.
+        position (int): Position index of the ema
+```
 

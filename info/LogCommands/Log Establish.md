@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `logging`
 
 ## Function Descriptions
 
@@ -43,5 +43,17 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import logging
+
+# Configure the logging
+logging.basicConfig(
+    level=logging.DEBUG,  # Set the threshold for what messages should be logged
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",  # Log format
+    handlers=[
+        logging.FileHandler("app.log"),  # Log to a file
+     
+```
 

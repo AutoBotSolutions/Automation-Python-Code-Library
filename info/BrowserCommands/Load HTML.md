@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `webdriver`
+- `selenium`
 
 ## Function Descriptions
 
@@ -44,5 +45,22 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+
+# Path to the local HTML file
+file_path = "/path/to/your/file.html"
+
+# Initialize the WebDriver (e.g., Chrome)
+driver = webdriver.Chrome()
+
+# Load the local HTML file
+driver.get(f"file://{file_path}")
+
+# Perform actions on the page
+# ...
+driver.quit()
+```
 

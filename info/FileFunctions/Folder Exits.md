@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `os`
 
 ## Function Descriptions
 
@@ -43,5 +43,18 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import os
+
+# Specify the directory path
+directory_path = '/path/to/your/directory'
+
+# Check if 'python' folder exists
+if os.path.isdir(os.path.join(directory_path, 'python')):
+    print("'python' folder exists.")
+else:
+    print("'python' folder does not exist.")
+```
 

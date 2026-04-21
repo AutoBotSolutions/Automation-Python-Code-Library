@@ -43,5 +43,11 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Appending text to a file
+with open('filename.txt', 'a') as file:
+    file.write('This text will be appended to the file.\n')
+```
 

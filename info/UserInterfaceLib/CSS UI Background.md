@@ -23,7 +23,9 @@ Object-oriented - Provides classes and methods with standalone execution capabil
 
 ## Dependencies
 
-No external dependencies identified.
+- `sys`
+- `PyQt5`
+- `QtWidgets`
 
 ## Function Descriptions
 
@@ -43,5 +45,20 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from PyQt5 import QtWidgets
+import sys
+
+class MainWindow(QtWidgets.QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle("Desktop UI with Background")
+        self.setGeometry(100, 100, 800, 600)
+
+        # Set the background image using CSS
+        self.setSt
+```
 

@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `webdriver`
+- `selenium`
 
 ## Function Descriptions
 
@@ -45,5 +46,19 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+
+# Example setup, replace 'your_driver_path' with the path to your driver
+driver_path = 'your_driver_path'
+driver = webdriver.Chrome(driver_path)
+
+# Open a page
+driver.get("https://example.com")
+
+# Get the page source and store it in a variable
+page_source = driver.pag
+```
 

@@ -23,7 +23,9 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `Proxy`
+- `webdriver`
+- `selenium`
 
 ## Function Descriptions
 
@@ -44,5 +46,21 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+from selenium.webdriver.common.proxy import Proxy, ProxyType
+
+# Define your proxy settings
+my_proxy = "123.45.67.89:8080"
+
+# Setup Proxy
+proxy = Proxy()
+proxy.proxy_type = ProxyType.MANUAL
+proxy.http_proxy = my_proxy
+proxy.ssl_proxy = my_proxy
+
+# Add the proxy to Chrom
+```
 

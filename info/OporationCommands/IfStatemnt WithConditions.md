@@ -43,5 +43,20 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Variables for demonstration
+a = 5
+b = 10
+c = None
+my_list = [1, 2, 3, 4, 5]
+
+# If statement with all conditions
+if (a == 5                # Equality check
+    and b != 5            # Inequality check
+    and b > a             # Greater than check
+    and a < b             # Less than check
+    and
+```
 

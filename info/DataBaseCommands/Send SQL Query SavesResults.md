@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `the`
+- `sqlite3`
 
 ## Function Descriptions
 
@@ -43,5 +44,19 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import sqlite3
+
+# Establish a connection to the database
+conn = sqlite3.connect('example.db')
+cursor = conn.cursor()
+
+# Step 1: Write and execute the SQL query
+query = "SELECT * FROM your_source_table WHERE column_name = 'some_value';"
+cursor.execute(query)
+
+# Step 2: Fetch all results from the quer
+```
 

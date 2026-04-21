@@ -27,7 +27,31 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- basic_window_example - Performs a specific operation.
+- button_click - Performs a specific operation.
+- widgets_example - Performs a specific operation.
+- get_name - Performs a specific operation.
+- print_selection - Performs a specific operation.
+- ttk_widgets_example - Performs a specific operation.
+- greet - Performs a specific operation.
+- show_selection - Performs a specific operation.
+- start_progress - Performs a specific operation.
+- geometry_managers_example - Performs a specific operation.
+- dialogs_example - Performs a specific operation.
+- show_info - Performs a specific operation.
+- show_warning - Performs a specific operation.
+- show_error - Performs a specific operation.
+- ask_question - Performs a specific operation.
+- open_file - Performs a specific operation.
+- save_file - Performs a specific operation.
+- ask_name - Performs a specific operation.
+- ask_integer - Performs a specific operation.
+- canvas_example - Performs a specific operation.
+- draw_random_circle - Performs a specific operation.
+- menu_example - Performs a specific operation.
+- event_binding_example - Performs a specific operation.
+- mouse_click - Parameters: event. Performs a specific operation.
+- key_press - Parameters: event. Performs a specific operation.
 
 ## Functions
 

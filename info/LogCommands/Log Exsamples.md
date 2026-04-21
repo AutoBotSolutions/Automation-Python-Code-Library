@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `logging`
 
 ## Function Descriptions
 
@@ -43,5 +43,15 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import logging
+
+# Set the logging level and format
+logging.basicConfig(level=logging.INFO)
+logging.info("This is an info message")
+logging.warning("This is a warning message")
+logging.error("This is an error message")
+```
 

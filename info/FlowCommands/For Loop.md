@@ -43,5 +43,11 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Looping 100 times
+for i in range(100):
+    print(f"Iteration number: {i+1}")
+```
 

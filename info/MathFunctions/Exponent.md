@@ -43,5 +43,13 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Basic usage
+x = 2
+y = 3
+result = x ** y  # 2 raised to the power of 3
+print(f"{x} raised to the power {y} is {result}")  # Output: 8
+```
 

@@ -43,5 +43,13 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+my_list = [1, 2, 3, 4, 5]
+current_index = 2  # Assuming we're at index 2
+if current_index + 1 < len(my_list):
+    next_item = my_list[current_index + 1]
+    print(next_item)  # Output: 4
+```
 

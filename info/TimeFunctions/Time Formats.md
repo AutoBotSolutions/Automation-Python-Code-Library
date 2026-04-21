@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `datetime`
 
 ## Function Descriptions
 
@@ -43,5 +43,16 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from datetime import datetime
+
+# Current date and time
+now = datetime.now()
+
+# Format the time using strftime
+formatted_time = now.strftime("%Y-%m-%d %H:%M:%S")
+print(formatted_time)  # Output: e.g., 2023-10-15 14:30:59
+```
 

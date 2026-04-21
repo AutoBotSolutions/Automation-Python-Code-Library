@@ -43,5 +43,18 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Example table (2D structure)
+table = [
+    [1, 'Alice', 25],
+    [2, 'Bob', 30],
+    [3, 'Charlie', 22]
+]
+
+# Convert rows of the table to a Python list
+rows_as_list = [row for row in table]
+print(rows_as_list)
+```
 

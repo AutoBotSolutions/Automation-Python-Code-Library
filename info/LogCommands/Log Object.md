@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `logging`
 
 ## Function Descriptions
 
@@ -43,5 +43,20 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import logging
+
+# Create a logger object
+logger = logging.getLogger("my_logger")
+
+# Set the severity level (default is WARNING)
+logger.setLevel(logging.DEBUG)
+
+# Create a console handler (for output to terminal)
+console_handler = logging.StreamHandler()
+
+# Create a file handler (for output to a file
+```
 

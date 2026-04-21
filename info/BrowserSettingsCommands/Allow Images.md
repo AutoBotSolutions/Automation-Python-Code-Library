@@ -23,7 +23,9 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `selenium`
+- `webdriver`
+- `Options`
 
 ## Function Descriptions
 
@@ -45,5 +47,19 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+# Set up Chrome options
+chrome_options = Options()
+prefs = {
+    "profile.managed_default_content_settings.images": 1  # 1 permits images to load
+}
+chrome_options.add_experimental_option("prefs", prefs)
+
+# Initiali
+```
 

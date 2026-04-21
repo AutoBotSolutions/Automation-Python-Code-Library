@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `time`
 
 ## Function Descriptions
 
@@ -43,5 +43,13 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import time
+
+print("Before pause")
+time.sleep(5)  # Pauses execution for 5 seconds
+print("After pause")
+```
 

@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `re`
 
 ## Function Descriptions
 
@@ -44,5 +44,11 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import re
+
+result = re.sub(pattern, replacement, string, count=0, flags=0)
+```
 

@@ -43,5 +43,17 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Define condition 1 and condition 2
+condition_one = True  # Replace with your actual condition
+condition_two = False  # Replace with your actual condition
+
+# Set the variable 'both'
+both = condition_one and condition_two
+
+# Print the result to check
+print(both)
+```
 

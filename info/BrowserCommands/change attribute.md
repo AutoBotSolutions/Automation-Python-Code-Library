@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `webdriver`
+- `selenium`
 
 ## Function Descriptions
 
@@ -44,5 +45,21 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+
+# Set up WebDriver
+driver = webdriver.Chrome()
+
+# Open a URL
+driver.get('https://example.com')
+
+# Find the element you want to modify
+element = driver.find_element('id', 'myElementId')
+
+# Change an attribute (e.g., modify the 'value' attribute)
+driver.execute_script("
+```
 

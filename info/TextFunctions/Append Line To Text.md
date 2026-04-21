@@ -43,5 +43,17 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# File path to the text file
+file_path = "example.txt"
+
+# Line you want to append
+new_line = "This is the new line of text.\n"
+
+# Open the file in append mode and write the new line
+with open(file_path, "a") as file:
+    file.write(new_line)
+```
 

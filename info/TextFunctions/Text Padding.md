@@ -43,5 +43,18 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Left padding (right justify)
+text = "Hello"
+padded_text = text.rjust(10)  # Pad with spaces to make a string of width 10
+print(f"'{padded_text}'")  # Output: '     Hello'
+
+# Right padding (left justify)
+padded_text = text.ljust(10)
+print(f"'{padded_text}'")  # Output: 'Hello     '
+
+# Centered padd
+```
 

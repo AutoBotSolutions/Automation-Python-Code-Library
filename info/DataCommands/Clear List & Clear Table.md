@@ -43,5 +43,19 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Example list
+my_list = [1, 2, 3, 4, 5]
+
+# Method 1: Using clear()
+my_list.clear()
+
+# Method 2: Reassign to an empty list
+my_list = []
+
+# Method 3: Using slice assignment
+my_list[:] = []
+```
 

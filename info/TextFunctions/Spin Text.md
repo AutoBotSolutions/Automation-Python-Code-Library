@@ -23,7 +23,7 @@ Function-based - Provides reusable functions
 
 ## Dependencies
 
-No external dependencies identified.
+- `random`
 
 ## Function Descriptions
 
@@ -43,5 +43,20 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import random
+
+def spin_text(text):
+    spun_text = text
+    # Define synonyms or alternate phrases
+    synonyms = {
+        "hello": ["hi", "hey", "greetings"],
+        "world": ["earth", "globe", "planet"],
+        "python": ["programming language", "snake", "tool"]
+    }
+
+    # Loop through the s
+```
 

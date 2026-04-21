@@ -43,5 +43,13 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+list1 = [1, 2, 3, 4, 5]
+list2 = [2, 4]
+
+result = [item for item in list1 if item not in list2]
+print(result)  # Output: [1, 3, 5]
+```
 

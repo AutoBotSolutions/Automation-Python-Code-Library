@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `Fraction`
+- `fractions`
 
 ## Function Descriptions
 
@@ -43,5 +44,22 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from fractions import Fraction
+
+# Representing ratios
+ratio1 = Fraction(2, 5)  # 2/5
+ratio2 = Fraction(3, 7)  # 3/7
+
+# Arithmetic with ratios
+sum_ratio = ratio1 + ratio2
+difference_ratio = ratio1 - ratio2
+product_ratio = ratio1 * ratio2
+division_ratio = ratio1 / ratio2
+
+print("Sum:", sum_ratio)
+prin
+```
 

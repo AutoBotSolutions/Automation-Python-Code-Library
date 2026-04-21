@@ -43,5 +43,19 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Define the variable with some random text
+contains = "This is some random text used for testing."
+
+# Define your query
+query = "random text"
+
+# Check if the query is contained in the `contains` variable
+if query in contains:
+    print(f"The query '{query}' was found in the text.")
+else:
+    print(
+```
 

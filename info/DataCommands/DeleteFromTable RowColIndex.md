@@ -43,5 +43,21 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Sample table
+table = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+# Deleting a specific row by index (e.g., the second row, index 1)
+row_index = 1
+del table[row_index]
+
+# Output
+print(table)  # [[1, 2, 3], [7, 8, 9]]
+```
 

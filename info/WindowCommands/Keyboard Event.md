@@ -23,7 +23,10 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `Keys`
+- `selenium`
+- `webdriver`
+- `By`
 
 ## Function Descriptions
 
@@ -44,5 +47,17 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+
+# Set up the WebDriver
+driver = webdriver.Chrome()  # Or use any other browser's WebDriver
+driver.get('https://example.com')  # Replace with the URL of your choice
+
+# Find an i
+```
 

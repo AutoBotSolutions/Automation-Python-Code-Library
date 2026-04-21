@@ -43,5 +43,12 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Example
+my_set = {1, 2, 3}
+my_list = list(my_set)
+print(my_list)  # Output: [1, 2, 3]
+```
 

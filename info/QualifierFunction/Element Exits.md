@@ -23,7 +23,9 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `NoSuchElementException`
+- `webdriver`
+- `selenium`
 
 ## Function Descriptions
 
@@ -44,5 +46,19 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+
+# Initialize the web driver (use the appropriate driver for your browser)
+driver = webdriver.Chrome()
+
+# URL of the page to search
+url = "https://example.com"
+driver.get(url)
+
+# Default value for the 'exist
+```
 

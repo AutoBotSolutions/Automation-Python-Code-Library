@@ -43,5 +43,18 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Assume this 'table' is a 2D list (a list of lists).
+table = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+# Assign table to a variable
+all_rows = table  # Keeps all rows as a list of lists
+print(all_rows)
+```
 

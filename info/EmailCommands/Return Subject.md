@@ -23,7 +23,10 @@ Function-based - Provides reusable functions
 
 ## Dependencies
 
-No external dependencies identified.
+- `a`
+- `BytesParser`
+- `policy`
+- `email`
 
 ## Function Descriptions
 
@@ -43,5 +46,18 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import email
+from email import policy
+from email.parser import BytesParser
+
+# Function to get email subject from a file at a given position
+def get_email_subject_at_position(file_path, position):
+    try:
+        # Open the file and read its content
+        with open(file_path, 'rb') as f:
+         
+```
 

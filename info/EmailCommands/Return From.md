@@ -23,7 +23,8 @@ Function-based - Provides reusable functions
 
 ## Dependencies
 
-No external dependencies identified.
+- `default`
+- `email`
 
 ## Function Descriptions
 
@@ -43,5 +44,18 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import email
+from email.policy import default
+
+def get_email_body(emails, position):
+    """
+    Retrieves the body text of the email specified by its position.
+
+    Args:
+        emails (list): A list of email raw strings or email.message.Message objects.
+        position (int): The position of the
+```
 

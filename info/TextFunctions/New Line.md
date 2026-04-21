@@ -43,5 +43,15 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Simple use of \n in a string
+message = "Hello,\nWorld!"
+print(message)
+
+# Output:
+# Hello,
+# World!
+```
 

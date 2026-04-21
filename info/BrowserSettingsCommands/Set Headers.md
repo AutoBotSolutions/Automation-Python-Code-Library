@@ -23,7 +23,10 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `DesiredCapabilities`
+- `Service`
+- `webdriver`
+- `selenium`
 
 ## Function Descriptions
 
@@ -45,5 +48,16 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
+# Enable DevTools Protocol
+options = webdriver.ChromeOptions()
+options.add_argument("--remote-debugging-port=9222")
+service = Service("
+```
 

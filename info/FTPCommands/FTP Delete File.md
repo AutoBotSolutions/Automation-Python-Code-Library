@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `ftplib`
+- `FTP`
 
 ## Function Descriptions
 
@@ -43,5 +44,20 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from ftplib import FTP
+
+# FTP server details
+ftp_server = "ftp.example.com"
+username = "your_username"
+password = "your_password"
+file_to_delete = "file_to_delete.txt"  # File name with path if needed
+
+try:
+    # Connect to FTP server
+    ftp = FTP(ftp_server)
+    ftp.login(user=username, passwd=pas
+```
 

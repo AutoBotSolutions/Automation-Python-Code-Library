@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `webdriver`
+- `selenium`
 
 ## Function Descriptions
 
@@ -45,5 +46,21 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+
+# Initialize the WebDriver (choose the browser you're automating)
+driver = webdriver.Chrome()
+
+# Open a website
+driver.get("https://example.com")
+
+# Clear all cookies
+driver.delete_all_cookies()
+
+# Optionally, verify cookies are cleared
+print("Cookies after deletion:"
+```
 

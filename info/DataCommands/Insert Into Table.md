@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `sqlite3`
 
 ## Function Descriptions
 
@@ -43,5 +43,16 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Example of inserting data into an SQLite table without external libraries
+
+import sqlite3
+
+# Connect to a database file (or create it if it doesn't exist)
+connection = sqlite3.connect("example.db")  # Replace 'example.db' with your database file
+
+# Create a cursor object to interact with the datab
+```
 

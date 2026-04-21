@@ -43,5 +43,12 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Clear all user-defined variables
+for name in dir():
+    if not name.startswith('_'):
+        del globals()[name]
+```
 

@@ -23,7 +23,10 @@ Function-based - Provides reusable functions with standalone execution capabilit
 
 ## Dependencies
 
-No external dependencies identified.
+- `sys`
+- `os`
+- `signal`
+- `psutil`
 
 ## Function Descriptions
 
@@ -43,5 +46,21 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import os
+import psutil
+import signal
+import sys
+
+def close_software(process_name):
+    """
+    Closes the software and any zombie processes tied to it.
+
+    :param process_name: Name of the process to terminate (use executable name).
+    """
+    try:
+        print(f"Attempting to gracefully close {
+```
 

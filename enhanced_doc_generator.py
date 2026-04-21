@@ -34,7 +34,7 @@ def analyze_code_functionality(content, filename):
     code_block_content = []
     
     for line in lines:
-        if line.strip().startswith('```python'):
+        if '```python' in line.strip():
             in_code_block = True
             continue
         elif line.strip() == '```' and in_code_block:
@@ -157,7 +157,48 @@ def analyze_code_functionality(content, filename):
                 if len(code_snippets) >= 5:
                     break
     except:
-        pass
+        # If AST parsing fails, try to extract functions using regex
+        func_pattern = r'def\s+(\w+)\s*\(([^)]*)\):'
+        matches = re.findall(func_pattern, content_to_analyze)
+        for func_name, params in matches:
+            desc = f"{func_name} - "
+            if params:
+                desc += f"Parameters: {params}. "
+            if func_name.lower() in ['connect', 'open', 'start', 'begin']:
+                desc += "Initializes a connection or process."
+            elif func_name.lower() in ['close', 'end', 'stop', 'shutdown']:
+                desc += "Terminates or closes a connection or process."
+            elif func_name.lower() in ['get', 'fetch', 'retrieve', 'read']:
+                desc += "Retrieves data or information."
+            elif func_name.lower() in ['set', 'update', 'modify', 'change']:
+                desc += "Modifies or updates data or settings."
+            elif func_name.lower() in ['send', 'post', 'submit']:
+                desc += "Sends data or requests to a target."
+            elif func_name.lower() in ['delete', 'remove']:
+                desc += "Deletes or removes data or resources."
+            elif func_name.lower() in ['create', 'add', 'insert']:
+                desc += "Creates or adds new data or resources."
+            elif func_name.lower() in ['execute', 'run', 'perform']:
+                desc += "Executes an action or command."
+            else:
+                desc += "Performs a specific operation."
+            analysis['function_descriptions'].append(desc)
+    
+    # If code blocks were extracted, add them as code examples
+    if code_blocks and not code_snippets:
+        code_snippets.append({
+            'name': 'Example Code',
+            'code': code_blocks[0][:300]
+        })
+        
+        # Extract dependencies from code block
+        import_pattern = r'import\s+(\w+)'
+        from_pattern = r'from\s+(\w+)'
+        imports = re.findall(import_pattern, code_blocks[0])
+        from_imports = re.findall(from_pattern, code_blocks[0])
+        all_imports = list(set(imports + from_imports))
+        if all_imports:
+            analysis['dependencies'] = all_imports
     
     analysis['code_examples'] = code_snippets
     
@@ -219,12 +260,13 @@ def generate_enhanced_markdown(file_path, analysis, basic_info):
         md += "Usage pattern not identified.\n\n"
     
     # Dependencies
-    if basic_info['imports']:
+    dependencies = analysis.get('dependencies', []) or basic_info['imports']
+    if dependencies:
         md += "## Dependencies\n\n"
-        for imp in basic_info['imports'][:15]:
+        for imp in dependencies[:15]:
             md += f"- `{imp}`\n"
-        if len(basic_info['imports']) > 15:
-            md += f"- ... and {len(basic_info['imports']) - 15} more\n"
+        if len(dependencies) > 15:
+            md += f"- ... and {len(dependencies) - 15} more\n"
         md += "\n"
     else:
         md += "## Dependencies\n\n"

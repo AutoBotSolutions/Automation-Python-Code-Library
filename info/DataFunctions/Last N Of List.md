@@ -43,5 +43,15 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# To get the last n elements:
+n = 3  # Change this to the number of last elements you want
+last_n_elements = my_list[-n:]
+
+print(last_n_elements)  # Output: [7, 8, 9]
+```
 

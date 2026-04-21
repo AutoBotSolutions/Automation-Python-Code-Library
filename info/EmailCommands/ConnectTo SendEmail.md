@@ -27,7 +27,10 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- send_email - Parameters: smtp_server, port, username, password, to_email, subject, body. Performs a specific operation.
+- send_email - Parameters: smtp_server, port, username, password, to_email, subject, body, use_ssl=False. Performs a specific operation.
+- send_email - Parameters: .... Performs a specific operation.
+- send_email - Parameters: smtp_server, port, username, password, to_email, subject, body, use_ssl=False, is_html=False. Performs a specific operation.
 
 ## Functions
 

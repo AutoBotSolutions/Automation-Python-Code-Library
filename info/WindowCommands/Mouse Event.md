@@ -23,7 +23,9 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `ActionChains`
+- `webdriver`
+- `selenium`
 
 ## Function Descriptions
 
@@ -44,5 +46,17 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+   from selenium.webdriver.common.action_chains import ActionChains
+
+   driver = webdriver.Chrome()
+   driver.get("URL_TO_YOUR_PAGE")
+
+   element = driver.find_element("identifier", "value")  # Replace with actual identifier and value
+   actions = ActionChains(driver)
+
+```
 

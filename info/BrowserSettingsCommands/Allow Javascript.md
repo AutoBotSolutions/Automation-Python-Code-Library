@@ -23,7 +23,10 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `selenium`
+- `Service`
+- `webdriver`
+- `Options`
 
 ## Function Descriptions
 
@@ -46,5 +49,17 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+
+# Configure Chrome options
+chrome_options = Options()
+chrome_options.add_argument("--enable-javascript")  # Default in Chrome, but can be specified
+
+# Start Web
+```
 

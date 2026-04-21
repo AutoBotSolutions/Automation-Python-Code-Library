@@ -43,5 +43,21 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Example table represented as a 2D list
+table = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    [10, 11, 12]
+]
+
+# Calculate total rows
+total_rows = len(table)
+
+# Print the total rows
+print(f"Total rows in the table: {total_rows}")
+```
 

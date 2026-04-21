@@ -23,7 +23,7 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `os`
 
 ## Function Descriptions
 
@@ -43,5 +43,18 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import os
+
+# Path to the file
+file_path = "path/to/your/file.txt"
+
+# Check if the file exists
+if os.path.exists(file_path):
+    print("File exists.")
+else:
+    print("File does not exist.")
+```
 

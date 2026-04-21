@@ -43,5 +43,21 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Example string
+text = "hello World! Let's Change the TEXT casing."
+
+# Changing text casing
+uppercase = text.upper()
+lowercase = text.lower()
+title_case = text.title()
+capitalized = text.capitalize()
+swapped_case = text.swapcase()
+
+print("Original:", text)
+print("Uppercase:", uppercase)
+print("Lowe
+```
 

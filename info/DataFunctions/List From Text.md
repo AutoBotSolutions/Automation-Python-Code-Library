@@ -43,5 +43,16 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Open the file and read its contents
+with open('your_file.txt', 'r') as file:
+    lines = file.readlines()
+
+# Remove any extra whitespace, like newline characters, if needed
+lines = [line.strip() for line in lines]
+
+print(lines)
+```
 

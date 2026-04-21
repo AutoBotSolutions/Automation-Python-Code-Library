@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `webdriver`
+- `selenium`
 
 ## Function Descriptions
 
@@ -44,5 +45,18 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from selenium import webdriver
+
+# Initialize the Selenium WebDriver (e.g., Chrome)
+driver = webdriver.Chrome()  # Or use a different driver like Firefox, Edge, etc.
+
+# Navigate to a webpage
+driver.get('https://example.com')
+
+# Get the current page's document text
+page_text = driver.execute_script("r
+```
 

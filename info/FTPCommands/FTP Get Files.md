@@ -23,7 +23,8 @@ Function-based - Provides reusable functions
 
 ## Dependencies
 
-No external dependencies identified.
+- `ftplib`
+- `FTP`
 
 ## Function Descriptions
 
@@ -43,5 +44,17 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+from ftplib import FTP
+
+def download_file_from_ftp(server, username, password, remote_file_path, local_file_path):
+    try:
+        # Connect to the FTP server
+        ftp = FTP(server)
+        ftp.login(user=username, passwd=password)
+        
+        # Navigate to the directory containing the file
+```
 

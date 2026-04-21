@@ -43,5 +43,10 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+result = 2 / 2
+print(result)  # Output: 1.0
+```
 

@@ -23,7 +23,9 @@ Function-based - Provides reusable functions
 
 ## Dependencies
 
-No external dependencies identified.
+- `BeautifulSoup`
+- `requests`
+- `bs4`
 
 ## Function Descriptions
 
@@ -48,5 +50,16 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import requests
+from bs4 import BeautifulSoup
+
+def get_backlinks(target_url, search_engine="https://www.google.com/search"):
+    # Simulate a search for backlinks using the link: operator
+    search_query = f"link:{target_url}"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win
+```
 

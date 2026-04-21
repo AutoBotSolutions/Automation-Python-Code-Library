@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- create_proxy_extension - Parameters: proxy_host, proxy_port, proxy_username, proxy_password. Performs a specific operation.
 
 ## Functions
 

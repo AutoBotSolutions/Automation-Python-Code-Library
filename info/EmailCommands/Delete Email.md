@@ -23,7 +23,8 @@ Usage pattern not identified.
 
 ## Dependencies
 
-No external dependencies identified.
+- `bytes`
+- `imaplib`
 
 ## Function Descriptions
 
@@ -43,5 +44,21 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import imaplib
+
+# Email server credentials
+IMAP_SERVER = "imap.example.com"
+EMAIL_ACCOUNT = "your_email@example.com"
+PASSWORD = "your_password"
+
+try:
+    # Connect to the server
+    mail = imaplib.IMAP4_SSL(IMAP_SERVER)
+    mail.login(EMAIL_ACCOUNT, PASSWORD)
+
+    # Select the mailbox you want to de
+```
 

@@ -43,5 +43,15 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+list1 = [1, 2, 3, 4]
+list2 = [3, 4, 5, 6]
+
+# Find common items
+common_items = list(set(list1) & set(list2))
+
+print(common_items)  # Output: [3, 4]
+```
 

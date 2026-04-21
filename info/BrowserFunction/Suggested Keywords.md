@@ -23,7 +23,12 @@ Function-based - Provides reusable functions
 
 ## Dependencies
 
-No external dependencies identified.
+- `stopwords`
+- `Counter`
+- `word_tokenize`
+- `nltk`
+- `collections`
+- `re`
 
 ## Function Descriptions
 
@@ -43,5 +48,20 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+import re
+from collections import Counter
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+import nltk
+
+# Uncomment the first line to download NLTK stopwords if not already done
+# nltk.download('stopwords')
+# nltk.download('punkt')
+
+def extract_keywords(text, top_n=10):
+    
+```
 

@@ -43,5 +43,21 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### Example Code
+
+```python
+# Define the two values
+value1 = 99
+value2 = 100
+
+# Compare the two values and set the result
+if value1 > value2:
+    comparison = f"{value1} is greater than {value2}"
+elif value1 < value2:
+    comparison = f"{value2} is greater than {value1}"
+else:
+    comparison = "Both values are equal"
+
+# Output
+```
 
