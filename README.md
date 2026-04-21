@@ -86,12 +86,31 @@ CodeLibrary/
 ├── code_library_gui.py              # Main GUI application
 ├── README.md                        # Project documentation
 ├── LICENSE                          # MIT License
-├── CONTRIBUTING.md                  # Contribution guidelines
-├── GITHUB_SETUP.md                  # GitHub upload instructions
-├── GITHUB_2FA_SETUP.md              # 2FA authentication guide
 ├── .gitignore                       # Git ignore rules
 ├── tracking_log.txt                 # Event logs (auto-generated)
 ├── usage_stats.json                 # Usage statistics (auto-generated)
+├── api_requirements.txt             # API dependencies
+├── backend_api.py                   # Backend REST API
+├── docs/                            # Documentation directory
+│   ├── CONTRIBUTING.md              # Contribution guidelines
+│   ├── GITHUB_SETUP.md              # GitHub upload instructions
+│   ├── GITHUB_2FA_SETUP.md          # 2FA authentication guide
+│   ├── INSTALLATION_GUIDE.md        # Cross-platform installation
+│   ├── CHANGELOG.md                 # Version history
+│   ├── SECURITY.md                  # Security policy
+│   ├── CODE_OF_CONDUCT.md           # Community guidelines
+│   ├── API_DOCUMENTATION.md         # API documentation
+│   ├── GUI_SYSTEM.md               # GUI system documentation
+│   ├── CODE_LIBRARY_OVERVIEW.md     # Code library overview
+│   ├── CATEGORIES.md                # Script categories
+│   ├── API_REFERENCE.md             # API reference
+│   └── TROUBLESHOOTING.md           # Troubleshooting guide
+├── installers/                      # Installer scripts
+│   ├── windows_installer.spec       # PyInstaller spec
+│   ├── build_windows.bat            # Windows build script
+│   ├── build_linux.sh               # Linux build script
+│   ├── build_macos.sh               # macOS build script
+│   └── README.md                    # Installer documentation
 └── code-library/                    # Automation code library
     ├── AccountFuntions/             # Account-related functions
     ├── BrowserCommands/             # Browser automation commands
