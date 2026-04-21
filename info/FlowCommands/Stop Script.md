@@ -2,7 +2,7 @@
 
 **Path:** `FlowCommands/Stop Script.py`
 
-**Automation Type:** Threading/Multi-processing
+**Automation Type:** General Automation
 **Lines:** 39
 
 ## Purpose
@@ -11,11 +11,11 @@ terminating code execution
 
 ## Library Context
 
-This script is part of the threading library, providing functions for parallel execution, multi-threading, and concurrent task processing.
+This script is part of the general automation library, providing utility functions for common automation tasks.
 
 ## Key Features
 
-- Parallel execution
+No specific features documented.
 
 ## Usage Pattern
 

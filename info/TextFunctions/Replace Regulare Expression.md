@@ -2,7 +2,7 @@
 
 **Path:** `TextFunctions/Replace Regulare Expression.py`
 
-**Automation Type:** Browser Automation
+**Automation Type:** General Automation
 **Lines:** 390
 
 ## Purpose
@@ -11,15 +11,15 @@ python replace regular expression
 
 ## Library Context
 
-This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks.
+This script is part of the general automation library, providing utility functions for common automation tasks.
 
 ## Key Features
 
-- Web browser control
+No specific features documented.
 
 ## Usage Pattern
 
-Object-oriented - Provides classes and methods
+Usage pattern not identified.
 
 ## Dependencies
 

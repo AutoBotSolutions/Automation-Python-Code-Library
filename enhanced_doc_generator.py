@@ -28,6 +28,29 @@ def analyze_code_functionality(content, filename):
     
     lines = content.split('\n')
     
+    # Extract code from markdown code blocks if present
+    code_blocks = []
+    in_code_block = False
+    code_block_content = []
+    
+    for line in lines:
+        if line.strip().startswith('```python'):
+            in_code_block = True
+            continue
+        elif line.strip() == '```' and in_code_block:
+            in_code_block = False
+            if code_block_content:
+                code_blocks.append('\n'.join(code_block_content))
+            code_block_content = []
+        elif in_code_block:
+            code_block_content.append(line)
+    
+    # If code blocks found, use the first one for analysis
+    if code_blocks:
+        content_to_analyze = code_blocks[0]
+    else:
+        content_to_analyze = content
+    
     # Extract purpose from comments and docstrings
     # Handle AI conversation format: "## Me" on line 1, purpose on line 2
     if len(lines) >= 2 and lines[0].strip() == '## Me':
@@ -50,28 +73,28 @@ def analyze_code_functionality(content, filename):
     
     # Detect automation type based on imports and patterns
     selenium_keywords = ['selenium', 'webdriver', 'chrome', 'firefox', 'browser']
-    db_keywords = ['sqlite', 'mysql', 'postgres', 'database', 'sql', 'cursor']
+    db_keywords = ['sqlite', 'mysql', 'postgres', 'database', 'sql', 'cursor', 'imap']
     file_keywords = ['open(', 'read(', 'write(', 'os.path', 'shutil']
     http_keywords = ['requests', 'urllib', 'http', 'post(', 'get(']
     email_keywords = ['smtp', 'email', 'sendmail']
     threading_keywords = ['threading', 'Thread', 'thread']
     
-    if any(kw in content.lower() for kw in selenium_keywords):
+    if any(kw in content_to_analyze.lower() for kw in selenium_keywords):
         analysis['automation_type'] = 'Browser Automation'
         analysis['key_features'].append('Web browser control')
-    elif any(kw in content.lower() for kw in db_keywords):
+    elif any(kw in content_to_analyze.lower() for kw in db_keywords):
         analysis['automation_type'] = 'Database Operations'
         analysis['key_features'].append('Database interaction')
-    elif any(kw in content.lower() for kw in file_keywords):
+    elif any(kw in content_to_analyze.lower() for kw in file_keywords):
         analysis['automation_type'] = 'File Operations'
         analysis['key_features'].append('File system manipulation')
-    elif any(kw in content.lower() for kw in http_keywords):
+    elif any(kw in content_to_analyze.lower() for kw in http_keywords):
         analysis['automation_type'] = 'HTTP Requests'
         analysis['key_features'].append('Web API interaction')
-    elif any(kw in content.lower() for kw in email_keywords):
+    elif any(kw in content_to_analyze.lower() for kw in email_keywords):
         analysis['automation_type'] = 'Email Automation'
         analysis['key_features'].append('Email sending/receiving')
-    elif any(kw in content.lower() for kw in threading_keywords):
+    elif any(kw in content_to_analyze.lower() for kw in threading_keywords):
         analysis['automation_type'] = 'Threading/Multi-processing'
         analysis['key_features'].append('Parallel execution')
     else:
@@ -89,20 +112,20 @@ def analyze_code_functionality(content, filename):
         analysis['external_apis'].extend(matches)
     
     # Extract usage pattern
-    if 'def ' in content:
+    if 'def ' in content_to_analyze:
         analysis['usage_pattern'] = 'Function-based - Provides reusable functions'
-    if 'class ' in content:
+    if 'class ' in content_to_analyze:
         analysis['usage_pattern'] = 'Object-oriented - Provides classes and methods'
-    if 'if __name__' in content:
+    if 'if __name__' in content_to_analyze:
         analysis['usage_pattern'] += ' with standalone execution capability'
     
     # Extract code snippets and function descriptions
     code_snippets = []
     try:
-        tree = ast.parse(content)
+        tree = ast.parse(content_to_analyze)
         for node in ast.walk(tree):
             if isinstance(node, ast.FunctionDef):
-                func_code = ast.get_source_segment(content, node)
+                func_code = ast.get_source_segment(content_to_analyze, node)
                 if func_code and len(func_code) < 500:
                     code_snippets.append({
                         'name': node.name,

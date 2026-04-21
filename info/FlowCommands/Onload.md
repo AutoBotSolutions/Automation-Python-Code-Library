@@ -19,7 +19,7 @@ No specific features documented.
 
 ## Usage Pattern
 
-Object-oriented - Provides classes and methods
+Function-based - Provides reusable functions
 
 ## Dependencies
 
@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- onload - Performs a specific operation.
 
 ## Functions
 
@@ -43,5 +43,12 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### onload
+
+```python
+def onload():
+    print("Window has loaded!")
+    label = tk.Label(root, text="Hello, the window has loaded!", font=("Arial", 16))
+    label.pack(pady=20)
+```
 

@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- check_file_exists - Parameters: ftp, filepath. Performs a specific operation.
 
 ## Functions
 
@@ -43,5 +43,16 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### check_file_exists
+
+```python
+def check_file_exists(ftp, filepath):
+    directory, filename = filepath.rsplit('/', 1)
+    try:
+        ftp.cwd(directory)  # Change to the directory
+        files = ftp.nlst()  # List files in the directory
+        return filename in files  # Check if file exists
+    except Exception as e:
+       
+```
 

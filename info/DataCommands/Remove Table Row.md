@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- remove_row - Parameters: table, row_index. Performs a specific operation.
 
 ## Functions
 
@@ -43,5 +43,13 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### remove_row
+
+```python
+def remove_row(table, row_index):
+    if 0 <= row_index < len(table):
+        del table[row_index]
+    else:
+        print("Invalid row index")
+```
 

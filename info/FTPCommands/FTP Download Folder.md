@@ -19,7 +19,7 @@ This script is part of the file operations library, providing functions for file
 
 ## Usage Pattern
 
-Object-oriented - Provides classes and methods with standalone execution capability
+Function-based - Provides reusable functions with standalone execution capability
 
 ## Dependencies
 
@@ -27,7 +27,8 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- download_ftp_file - Parameters: ftp, remote_filepath, local_filepath. Performs a specific operation.
+- main - Performs a specific operation.
 
 ## Functions
 
@@ -43,5 +44,30 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### download_ftp_file
+
+```python
+def download_ftp_file(ftp, remote_filepath, local_filepath):
+    """
+    Downloads a single file from the FTP server to the local directory.
+    """
+    with open(local_filepath, 'wb') as local_file:
+        ftp.retrbinary(f"RETR {remote_filepath}", local_file.write)
+    print(f"Downloaded: {remote_
+```
+
+### main
+
+```python
+def main():
+    ftp_server = 'ftp.example.com'
+    ftp_user = 'your_username'
+    ftp_password = 'your_password'
+    remote_folder = '/path/to/remote/folder'
+    local_folder = '/path/to/local/folder'
+    
+    ftp = FTP(ftp_server)
+    ftp.login(user=ftp_user, passwd=ftp_password)
+    print(f"Connec
+```
 

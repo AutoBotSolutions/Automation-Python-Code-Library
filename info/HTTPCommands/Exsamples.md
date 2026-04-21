@@ -2,7 +2,7 @@
 
 **Path:** `HTTPCommands/Exsamples.py`
 
-**Automation Type:** Browser Automation
+**Automation Type:** HTTP Requests
 **Lines:** 96
 
 ## Purpose
@@ -11,11 +11,11 @@ examples of all http request, post, get and parameters
 
 ## Library Context
 
-This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks.
+This script is part of the HTTP/Network library, providing functions for making HTTP requests, interacting with web APIs, and handling network communications.
 
 ## Key Features
 
-- Web browser control
+- Web API interaction
 
 ## Usage Pattern
 

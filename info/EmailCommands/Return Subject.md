@@ -2,7 +2,7 @@
 
 **Path:** `EmailCommands/Return Subject.py`
 
-**Automation Type:** Database Operations
+**Automation Type:** File Operations
 **Lines:** 69
 
 ## Purpose
@@ -11,11 +11,11 @@ python return email subject at given position
 
 ## Library Context
 
-This script is part of the database operations library, providing functions for connecting to databases, executing SQL queries, and managing database transactions.
+This script is part of the file operations library, providing functions for file system manipulation including creating, reading, writing, and deleting files and directories.
 
 ## Key Features
 
-- Database interaction
+- File system manipulation
 
 ## Usage Pattern
 

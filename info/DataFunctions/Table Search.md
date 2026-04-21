@@ -2,7 +2,7 @@
 
 **Path:** `DataFunctions/Table Search.py`
 
-**Automation Type:** Database Operations
+**Automation Type:** General Automation
 **Lines:** 169
 
 ## Purpose
@@ -11,15 +11,15 @@ python search table
 
 ## Library Context
 
-This script is part of the database operations library, providing functions for connecting to databases, executing SQL queries, and managing database transactions.
+This script is part of the general automation library, providing utility functions for common automation tasks.
 
 ## Key Features
 
-- Database interaction
+No specific features documented.
 
 ## Usage Pattern
 
-Function-based - Provides reusable functions
+Usage pattern not identified.
 
 ## Dependencies
 

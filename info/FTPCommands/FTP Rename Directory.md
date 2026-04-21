@@ -19,7 +19,7 @@ No specific features documented.
 
 ## Usage Pattern
 
-Object-oriented - Provides classes and methods
+Usage pattern not identified.
 
 ## Dependencies
 

@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- calculate_square - Parameters: number. Performs a specific operation.
 
 ## Functions
 
@@ -43,5 +43,11 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### calculate_square
+
+```python
+def calculate_square(number):
+    """This function calculates the square of a number."""
+    return number ** 2
+```
 

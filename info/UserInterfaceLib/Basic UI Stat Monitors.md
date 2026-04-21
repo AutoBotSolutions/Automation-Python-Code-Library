@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- update_stats - Parameters: self. Performs a specific operation.
 
 ## Functions
 
@@ -43,5 +43,14 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### update_stats
+
+```python
+def update_stats(self):
+        # Example updating stats with dummy data
+        self.cpu_progress['value'] = 45  # Simulating 45% CPU usage
+        self.memory_progress['value'] = 65  # Simulating 65% Memory usage
+        self.disk_progress['value'] = 80  # Simulating 80% Disk usage
+        self.ne
+```
 

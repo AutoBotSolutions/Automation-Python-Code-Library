@@ -2,7 +2,7 @@
 
 **Path:** `DataCommands/Sort Table.py`
 
-**Automation Type:** Database Operations
+**Automation Type:** General Automation
 **Lines:** 111
 
 ## Purpose
@@ -11,11 +11,11 @@ Example table as a list of tuples Sort the table by the first column (id) Sort t
 
 ## Library Context
 
-This script is part of the database operations library, providing functions for connecting to databases, executing SQL queries, and managing database transactions.
+This script is part of the general automation library, providing utility functions for common automation tasks.
 
 ## Key Features
 
-- Database interaction
+No specific features documented.
 
 ## Usage Pattern
 

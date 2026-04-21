@@ -2,7 +2,7 @@
 
 **Path:** `DataFunctions/Object Has Key.py`
 
-**Automation Type:** HTTP Requests
+**Automation Type:** General Automation
 **Lines:** 44
 
 ## Purpose
@@ -11,15 +11,15 @@ python object has key
 
 ## Library Context
 
-This script is part of the HTTP/Network library, providing functions for making HTTP requests, interacting with web APIs, and handling network communications.
+This script is part of the general automation library, providing utility functions for common automation tasks.
 
 ## Key Features
 
-- Web API interaction
+No specific features documented.
 
 ## Usage Pattern
 
-Object-oriented - Provides classes and methods
+Usage pattern not identified.
 
 ## Dependencies
 

@@ -19,7 +19,7 @@ This script is part of the browser automation library, providing functions for c
 
 ## Usage Pattern
 
-Function-based - Provides reusable functions
+Usage pattern not identified.
 
 ## Dependencies
 

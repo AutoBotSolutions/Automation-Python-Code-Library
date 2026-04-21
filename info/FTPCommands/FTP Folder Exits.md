@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- folder_exists - Parameters: ftp, folder_name. Performs a specific operation.
 
 ## Functions
 
@@ -43,5 +43,16 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### folder_exists
+
+```python
+def folder_exists(ftp, folder_name):
+    """Check if a folder exists on the FTP server."""
+    try:
+        ftp.cwd(folder_name)  # Try to change to the directory
+        ftp.cwd('..')  # Change back to the original directory
+        return True
+    except error_perm as e:
+        # Directory doesn'
+```
 

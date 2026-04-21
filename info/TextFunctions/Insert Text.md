@@ -2,7 +2,7 @@
 
 **Path:** `TextFunctions/Insert Text.py`
 
-**Automation Type:** File Operations
+**Automation Type:** General Automation
 **Lines:** 138
 
 ## Purpose
@@ -11,15 +11,15 @@ python insert text
 
 ## Library Context
 
-This script is part of the file operations library, providing functions for file system manipulation including creating, reading, writing, and deleting files and directories.
+This script is part of the general automation library, providing utility functions for common automation tasks.
 
 ## Key Features
 
-- File system manipulation
+No specific features documented.
 
 ## Usage Pattern
 
-Function-based - Provides reusable functions
+Usage pattern not identified.
 
 ## Dependencies
 

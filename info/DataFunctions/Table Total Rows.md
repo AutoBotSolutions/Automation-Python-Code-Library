@@ -2,7 +2,7 @@
 
 **Path:** `DataFunctions/Table Total Rows.py`
 
-**Automation Type:** Database Operations
+**Automation Type:** General Automation
 **Lines:** 27
 
 ## Purpose
@@ -11,11 +11,11 @@ python table total rows without using external lib
 
 ## Library Context
 
-This script is part of the database operations library, providing functions for connecting to databases, executing SQL queries, and managing database transactions.
+This script is part of the general automation library, providing utility functions for common automation tasks.
 
 ## Key Features
 
-- Database interaction
+No specific features documented.
 
 ## Usage Pattern
 

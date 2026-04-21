@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- thread_function - Parameters: my_var. Performs a specific operation.
 
 ## Functions
 
@@ -43,5 +43,10 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### thread_function
+
+```python
+def thread_function(my_var):
+    print(f"The variable value in the thread is: {my_var}")
+```
 

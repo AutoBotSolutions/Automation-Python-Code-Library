@@ -2,7 +2,7 @@
 
 **Path:** `TextFunctions/Find Regex.py`
 
-**Automation Type:** Email Automation
+**Automation Type:** General Automation
 **Lines:** 127
 
 ## Purpose
@@ -11,15 +11,15 @@ python text function find regex
 
 ## Library Context
 
-This script is part of the email automation library, providing functions for sending, receiving, and managing email communications.
+This script is part of the general automation library, providing utility functions for common automation tasks.
 
 ## Key Features
 
-- Email sending/receiving
+No specific features documented.
 
 ## Usage Pattern
 
-Function-based - Provides reusable functions with standalone execution capability
+Function-based - Provides reusable functions
 
 ## Dependencies
 
@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- find_by_regex - Parameters: text, pattern. Performs a specific operation.
 
 ## Functions
 
@@ -43,5 +43,18 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### find_by_regex
+
+```python
+def find_by_regex(text, pattern):
+    """
+    Find all occurrences in the text that match the given regex pattern.
+
+    :param text: The input text to search for matches.
+    :param pattern: The regex pattern to search for.
+    :return: A list of all matched strings.
+    """
+    try:
+        matches
+```
 

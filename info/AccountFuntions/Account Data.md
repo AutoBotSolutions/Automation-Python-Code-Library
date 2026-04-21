@@ -27,7 +27,8 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- initialize_db - Performs a specific operation.
+- store_account_info - Parameters: account_info. Performs a specific operation.
 
 ## Functions
 
@@ -48,5 +49,30 @@ This script interacts with external services:
 
 ## Code Examples
 
-No code examples available.
+### initialize_db
+
+```python
+def initialize_db():
+    connection = sqlite3.connect("accounts.db")
+    cursor = connection.cursor()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS accounts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT UNIQUE,
+            email TEXT UNIQUE,
+            pa
+```
+
+### store_account_info
+
+```python
+def store_account_info(account_info):
+    connection = sqlite3.connect("accounts.db")
+    cursor = connection.cursor()
+    try:
+        cursor.execute("""
+            INSERT INTO accounts (username, email, password)
+            VALUES (?, ?, ?);
+        """, (account_info["username"], account_info["
+```
 

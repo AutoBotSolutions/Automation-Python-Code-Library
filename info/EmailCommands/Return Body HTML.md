@@ -2,7 +2,7 @@
 
 **Path:** `EmailCommands/Return Body HTML.py`
 
-**Automation Type:** Email Automation
+**Automation Type:** Database Operations
 **Lines:** 97
 
 ## Purpose
@@ -11,11 +11,11 @@ python email return the body of an email by position as html
 
 ## Library Context
 
-This script is part of the email automation library, providing functions for sending, receiving, and managing email communications.
+This script is part of the database operations library, providing functions for connecting to databases, executing SQL queries, and managing database transactions.
 
 ## Key Features
 
-- Email sending/receiving
+- Database interaction
 
 ## Usage Pattern
 

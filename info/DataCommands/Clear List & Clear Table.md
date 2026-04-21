@@ -2,7 +2,7 @@
 
 **Path:** `DataCommands/Clear List & Clear Table.py`
 
-**Automation Type:** Database Operations
+**Automation Type:** General Automation
 **Lines:** 55
 
 ## Purpose
@@ -11,11 +11,11 @@ python clear list and clear table
 
 ## Library Context
 
-This script is part of the database operations library, providing functions for connecting to databases, executing SQL queries, and managing database transactions.
+This script is part of the general automation library, providing utility functions for common automation tasks.
 
 ## Key Features
 
-- Database interaction
+No specific features documented.
 
 ## Usage Pattern
 

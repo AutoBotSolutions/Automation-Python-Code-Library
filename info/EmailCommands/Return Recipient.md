@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- get_recipient_at_position - Parameters: recipients, position. Performs a specific operation.
 
 ## Functions
 
@@ -43,5 +43,18 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### get_recipient_at_position
+
+```python
+def get_recipient_at_position(recipients, position):
+    """
+    Get the email recipient at the specified position in the list.
+
+    Args:
+    - recipients (list): List of email recipients as strings.
+    - position (int): Index (1-based) of the recipient to return.
+
+    Returns:
+    - str: The emai
+```
 

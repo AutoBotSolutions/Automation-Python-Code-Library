@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- confirm_action - Performs a specific operation.
 
 ## Functions
 
@@ -43,5 +43,17 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### confirm_action
+
+```python
+def confirm_action():
+    # Hide the root window
+    root = tkinter.Tk()
+    root.withdraw()  # Hide the main tkinter window
+
+    # Display the confirmation dialog
+    result = messagebox.askyesno("Confirmation", "Are you sure you want to proceed?")
+    
+    # True if "Yes" is pressed, False if "No"
+```
 

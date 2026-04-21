@@ -2,7 +2,7 @@
 
 **Path:** `FlowCommands/Wait For Condition.py`
 
-**Automation Type:** File Operations
+**Automation Type:** General Automation
 **Lines:** 84
 
 ## Purpose
@@ -11,11 +11,11 @@ Condition-checking function Replace with some logic Wait for the condition
 
 ## Library Context
 
-This script is part of the file operations library, providing functions for file system manipulation including creating, reading, writing, and deleting files and directories.
+This script is part of the general automation library, providing utility functions for common automation tasks.
 
 ## Key Features
 
-- File system manipulation
+No specific features documented.
 
 ## Usage Pattern
 
@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- is_condition_met - Performs a specific operation.
 
 ## Functions
 
@@ -43,5 +43,11 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### is_condition_met
+
+```python
+def is_condition_met():
+    # Replace with some logic
+    return True
+```
 

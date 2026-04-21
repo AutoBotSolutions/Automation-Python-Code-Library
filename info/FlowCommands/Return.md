@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- add_numbers - Parameters: a, b. Performs a specific operation.
 
 ## Functions
 
@@ -43,5 +43,12 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### add_numbers
+
+```python
+def add_numbers(a, b):
+    # This function takes two numbers and returns their sum
+    result = a + b
+    return result
+```
 

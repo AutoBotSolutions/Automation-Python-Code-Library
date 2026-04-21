@@ -2,7 +2,7 @@
 
 **Path:** `SystemCommands/Delete Folder.py`
 
-**Automation Type:** File Operations
+**Automation Type:** General Automation
 **Lines:** 39
 
 ## Purpose
@@ -11,11 +11,11 @@ using python delete folder
 
 ## Library Context
 
-This script is part of the file operations library, providing functions for file system manipulation including creating, reading, writing, and deleting files and directories.
+This script is part of the general automation library, providing utility functions for common automation tasks.
 
 ## Key Features
 
-- File system manipulation
+No specific features documented.
 
 ## Usage Pattern
 

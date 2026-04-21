@@ -27,7 +27,8 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- greet - Parameters: name. Performs a specific operation.
+- add_numbers - Parameters: a, b. Performs a specific operation.
 
 ## Functions
 
@@ -43,5 +44,17 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### greet
+
+```python
+def greet(name):
+    return f"Hello, {name}!"
+```
+
+### add_numbers
+
+```python
+def add_numbers(a, b):
+    return a + b
+```
 

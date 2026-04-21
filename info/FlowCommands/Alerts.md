@@ -2,7 +2,7 @@
 
 **Path:** `FlowCommands/Alerts.py`
 
-**Automation Type:** Browser Automation
+**Automation Type:** General Automation
 **Lines:** 171
 
 ## Purpose
@@ -11,15 +11,15 @@ python alert examples
 
 ## Library Context
 
-This script is part of the browser automation library, providing functions for controlling web browsers, navigating to URLs, interacting with web elements, and automating web-based tasks.
+This script is part of the general automation library, providing utility functions for common automation tasks.
 
 ## Key Features
 
-- Web browser control
+No specific features documented.
 
 ## Usage Pattern
 
-Object-oriented - Provides classes and methods with standalone execution capability
+Function-based - Provides reusable functions
 
 ## Dependencies
 
@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- alert_message - Performs a specific operation.
 
 ## Functions
 
@@ -43,5 +43,10 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### alert_message
+
+```python
+def alert_message():
+    print("ALERT: Something important happened!")
+```
 

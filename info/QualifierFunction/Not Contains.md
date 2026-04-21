@@ -27,7 +27,7 @@ No external dependencies identified.
 
 ## Function Descriptions
 
-No function descriptions available.
+- check_page_content - Parameters: page_content. Performs a specific operation.
 
 ## Functions
 
@@ -43,5 +43,14 @@ No external API interactions identified.
 
 ## Code Examples
 
-No code examples available.
+### check_page_content
+
+```python
+def check_page_content(page_content):
+    global not_contains  # Declare it as global to modify the variable outside the function
+    if '10' not in page_content:
+        not_contains = True  # Set to True if "10" is not found
+    else:
+        not_contains = False
+```
 

@@ -2,7 +2,7 @@
 
 **Path:** `LogCommands/Log Object.py`
 
-**Automation Type:** Threading/Multi-processing
+**Automation Type:** General Automation
 **Lines:** 84
 
 ## Purpose
@@ -11,11 +11,11 @@ Create a logger object Set the severity level (default is WARNING) Create a cons
 
 ## Library Context
 
-This script is part of the threading library, providing functions for parallel execution, multi-threading, and concurrent task processing.
+This script is part of the general automation library, providing utility functions for common automation tasks.
 
 ## Key Features
 
-- Parallel execution
+No specific features documented.
 
 ## Usage Pattern
 
